@@ -519,3 +519,23 @@ EXPECT='/ (fcn) fcn2.0x004017c0 13
 |       ,=< 0x004017cb      7210           jb 0x4017dd
 '
 run_test
+
+NAME='no rep flag in comment with gen str flag'
+FILE=../bins/elf/analysis/ls-alxchk
+ARGS=
+CMDS='pd 1 @ 0x0001145f
+'
+EXPECT='            0x0001145f      488d3d72a100.  lea rdi, str.A_NULL_argv_0__was_passed_through_an_exec_system_call._n ; 0x1b5d8 ; "A NULL argv[0] was passed through an exec system call.." @ 0x1b5d8
+'
+run_test
+
+NAME='flag in comment with manual flag'
+FILE=../bins/elf/analysis/ls-alxchk
+ARGS=
+CMDS='f- @ 0x1b5d8
+f NULL_error 56 @ 0x1b5d8
+pd 1 @ 0x0001145f
+'
+EXPECT='            0x0001145f      488d3d72a100.  lea rdi, 0x0001b5d8         ; 0x1b5d8 ; NULL_error ; "A NULL argv[0] was passed through an exec system call.." @ 0x1b5d8
+'
+run_test
