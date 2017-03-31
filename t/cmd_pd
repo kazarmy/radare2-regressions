@@ -589,9 +589,8 @@ ARGS=
 CMDS='e asm.bytes=false
 e asm.comments=false
 e scr.color=true
-e scr.html=true
 pd 1 @ 0x0001145f
 '
-EXPECT="&nbsp;&nbsp;<font color='#aaf'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color='#0f0'>0x0001145f</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color='#fff'>lea</font><font color='#aaf'>&nbsp;rdi</font>,<font color='#aaf'></font><font color='#aaf'>&nbsp;</font><font color='#ff0'>str.A_NULL_argv_0__was_passed_through_an_exec_system_call._n</font><br />
-"
+EXPECT='  [36m          [0m[32m0x0001145f[0m      [37mlea[36m rdi[0m,[36m[36m [33mstr.A_NULL_argv_0__was_passed_through_an_exec_system_call._n[0m[0m
+'
 run_test
