@@ -582,3 +582,52 @@ pd 1 @ 0x004010f0
 EXPECT='            0x004010f0      68b8214000     push 0x4021b8 ; num_cpu     ; "Number of CPU %d\x0a" @ 0x4021b8
 '
 run_test
+
+NAME='no rep flag in cmt with gen str flag (lea) (asm.cmtright=false)'
+FILE=../bins/elf/analysis/ls-alxchk
+ARGS=
+CMDS='e asm.cmtright=false
+pd 1 @ 0x0001145f
+'
+EXPECT='               ; 0x1b5d8
+               ; "A NULL argv[0] was passed through an exec system call.." @ 0x1b5d8
+            0x0001145f      488d3d72a100.  lea rdi, str.A_NULL_argv_0__was_passed_through_an_exec_system_call._n
+'
+run_test
+NAME='flag in cmt with manual flag (lea) (asm.cmtright=false)'
+FILE=../bins/elf/analysis/ls-alxchk
+ARGS=
+CMDS='e asm.cmtright=false
+f- @ 0x1b5d8
+f NULL_error 56 @ 0x1b5d8
+pd 1 @ 0x0001145f
+'
+EXPECT='               ; 0x1b5d8 ; NULL_error
+               ; "A NULL argv[0] was passed through an exec system call.." @ 0x1b5d8
+            0x0001145f      488d3d72a100.  lea rdi, 0x0001b5d8
+'
+run_test
+
+NAME='no rep flag in cmt with gen str flag (push) (asm.cmtright=false)'
+FILE=../bins/pe/ConsoleApplication1.exe
+ARGS=
+CMDS='e asm.cmtright=false
+pd 1 @ 0x004010f0
+'
+EXPECT='               ; "Number of CPU %d\x0a" @ 0x4021b8
+            0x004010f0      68b8214000     push str.Number_of_CPU__d_n
+'
+run_test
+
+NAME='flag in cmt with manual flag (push) (asm.cmtright=false)'
+FILE=../bins/pe/ConsoleApplication1.exe
+ARGS=
+CMDS='e asm.cmtright=false
+f- @ 0x4021b8
+f num_cpu 36 @ 0x4021b8
+pd 1 @ 0x004010f0
+'
+EXPECT='               ; "Number of CPU %d\x0a" @ 0x4021b8
+            0x004010f0      68b8214000     push 0x4021b8 ; num_cpu
+'
+run_test
