@@ -357,3 +357,19 @@ pd 1 @ 0x08048432
 EXPECT='|           0x08048432      8d83e0e4ffff   lea eax, str.Hello_PIC_     ; "Hello PIC!" @ 0x80484e0
 '
 run_test
+
+NAME='refs on PIC binary disassembly (color)'
+FILE=../../bins/elf/analysis/xrefpic
+ARGS=
+CMDS='
+e asm.bytes=false
+e asm.comments=false
+e scr.color=true
+e anal.strings=true
+aa
+aae
+pd 1 @ 0x08048432
+'
+EXPECT='[36m| [0m[36m          [0m[32m0x08048432[0m      [37mlea[36m eax[0m,[36m [0m[33mstr.Hello_PIC_[0m[36m[0m[0m
+'
+run_test
