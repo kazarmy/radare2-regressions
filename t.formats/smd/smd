@@ -7,35 +7,36 @@ FILE=../../bins/smd/LiquidSpaceDodgerV3.bin
 ARGS=''
 BROKEN=
 CMDS="i~!fd"
-EXPECT='type     ROM
-file     ../../bins/smd/LiquidSpaceDodgerV3.bin
-size     0x272f8
-iorw     false
-blksz    0x0
-mode     -r--
+EXPECT='blksz    0x0
 block    0x100
+file     ../../bins/smd/LiquidSpaceDodgerV3.bin
 format   smd
-havecode true
-pic      false
-canary   false
-nx       false
-crypto   false
-va       true
-class    SEGA MEGASIS    (C)2015 James L.
+iorw     false
+mode     -r--
+size     0x272f8
+humansz  156.7K
+type     ROM
 arch     m68k
+binsz    160504
 bits     16
-machine  Sega Megadrive
-os       smd
-minopsz  1
-maxopsz  16
-pcalign  0
+canary   false
+class    SEGA MEGASIS    (C)2015 James L.
+crypto   false
 endian   little
-stripped false
-static   true
+havecode true
 linenum  false
 lsyms    false
+machine  Sega Megadrive
+maxopsz  16
+minopsz  1
+nx       false
+os       smd
+pcalign  0
+pic      false
 relocs   false
-binsz    160504
+static   true
+stripped false
+va       true
 '
 run_test
 

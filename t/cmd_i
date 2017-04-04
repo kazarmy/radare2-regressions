@@ -43,31 +43,32 @@ iS*
 iz
 iz*
 '
-EXPECT="file     malloc://1025
-fd       42
-size     0x401
-iorw     true
-blksz    0x0
-mode     -rwx
+EXPECT="blksz    0x0
 block    0x100
+fd       42
+file     malloc://1025
 format   any
-havecode false
-pic      false
-canary   false
-nx       false
-crypto   false
-va       false
+iorw     true
+mode     -rwx
+size     0x401
+humansz  1K
+binsz    1025
 bits     64
-minopsz  1
-maxopsz  16
-pcalign  0
+canary   false
+crypto   false
 endian   little
-stripped false
-static   true
+havecode false
 linenum  false
 lsyms    false
+maxopsz  16
+minopsz  1
+nx       false
+pcalign  0
+pic      false
 relocs   false
-binsz    1025
+static   true
+stripped false
+va       false
 [Imports]
 
 0 imports
@@ -118,35 +119,36 @@ i*
 iI
 iI*
 '
-EXPECT="file     malloc://1024
-fd       42
-size     0x400
-iorw     true
-blksz    0x0
-mode     -rwx
+EXPECT="blksz    0x0
 block    0x100
+fd       42
+file     malloc://1024
 format   any
+iorw     true
+mode     -rwx
+size     0x400
+humansz  1K
 e cfg.bigendian=false
 e asm.bits=${BIT_SIZE}
 e asm.dwarf=false
 e asm.pcalign=0
-havecode false
-pic      false
-canary   false
-nx       false
-crypto   false
-va       false
+binsz    1024
 bits     ${BIT_SIZE}
-minopsz  1
-maxopsz  16
-pcalign  0
+canary   false
+crypto   false
 endian   little
-stripped false
-static   true
+havecode false
 linenum  false
 lsyms    false
+maxopsz  16
+minopsz  1
+nx       false
+pcalign  0
+pic      false
 relocs   false
-binsz    1024
+static   true
+stripped false
+va       false
 e cfg.bigendian=false
 e asm.bits=${BIT_SIZE}
 e asm.dwarf=false
@@ -159,40 +161,42 @@ NAME='i (file x86)'
 FILE=../bins/elf/analysis/x86-helloworld-gcc
 ARGS=
 CMDS="i~!fd"
-EXPECT='type     EXEC (Executable file)
-file     ../bins/elf/analysis/x86-helloworld-gcc
-size     0x1323
-iorw     false
-blksz    0x0
-mode     -r--
+EXPECT='blksz    0x0
 block    0x100
+file     ../bins/elf/analysis/x86-helloworld-gcc
 format   elf
-havecode true
-pic      false
-canary   false
-nx       true
-crypto   false
-va       true
-intrp    /lib/ld-linux.so.2
-bintype  elf
-class    ELF32
-lang     c
+iorw     false
+mode     -r--
+size     0x1323
+humansz  4.8K
+type     EXEC (Executable file)
 arch     x86
+binsz    4899
+bintype  elf
 bits     32
-machine  Intel 80386
-os       linux
-minopsz  1
-maxopsz  16
-pcalign  0
-subsys   linux
+canary   false
+class    ELF32
+crypto   false
 endian   little
-stripped false
-static   false
+havecode true
+intrp    /lib/ld-linux.so.2
+lang     c
 linenum  true
 lsyms    true
+machine  Intel 80386
+maxopsz  16
+minopsz  1
+nx       true
+os       linux
+pcalign  0
+pic      false
 relocs   true
+relro    no relro
 rpath    NONE
-binsz    4899
+static   false
+stripped false
+subsys   linux
+va       true
 '
 # fd changes in each test, replace it with 42.
 FILTER='sed "s/^fd	[0-9][0-9]*/fd       42/;
@@ -240,36 +244,37 @@ if
 af
 pdf
 '
-EXPECT='type     JAVA CLASS
-file     malloc://1024
-fd       42
-size     0x400
-iorw     true
-blksz    0x0
-mode     -rwx
+EXPECT='blksz    0x0
 block    0x100
+fd       42
+file     malloc://1024
 format   java
-havecode true
-pic      false
-canary   false
-nx       false
-crypto   false
-va       false
-bintype  class
-class    0x3200 0x0000
-lang     java
+iorw     true
+mode     -rwx
+size     0x400
+humansz  1K
+type     JAVA CLASS
 arch     java
+binsz    1024
+bintype  class
 bits     32
-machine  jvm
-os       any
-subsys   any
+canary   false
+class    0x3200 0x0000
+crypto   false
 endian   little
-stripped false
-static   false
+havecode true
+lang     java
 linenum  true
 lsyms    true
+machine  jvm
+nx       false
+os       any
+pic      false
 relocs   false
-binsz    1024
+static   false
+stripped false
+subsys   any
+va       false
   ;-- entry1:
 / (fcn) sym.TestVariableSwitchUp.TestMultipleVariable 37
 | 0x000002fd      1064           bipush 100
@@ -344,32 +349,33 @@ NAME='iI (file x86)'
 FILE=../bins/elf/analysis/x86-helloworld-gcc
 ARGS=
 CMDS="iI"
-EXPECT='havecode true
-pic      false
-canary   false
-nx       true
-crypto   false
-va       true
-intrp    /lib/ld-linux.so.2
+EXPECT='arch     x86
+binsz    4899
 bintype  elf
-class    ELF32
-lang     c
-arch     x86
 bits     32
-machine  Intel 80386
-os       linux
-minopsz  1
-maxopsz  16
-pcalign  0
-subsys   linux
+canary   false
+class    ELF32
+crypto   false
 endian   little
-stripped false
-static   false
+havecode true
+intrp    /lib/ld-linux.so.2
+lang     c
 linenum  true
 lsyms    true
+machine  Intel 80386
+maxopsz  16
+minopsz  1
+nx       true
+os       linux
+pcalign  0
+pic      false
 relocs   true
+relro    no relro
 rpath    NONE
-binsz    4899
+static   false
+stripped false
+subsys   linux
+va       true
 '
 # fd changes in each test, replace it with 42.
 FILTER='sed "s/^fd	[0-9][0-9]*/fd       42/;
@@ -527,40 +533,42 @@ NAME='i (file x86_64)'
 FILE=../bins/elf/analysis/hello-linux-x86_64
 ARGS=
 CMDS="i~!fd"
-EXPECT='type     EXEC (Executable file)
-file     ../bins/elf/analysis/hello-linux-x86_64
-size     0x1a36
-iorw     false
-blksz    0x0
-mode     -r--
+EXPECT='blksz    0x0
 block    0x100
+file     ../bins/elf/analysis/hello-linux-x86_64
 format   elf64
-havecode true
-pic      false
-canary   false
-nx       true
-crypto   false
-va       true
-intrp    /lib/ld-linux-x86-64.so.2
-bintype  elf
-class    ELF64
-lang     c
+iorw     false
+mode     -r--
+size     0x1a36
+humansz  6.6K
+type     EXEC (Executable file)
 arch     x86
+binsz    6710
+bintype  elf
 bits     64
-machine  AMD x86-64 architecture
-os       linux
-minopsz  1
-maxopsz  16
-pcalign  0
-subsys   linux
+canary   false
+class    ELF64
+crypto   false
 endian   little
-stripped false
-static   false
+havecode true
+intrp    /lib/ld-linux-x86-64.so.2
+lang     c
 linenum  true
 lsyms    true
+machine  AMD x86-64 architecture
+maxopsz  16
+minopsz  1
+nx       true
+os       linux
+pcalign  0
+pic      false
 relocs   true
+relro    no relro
 rpath    NONE
-binsz    6710
+static   false
+stripped false
+subsys   linux
+va       true
 '
 # fd changes in each test, replace it with 42.
 FILTER='sed "s/^fd	[0-9][0-9]*/fd       42/;
@@ -618,32 +626,33 @@ NAME='iI (file x86_64)'
 FILE=../bins/elf/analysis/hello-linux-x86_64
 ARGS=
 CMDS="iI"
-EXPECT='havecode true
-pic      false
-canary   false
-nx       true
-crypto   false
-va       true
-intrp    /lib/ld-linux-x86-64.so.2
+EXPECT='arch     x86
+binsz    6710
 bintype  elf
-class    ELF64
-lang     c
-arch     x86
 bits     64
-machine  AMD x86-64 architecture
-os       linux
-minopsz  1
-maxopsz  16
-pcalign  0
-subsys   linux
+canary   false
+class    ELF64
+crypto   false
 endian   little
-stripped false
-static   false
+havecode true
+intrp    /lib/ld-linux-x86-64.so.2
+lang     c
 linenum  true
 lsyms    true
+machine  AMD x86-64 architecture
+maxopsz  16
+minopsz  1
+nx       true
+os       linux
+pcalign  0
+pic      false
 relocs   true
+relro    no relro
 rpath    NONE
-binsz    6710
+static   false
+stripped false
+subsys   linux
+va       true
 '
 # fd changes in each test, replace it with 42.
 FILTER='sed "s/^fd	[0-9][0-9]*/fd       42/;
@@ -850,12 +859,13 @@ NAME='i (no rbin - file x86_64)'
 FILE=../bins/elf/analysis/hello-linux-x86_64
 ARGS="-n"
 CMDS="i~!file"
-EXPECT='fd       42
-size     0x1a36
-iorw     false
-blksz    0x0
-mode     -r--
+EXPECT='blksz    0x0
 block    0x100
+fd       42
+iorw     false
+mode     -r--
+size     0x1a36
+humansz  6.6K
 '
 FILTER='sed "s/^fd       [0-9][0-9]*/fd       42/"'
 run_test

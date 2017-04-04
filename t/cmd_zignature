@@ -320,6 +320,8 @@ z
 EXPECT='zigs.sym.main:
   bytes: 554889e54883ec1089....48......bf........e8........b800000000c9c3
   graph: cc=1 nbbs=1 edges=0 ebbs=1
+  offset: 0x0040055b
+  refs: sym.print
 '
 run_test
 
@@ -335,6 +337,8 @@ z
 EXPECT='zigs.sym.main:
   bytes: 554889e54883ec1089....48......bf........e8........b800000000c9c3
   graph: cc=1 nbbs=1 edges=0 ebbs=1
+  offset: 0x0040055b
+  refs: sym.print
 '
 run_test
 
@@ -348,6 +352,8 @@ z
 EXPECT='sym.main:
   bytes: 554889e54883ec1089....48......bf........e8........b800000000c9c3
   graph: cc=1 nbbs=1 edges=0 ebbs=1
+  offset: 0x0040055b
+  refs: sym.print
 '
 run_test
 
@@ -362,6 +368,8 @@ z
 EXPECT='foobar:
   bytes: 554889e54883ec1089....48......bf........e8........b800000000c9c3
   graph: cc=1 nbbs=1 edges=0 ebbs=1
+  offset: 0x0040055b
+  refs: sym.print
 '
 run_test
 
@@ -375,6 +383,8 @@ z
 EXPECT='foobar:
   bytes: 554889e54883ec1089....48......bf........e8........b800000000c9c3
   graph: cc=1 nbbs=1 edges=0 ebbs=1
+  offset: 0x0040055b
+  refs: sym.print
 '
 run_test
 

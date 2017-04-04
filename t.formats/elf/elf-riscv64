@@ -318,37 +318,39 @@ FILE=../../bins/elf/analysis/guess-number-riscv64
 FILTER='sed "s/^fd.*//g"'
 ARGS=''
 CMDS='if'
-EXPECT='type     EXEC (Executable file)
-file     ../../bins/elf/analysis/guess-number-riscv64
-
-size     0x9d5a8
-iorw     false
-blksz    0x0
-mode     -r--
+EXPECT='blksz    0x0
 block    0x100
+
+file     ../../bins/elf/analysis/guess-number-riscv64
 format   elf64
-havecode true
-pic      false
-canary   false
-nx       false
-crypto   false
-va       true
-bintype  elf
-class    ELF64
-lang     c
+iorw     false
+mode     -r--
+size     0x9d5a8
+humansz  629.4K
+type     EXEC (Executable file)
+
 arch     riscv
+binsz    643108
+bintype  elf
 bits     64
-machine  RISC V
-os       linux
-subsys   linux
+canary   false
+class    ELF64
+crypto   false
 endian   little
-stripped false
-static   true
+havecode true
+lang     c
 linenum  true
 lsyms    true
+machine  RISC V
+nx       false
+os       linux
+pic      false
 relocs   true
 rpath    NONE
-binsz    643108
+static   true
+stripped false
+subsys   linux
+va       true
 '
 run_test
 

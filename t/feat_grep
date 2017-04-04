@@ -118,16 +118,18 @@ i~:1
 i~:2
 i~:..3
 i~:1..2
+i~:-2
 i~:-1
 '
-EXPECT='file     malloc://1024
+EXPECT='blksz    0x0
+block    0x100
 fd       42
+blksz    0x0
+block    0x100
+fd       42
+block    0x100
 size     0x400
-file     malloc://1024
-fd       42
-size     0x400
-fd       42
-format   any
+humansz  1K
 '
 FILTER='sed "s/^fd       [0-9][0-9]*/fd       42/"'
 run_test
