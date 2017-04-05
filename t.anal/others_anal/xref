@@ -88,7 +88,7 @@ e asm.relsub=true
 axt @ sym.imp.msvcrt.dll_printf
 '
 EXPECT='data 0xffffffffffff100a call qword [rip + 0xd8] in entry0
-data 0xffffffffffff100a call qword [sym.imp.msvcrt.dll_printf] in entry0
+data 0xffffffffffff100a call qword sym.imp.msvcrt.dll_printf in entry0
 '
 run_test
 
@@ -256,7 +256,7 @@ CMDS='
 aaa
 axt@0x0804a01c
 '
-EXPECT='data 0x80483ee mov dword [obj.a], 0x1337 in sym.main
+EXPECT='data 0x80483ee mov dword obj.a, 0x1337 in sym.main
 '
 run_test
 
