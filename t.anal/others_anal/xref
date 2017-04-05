@@ -15,12 +15,7 @@ aa
 axt @ str.Hello_World'
 EXPECT='data 0x40050a mov edi, str.Hello_World in sym.main
 '
-if [ -n "${TRAVIS}" ]; then
-  unset BROKEN
-  return
-else
-  run_test
-fi
+run_test
 
 NAME="axt capstone x86"
 BROKEN=
