@@ -583,6 +583,26 @@ EXPECT='            0x004010f0      68b8214000     push 0x4021b8 ; num_cpu     ;
 '
 run_test
 
+NAME='no lea cmt with gen sym flag'
+FILE=../bins/pe/ConsoleApplication1.exe
+ARGS=
+CMDS='pd 1 @ 0x004010fa
+'
+EXPECT='            0x004010fa      8b3500204000   mov esi, dword sym.imp.KERNEL32.dll_GetLastError ; [0x402000:4]=0x29f4 reloc.KERNEL32.dll_GetLastError_244 ; sym.imp.KERNEL32.dll_GetLastError
+'
+run_test
+
+NAME='lea cmt with manual flag'
+FILE=../bins/pe/ConsoleApplication1.exe
+ARGS=
+CMDS='f- @ 0x402000
+f GetLastError 0 @ 0x402000
+pd 1 @ 0x004010fa
+'
+EXPECT='            0x004010fa      8b3500204000   mov esi, dword [0x402000]   ; [0x402000:4]=0x29f4 reloc.KERNEL32.dll_GetLastError_244 ; LEA GetLastError ; GetLastError
+'
+run_test
+
 NAME='pd asm.filter color'
 FILE=../bins/elf/analysis/ls-alxchk
 ARGS=
@@ -640,5 +660,32 @@ pd 1 @ 0x004010f0
 '
 EXPECT='               ; "Number of CPU %d\x0a" @ 0x4021b8
             0x004010f0      68b8214000     push 0x4021b8 ; num_cpu
+'
+run_test
+
+NAME='no lea cmt with gen sym flag (asm.cmtright=false)'
+FILE=../bins/pe/ConsoleApplication1.exe
+ARGS=
+CMDS='e asm.cmtright=false
+pd 1 @ 0x004010fa
+'
+EXPECT='               ; [0x402000:4]=0x29f4 reloc.KERNEL32.dll_GetLastError_244
+               ; sym.imp.KERNEL32.dll_GetLastError
+            0x004010fa      8b3500204000   mov esi, dword sym.imp.KERNEL32.dll_GetLastError
+'
+run_test
+
+NAME='lea cmt with manual flag (asm.cmtright=false)'
+FILE=../bins/pe/ConsoleApplication1.exe
+ARGS=
+CMDS='e asm.cmtright=false
+f- @ 0x402000
+f GetLastError 0 @ 0x402000
+pd 1 @ 0x004010fa
+'
+EXPECT='               ; [0x402000:4]=0x29f4 reloc.KERNEL32.dll_GetLastError_244
+               ; LEA GetLastError
+               ; GetLastError
+            0x004010fa      8b3500204000   mov esi, dword [0x402000]
 '
 run_test
