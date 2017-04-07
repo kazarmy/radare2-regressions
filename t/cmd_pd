@@ -596,10 +596,10 @@ NAME='lea cmt with manual flag'
 FILE=../bins/pe/ConsoleApplication1.exe
 ARGS=
 CMDS='f- @ 0x402000
-f GetLastError 0 @ 0x402000
+f ptr_GetLastError 0 @ 0x402000
 pd 1 @ 0x004010fa
 '
-EXPECT='            0x004010fa      8b3500204000   mov esi, dword [0x402000]   ; [0x402000:4]=0x29f4 reloc.KERNEL32.dll_GetLastError_244 ; LEA GetLastError ; GetLastError
+EXPECT='            0x004010fa      8b3500204000   mov esi, dword [0x402000]   ; [0x402000:4]=0x29f4 reloc.KERNEL32.dll_GetLastError_244 ; LEA ptr_GetLastError ; ptr_GetLastError
 '
 run_test
 
@@ -680,12 +680,12 @@ FILE=../bins/pe/ConsoleApplication1.exe
 ARGS=
 CMDS='e asm.cmtright=false
 f- @ 0x402000
-f GetLastError 0 @ 0x402000
+f ptr_GetLastError 0 @ 0x402000
 pd 1 @ 0x004010fa
 '
 EXPECT='               ; [0x402000:4]=0x29f4 reloc.KERNEL32.dll_GetLastError_244
-               ; LEA GetLastError
-               ; GetLastError
+               ; LEA ptr_GetLastError
+               ; ptr_GetLastError
             0x004010fa      8b3500204000   mov esi, dword [0x402000]
 '
 run_test
