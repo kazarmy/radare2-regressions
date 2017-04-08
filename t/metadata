@@ -45,7 +45,7 @@ pd 2
 '
 EXPECT='            0x00000000 hex length=3 delta=0
 0x00000000  3930 39                                  909
-                                                                         ; [0x1d:4]=0
+
             0x00000003      3039           xor byte [ecx], bh
 '
 run_test
@@ -63,7 +63,7 @@ pd 2
 '
 EXPECT='            0x00000001 hex length=3 delta=1
 0x00000001  30 39                                    09
-                                                                       ; [0x1d:4]=0
+
             0x00000003      3039           xor byte [ecx], bh
 '
 run_test
@@ -242,5 +242,16 @@ EXPECT='            ;-- $d_61:
             0x0000db98      .dword 0x00085038 ; obj.main_arena
             0x0000db9c      .dword 0x000844ac ; obj.check_action
             0x0000dba0      .dword 0x000663c4 ; str.free__:_invalid_pointer
+'
+run_test
+
+NAME="Ch and CCu on instr with potential LEA cmt"
+FILE=../bins/pe/ConsoleApplication1.exe
+ARGS=
+CMDS='Ch 6 @ 0x004010fa
+CCu get error @ 0x004010fa
+pd 1 @ 0x004010fa
+'
+EXPECT='            0x004010fa (6 bytes hidden)                                ; get error
 '
 run_test
