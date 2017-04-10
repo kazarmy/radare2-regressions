@@ -609,10 +609,15 @@ ARGS=
 CMDS='e asm.bytes=false
 e asm.comments=false
 e scr.color=true
+e asm.filter=true
+pd 1 @ 0x0001145f
+e asm.filter=false
 pd 1 @ 0x0001145f
 '
 EXPECT='  [36m          [0m[32m0x0001145f[0m      [37mlea[36m rdi[0m,[36m[36m [33mstr.A_NULL_argv_0__was_passed_through_an_exec_system_call._n[0m[0m
+  [36m          [0m[32m0x0001145f[0m      [37mlea[36m rdi[0m,[36m[36m [33m0x0001b5d8[0m[0m
 '
+run_test
 
 NAME='no rep flag in cmt with gen str flag (lea) (asm.cmtright=false)'
 FILE=../bins/elf/analysis/ls-alxchk
@@ -625,6 +630,7 @@ EXPECT='               ; 0x1b5d8
             0x0001145f      488d3d72a100.  lea rdi, str.A_NULL_argv_0__was_passed_through_an_exec_system_call._n
 '
 run_test
+
 NAME='flag in cmt with manual flag (lea) (asm.cmtright=false)'
 FILE=../bins/elf/analysis/ls-alxchk
 ARGS=
