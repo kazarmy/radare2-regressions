@@ -162,6 +162,25 @@ EXPECT="            0x00000000      31ed           ebp = 0
 "
 run_test
 
+NAME='pd pseudo test for issue #7268'
+FILE='malloc://8'
+ARGS=
+BROKEN=
+CMDS='e asm.arch=x86
+e asm.bits=64
+wx 4889e5
+e asm.pseudo=true
+e asm.comments=true
+e scr.color=true
+e asm.cmtright=true
+pd 1
+e asm.cmtright=false
+pd 1'
+EXPECT="  [36m          [0m[7m[32m0x00000000[0m      [33m48[37m89[37me5[0m         [37mrbp =[36m rsp[0m[0m[0m
+[0m  [36m          [0m[7m[32m0x00000000[0m      [33m48[37m89[37me5[0m         [37mrbp =[36m rsp[0m[0m
+"
+run_test
+
 NAME='pd bits hint'
 FILE='-'
 ARGS='-a snes'
