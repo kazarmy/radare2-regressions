@@ -269,16 +269,19 @@ EXPECT="mov eax, 'VMXh'
 "
 run_test
 
-NAME='ahi s pd color'
+NAME='ahi s - pd with colors'
 CMDS='e asm.bytes=false
 e asm.comments=false
-e scr.color=true
 e asm.bits=64
 e asm.arch=x86
 wx 67c744246864616572
 ahi s
+e scr.color=false
+pd 1
+e scr.color=true
 pd 1
 '
-EXPECT="  [36m          [0m[7m[32m0x00000000[0m      [37mmov dword [0m[[36mesp [0m+[36m[36m [33m0x68[0m][36m[0m,[36m[36m [33m'read'[0m[0m
+EXPECT="            0x00000000      mov dword [esp + 0x68], 'read'
+  [36m          [0m[7m[32m0x00000000[0m      [37mmov dword [0m[[36mesp [0m+[36m[36m [33m0x68[0m][36m[0m,[36m[36m [33m'read'[0m[0m
 "
 run_test
