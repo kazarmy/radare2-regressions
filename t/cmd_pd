@@ -684,3 +684,14 @@ EXPECT='  [36m          [0m[32m0x0001145f[0m      [37mlea[36m rdi[0m,[36
   [36m          [0m[32m0x0001145f[0m      [37mlea[36m rdi[0m,[36m[36m [33m0x0001b5d8[0m[0m
 '
 run_test
+
+NAME='string cmt with whitechar at start'
+FILE=../bins/pe/testapp-msvc64.exe
+ARGS=
+CMDS='pd 1 @ 0x140001004
+pd 1 @ 0x140001010
+'
+EXPECT='            0x140001004      488d05f54f01.  lea rax, str._t_r_nANSI_t_r_n ; 0x140016000 ; section..data ; "...ANSI..." @ 0x140016000
+            0x140001010      488d05f94f01.  lea rax, str._t_r_nwide_t_r_n ; 0x140016010 ; "\x09\x0d\x0awide\x09\x0d\x0a" @ 0x140016010
+'
+run_test
