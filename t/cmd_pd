@@ -691,7 +691,7 @@ ARGS=
 CMDS='pd 1 @ 0x140001004
 pd 1 @ 0x140001010
 '
-EXPECT='            0x140001004      488d05f54f01.  lea rax, str._t_r_nANSI_t_r_n ; 0x140016000 ; section..data ; "...ANSI..." @ 0x140016000
-            0x140001010      488d05f94f01.  lea rax, str._t_r_nwide_t_r_n ; 0x140016010 ; "\x09\x0d\x0awide\x09\x0d\x0a" @ 0x140016010
+EXPECT='            0x140001004      488d05f54f01.  lea rax, str._tANSI_r_n    ; 0x140016000 ; section..data ; ".ANSI.." @ 0x140016000
+            0x140001010      488d05f14f01.  lea rax, str._twide_r_n    ; 0x140016008 ; "\x09wide\x0d\x0a" @ 0x140016008
 '
 run_test
