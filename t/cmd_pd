@@ -636,32 +636,42 @@ EXPECT='            0x004010f0      68b8214000     push 0x4021b8 ; num_cpu     ;
 '
 run_test
 
-NAME='no lea cmt with gen sym flag'
+NAME='no rep flag in cmt with gen sym flag (call/mov)'
 FILE=../bins/pe/ConsoleApplication1.exe
 ARGS=
 CMDS='e asm.cmtright=true
+pd 1 @ 0x004010e9
 pd 1 @ 0x004010fa
 e asm.cmtright=false
+pd 1 @ 0x004010e9
 pd 1 @ 0x004010fa
 '
-EXPECT='            0x004010fa      8b3500204000   mov esi, dword sym.imp.KERNEL32.dll_GetLastError ; [0x402000:4]=0x29f4 reloc.KERNEL32.dll_GetLastError_244 ; sym.imp.KERNEL32.dll_GetLastError
+EXPECT='            0x004010e9      ff1504204000   call dword [sym.imp.KERNEL32.dll_GetCurrentProcessorNumber]
+            0x004010fa      8b3500204000   mov esi, dword sym.imp.KERNEL32.dll_GetLastError ; [0x402000:4]=0x29f4 reloc.KERNEL32.dll_GetLastError_244
+            0x004010e9      ff1504204000   call dword [sym.imp.KERNEL32.dll_GetCurrentProcessorNumber]
                ; [0x402000:4]=0x29f4 reloc.KERNEL32.dll_GetLastError_244
-               ; sym.imp.KERNEL32.dll_GetLastError
             0x004010fa      8b3500204000   mov esi, dword sym.imp.KERNEL32.dll_GetLastError
 '
 run_test
 
-NAME='lea cmt with manual flag'
+NAME='flag in cmt with manual flag (call/mov)'
 FILE=../bins/pe/ConsoleApplication1.exe
 ARGS=
-CMDS='f- @ 0x402000
+CMDS='f- @ 0x402004
+f ptr_GetCurrentProcessorNumber 0 @ 0x402004
+f- @ 0x402000
 f ptr_GetLastError 0 @ 0x402000
 e asm.cmtright=true
+pd 1 @ 0x004010e9
 pd 1 @ 0x004010fa
 e asm.cmtright=false
+pd 1 @ 0x004010e9
 pd 1 @ 0x004010fa
 '
-EXPECT='            0x004010fa      8b3500204000   mov esi, dword [0x402000]   ; [0x402000:4]=0x29f4 reloc.KERNEL32.dll_GetLastError_244 ; LEA ptr_GetLastError ; ptr_GetLastError
+EXPECT='            0x004010e9      ff1504204000   call dword [0x402004]       ; ptr_GetCurrentProcessorNumber
+            0x004010fa      8b3500204000   mov esi, dword [0x402000]   ; [0x402000:4]=0x29f4 reloc.KERNEL32.dll_GetLastError_244 ; LEA ptr_GetLastError ; ptr_GetLastError
+               ; ptr_GetCurrentProcessorNumber
+            0x004010e9      ff1504204000   call dword [0x402004]
                ; [0x402000:4]=0x29f4 reloc.KERNEL32.dll_GetLastError_244
                ; LEA ptr_GetLastError
                ; ptr_GetLastError
