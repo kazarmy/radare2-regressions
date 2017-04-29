@@ -630,9 +630,10 @@ pd 1 @ 0x004010f0
 e asm.cmtright=false
 pd 1 @ 0x004010f0
 '
-EXPECT='            0x004010f0      68b8214000     push 0x4021b8 ; num_cpu     ; "Number of CPU %d\x0a" @ 0x4021b8
+EXPECT='            0x004010f0      68b8214000     push 0x4021b8               ; num_cpu ; "Number of CPU %d\x0a" @ 0x4021b8
+               ; num_cpu
                ; "Number of CPU %d\x0a" @ 0x4021b8
-            0x004010f0      68b8214000     push 0x4021b8 ; num_cpu
+            0x004010f0      68b8214000     push 0x4021b8
 '
 run_test
 
