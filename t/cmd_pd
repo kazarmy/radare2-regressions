@@ -705,3 +705,14 @@ EXPECT='            0x140001004      488d05f54f01.  lea rax, str._tANSI_r_n    ;
             0x140001010      488d05f14f01.  lea rax, str._twide_r_n
 '
 run_test
+
+NAME='fcn name cmt alignment'
+FILE=../bins/pe/ConsoleApplication1.exe
+ARGS=
+CMDS='e asm.filter=false
+af @ main
+pd 1 @ 0x00401157
+'
+EXPECT='|           0x00401157      e8b4feffff     call 0x401010               ; fcn.00401010
+'
+run_test
