@@ -97,7 +97,7 @@ EXPECT='            ;-- main:
 |           0x00400531      4883ec10       sub rsp, 0x10
 |           0x00400535      c745fc000000.  mov dword [rbp-0x4], 0x0    ; dwarftest.c:7  for (i = 0; i < 5; i++) { ; [0xfc:4]=0
 |       ,=< 0x0040053c      eb0e           jmp 0x40054c
-|      .--> 0x0040053e      bfe4054000     mov edi, str.dwarftest      ; dwarftest.c:8   printf ("dwarftest\n"); ; "dwarftest" @ 0x4005e4
+|      .--> 0x0040053e      bfe4054000     mov edi, str.dwarftest      ; dwarftest.c:8   printf ("dwarftest\n"); ; 0x4005e4 ; "dwarftest"
 |      !|   0x00400543      e8c8feffff     call sym.imp.puts
 |      !|   0x00400548      8345fc01       add dword [rbp-0x4], 0x1    ; dwarftest.c:7  for (i = 0; i < 5; i++) {
 |      !|      ; JMP XREF from 0x0040053c (main)
@@ -136,7 +136,7 @@ EXPECT='            ;-- main:
 |           0x00400531      4883ec10       sub rsp, 0x10
 |           0x00400535      c745fc000000.  mov dword [rbp-0x4], 0x0    ; /tmp/r2-regressions/.//dwarftest.c:7  for (i = 0; i < 5; i++) { ; [0xfc:4]=0
 |       ,=< 0x0040053c      eb0e           jmp 0x40054c
-|      .--> 0x0040053e      bfe4054000     mov edi, str.dwarftest      ; /tmp/r2-regressions/.//dwarftest.c:8   printf ("dwarftest\n"); ; "dwarftest" @ 0x4005e4
+|      .--> 0x0040053e      bfe4054000     mov edi, str.dwarftest      ; /tmp/r2-regressions/.//dwarftest.c:8   printf ("dwarftest\n"); ; 0x4005e4 ; "dwarftest"
 |      !|   0x00400543      e8c8feffff     call sym.imp.puts
 |      !|   0x00400548      8345fc01       add dword [rbp-0x4], 0x1    ; /tmp/r2-regressions/.//dwarftest.c:7  for (i = 0; i < 5; i++) {
 |      !|      ; JMP XREF from 0x0040053c (main)

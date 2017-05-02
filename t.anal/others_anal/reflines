@@ -141,27 +141,27 @@ EXPECT='|       ,=< 0x000113bd      je 0x1144e
 |       |   0x000113c8      call sym.imp.strrchr                      ; char*strrchr(char *s, int c)
 |       |   0x000113cd      test rax, rax
 |      ,==< 0x000113d0      je 0x11424
-|      ||   0x000113d2      lea rdx, [rax + 1]                         ; 0x1
+|      ||   0x000113d2      lea rdx, [rax + 1]
 |      ||   0x000113d6      mov rcx, rdx
 |      ||   0x000113d9      sub rcx, rbx
 |      ||   0x000113dc      cmp rcx, 6
 |     ,===< 0x000113e0      jle 0x11424
 |     |||   0x000113e2      lea rsi, [rax - 6]
 |     |||   0x000113e6      mov ecx, 7
-|     |||   0x000113eb      lea rdi, [rip + 0x7ebb]                    ; 0x192ad ; str._.libs_ ; "/.libs/" @ 0x192ad
+|     |||   0x000113eb      lea rdi, [rip + 0x7ebb]                    ; str._.libs_ ; 0x192ad ; "/.libs/"
 |     |||   0x000113f2      repe cmpsb byte [rsi], byte ptr [rdi]      ; [0x2700000000:1]=255 ; 0
 |    ,====< 0x000113f4      jne 0x11424
 |    ||||   0x000113f6      mov ecx, 3
 |    ||||   0x000113fb      mov rsi, rdx
 |    ||||   0x000113fe      mov rbx, rdx
-|    ||||   0x00011401      lea rdi, [rip + 0x7ead]                    ; 0x192b5 ; "lt-"
+|    ||||   0x00011401      lea rdi, [rip + 0x7ead]                    ; "lt-" ; 0x192b5
 |    ||||   0x00011408      repe cmpsb byte [rsi], byte ptr [rdi]      ; [0x2700000000:1]=255 ; 0
 |    ||||   0x0001140a      seta sil
 |    ||||   0x0001140e      setb cl
 |    ||||   0x00011411      cmp sil, cl
 |   ,=====< 0x00011414      jne 0x11424
-|   |||||   0x00011416      lea rbx, [rax + 4]                         ; 0x4
-|   |||||   0x0001141a      mov rax, qword [rip + 0xdeaf]              ; [0x1f2d0:8]=0 ; LEA reloc.program_invocation_name_208 ; reloc.program_invocation_name_208
+|   |||||   0x00011416      lea rbx, [rax + 4]
+|   |||||   0x0001141a      mov rax, qword [rip + 0xdeaf]              ; reloc.program_invocation_name_208 ; [0x1f2d0:8]=0
 |   |||||   0x00011421      mov qword [rax], rbx
 |   |||||      ; JMP XREF from 0x000113d0 (sub.program_invocation_name_112_390)
 |   |||||      ; JMP XREF from 0x000113e0 (sub.program_invocation_name_112_390)
@@ -207,7 +207,7 @@ EXPECT='|           0x00003ca6      cmp eax, 2
 |    || |      ; JMP XREF from 0x00004602 (main)
 |    || |      ; JMP XREF from 0x00004c38 (main)
 |    || |      ; JMP XREF from 0x00003ce1 (main)
-|    `----> 0x00003cf9      lea rdi, [rip + 0x14fb4]                   ; 0x18cb4 ; str.QUOTING_STYLE ; "QUOTING_STYLE" @ 0x18cb4
+|    `----> 0x00003cf9      lea rdi, [rip + 0x14fb4]                   ; str.QUOTING_STYLE ; 0x18cb4 ; "QUOTING_STYLE"
 '
 run_test
 
@@ -248,7 +248,7 @@ EXPECT='|           0x00003ca6      cmp eax, 2
 |  |   |       ; JMP XREF from 0x00004602 (main)
 |  |   |       ; JMP XREF from 0x00004c38 (main)
 |  |   |       ; JMP XREF from 0x00003ce1 (main)
-| --------> 0x00003cf9      lea rdi, [rip + 0x14fb4]                   ; 0x18cb4 ; str.QUOTING_STYLE ; "QUOTING_STYLE" @ 0x18cb4
+| --------> 0x00003cf9      lea rdi, [rip + 0x14fb4]                   ; str.QUOTING_STYLE ; 0x18cb4 ; "QUOTING_STYLE"
 '
 run_test
 
@@ -289,7 +289,7 @@ EXPECT='|           0x00003ca6      cmp eax, 2
 |  |   |       ; JMP XREF from 0x00004602 (main)
 |  |   |       ; JMP XREF from 0x00004c38 (main)
 |  |   |       ; JMP XREF from 0x00003ce1 (main)
-| --------> 0x00003cf9      lea rdi, [rip + 0x14fb4]                   ; 0x18cb4 ; str.QUOTING_STYLE ; "QUOTING_STYLE" @ 0x18cb4
+| --------> 0x00003cf9      lea rdi, [rip + 0x14fb4]                   ; str.QUOTING_STYLE ; 0x18cb4 ; "QUOTING_STYLE"
 '
 run_test
 

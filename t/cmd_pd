@@ -233,7 +233,7 @@ e scr.columns = 90
 aa
 pd 1 @ 0x0040050a
 '
-EXPECT='|           0x0040050a      bfc4054000     mov edi, str.Hello_World    ; "Hello World" @ 0x4005c4
+EXPECT='|           0x0040050a      bfc4054000     mov edi, str.Hello_World    ; 0x4005c4 ; "Hello World"
 '
 run_test
 
@@ -247,7 +247,7 @@ e scr.columns = 90
 aa
 pd 1 @ 0x0040050a
 '
-EXPECT='|           0x0040050a      bfc4054000     mov edi, str.Hello_World    ; "Hello World" @ 0x4005c4
+EXPECT='|           0x0040050a      bfc4054000     mov edi, str.Hello_World    ; 0x4005c4 ; "Hello World"
 '
 run_test
 
@@ -304,7 +304,7 @@ EXPECT='            ;-- main:
             ;-- main:
             0x00400506      55             push rbp
             0x00400507      4889e5         mov rbp, rsp
-            0x0040050a      bfc4054000     mov edi, str.Hello_World    ; "Hello World" @ 0x4005c4
+            0x0040050a      bfc4054000     mov edi, str.Hello_World    ; 0x4005c4 ; "Hello World"
 '
 
 run_test
@@ -320,7 +320,7 @@ EXPECT='            ;-- main:
             ;-- main:
             0x00400506      55             push rbp
             0x00400507      4889e5         mov rbp, rsp
-            0x0040050a      bfc4054000     mov edi, str.Hello_World    ; "Hello World" @ 0x4005c4
+            0x0040050a      bfc4054000     mov edi, str.Hello_World    ; 0x4005c4 ; "Hello World"
 '
 
 run_test
@@ -582,9 +582,9 @@ pd 1 @ 0x0001145f
 e asm.cmtright=false
 pd 1 @ 0x0001145f
 '
-EXPECT='            0x0001145f      488d3d72a100.  lea rdi, str.A_NULL_argv_0__was_passed_through_an_exec_system_call._n ; 0x1b5d8 ; "A NULL argv[0] was passed through an exec system call.." @ 0x1b5d8
+EXPECT='            0x0001145f      488d3d72a100.  lea rdi, str.A_NULL_argv_0__was_passed_through_an_exec_system_call._n ; 0x1b5d8 ; "A NULL argv[0] was passed through an exec system call.."
                ; 0x1b5d8
-               ; "A NULL argv[0] was passed through an exec system call.." @ 0x1b5d8
+               ; "A NULL argv[0] was passed through an exec system call.."
             0x0001145f      488d3d72a100.  lea rdi, str.A_NULL_argv_0__was_passed_through_an_exec_system_call._n
 '
 run_test
@@ -599,10 +599,9 @@ pd 1 @ 0x0001145f
 e asm.cmtright=false
 pd 1 @ 0x0001145f
 '
-EXPECT='            0x0001145f      488d3d72a100.  lea rdi, 0x0001b5d8         ; NULL_error ; 0x1b5d8 ; "A NULL argv[0] was passed through an exec system call.." @ 0x1b5d8
+EXPECT='            0x0001145f      488d3d72a100.  lea rdi, 0x0001b5d8         ; NULL_error ; "A NULL argv[0] was passed through an exec system call.."
                ; NULL_error
-               ; 0x1b5d8
-               ; "A NULL argv[0] was passed through an exec system call.." @ 0x1b5d8
+               ; "A NULL argv[0] was passed through an exec system call.."
             0x0001145f      488d3d72a100.  lea rdi, 0x0001b5d8
 '
 run_test
@@ -615,8 +614,9 @@ pd 1 @ 0x004010f0
 e asm.cmtright=false
 pd 1 @ 0x004010f0
 '
-EXPECT='            0x004010f0      68b8214000     push str.Number_of_CPU__d_n ; "Number of CPU %d\x0a" @ 0x4021b8
-               ; "Number of CPU %d\x0a" @ 0x4021b8
+EXPECT='            0x004010f0      68b8214000     push str.Number_of_CPU__d_n ; 0x4021b8 ; "Number of CPU %d\x0a"
+               ; 0x4021b8
+               ; "Number of CPU %d\x0a"
             0x004010f0      68b8214000     push str.Number_of_CPU__d_n
 '
 run_test
@@ -631,9 +631,9 @@ pd 1 @ 0x004010f0
 e asm.cmtright=false
 pd 1 @ 0x004010f0
 '
-EXPECT='            0x004010f0      68b8214000     push 0x4021b8               ; num_cpu ; "Number of CPU %d\x0a" @ 0x4021b8
+EXPECT='            0x004010f0      68b8214000     push 0x4021b8               ; num_cpu ; "Number of CPU %d\x0a"
                ; num_cpu
-               ; "Number of CPU %d\x0a" @ 0x4021b8
+               ; "Number of CPU %d\x0a"
             0x004010f0      68b8214000     push 0x4021b8
 '
 run_test
@@ -695,14 +695,14 @@ e asm.cmtright=false
 pd 1 @ 0x140001004
 pd 1 @ 0x140001010
 '
-EXPECT='            0x140001004      488d05f54f01.  lea rax, str._tANSI_r_n    ; section..data ; 0x140016000 ; ".ANSI.." @ 0x140016000
-            0x140001010      488d05f14f01.  lea rax, str._twide_r_n    ; 0x140016008 ; "\x09wide\x0d\x0a" @ 0x140016008
+EXPECT='            0x140001004      488d05f54f01.  lea rax, str._tANSI_r_n    ; section..data ; 0x140016000 ; ".ANSI.."
+            0x140001010      488d05f14f01.  lea rax, str._twide_r_n    ; 0x140016008 ; "\x09wide\x0d\x0a"
                ; section..data
                ; 0x140016000
-               ; ".ANSI.." @ 0x140016000
+               ; ".ANSI.."
             0x140001004      488d05f54f01.  lea rax, str._tANSI_r_n
                ; 0x140016008
-               ; "\x09wide\x0d\x0a" @ 0x140016008
+               ; "\x09wide\x0d\x0a"
             0x140001010      488d05f14f01.  lea rax, str._twide_r_n
 '
 run_test
@@ -727,9 +727,9 @@ pd 1 @ 0x004010c6
 e asm.cmtright=false
 pd 1 @ 0x004010c6
 '
-EXPECT='            0x004010c6      ff1508204000   call dword [0x402008]       ; sym.imp.KERNEL32.dll_GetProcAddress ; " *" @ 0x402008
+EXPECT='            0x004010c6      ff1508204000   call dword [0x402008]       ; sym.imp.KERNEL32.dll_GetProcAddress ; " *"
                ; sym.imp.KERNEL32.dll_GetProcAddress
-               ; " *" @ 0x402008
+               ; " *"
             0x004010c6      ff1508204000   call dword [0x402008]
 '
 run_test
