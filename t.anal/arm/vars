@@ -48,7 +48,7 @@ EXPECT='            ;-- main:
 |           0x00010454      04b08de2       add fp, sp, 4
 |           0x00010458      08d04de2       sub sp, sp, 8
 |           0x0001045c      08000be5       str r0, [fp - local_8h]
-|           0x00010460      0c100be5       str r1, [fp - local_ch]
+|           0x00010460      0c100be5       str r1, [fp - local_ch]     ; 0xc
 |           0x00010464      08001be5       ldr r0, [fp - local_8h]
 |           0x00010468      ecffffeb       bl sym.call
 |           0x0001046c      0030a0e1       mov r3, r0

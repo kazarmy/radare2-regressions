@@ -23,6 +23,6 @@ ARGS=''
 BROKEN=
 IGNORE_ERR=1
 CMDS="pd 1 @ 0x000001c4"
-EXPECT='            0x000001c4      1234           const/4 v4, 0x3             ; 3
+EXPECT='            0x000001c4      1234           const/4 v4, 0x3             ; 0xfffffffd ; 3
 '
 run_test
