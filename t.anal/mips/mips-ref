@@ -24,7 +24,7 @@ aae
 s 0x0041ed50
 pd 5~IGNORE
 "
-EXPECT='            0x0041ed58      24a54268       addiu a1, a1, 0x4268        ; "IGNORE" @ 0x474268 ; str.IGNORE
+EXPECT='            0x0041ed58      24a54268       addiu a1, a1, 0x4268        ; 0x474268 ; "IGNORE" ; str.IGNORE
 '
 run_test
 
@@ -38,7 +38,7 @@ pd 1 @0x00406228
 fs strings
 axt str.busybox
 "
-EXPECT='            0x00406228      fcc38424       addiu a0, a0, -0x3c04       ; "busybox" @ 0x44c3fc ; str.busybox
+EXPECT='            0x00406228      fcc38424       addiu a0, a0, -0x3c04       ; 0x44c3fc ; "busybox" ; str.busybox
 data 0x406228 addiu a0, a0, -0x3c04 in unknown function; str.busybox
 '
 
