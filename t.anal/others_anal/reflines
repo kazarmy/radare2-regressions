@@ -141,10 +141,10 @@ EXPECT='|       ,=< 0x000113bd      je 0x1144e
 |       |   0x000113c8      call sym.imp.strrchr                       ; char*strrchr(char *s, int c)
 |       |   0x000113cd      test rax, rax
 |      ,==< 0x000113d0      je 0x11424
-|      ||   0x000113d2      lea rdx, [rax + 1]
+|      ||   0x000113d2      lea rdx, [rax + 1]                         ; 0x1
 |      ||   0x000113d6      mov rcx, rdx
 |      ||   0x000113d9      sub rcx, rbx
-|      ||   0x000113dc      cmp rcx, 6
+|      ||   0x000113dc      cmp rcx, 6                                 ; 0x6
 |     ,===< 0x000113e0      jle 0x11424
 |     |||   0x000113e2      lea rsi, [rax - 6]
 |     |||   0x000113e6      mov ecx, 7
@@ -160,7 +160,7 @@ EXPECT='|       ,=< 0x000113bd      je 0x1144e
 |    ||||   0x0001140e      setb cl
 |    ||||   0x00011411      cmp sil, cl
 |   ,=====< 0x00011414      jne 0x11424
-|   |||||   0x00011416      lea rbx, [rax + 4]
+|   |||||   0x00011416      lea rbx, [rax + 4]                         ; 0x4
 |   |||||   0x0001141a      mov rax, qword [rip + 0xdeaf]              ; reloc.program_invocation_name_208 ; [0x1f2d0:8]=0
 |   |||||   0x00011421      mov qword [rax], rbx
 |   |||||      ; JMP XREF from 0x000113d0 (sub.program_invocation_name_112_390)
@@ -183,9 +183,9 @@ aaa >/dev/null
 s 0x00003ca6
 pd 19
 '
-EXPECT='|           0x00003ca6      cmp eax, 2
+EXPECT='|           0x00003ca6      cmp eax, 2                                 ; 0x2
 |       ,=< 0x00003ca9      je 0x45ec
-|       |   0x00003caf      cmp eax, 3
+|       |   0x00003caf      cmp eax, 3                                 ; 0x3
 |      ,==< 0x00003cb2      je 0x3ce3
 |      ||   0x00003cb4      sub eax, 1
 |     ,===< 0x00003cb7      je 0x3cbe
@@ -224,9 +224,9 @@ aaa >/dev/null
 s 0x00003ca6
 pd 19
 '
-EXPECT='|           0x00003ca6      cmp eax, 2
+EXPECT='|           0x00003ca6      cmp eax, 2                                 ; 0x2
 |      ,==< 0x00003ca9      je 0x45ec
-|      |    0x00003caf      cmp eax, 3
+|      |    0x00003caf      cmp eax, 3                                 ; 0x3
 |    ,====< 0x00003cb2      je 0x3ce3
 |    | |    0x00003cb4      sub eax, 1
 |  ,======< 0x00003cb7      je 0x3cbe
@@ -265,9 +265,9 @@ aaa >/dev/null
 s 0x00003ca6
 pd 19
 '
-EXPECT='|           0x00003ca6      cmp eax, 2
+EXPECT='|           0x00003ca6      cmp eax, 2                                 ; 0x2
 |      ,==< 0x00003ca9      je 0x45ec
-|      |    0x00003caf      cmp eax, 3
+|      |    0x00003caf      cmp eax, 3                                 ; 0x3
 |    ,====< 0x00003cb2      je 0x3ce3
 |    | |    0x00003cb4      sub eax, 1
 |  ,======< 0x00003cb7      je 0x3cbe
