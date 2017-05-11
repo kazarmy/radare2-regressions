@@ -711,6 +711,23 @@ EXPECT='            0x140001004      488d05f54f01.  lea rax, str._tANSI_r_n    ;
 '
 run_test
 
+NAME='multiple flags at addr'
+FILE=../bins/pe/testapp-msvc64.exe
+ARGS=
+CMDS='e asm.filter=false
+e asm.cmtright=true
+pd 1 @ 0x140001004
+e asm.cmtright=false
+pd 1 @ 0x140001004
+'
+EXPECT='            0x140001004      488d05f54f01.  lea rax, 0x140016000       ; str._tANSI_r_n ; section..data ; ".ANSI.."
+               ; str._tANSI_r_n
+               ; section..data
+               ; ".ANSI.."
+            0x140001004      488d05f54f01.  lea rax, 0x140016000
+'
+run_test
+
 NAME='fcn name cmt alignment'
 FILE=../bins/pe/ConsoleApplication1.exe
 ARGS=
