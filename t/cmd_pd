@@ -646,9 +646,7 @@ pd 1 @ 0x004010fa
 e asm.cmtright=false
 pd 1 @ 0x004010fa
 '
-EXPECT='            0x004010fa      8b3500204000   mov esi, dword sym.imp.KERNEL32.dll_GetLastError ; section_end..text ; section..rdata ; [0x402000:4]=0x29f4 reloc.KERNEL32.dll_GetLastError_244
-               ; section_end..text
-               ; section..rdata
+EXPECT='            0x004010fa      8b3500204000   mov esi, dword sym.imp.KERNEL32.dll_GetLastError ; [0x402000:4]=0x29f4 reloc.KERNEL32.dll_GetLastError_244
                ; [0x402000:4]=0x29f4 reloc.KERNEL32.dll_GetLastError_244
             0x004010fa      8b3500204000   mov esi, dword sym.imp.KERNEL32.dll_GetLastError
 '
@@ -664,9 +662,7 @@ pd 1 @ 0x004010fa
 e asm.cmtright=false
 pd 1 @ 0x004010fa
 '
-EXPECT='            0x004010fa      8b3500204000   mov esi, dword [0x402000]   ; section_end..text ; section..rdata ; ptr_GetLastError ; [0x402000:4]=0x29f4 reloc.KERNEL32.dll_GetLastError_244
-               ; section_end..text
-               ; section..rdata
+EXPECT='            0x004010fa      8b3500204000   mov esi, dword [0x402000]   ; ptr_GetLastError ; [0x402000:4]=0x29f4 reloc.KERNEL32.dll_GetLastError_244
                ; ptr_GetLastError
                ; [0x402000:4]=0x29f4 reloc.KERNEL32.dll_GetLastError_244
             0x004010fa      8b3500204000   mov esi, dword [0x402000]
@@ -699,9 +695,8 @@ e asm.cmtright=false
 pd 1 @ 0x140001004
 pd 1 @ 0x140001010
 '
-EXPECT='            0x140001004      488d05f54f01.  lea rax, str._tANSI_r_n    ; section..data ; 0x140016000 ; ".ANSI.."
+EXPECT='            0x140001004      488d05f54f01.  lea rax, str._tANSI_r_n    ; 0x140016000 ; ".ANSI.."
             0x140001010      488d05f14f01.  lea rax, str._twide_r_n    ; 0x140016008 ; "\x09wide\x0d\x0a"
-               ; section..data
                ; 0x140016000
                ; ".ANSI.."
             0x140001004      488d05f54f01.  lea rax, str._tANSI_r_n
@@ -720,9 +715,8 @@ pd 1 @ 0x140001004
 e asm.cmtright=false
 pd 1 @ 0x140001004
 '
-EXPECT='            0x140001004      488d05f54f01.  lea rax, 0x140016000       ; str._tANSI_r_n ; section..data ; ".ANSI.."
+EXPECT='            0x140001004      488d05f54f01.  lea rax, 0x140016000       ; str._tANSI_r_n ; ".ANSI.."
                ; str._tANSI_r_n
-               ; section..data
                ; ".ANSI.."
             0x140001004      488d05f54f01.  lea rax, 0x140016000
 '
