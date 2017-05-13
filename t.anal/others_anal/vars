@@ -90,7 +90,7 @@ EXPECT="fastcall
 |           0x0804843b      ff7508         push dword [arg_8h]
 |           0x0804843e      ff75f0         push dword [local_10h]
 |           0x08048441      ff75f4         push dword [local_ch]
-|           0x08048444      6874850408     push str._i__i__i_n         ; 0x8048574 ; \"%i %i %i.\"
+|           0x08048444      6874850408     push str._i__i__i_n         ; 0x8048574 ; \"%i %i %i\n\"
 |           0x08048449      e8a2feffff     call sym.imp.printf         ; int printf(const char *format)
 |           0x0804844e      83c410         add esp, 0x10
 |           0x08048451      90             nop
@@ -130,7 +130,7 @@ EXPECT='cdecl
 |           0x08048470      ff7510         push dword [arg_10h]
 |           0x08048473      ff75f0         push dword [local_10h]
 |           0x08048476      ff75f4         push dword [local_ch]
-|           0x08048479      6874850408     push str._i__i__i_n         ; 0x8048574 ; "%i %i %i."
+|           0x08048479      6874850408     push str._i__i__i_n         ; 0x8048574 ; "%i %i %i\n"
 |           0x0804847e      e86dfeffff     call sym.imp.printf
 |           0x08048483      83c410         add esp, 0x10
 |           0x08048486      90             nop
