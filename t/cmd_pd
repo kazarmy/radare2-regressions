@@ -685,25 +685,31 @@ EXPECT='  [36m          [0m[32m0x0001145f[0m      [37mlea[36m rdi[0m,[36
 '
 run_test
 
-NAME='string cmt with whitechar at start'
+NAME='ANSI and wide strings'
 FILE=../bins/pe/testapp-msvc64.exe
 ARGS=
 CMDS='e asm.cmtright=true
 pd 1 @ 0x140001004
 pd 1 @ 0x140001010
+pd 1 @ 0x14000101c
 e asm.cmtright=false
 pd 1 @ 0x140001004
 pd 1 @ 0x140001010
+pd 1 @ 0x14000101c
 '
-EXPECT='            0x140001004      488d05f54f01.  lea rax, str._tANSI_r_n    ; section..data ; 0x140016000 ; "\tANSI\r\n"
-            0x140001010      488d05f14f01.  lea rax, str._twide_r_n    ; 0x140016008 ; "\twide\r\n"
+EXPECT='            0x140001004      488d05f54f01.  lea rax, str._tANSI_esc:__e_33m_r_n ; section..data ; 0x140016000 ; "\tANSI\\esc: \x1b[33m\r\n"
+            0x140001010      488d05015001.  lea rax, str._twide_esc:__e_0m_r_n ; 0x140016018 ; "\twide\\esc: \x1b[0m\r\n"
+            0x14000101c      488d051d5001.  lea rax, str._wide__in_Arabic:_________ ; 0x140016040 ; "\"wide\" in Arabic: \u0648\u0627\u0633\u0639"
                ; section..data
                ; 0x140016000
-               ; "\tANSI\r\n"
-            0x140001004      488d05f54f01.  lea rax, str._tANSI_r_n
-               ; 0x140016008
-               ; "\twide\r\n"
-            0x140001010      488d05f14f01.  lea rax, str._twide_r_n
+               ; "\tANSI\\esc: \x1b[33m\r\n"
+            0x140001004      488d05f54f01.  lea rax, str._tANSI_esc:__e_33m_r_n
+               ; 0x140016018
+               ; "\twide\\esc: \x1b[0m\r\n"
+            0x140001010      488d05015001.  lea rax, str._twide_esc:__e_0m_r_n
+               ; 0x140016040
+               ; "\"wide\" in Arabic: \u0648\u0627\u0633\u0639"
+            0x14000101c      488d051d5001.  lea rax, str._wide__in_Arabic:_________
 '
 run_test
 
