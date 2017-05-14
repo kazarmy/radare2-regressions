@@ -685,7 +685,7 @@ EXPECT='  [36m          [0m[32m0x0001145f[0m      [37mlea[36m rdi[0m,[36
 '
 run_test
 
-NAME='ANSI and wide strings'
+NAME='ANSI and wide string flag cmts'
 FILE=../bins/pe/testapp-msvc64.exe
 ARGS=
 CMDS='e asm.cmtright=true
