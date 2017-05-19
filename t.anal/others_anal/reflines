@@ -148,7 +148,7 @@ EXPECT='|       ,=< 0x000113bd      je 0x1144e
 |     ,===< 0x000113e0      jle 0x11424
 |     |||   0x000113e2      lea rsi, [rax - 6]
 |     |||   0x000113e6      mov ecx, 7
-|     |||   0x000113eb      lea rdi, [rip + 0x7ebb]                    ; str._.libs_ ; 0x192ad ; "/.libs/"
+|     |||   0x000113eb      lea rdi, [rip + 0x7ebb]                    ; 0x192ad ; "/.libs/"
 |     |||   0x000113f2      repe cmpsb byte [rsi], byte ptr [rdi]      ; [0x2700000000:1]=255 ; 0
 |    ,====< 0x000113f4      jne 0x11424
 |    ||||   0x000113f6      mov ecx, 3
@@ -207,7 +207,7 @@ EXPECT='|           0x00003ca6      cmp eax, 2
 |    || |      ; JMP XREF from 0x00004602 (main)
 |    || |      ; JMP XREF from 0x00004c38 (main)
 |    || |      ; JMP XREF from 0x00003ce1 (main)
-|    `----> 0x00003cf9      lea rdi, [rip + 0x14fb4]                   ; str.QUOTING_STYLE ; 0x18cb4 ; "QUOTING_STYLE"
+|    `----> 0x00003cf9      lea rdi, [rip + 0x14fb4]                   ; 0x18cb4 ; "QUOTING_STYLE"
 '
 run_test
 
@@ -248,7 +248,7 @@ EXPECT='|           0x00003ca6      cmp eax, 2
 |  |   |       ; JMP XREF from 0x00004602 (main)
 |  |   |       ; JMP XREF from 0x00004c38 (main)
 |  |   |       ; JMP XREF from 0x00003ce1 (main)
-| --------> 0x00003cf9      lea rdi, [rip + 0x14fb4]                   ; str.QUOTING_STYLE ; 0x18cb4 ; "QUOTING_STYLE"
+| --------> 0x00003cf9      lea rdi, [rip + 0x14fb4]                   ; 0x18cb4 ; "QUOTING_STYLE"
 '
 run_test
 
@@ -289,7 +289,7 @@ EXPECT='|           0x00003ca6      cmp eax, 2
 |  |   |       ; JMP XREF from 0x00004602 (main)
 |  |   |       ; JMP XREF from 0x00004c38 (main)
 |  |   |       ; JMP XREF from 0x00003ce1 (main)
-| --------> 0x00003cf9      lea rdi, [rip + 0x14fb4]                   ; str.QUOTING_STYLE ; 0x18cb4 ; "QUOTING_STYLE"
+| --------> 0x00003cf9      lea rdi, [rip + 0x14fb4]                   ; 0x18cb4 ; "QUOTING_STYLE"
 '
 run_test
 
