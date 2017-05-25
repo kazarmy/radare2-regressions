@@ -717,6 +717,7 @@ NAME='hide flag iff unchanged and string shown'
 FILE=../bins/pe/testapp-msvc64.exe
 ARGS=
 CMDS='e asm.filter=false
+e asm.noisy=false
 e asm.cmtright=true
 pd 1 @ 0x140001010
 pd 1 @ 0x140001028
@@ -737,6 +738,23 @@ EXPECT='            0x140001010      488d05015001.  lea rax, 0x140016018       ;
             0x140001028      488d05415001.  lea rax, 0x140016070
             0x140001010      488d05015001.  lea rax, 0x140016018       ; str.wide ; "\twide\\esc: \x1b[0m\xa1\r\n"
                ; str.wide
+               ; "\twide\\esc: \x1b[0m\xa1\r\n"
+            0x140001010      488d05015001.  lea rax, 0x140016018
+'
+run_test
+
+NAME='asm.noisy'
+FILE=../bins/pe/testapp-msvc64.exe
+ARGS=
+CMDS='e asm.filter=false
+e asm.noisy=true
+e asm.cmtright=true
+pd 1 @ 0x140001010
+e asm.cmtright=false
+pd 1 @ 0x140001010
+'
+EXPECT='            0x140001010      488d05015001.  lea rax, 0x140016018       ; str._twide_esc:__e_0m___r_n ; "\twide\\esc: \x1b[0m\xa1\r\n"
+               ; str._twide_esc:__e_0m___r_n
                ; "\twide\\esc: \x1b[0m\xa1\r\n"
             0x140001010      488d05015001.  lea rax, 0x140016018
 '
