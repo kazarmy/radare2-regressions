@@ -106,3 +106,17 @@ pd 1~?strcmp(const
 EXPECT="1
 "
 run_test
+
+NAME="r_anal_type_func_guess false positive"
+FILE=../../bins/elf/analysis/zigs_stripped
+BROKEN=
+CMDS='e asm.calls=true
+za print b 5548....48......48......48......48....bf........b8........e8........90c9c3
+z/ > /dev/null
+s main
+af
+pd 1 @ 0x0040056f
+'
+EXPECT="|           0x0040056f      e8c2ffffff     call sign.bytes.print_0
+"
+run_test
