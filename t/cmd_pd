@@ -786,3 +786,22 @@ EXPECT='            0x004010c6      ff1508204000   call dword [0x402008]       ;
             0x004010c6      ff1508204000   call dword [0x402008]
 '
 run_test
+
+NAME='asm.cmtoff'
+FILE=../bins/pe/testapp-msvc64.exe
+ARGS=
+CMDS='e asm.noisy=false
+e asm.filter=true
+e asm.cmtoff=false
+pd 1 @ 0x140001010
+e asm.filter=false
+e asm.cmtoff=true
+pd 1 @ 0x140001010
+e asm.cmtoff=nodup
+pd 1 @ 0x140001010
+'
+EXPECT='            0x140001010      488d05015001.  lea rax, str._twide_esc:__e_0m___r_n ; "\twide\\esc: \x1b[0m\xa1\r\n"
+            0x140001010      488d05015001.  lea rax, 0x140016018       ; 0x140016018 ; "\twide\\esc: \x1b[0m\xa1\r\n"
+            0x140001010      488d05015001.  lea rax, 0x140016018       ; "\twide\\esc: \x1b[0m\xa1\r\n"
+'
+run_test
