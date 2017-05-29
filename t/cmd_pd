@@ -805,3 +805,18 @@ EXPECT='            0x140001010      488d05015001.  lea rax, str._twide_esc:__e_
             0x140001010      488d05015001.  lea rax, 0x140016018       ; "\twide\\esc: \x1b[0m\xa1\r\n"
 '
 run_test
+
+NAME='asm.leahints cmt'
+FILE=../bins/elf/analysis/ls-linux64
+ARGS=
+CMDS='e asm.leahints=true
+e asm.cmtright=true
+pd 1 @ 0x00005c2f
+e asm.cmtright=false
+pd 1 @ 0x00005c2f
+'
+EXPECT='            0x00005c2f      4c8d054ae200.  lea r8, 0x00013e80          ; LEA r8 = [0x5c36] = 0x480000e1d30d8d48 "H...."
+               ; LEA r8 = [0x5c36] = 0x480000e1d30d8d48 "H...."
+            0x00005c2f      4c8d054ae200.  lea r8, 0x00013e80
+'
+run_test
