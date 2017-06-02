@@ -60,7 +60,7 @@ CMDS='
 wx 666f6f005c
 /j foo\x00\\
 '
-EXPECT='[{"offset": 0,"id:":0,"type":"string","data":"foo\u0000\\\\"}]
+EXPECT='[{"offset": 0,"id:":0,"type":"string","data":"foo\u0000\\"}]
 '
 run_test
 
