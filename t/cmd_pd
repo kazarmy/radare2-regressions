@@ -820,3 +820,13 @@ EXPECT='            0x00005c2f      4c8d054ae200.  lea r8, 0x00013e80          ;
             0x00005c2f      4c8d054ae200.  lea r8, 0x00013e80
 '
 run_test
+
+NAME='\u escape'
+FILE=../bins/pe/testapp-msvc64.exe
+ARGS=
+CMDS='e asm.cmtoff=false
+pd 1 @ 0x140001034
+'
+EXPECT='            0x140001034      488d054d5001.  lea rax, str.C:_images_umbrellas_ ; "C:\\images\\umbrellas\\"
+'
+run_test
