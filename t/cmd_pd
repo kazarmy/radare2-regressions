@@ -574,6 +574,15 @@ EXPECT='/ (fcn) fcn2.0x004017c0 13
 '
 run_test
 
+NAME='r_str_escape anal'
+FILE='../bins/pe/a.exe'
+ARGS=
+CMDS='pd 1 @ 0x00401322
+'
+EXPECT='            0x00401322      c70424043040.  mov dword [esp], 0x403004   ; [0x403004:4]=0xa7025 ; "%p\n"
+'
+run_test
+
 NAME='no rep flag in cmt with gen str flag (lea)'
 FILE=../bins/elf/analysis/ls-alxchk
 ARGS=
