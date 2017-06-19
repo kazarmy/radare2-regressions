@@ -583,6 +583,15 @@ EXPECT='            0x00401322      c70424043040.  mov dword [esp], 0x403004   ;
 '
 run_test
 
+NAME="no 'u' prefix for single-char strings"
+FILE='../bins/pe/testapp-msvc32.exe'
+ARGS=
+CMDS='pd 1 @ 0x00401003
+'
+EXPECT='            0x00401003      6800304100     push 0x413000               ; section..data ; "\n"
+'
+run_test
+
 NAME='no rep flag in cmt with gen str flag (lea)'
 FILE=../bins/elf/analysis/ls-alxchk
 ARGS=
