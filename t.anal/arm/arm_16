@@ -118,6 +118,6 @@ e asm.bits=16
 wx 10b5 01a0 00bf 00bf 5261646172653220746573740d0a00
 pd 1 @ 0x2
 "
-EXPECT='            0x00000002      01a0           adr r0, 4                   ; "Radare2 test.." ; 0x8 ; 8
+EXPECT='            0x00000002      01a0           adr r0, 4                   ; "Radare2 test\r\n" ; 0x8 ; 8
 '
 run_test

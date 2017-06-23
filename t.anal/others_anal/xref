@@ -344,7 +344,7 @@ aa
 aae
 pd 1 @ 0x08048432
 '
-EXPECT='|           0x08048432      8d83e0e4ffff   lea eax, str.Hello_PIC_     ; "Hello PIC!" @ 0x80484e0
+EXPECT='|           0x08048432      8d83e0e4ffff   lea eax, str.Hello_PIC_     ; 0x80484e0 ; "Hello PIC!"
 '
 run_test
 
