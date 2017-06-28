@@ -592,6 +592,15 @@ EXPECT='            0x140001034      488d0d495001.  lea rcx, 0x140016084       ;
 '
 run_test
 
+NAME='r_str_escape anal addr'
+FILE='../bins/pe/cmd_adf_sample0.exe'
+ARGS=
+CMDS='pd 1 @ 0x0040116a
+'
+EXPECT='            0x0040116a      6828304000     push 0x403028               ; "End\r\n"
+'
+run_test
+
 NAME='no rep flag in cmt with gen str flag (lea)'
 FILE=../bins/elf/analysis/ls-alxchk
 ARGS=
