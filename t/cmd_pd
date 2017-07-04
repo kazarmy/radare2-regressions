@@ -764,6 +764,27 @@ EXPECT='            0x00400863      bfeb0a4000     mov edi, 0x400aeb           ;
 '
 run_test
 
+NAME='asm.strenc latin1'
+FILE=../bins/pe/testapp-msvc64.exe
+ARGS=
+CMDS='e asm.filter=false
+e asm.noisy=false
+e asm.strenc=latin1
+pd 1 @ 0x14000104c
+e asm.strenc=guess
+pd 1 @ 0x14000104c
+e asm.strenc=latin1
+pd 1 @ 0x140001058
+e asm.strenc=utf8
+pd 1 @ 0x140001058
+'
+EXPECT='            0x14000104c      488d05455001.  lea rax, 0x140016098       ; "@"
+            0x14000104c      488d05455001.  lea rax, 0x140016098       ; u"@\ufffd\ud801"
+            0x140001058      488d05415001.  lea rax, 0x1400160a0       ; "latin1 gate: \xce\xbb\xab\xce"
+            0x140001058      488d05415001.  lea rax, 0x1400160a0       ; "latin1 gate: \u03bb\xab\xce"
+'
+run_test
+
 NAME='hide flag iff unchanged and string shown'
 FILE=../bins/pe/testapp-msvc64.exe
 ARGS=
