@@ -892,3 +892,19 @@ EXPECT='            0x00005c2f      4c8d054ae200.  lea r8, 0x00013e80          ;
             0x00005c2f      4c8d054ae200.  lea r8, 0x00013e80
 '
 run_test
+
+NAME='no | highlight with asm.cmtright=false & call statement'
+FILE=../bins/pe/ConsoleApplication1.exe
+ARGS=
+CMDS='e asm.bytes=false
+e scr.color=true
+e asm.cmtright=false
+s main
+af
+pd 2 @ 0x004010e8
+'
+EXPECT='[35m[0m[36m| [0m[36m          [0m[32m0x004010e8[0m      [35mpush[36m esi[0m[0m
+[1;32m[0m[36m|           [0m   [31m; 0x402004
+[0m[36m| [0m[36m          [0m[32m0x004010e9[0m      [1;32mcall dword [sym.imp.KERNEL32.dll_GetCurrentProcessorNumber][0m
+'
+run_test
