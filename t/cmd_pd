@@ -749,18 +749,33 @@ EXPECT='            0x140001040      488d05415001.  lea rax, 0x140016088       ;
 '
 run_test
 
+
+NAME='asm.strenc asciidot'
+FILE=../bins/elf/strenc
+ARGS=
+CMDS='e asm.cmtoff=false
+e asm.strenc=latin1
+pd 1 @ 0x004008ed
+e asm.strenc=asciidot
+pd 1 @ 0x004008ed
+'
+EXPECT='            0x004008ed      beb20b4000     mov esi, str.see            ; "see \xdab\xbee\xace\xcaf\n"
+            0x004008ed      beb20b4000     mov esi, str.see            ; "see .b.e.e.f\n"
+'
+run_test
+
 NAME='asm.strenc utf8'
 FILE=../bins/elf/strenc
 ARGS=
 CMDS='e asm.filter=false
 e asm.noisy=false
 e asm.strenc=utf8
-pd 1 @ 0x00400863
+pd 1 @ 0x004008e3
 e asm.strenc=guess
-pd 1 @ 0x00400863
+pd 1 @ 0x004008e3
 '
-EXPECT='            0x00400863      bfeb0a4000     mov edi, 0x400aeb           ; "\\u00a2\\u20ac\\U00010348 in yellow:\x1b[33m \u00a2\u20ac\U00010348 \x1b[0m\n"
-            0x00400863      bfeb0a4000     mov edi, 0x400aeb           ; "\\u00a2\\u20ac\\U00010348 in yellow:\x1b[33m \xc2\xa2\xe2\x82\xac\xf0\x90\x8d\x88 \x1b[0m\n"
+EXPECT='            0x004008e3      bf7b0b4000     mov edi, 0x400b7b           ; "\\u00a2\\u20ac\\U00010348 in yellow:\x1b[33m \u00a2\u20ac\U00010348 \x1b[0m\n"
+            0x004008e3      bf7b0b4000     mov edi, 0x400b7b           ; "\\u00a2\\u20ac\\U00010348 in yellow:\x1b[33m \xc2\xa2\xe2\x82\xac\xf0\x90\x8d\x88 \x1b[0m\n"
 '
 run_test
 
