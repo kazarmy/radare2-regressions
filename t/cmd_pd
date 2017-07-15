@@ -587,8 +587,10 @@ NAME="r_str_escape io + no 'u' prefix for single-char strings"
 FILE='../bins/pe/testapp-msvc64.exe'
 ARGS=
 CMDS='pd 1 @ 0x140001034
+pd 1 @ 0x140001070
 '
 EXPECT='            0x140001034      488d05495001.  lea rax, 0x140016084       ; "\r"
+            0x140001070      488d053d5001.  lea rax, 0x1400160b4       ; "a"
 '
 run_test
 
@@ -753,29 +755,31 @@ run_test
 NAME='asm.strenc asciidot'
 FILE=../bins/elf/strenc
 ARGS=
-CMDS='e asm.cmtoff=false
+CMDS='e asm.bytes=false
+e asm.cmtoff=false
 e asm.strenc=latin1
-pd 1 @ 0x004008ed
+pd 1 @ 0x0040122d
 e asm.strenc=asciidot
-pd 1 @ 0x004008ed
+pd 1 @ 0x0040122d
 '
-EXPECT='            0x004008ed      beb20b4000     mov esi, str.see            ; "see \xdab\xbee\xace\xcaf\n"
-            0x004008ed      beb20b4000     mov esi, str.see            ; "see .b.e.e.f\n"
+EXPECT='            0x0040122d      mov esi, str.see                           ; "see \xdab\xbee\xace\xcaf\n"
+            0x0040122d      mov esi, str.see                           ; "see .b.e.e.f\n"
 '
 run_test
 
 NAME='asm.strenc utf8'
 FILE=../bins/elf/strenc
 ARGS=
-CMDS='e asm.filter=false
+CMDS='e asm.bytes=false
+e asm.filter=false
 e asm.noisy=false
 e asm.strenc=utf8
-pd 1 @ 0x004008e3
+pd 1 @ 0x00401223
 e asm.strenc=guess
-pd 1 @ 0x004008e3
+pd 1 @ 0x00401223
 '
-EXPECT='            0x004008e3      bf7b0b4000     mov edi, 0x400b7b           ; "\\u00a2\\u20ac\\U00010348 in yellow:\x1b[33m \u00a2\u20ac\U00010348 \x1b[0m\n"
-            0x004008e3      bf7b0b4000     mov edi, 0x400b7b           ; "\\u00a2\\u20ac\\U00010348 in yellow:\x1b[33m \xc2\xa2\xe2\x82\xac\xf0\x90\x8d\x88 \x1b[0m\n"
+EXPECT='            0x00401223      mov edi, 0x40193f                          ; "utf8> \\u00a2\\u20ac\\U00010348 in yellow:\x1b[33m \u00a2\u20ac\U00010348 \x1b[0m\n"
+            0x00401223      mov edi, 0x40193f                          ; "utf8> \\u00a2\\u20ac\\U00010348 in yellow:\x1b[33m \xc2\xa2\xe2\x82\xac\xf0\x90\x8d\x88 \x1b[0m\n"
 '
 run_test
 
@@ -797,6 +801,33 @@ EXPECT='            0x14000104c      488d05455001.  lea rax, 0x140016098       ;
             0x14000104c      488d05455001.  lea rax, 0x140016098       ; u"@\ufffd\ud801"
             0x140001058      488d05415001.  lea rax, 0x1400160a0       ; "latin1 gate: \xce\xbb\xab\xce"
             0x140001058      488d05415001.  lea rax, 0x1400160a0       ; "latin1 gate: \u03bb\xab\xce"
+'
+run_test
+
+NAME='asm.strenc utf16le'
+FILE=../bins/elf/strenc
+ARGS=
+CMDS='e asm.bytes=false
+e asm.filter=false
+e asm.noisy=false
+e asm.strenc=guess
+pd 1 @ 0x0040123c
+e asm.filter=true
+e asm.cmtoff=false
+e asm.strenc=guess
+pd 1 @ 0x00401246
+e asm.strenc=utf16le
+pd 1 @ 0x00401246
+e asm.strenc=guess
+pd 1 @ 0x00401250
+e asm.strenc=utf16le
+pd 1 @ 0x00401250
+'
+EXPECT='            0x0040123c      mov edi, 0x40198a                          ; u"utf16le> \\u00a2\\u20ac\\U00010348 in green:\x1b[32m \xa2\u20ac\U00010348 \x1b[0m\n"
+            0x00401246      mov edi, str.__e_e_b_                      ; "_%e%e%b% "
+            0x00401246      mov edi, str.__e_e_b_                      ; u"\u255f\u2565\u2565\u2562 is a wall with no embedded zeros\n"
+            0x00401250      mov edi, str._B_                           ; " %B%"
+            0x00401250      mov edi, str._B_                           ; u"\u2520\u2542\u2500\u2500\u2542\u2528 is a fence with embedded zeros\n"
 '
 run_test
 
