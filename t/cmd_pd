@@ -822,12 +822,14 @@ e asm.strenc=guess
 pd 1 @ 0x00401250
 e asm.strenc=utf16le
 pd 1 @ 0x00401250
+pd 1 @ 0x0040125a
 '
 EXPECT='            0x0040123c      mov edi, 0x40198a                          ; u"utf16le> \\u00a2\\u20ac\\U00010348 in green:\x1b[32m \xa2\u20ac\U00010348 \x1b[0m\n"
             0x00401246      mov edi, str.__e_e_b_                      ; "_%e%e%b% "
             0x00401246      mov edi, str.__e_e_b_                      ; u"\u255f\u2565\u2565\u2562 is a wall with no embedded zeros\n"
             0x00401250      mov edi, str._B_                           ; " %B%"
             0x00401250      mov edi, str._B_                           ; u"\u2520\u2542\u2500\u2500\u2542\u2528 is a fence with embedded zeros\n"
+            0x0040125a      mov edi, str._B__                          ; u"\u2520\u2542-\u2500-\u2500\u2542\u2528 is a fence with embedded double zeros\n"
 '
 run_test
 
