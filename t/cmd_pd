@@ -782,21 +782,6 @@ EXPECT='            0x0040169d      mov esi, str.see                           ;
 '
 run_test
 
-NAME='asm.strenc asciidot'
-FILE=../bins/elf/strenc
-ARGS=
-CMDS='e asm.bytes=false
-e asm.cmtoff=false
-e asm.strenc=latin1
-pd 1 @ 0x0040169d
-e asm.strenc=asciidot
-pd 1 @ 0x0040169d
-'
-EXPECT='            0x0040169d      mov esi, str.see                           ; "see \xdab\xbee\xace\xcaf\n"
-            0x0040169d      mov esi, str.see                           ; "see .b.e.e.f\n"
-'
-run_test
-
 NAME='asm.strenc utf8'
 FILE=../bins/elf/strenc
 ARGS=
