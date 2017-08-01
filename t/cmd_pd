@@ -790,11 +790,14 @@ e asm.filter=false
 e asm.noisy=false
 e asm.strenc=utf8
 pd 1 @ 0x00401693
+e asm.strenc=latin1
+pd 1 @ 0x00401693
 e asm.strenc=guess
 pd 1 @ 0x00401693
 '
 EXPECT='            0x00401693      mov edi, 0x4021ff                          ; "utf8> \\u00a2\\u20ac\\U00010348 in yellow:\x1b[33m \u00a2\u20ac\U00010348 \x1b[0m\n"
             0x00401693      mov edi, 0x4021ff                          ; "utf8> \\u00a2\\u20ac\\U00010348 in yellow:\x1b[33m \xc2\xa2\xe2\x82\xac\xf0\x90\x8d\x88 \x1b[0m\n"
+            0x00401693      mov edi, 0x4021ff                          ; "utf8> \\u00a2\\u20ac\\U00010348 in yellow:\x1b[33m \u00a2\u20ac\U00010348 \x1b[0m\n"
 '
 run_test
 
