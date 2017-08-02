@@ -807,17 +807,11 @@ ARGS=
 CMDS='e asm.filter=false
 e asm.noisy=false
 e asm.strenc=latin1
-pd 1 @ 0x14000104c
-e asm.strenc=guess
-pd 1 @ 0x14000104c
-e asm.strenc=latin1
 pd 1 @ 0x140001058
 e asm.strenc=utf8
 pd 1 @ 0x140001058
 '
-EXPECT='            0x14000104c      488d05455001.  lea rax, 0x140016098       ; "@"
-            0x14000104c      488d05455001.  lea rax, 0x140016098       ; u"@\ufffd\ud801"
-            0x140001058      488d05415001.  lea rax, 0x1400160a0       ; "latin1 gate: \xce\xbb\xab\xce"
+EXPECT='            0x140001058      488d05415001.  lea rax, 0x1400160a0       ; "latin1 gate: \xce\xbb\xab\xce"
             0x140001058      488d05415001.  lea rax, 0x1400160a0       ; "latin1 gate: \u03bb\xab\xce"
 '
 run_test
@@ -877,6 +871,21 @@ EXPECT='            0x004016de      mov esi, str._tLinux_wide_esc:__e_0m___r_n ;
             0x004016ed      mov edi, 0x40258c                          ; U"utf32le> \\u00a2\\u20ac\\U00010348 in cyan:\x1b[36m \xa2\u20ac\U00010348 \x1b[0m\n"
             0x004016f7      mov edi, 0x40266c                          ; U"Mountain range with embedded quad zeros: \U00010300A\U00010300A\U00010300A\n"
             0x00401701      mov edi, 0x402730                          ; U"\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u256b\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u256b\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u256b\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u256b\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u256b\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u256b\u2565\u2565\u2565\u2565\u2565\u2565"
+'
+run_test
+
+NAME='asm.strenc guess utf16le'
+FILE=../bins/pe/testapp-msvc64.exe
+ARGS=
+CMDS='e asm.filter=false
+e asm.noisy=false
+e asm.strenc=guess
+pd 1 @ 0x14000104c
+e asm.strenc=utf16le
+pd 1 @ 0x14000104c
+'
+EXPECT='            0x14000104c      488d05455001.  lea rax, 0x140016098       ; "@"
+            0x14000104c      488d05455001.  lea rax, 0x140016098       ; u"@\ufffd\ud801"
 '
 run_test
 
