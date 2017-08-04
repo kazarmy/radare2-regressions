@@ -860,16 +860,16 @@ e asm.filter=false
 e asm.noisy=false
 e asm.strenc=guess
 pd 1 @ 0x004016ed
-e asm.strenc=utf32le
-pd 1 @ 0x004016ed
 pd 1 @ 0x004016f7
+pd 1 @ 0x00401701
+e asm.strenc=utf32le
 pd 1 @ 0x00401701
 '
 EXPECT='            0x004016de      mov esi, str._tLinux_wide_esc:__e_0m___r_n ; u"\t"
             0x004016de      mov esi, str._tLinux_wide_esc:__e_0m___r_n ; U"\tLinux_wide\\esc: \x1b[0m\xa1\r\n"
-            0x004016ed      mov edi, 0x40258c                          ; "u"
             0x004016ed      mov edi, 0x40258c                          ; U"utf32le> \\u00a2\\u20ac\\U00010348 in cyan:\x1b[36m \xa2\u20ac\U00010348 \x1b[0m\n"
             0x004016f7      mov edi, 0x40266c                          ; U"Mountain range with embedded quad zeros: \U00010300A\U00010300A\U00010300A\n"
+            0x00401701      mov edi, 0x402730                          ; "e%"
             0x00401701      mov edi, 0x402730                          ; U"\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u256b\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u256b\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u256b\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u256b\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u256b\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u2565\u256b\u2565\u2565\u2565\u2565\u2565\u2565"
 '
 run_test
