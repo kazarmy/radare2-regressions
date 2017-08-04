@@ -889,6 +889,21 @@ EXPECT='            0x14000104c      488d05455001.  lea rax, 0x140016098       ;
 '
 run_test
 
+NAME='asm.strenc guess utf32le'
+FILE=../bins/elf/strenc-guess-utf32le
+ARGS=
+CMDS='e asm.cmtoff=false
+e asm.bytes=false
+e asm.strenc=guess
+pd 1 @ 0x00400463
+e asm.strenc=utf32le
+pd 1 @ 0x00400463
+'
+EXPECT='            0x00400463      mov edi, str.AB                            ; "A"
+            0x00400463      mov edi, str.AB                            ; U"AB\U0010ffff  \U00110000  \U7ffdfeff\n"
+'
+run_test
+
 NAME='hide flag iff unchanged and string shown'
 FILE=../bins/pe/testapp-msvc64.exe
 ARGS=
