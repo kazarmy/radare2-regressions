@@ -899,3 +899,11 @@ EXPECT='[Main]
 vaddr=0x0000142e paddr=0x0000142e
 '
 run_test
+
+NAME='iz utf16le'
+FILE=../bins/elf/strenc
+ARGS=
+CMDS="iz~green"
+EXPECT='vaddr=0x0040224a paddr=0x0000224a ordinal=005 sz=116 len=56 section=.rodata type=utf16le string=utf16le> \u00a2\u20ac\U00010348 in green:\e[32m ¢€𐍈 \e[0m\n
+'
+run_test
