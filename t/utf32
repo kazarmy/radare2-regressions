@@ -7,7 +7,7 @@ CMDS='iz
 EXPECT='vaddr=0x080485d0 paddr=0x000005d0 ordinal=000 sz=17 len=16 section=.rodata type=ascii string=Enter password: 
 vaddr=0x080485e5 paddr=0x000005e5 ordinal=001 sz=10 len=9 section=.rodata type=ascii string=Congrats!
 vaddr=0x080485ef paddr=0x000005ef ordinal=002 sz=7 len=6 section=.rodata type=ascii string=Wrong!
-vaddr=0x0804a040 paddr=0x00001040 ordinal=000 sz=36 len=8 section=.data type=wide32 string=w0wgreat
+vaddr=0x0804a040 paddr=0x00001040 ordinal=000 sz=36 len=8 section=.data type=utf32le string=w0wgreat
 '
 
 run_test

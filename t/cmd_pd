@@ -899,8 +899,8 @@ pd 1 @ 0x00400463
 e asm.strenc=utf32le
 pd 1 @ 0x00400463
 '
-EXPECT='            0x00400463      mov edi, str.AB                            ; "A"
-            0x00400463      mov edi, str.AB                            ; U"AB\U0010ffff  \U00110000  \U7ffdfeff\n"
+EXPECT='            0x00400463      mov edi, str.ABCDEF                        ; "A"
+            0x00400463      mov edi, str.ABCDEF                        ; U"ABCDEF\U0010ffff  G\U00110000  H\U7ffdfeff\n"
 '
 run_test
 

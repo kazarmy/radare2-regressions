@@ -907,3 +907,23 @@ CMDS="iz~green"
 EXPECT='vaddr=0x0040224a paddr=0x0000224a ordinal=005 sz=116 len=56 section=.rodata type=utf16le string=utf16le> \u00a2\u20ac\U00010348 in green:\e[32m ¢€𐍈 \e[0m\n
 '
 run_test
+
+NAME='iz utf32le'
+FILE=../bins/elf/strenc
+ARGS=
+CMDS="iz~cyan
+iz~Mountain"
+EXPECT='vaddr=0x0040258c paddr=0x0000258c ordinal=016 sz=224 len=55 section=.rodata type=utf32le string=utf32le> \u00a2\u20ac\U00010348 in cyan:\e[36m ¢€𐍈 \e[0m\n
+vaddr=0x0040266c paddr=0x0000266c ordinal=017 sz=196 len=48 section=.rodata type=utf32le string=Mountain range with embedded quad zeros: 𐌀A𐌀A𐌀A\n
+'
+run_test
+
+NAME='iz utf32le partial'
+FILE=../bins/elf/strenc-guess-utf32le
+ARGS=
+CMDS="iz~ABCDEF
+iz~abcdef"
+EXPECT='vaddr=0x004005fc paddr=0x000005fc ordinal=001 sz=28 len=6 section=.rodata type=utf32le string=ABCDEF
+vaddr=0x00400640 paddr=0x00000640 ordinal=002 sz=44 len=10 section=.rodata type=utf32le string=abcdef𐍈  g
+'
+run_test
