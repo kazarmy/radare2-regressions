@@ -922,8 +922,10 @@ NAME='iz utf32le partial'
 FILE=../bins/elf/strenc-guess-utf32le
 ARGS=
 CMDS="iz~ABCDEF
-iz~abcdef"
-EXPECT='vaddr=0x004005fc paddr=0x000005fc ordinal=001 sz=28 len=6 section=.rodata type=utf32le string=ABCDEF
-vaddr=0x00400640 paddr=0x00000640 ordinal=002 sz=44 len=10 section=.rodata type=utf32le string=abcdef𐍈  g
+iz~abcdef
+iz~123456"
+EXPECT='vaddr=0x0040060c paddr=0x0000060c ordinal=001 sz=28 len=6 section=.rodata type=utf32le string=ABCDEF
+vaddr=0x00400650 paddr=0x00000650 ordinal=002 sz=44 len=10 section=.rodata type=utf32le string=abcdef𐍈  g
+vaddr=0x00400694 paddr=0x00000694 ordinal=003 sz=28 len=6 section=.rodata type=utf32le string=123456
 '
 run_test
