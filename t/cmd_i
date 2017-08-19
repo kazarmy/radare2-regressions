@@ -938,7 +938,7 @@ NAME='izj unicode blocks'
 FILE=../bins/elf/strenc
 ARGS=
 CMDS="izj"
-FILTER='grep -o "{[^}]*\ordinal..\(2\|3\|7\)[^}]*}"'
+FILTER='grep -o "{[^}]*\ordinal..\(2\|3\|7\),[^}]*}"'
 EXPECT='{"vaddr":4202996,"paddr":8692,"ordinal":2,"size":11,"length":10,"section":".rodata","type":"ascii","string":"ZW5fVVMudXRmOA=="}
 {"vaddr":4203007,"paddr":8703,"ordinal":3,"size":61,"length":54,"section":".rodata","type":"utf8","string":"dXRmOD4gXHUwMGEyXHUyMGFjXFUwMDAxMDM0OCBpbiB5ZWxsb3c6XGVbMzNtIMKi4oKs8JCNiCBcZVswbVxu","blocks":["Basic Latin","Latin-1 Supplement","Currency Symbols","Gothic"]}
 {"vaddr":4203208,"paddr":8904,"ordinal":7,"size":68,"length":33,"section":".rodata","type":"utf16le","string":"aXMgYSB3YWxsIHdpdGggbm8gZW1iZWRkZWQgemVyb3Ncbg=="}
@@ -949,7 +949,7 @@ NAME='izzj unicode blocks'
 FILE=../bins/elf/strenc-guess-utf32le
 ARGS=
 CMDS="izzj"
-FILTER='grep -o "{[^}]*\ordinal..13[^}]*}"'
+FILTER='grep -o "{[^}]*\ordinal..13,[^}]*}"'
 EXPECT='{"vaddr":4195920,"paddr":1616,"ordinal":13,"size":44,"length":10,"section":".rodata","type":"utf32le","string":"YWJjZGVm8JCNiCAgZw==","blocks":["Basic Latin","Gothic"]}
 '
 run_test
