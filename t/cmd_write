@@ -265,3 +265,20 @@ i
 rm .b.exe
 '
 run_test
+
+NAME='w octal esc'
+FILE=malloc://16
+ARGS=
+CMDS='w 0123456789abcde
+w a\57b\0
+w 1\0532\0 @ 0x4
+w 0\1741\0 @ 0x8
+ps
+ps @ 0x4
+ps @ 0x8
+'
+EXPECT='a/b
+1+2
+0|1
+'
+run_test
