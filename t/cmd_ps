@@ -1,0 +1,20 @@
+#!/bin/sh
+[ -e tests.sh ] && . ./tests.sh || . ../tests.sh
+
+NAME='ps+ libc++ 32bit'
+FILE=../bins/elf/stdstring32-libc++
+ARGS=-d
+CMDS='dcu main
+ps+ @ obj.short_str1
+ps+ @ obj.short_str2
+ps+ @ obj.empty_str
+ps+ @ obj.long_str1
+ps+ @ obj.long_str2
+'
+EXPECT='a
+abcdefghij
+
+abcdefghijk
+abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+'
+run_test
