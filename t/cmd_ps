@@ -35,9 +35,15 @@ EXPECT_ERR='Error: bitness of 16 not supported'
 run_test
 
 NAME='ps+ libc++ 64bit'
-FILE=../bins/elf/stdstring64-libc++
-ARGS=-d
-CMDS='dcu main
+FILE=../bins/elf/stdstring64-libc++.LOAD1
+ARGS='-n -m 0x00600dc8'
+CMDS='on ../bins/elf/stdstring64-libc++.heap 0x0128b000 > /dev/null
+f obj.empty_str 24 0x006010b8
+f obj.long_str1 24 0x00601088
+f obj.short_str1 24 0x00601058
+f obj.long_str2 24 0x006010a0
+f obj.short_str2 24 0x00601070
+e asm.bits=64
 ps+ @ obj.short_str1
 ps+ @ obj.short_str2
 ps+ @ obj.empty_str
