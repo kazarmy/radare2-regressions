@@ -204,7 +204,7 @@ EXPECT='1020
 
 run_test
 
-NAME=count grep
+NAME='count grep'
 CMDS='
 wx 10203040
 b 128
