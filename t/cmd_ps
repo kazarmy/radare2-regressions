@@ -24,3 +24,12 @@ abcdefghijk
 abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
 '
 run_test
+
+NAME='ps+ libc++ 16bit error'
+IGNORE_ERR=0
+CMDS='f obj.empty_str 12 0x0804a064
+e asm.bits=16
+ps+ @ obj.empty_str
+'
+EXPECT_ERR='Error: bitness of 16 not supported'
+run_test
