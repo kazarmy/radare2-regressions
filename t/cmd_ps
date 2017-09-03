@@ -10,6 +10,7 @@ f obj.long_str1 12 0x0804a04c
 f obj.short_str1 12 0x0804a034
 f obj.long_str2 12 0x0804a058
 f obj.short_str2 12 0x0804a040
+e asm.bits=32
 ps+ @ obj.short_str1
 ps+ @ obj.short_str2
 ps+ @ obj.empty_str
