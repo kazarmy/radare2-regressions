@@ -33,3 +33,21 @@ ps+ @ obj.empty_str
 '
 EXPECT_ERR='Error: bitness of 16 not supported'
 run_test
+
+NAME='ps+ libc++ 64bit'
+FILE=../bins/elf/stdstring64-libc++
+ARGS=-d
+CMDS='dcu main
+ps+ @ obj.short_str1
+ps+ @ obj.short_str2
+ps+ @ obj.empty_str
+ps+ @ obj.long_str1
+ps+ @ obj.long_str2
+'
+EXPECT='a
+abcdefghijklmnopqrstuv
+
+abcdefghijklmnopqrstuvw
+abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+'
+run_test
