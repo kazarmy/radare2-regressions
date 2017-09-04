@@ -264,8 +264,8 @@ ARGS='-n -m 0x1337'
 CMDS='e dir.projects = /tmp/
 Ps blah > /dev/null
 Po blah > /dev/null
-on*~?
-on*~[2]
+om*~?
+om*~[2]
 '
 EXPECT='1
 0x1337
