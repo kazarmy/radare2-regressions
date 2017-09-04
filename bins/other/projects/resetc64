@@ -306,7 +306,7 @@
 "e zoom.from = 0"
 "e zoom.maxsz = 512"
 "e zoom.to = 49155"
-omr 0x0 0xbffe
+omr 1 0xbffe
 # sections
 # meta
 CCu base64:cmVzZXRzIHRoZSBDNjQ= @ 0x0000c000
