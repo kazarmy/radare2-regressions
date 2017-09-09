@@ -5,7 +5,7 @@ FILE=malloc://1024
 NAME="Cs"
 CMDS='
 w hello world
-Cs
+Cs @ $$
 C*~[1]
 '
 EXPECT='12
@@ -253,5 +253,81 @@ CCu get error @ 0x004010fa
 pd 1 @ 0x004010fa
 '
 EXPECT='            0x004010fa (6 bytes hidden)                                ; get error
+'
+run_test
+
+NAME="C[Chsdf][*] without arguments"
+FILE=malloc://1024
+ARGS=
+CMDS='w hello world
+Cs @ $$
+s 0x100
+e asm.arch=x86
+e asm.bits=32
+w 909090
+Cd 3
+s 0x200
+wx 554889e54883c768
+Ch 2
+s 0x300
+wx 41424344
+Cf 4 x
+s 0x0
+CCu Hello!
+Cs
+?e ----
+Cd
+?e ----
+Ch
+?e ----
+Cf
+?e ----
+CC
+?e ----
+C
+?e ----
+Cs*
+?e ----
+Cd*
+?e ----
+Ch*
+?e ----
+Cf*
+?e ----
+CC*
+?e ----
+C*
+'
+EXPECT='0x00000000 string[12] "hello_world"
+----
+0x00000100 data Cd 3
+----
+0x00000200 string[2] "2"
+----
+0x00000300 format 4 x
+----
+0x00000000 CCu "Hello!"
+----
+0x00000000 CCu "Hello!"
+0x00000100 data Cd 3
+0x00000300 format 4 x
+0x00000200 string[2] "2"
+0x00000000 string[12] "hello_world"
+----
+Cs 12 @ 0x00000000 # hello_world
+----
+Cd 3 @ 0x00000100
+----
+Ch 2 @ 0x00000200 # 2
+----
+Cf 4 x @ 0x00000300
+----
+CCu base64:SGVsbG8h @ 0x00000000
+----
+CCu base64:SGVsbG8h @ 0x00000000
+Cd 3 @ 0x00000100
+Cf 4 x @ 0x00000300
+Ch 2 @ 0x00000200 # 2
+Cs 12 @ 0x00000000 # hello_world
 '
 run_test
