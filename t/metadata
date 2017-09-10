@@ -256,7 +256,7 @@ EXPECT='            0x004010fa (6 bytes hidden)                                ;
 '
 run_test
 
-NAME="C[Chsdf][*] without arguments"
+NAME="C[Chsdmf][*] without arguments"
 FILE=malloc://1024
 ARGS=
 CMDS='w hello world
@@ -274,6 +274,9 @@ wx 41424344
 Cf 4 x
 s 0x0
 CCu Hello!
+s 0x380
+wx cafebabe00000032
+Cm 8 wwww
 Cs
 ?e ----
 Cd
@@ -283,6 +286,8 @@ Ch
 Cf
 ?e ----
 CC
+?e ----
+Cm
 ?e ----
 C
 ?e ----
@@ -296,6 +301,8 @@ Cf*
 ?e ----
 CC*
 ?e ----
+Cm*
+?e ----
 C*
 '
 EXPECT='0x00000000 string[12] "hello_world"
@@ -308,10 +315,13 @@ EXPECT='0x00000000 string[12] "hello_world"
 ----
 0x00000000 CCu "Hello!"
 ----
+0x00000380 magic 8 wwww
+----
 0x00000000 CCu "Hello!"
 0x00000100 data Cd 3
 0x00000300 format 4 x
 0x00000200 string[2] "2"
+0x00000380 magic 8 wwww
 0x00000000 string[12] "hello_world"
 ----
 Cs 12 @ 0x00000000 # hello_world
@@ -324,10 +334,13 @@ Cf 4 x @ 0x00000300
 ----
 CCu base64:SGVsbG8h @ 0x00000000
 ----
+Cm 8 wwww @ 0x00000380
+----
 CCu base64:SGVsbG8h @ 0x00000000
 Cd 3 @ 0x00000100
 Cf 4 x @ 0x00000300
 Ch 2 @ 0x00000200 # 2
+Cm 8 wwww @ 0x00000380
 Cs 12 @ 0x00000000 # hello_world
 '
 run_test
