@@ -20,7 +20,7 @@ run_test
 NAME='metadata'
 BROKEN=
 FILE=../../bins/elf/analysis/x86-helloworld-gcc
-CMDS='CC
+CMDS='C
 '
 EXPECT='0x00000000 CCu "section 37 va=0x00000000 pa=0x00000000 sz=0 vsz=0 rwx=m-rw- GNU_STACK"
 0x08048000 CCu "section 38 va=0x08048000 pa=0x00000000 sz=52 vsz=52 rwx=m-rw- ehdr"

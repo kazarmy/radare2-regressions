@@ -6,7 +6,7 @@ FILE=../../bins/pe/ioli/w32/crackme0x00.exe
 ARGS=''
 CMDS="aaa
 axt str.250382~?0x401368
-CC~?"250382"
+C~?"250382"
 "
 EXPECT='1
 1
