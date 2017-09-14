@@ -259,7 +259,8 @@ run_test
 NAME="C[Chsdmf][*] without arguments"
 FILE=malloc://1024
 ARGS=
-CMDS='w hello world
+CMDS='k anal/meta/range.0x5=0x5120
+w hello world
 Cs @ $$
 s 0x100
 e asm.arch=x86
