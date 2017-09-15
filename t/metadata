@@ -310,7 +310,7 @@ EXPECT='0x00000000 string[12] "hello_world"
 ----
 0x00000100 data Cd 3
 ----
-0x00000200 string[2] "2"
+0x00000200 hidden Ch 2
 ----
 0x00000300 format 4 x
 ----
@@ -321,7 +321,7 @@ EXPECT='0x00000000 string[12] "hello_world"
 0x00000000 CCu "Hello!"
 0x00000100 data Cd 3
 0x00000300 format 4 x
-0x00000200 string[2] "2"
+0x00000200 hidden Ch 2
 0x00000380 magic 8 wwww
 0x00000000 string[12] "hello_world"
 ----
@@ -329,7 +329,7 @@ Cs 12 @ 0x00000000 # hello_world
 ----
 Cd 3 @ 0x00000100
 ----
-Ch 2 @ 0x00000200 # 2
+Ch 2 @ 0x00000200
 ----
 Cf 4 x @ 0x00000300
 ----
@@ -340,7 +340,7 @@ Cm 8 wwww @ 0x00000380
 CCu base64:SGVsbG8h @ 0x00000000
 Cd 3 @ 0x00000100
 Cf 4 x @ 0x00000300
-Ch 2 @ 0x00000200 # 2
+Ch 2 @ 0x00000200
 Cm 8 wwww @ 0x00000380
 Cs 12 @ 0x00000000 # hello_world
 '
