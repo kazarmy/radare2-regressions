@@ -256,7 +256,7 @@ EXPECT='            0x004010fa (6 bytes hidden)                                ;
 '
 run_test
 
-NAME="C[Chsdmf][*] without arguments"
+NAME="C[Chsdmf][*j] without arguments"
 FILE=malloc://1024
 ARGS=
 CMDS='k anal/meta/range.0x5=0x5120
@@ -305,6 +305,20 @@ CC*
 Cm*
 ?e ----
 C*
+?e ----
+Csj
+?e ----
+Cdj
+?e ----
+Chj
+?e ----
+Cfj
+?e ----
+CCj
+?e ----
+Cmj
+?e ----
+Cj
 '
 EXPECT='0x00000000 string[12] "hello_world"
 ----
@@ -343,5 +357,19 @@ Cf 4 x @ 0x00000300
 Ch 2 @ 0x00000200
 Cm 8 wwww @ 0x00000380
 Cs 12 @ 0x00000000 # hello_world
+----
+[{"offset":0, "type":"Cs", "name":"hello_world"}]
+----
+[{"offset":256, "type":"Cd", "name":"3"}]
+----
+[{"offset":512, "type":"Ch", "name":"2"}]
+----
+[{"offset":768, "type":"Cf", "name":"x"}]
+----
+[{"offset":0, "type":"CCu", "name":"Hello!"}]
+----
+[{"offset":896, "type":"Cm", "name":"wwww"}]
+----
+[{"offset":0, "type":"CCu", "name":"Hello!"},{"offset":256, "type":"Cd", "name":"3"},{"offset":768, "type":"Cf", "name":"x"},{"offset":512, "type":"Ch", "name":"2"},{"offset":896, "type":"Cm", "name":"wwww"},{"offset":0, "type":"Cs", "name":"hello_world"}]
 '
 run_test
