@@ -320,7 +320,7 @@ Cmj
 ?e ----
 Cj
 '
-EXPECT='0x00000000 string[12] "hello_world"
+EXPECT='0x00000000 ascii[12] "hello_world"
 ----
 0x00000100 data Cd 3
 ----
@@ -337,7 +337,7 @@ EXPECT='0x00000000 string[12] "hello_world"
 0x00000300 format 4 x
 0x00000200 hidden Ch 2
 0x00000380 magic 8 wwww
-0x00000000 string[12] "hello_world"
+0x00000000 ascii[12] "hello_world"
 ----
 Cs 12 @ 0x00000000 # hello_world
 ----
@@ -371,5 +371,16 @@ Cs 12 @ 0x00000000 # hello_world
 [{"offset":896, "type":"Cm", "name":"wwww"}]
 ----
 [{"offset":0, "type":"CCu", "name":"Hello!"},{"offset":256, "type":"Cd", "name":"3"},{"offset":768, "type":"Cf", "name":"x"},{"offset":512, "type":"Ch", "name":"2"},{"offset":896, "type":"Cm", "name":"wwww"},{"offset":0, "type":"Cs", "name":"hello_world"}]
+'
+run_test
+
+NAME="Cs ascii/latin1"
+FILE=../bins/pe/testapp-msvc64.exe
+ARGS=
+CMDS='Cs @ 0x1400160a0
+Cs~gate
+'
+EXPECT='0x1400160a0 latin1[18] "latin1_gate:__xce_xbb_xab_xce"
+0x1400160b8 ascii[50] "___in_ConEmu__run__chcp_28591__to_see_the_gate."
 '
 run_test
