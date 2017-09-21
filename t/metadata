@@ -358,7 +358,7 @@ Ch 2 @ 0x00000200
 Cm 8 wwww @ 0x00000380
 Cs 12 @ 0x00000000 # hello_world
 ----
-[{"offset":0, "type":"Cs", "name":"hello_world", "enc":"latin1", "ascii":true}]
+[{"offset":0, "type":"Cs", "name":"aGVsbG8gd29ybGQ=", "enc":"latin1", "ascii":true}]
 ----
 [{"offset":256, "type":"Cd", "name":"3"}]
 ----
@@ -370,7 +370,7 @@ Cs 12 @ 0x00000000 # hello_world
 ----
 [{"offset":896, "type":"Cm", "name":"wwww"}]
 ----
-[{"offset":0, "type":"CCu", "name":"Hello!"},{"offset":256, "type":"Cd", "name":"3"},{"offset":768, "type":"Cf", "name":"x"},{"offset":512, "type":"Ch", "name":"2"},{"offset":896, "type":"Cm", "name":"wwww"},{"offset":0, "type":"Cs", "name":"hello_world", "enc":"latin1", "ascii":true}]
+[{"offset":0, "type":"CCu", "name":"Hello!"},{"offset":256, "type":"Cd", "name":"3"},{"offset":768, "type":"Cf", "name":"x"},{"offset":512, "type":"Ch", "name":"2"},{"offset":896, "type":"Cm", "name":"wwww"},{"offset":0, "type":"Cs", "name":"aGVsbG8gd29ybGQ=", "enc":"latin1", "ascii":true}]
 '
 run_test
 
@@ -392,7 +392,7 @@ CMDS='Cs @ 0x1400160a0
 Csj
 '
 FILTER='grep -o "{[^}]*\(5368799392\|5368799416\),[^}]*}"'
-EXPECT='{"offset":5368799392, "type":"Cs", "name":"latin1_gate:__xce_xbb_xab_xce", "enc":"latin1", "ascii":false}
-{"offset":5368799416, "type":"Cs", "name":"___in_ConEmu__run__chcp_28591__to_see_the_gate.", "enc":"latin1", "ascii":true}
+EXPECT='{"offset":5368799392, "type":"Cs", "name":"bGF0aW4xIGdhdGU6IM67q84=", "enc":"latin1", "ascii":false}
+{"offset":5368799416, "type":"Cs", "name":"ICAtLSBpbiBDb25FbXUsIHJ1biBgY2hjcCAyODU5MWAgdG8gc2VlIHRoZSBnYXRlLg==", "enc":"latin1", "ascii":true}
 '
 run_test
