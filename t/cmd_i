@@ -908,7 +908,7 @@ FILE=../bins/elf/strenc
 ARGS=
 CMDS="iz~green
 iz~wall"
-EXPECT='vaddr=0x0040224a paddr=0x0000224a ordinal=005 sz=116 len=56 section=.rodata type=utf16le string=utf16le> \u00a2\u20ac\U00010348 in green:\e[32m ¢€𐍈 \e[0m\n blocks=Basic Latin,Latin-1 Supplement,Currency Symbols,Gothic
+EXPECT='vaddr=0x0040224a paddr=0x0000224a ordinal=005 sz=116 len=56 section=.rodata type=utf16le string=utf16le> \\u00a2\\u20ac\\U00010348 in green:\e[32m ¢€𐍈 \e[0m\n blocks=Basic Latin,Latin-1 Supplement,Currency Symbols,Gothic
 vaddr=0x004022c8 paddr=0x000022c8 ordinal=007 sz=68 len=33 section=.rodata type=utf16le string=is a wall with no embedded zeros\n
 '
 run_test
@@ -919,9 +919,9 @@ ARGS=
 CMDS="iz~cyan
 iz~Mountain
 izz~Linux_wide"
-EXPECT='vaddr=0x0040258c paddr=0x0000258c ordinal=016 sz=224 len=55 section=.rodata type=utf32le string=utf32le> \u00a2\u20ac\U00010348 in cyan:\e[36m ¢€𐍈 \e[0m\n blocks=Basic Latin,Latin-1 Supplement,Currency Symbols,Gothic
+EXPECT='vaddr=0x0040258c paddr=0x0000258c ordinal=016 sz=224 len=55 section=.rodata type=utf32le string=utf32le> \\u00a2\\u20ac\\U00010348 in cyan:\e[36m ¢€𐍈 \e[0m\n blocks=Basic Latin,Latin-1 Supplement,Currency Symbols,Gothic
 vaddr=0x0040266c paddr=0x0000266c ordinal=017 sz=196 len=48 section=.rodata type=utf32le string=Mountain range with embedded quad zeros: 𐌀A𐌀A𐌀A\n blocks=Basic Latin,Old Italic
-vaddr=0x00402528 paddr=0x00002528 ordinal=135 sz=100 len=24 section=.rodata type=utf32le string=\tLinux_wide\esc: \e[0m¡\r\n blocks=Basic Latin,Latin-1 Supplement
+vaddr=0x00402528 paddr=0x00002528 ordinal=135 sz=100 len=24 section=.rodata type=utf32le string=\tLinux_wide\\esc: \e[0m¡\r\n blocks=Basic Latin,Latin-1 Supplement
 '
 run_test
 
