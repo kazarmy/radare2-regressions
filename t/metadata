@@ -320,7 +320,7 @@ Cmj
 ?e ----
 Cj
 '
-EXPECT='0x00000000 ascii[12] "hello_world"
+EXPECT='0x00000000 ascii[12] "hello world"
 ----
 0x00000100 data Cd 3
 ----
@@ -337,9 +337,9 @@ EXPECT='0x00000000 ascii[12] "hello_world"
 0x00000300 format 4 x
 0x00000200 hidden Ch 2
 0x00000380 magic 8 wwww
-0x00000000 ascii[12] "hello_world"
+0x00000000 ascii[12] "hello world"
 ----
-Cs 12 @ 0x00000000 # hello_world
+Cs 12 @ 0x00000000 # hello world
 ----
 Cd 3 @ 0x00000100
 ----
@@ -356,7 +356,7 @@ Cd 3 @ 0x00000100
 Cf 4 x @ 0x00000300
 Ch 2 @ 0x00000200
 Cm 8 wwww @ 0x00000380
-Cs 12 @ 0x00000000 # hello_world
+Cs 12 @ 0x00000000 # hello world
 ----
 [{"offset":0, "type":"Cs", "name":"aGVsbG8gd29ybGQ=", "enc":"latin1", "ascii":true}]
 ----
@@ -379,9 +379,11 @@ FILE=../bins/pe/testapp-msvc64.exe
 ARGS=
 CMDS='Cs @ 0x1400160a0
 Cs~gate
+Cs~ANSI
 '
-EXPECT='0x1400160a0 latin1[18] "latin1_gate:__xce_xbb_xab_xce"
-0x1400160b8 ascii[50] "___in_ConEmu__run__chcp_28591__to_see_the_gate."
+EXPECT='0x1400160a0 latin1[18] "latin1 gate: \xce\xbb\xab\xce"
+0x1400160b8 ascii[50] "  -- in ConEmu, run `chcp 28591` to see the gate."
+0x140016000 ascii[19] "\tANSI\esc: \e[33m\r\n"
 '
 run_test
 
