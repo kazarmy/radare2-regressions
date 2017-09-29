@@ -39,6 +39,18 @@ idx=01 vaddr=0x00001013 paddr=0x00000095 sz=14 vsz=14 perm=m-rwx name=data_1
 '
 run_test
 
+NAME="sections 16 bits omf - content"
+FILE=../../bins/omf/hello_world
+ARGS=''
+BROKEN=
+CMDS="px 16 @ section.text_1; px 16 @ section.data_1"
+EXPECT='- offset -  0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
+0000:1000  ba0e 00b9 0000 bb01 00b8 0400 cd80 b801  ................
+- offset -  0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
+0000:1013  4865 6c6c 6f2c 2077 6f72 6c64 210a ffff  Hello, world!...
+'
+run_test
+
 NAME="virtual address 16 bits omf"
 FILE=../../bins/omf/hello_world
 ARGS=''

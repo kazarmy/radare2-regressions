@@ -3,7 +3,7 @@
 
 bool test_r_buf_new_sparse(void) {
 	ut8 data[128];
-	RBuffer *b = r_buf_new_sparse ();
+	RBuffer *b = r_buf_new_sparse (0xff);
 	r_buf_write_at (b, 0x100, (void*)"Hello World", 12);
 	r_buf_write_at (b, 0x200, (void*)"This Rocks!", 12);
 	r_buf_write_at (b, 0x102, (void*)"XX", 2);
