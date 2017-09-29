@@ -383,7 +383,7 @@ Cs~ANSI
 '
 EXPECT='0x1400160a0 latin1[18] "latin1 gate: \xce\xbb\xab\xce"
 0x1400160b8 ascii[50] "  -- in ConEmu, run `chcp 28591` to see the gate."
-0x140016000 ascii[19] "\tANSI\esc: \e[33m\r\n"
+0x140016000 ascii[19] "\tANSI\\esc: \e[33m\r\n"
 '
 run_test
 
