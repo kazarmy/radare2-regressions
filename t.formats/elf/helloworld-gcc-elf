@@ -54,7 +54,7 @@ EXPECT='0x00000000 CCu "section 37 va=0x00000000 pa=0x00000000 sz=0 vsz=0 rwx=m-
 0x080496a0 data Cd 4
 0x080496a4 data Cd 4
 0x080496a8 data Cd 4
-0x080484b0 ascii[13] "Hello_world_"
+0x080484b0 ascii[13] "Hello world!"
 '
 run_test
 
@@ -95,7 +95,7 @@ Cd 4 @ 0x08049690
 Cd 4 @ 0x080496a0
 Cd 4 @ 0x080496a4
 Cd 4 @ 0x080496a8
-Cs 13 @ 0x080484b0 # Hello_world_
+Cs 13 @ 0x080484b0 # Hello world!
 '
 run_test
 
