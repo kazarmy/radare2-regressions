@@ -377,7 +377,7 @@ run_test
 NAME="Cs ascii/latin1"
 FILE=../bins/pe/testapp-msvc64.exe
 ARGS=
-CMDS='Cs @ 0x1400160a0
+CMDS='Csa @ 0x1400160a0
 Cs~gate
 Cs~ANSI
 '
@@ -390,11 +390,24 @@ run_test
 NAME="Csj ascii/latin1"
 FILE=../bins/pe/testapp-msvc64.exe
 ARGS=
-CMDS='Cs @ 0x1400160a0
+CMDS='Csa @ 0x1400160a0
 Csj
 '
 FILTER='grep -o "{[^}]*\(5368799392\|5368799416\),[^}]*}"'
 EXPECT='{"offset":5368799392, "type":"Cs", "name":"bGF0aW4xIGdhdGU6IM67q84=", "enc":"latin1", "ascii":false}
 {"offset":5368799416, "type":"Cs", "name":"ICAtLSBpbiBDb25FbXUsIHJ1biBgY2hjcCAyODU5MWAgdG8gc2VlIHRoZSBnYXRlLg==", "enc":"latin1", "ascii":true}
+'
+run_test
+
+NAME="Csa"
+FILE=../bins/pe/testapp-msvc64.exe
+ARGS=
+CMDS='Cs @ 0x140016018
+Cs~0x140016018
+Csa @ 0x140016018
+Cs~0x140016018
+'
+EXPECT='0x140016018 latin1[19] "\twide\esc: \x1b[0m\xa1\r\n"
+0x140016018 ascii[2] "\t"
 '
 run_test
