@@ -108,9 +108,9 @@ FILE=-
 IGNORE_ERR=1
 ARGS=
 CMDS='ax 10 20
-ax
+axk
 ax-10 20 
-ax
+axk
 '
 EXPECT='ref.unk.0x14=0xa
 xref.unk.0xa=0x14
@@ -126,9 +126,9 @@ IGNORE_ERR=1
 ARGS=
 CMDS='s 20
 ax 10
-ax
+axk
 ax-10
-ax
+axk
 '
 EXPECT='ref.unk.0x14=0xa
 xref.unk.0xa=0x14
@@ -256,18 +256,19 @@ EXPECT='data 0x80483ee mov dword obj.a, 0x1337 in sym.main
 run_test
 
 NAME='delete references with ax-'
-FILE='../../bins/elf/crackme'
+FILE=-
+#'../../bins/elf/crackme'
 ARGS=
 CMDS='
 ax 10 20
-ax
+axk
 ax- 10
-ax
+axk
 ax 10 20
 ax 30 40
-ax
+axk
 ax-*
-ax
+axk
 '
 EXPECT='ref.unk.0x14=0xa
 xref.unk.0xa=0x14

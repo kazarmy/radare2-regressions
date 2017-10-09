@@ -90,3 +90,13 @@ EXPECT='xor ebp, ebp
 xor bp, bp
 '
 run_test
+
+NAME='V - crash #1'
+FILE='-'
+CMDS='V|||'
+run_test
+
+NAME='V - crash #2'
+FILE='-'
+CMDS='V```...'
+run_test

@@ -35,3 +35,29 @@ dk 9'
 EXPECT='3
 '
 run_test
+
+NAME='dd  - crash #1'
+FILE='-'
+CMDS='dd A'
+FILTER='wc -l'
+EXPECT='1
+'
+run_test
+
+NAME='dd  - crash #2'
+FILE='-'
+CMDS='dd .,,.,,,'
+FILTER='wc -l'
+EXPECT='1
+'
+run_test
+
+NAME='=<  - crash #1'
+FILE='-'
+CMDS='=< dt'
+run_test
+
+NAME='=<  - crash #2'
+FILE='-'
+CMDS='=<5'
+run_test

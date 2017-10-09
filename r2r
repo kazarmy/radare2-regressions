@@ -46,9 +46,14 @@ usage() {
 	echo "  -e    edit test"
 	echo "  -v    show version"
 	echo "  -t [type]   show travis status for type (pr, master, any)"
+	echo "  -S    enter shell (same as sh, shell or cd)"
 }
 
 case "$KW" in
+-S|cd|shell|sh)
+	exec ${SHELL}
+	exit $?
+	;;
 -c)
 	rm -rf new/tmp
 	exit 0

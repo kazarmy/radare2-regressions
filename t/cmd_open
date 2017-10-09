@@ -56,6 +56,11 @@ EXPECT='3
 '
 run_test
 
+NAME='omn - crash'
+FILE='-'
+CMDS='omn'
+run_test
+
 NAME='oob 10'
 FILE=../bins/elf/analysis/hello-linux-x86_64
 ARGS=

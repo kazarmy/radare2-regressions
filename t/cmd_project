@@ -81,9 +81,9 @@ FILE=malloc://512
 ARGS=
 CMDS='ax 1
 e dir.projects = /tmp/
-ax
+axk
 Ps xrefs > /dev/null
-ax
+axk
 '
 EXPECT='ref.unk.0x0=0x1
 xref.unk.0x1=0
@@ -351,7 +351,7 @@ wx 5031c0e801000000c3b801000000c3
 af
 Ps blah > /dev/null
 Po blah > /dev/null
-ax
+axk
 '
 EXPECT='xref.code.call.0x9=0x3
 ref.code.call.0x3=0x9

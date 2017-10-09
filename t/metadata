@@ -399,12 +399,13 @@ EXPECT='{"offset":5368799392, "type":"Cs", "name":"bGF0aW4xIGdhdGU6IM67q84=", "e
 '
 run_test
 
-NAME="Csa"
+NAME="Csg and Csa"
 FILE=../bins/pe/testapp-msvc64.exe
 ARGS=
-CMDS='Cs @ 0x140016018
+CMDS='s 0x140016018
+Csg
 Cs~0x140016018
-Csa @ 0x140016018
+Csa
 Cs~0x140016018
 '
 EXPECT='0x140016018 latin1[19] "\twide\esc: \x1b[0m\xa1\r\n"

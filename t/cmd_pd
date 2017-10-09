@@ -1063,3 +1063,21 @@ pd 1 @ 0x004004ee
 EXPECT='            0x004004ee      mov edi, str._____S                        ; 0x4005c0 ; u"\ufeff--> %S\ufeff\n"
 '
 run_test
+
+NAME='pd0~{} - crash'
+FILE='-'
+CMDS='pd0~{}'
+FILTER='grep dummy_search_string'
+run_test
+
+NAME='pI - crash'
+FILE='-'
+CMDS='pI 0x200'
+FILTER='grep dummy_search_string'
+run_test
+
+NAME='pC - crash'
+FILE='-'
+CMDS='pC 0x200'
+FILTER='grep dummy_search_string'
+run_test
