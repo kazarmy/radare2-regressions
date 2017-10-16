@@ -1064,6 +1064,16 @@ EXPECT='            0x004004ee      mov edi, str._____S                        ;
 '
 run_test
 
+NAME='show string at src if dst is stack (x86_cs MOV)'
+FILE=../bins/elf/7786-utf16le
+ARGS=
+CMDS='e asm.bytes=false
+pd 1 @ 0x004004df
+'
+EXPECT='            0x004004df      mov qword [rbp - 8], str.Hello_World       ; 0x4005a0 ; u"\ufeffHello World\ufeff\n"
+'
+run_test
+
 NAME='pd0~{} - crash'
 FILE='-'
 CMDS='pd0~{}'
