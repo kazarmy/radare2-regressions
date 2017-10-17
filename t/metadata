@@ -409,10 +409,16 @@ Cs..
 Csg
 Cs.
 Cs..
+Csa 4
+Cs..
+Csg 4
+Cs..
 '
 EXPECT='"\t"
 ascii[2] "\t"
 "\twide\esc: \x1b[0m\xa1\r\n"
 latin1[19] "\twide\esc: \x1b[0m\xa1\r\n"
+ascii[4] "\t"
+ascii[4] "\twid"
 '
 run_test
