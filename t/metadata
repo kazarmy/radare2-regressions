@@ -411,8 +411,10 @@ Cs.
 Cs..
 Csa 4
 Cs..
+Cs.. @ 0x14001601c  # should print nothing
 Csg 4
 Cs..
+Cs.. @ 0x14001601c  # should print nothing
 '
 EXPECT='"\t"
 ascii[2] "\t"
