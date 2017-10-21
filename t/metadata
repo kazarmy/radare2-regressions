@@ -404,9 +404,11 @@ FILE=../bins/pe/testapp-msvc64.exe
 ARGS=
 CMDS='s 0x140016018
 Csa
+Cs*~0x140016018
 Cs.
 Cs..
 Csg
+Cs*~0x140016018
 Cs.
 Cs..
 Csa 4
@@ -416,8 +418,10 @@ Csg 4
 Cs..
 Cs.. @ 0x14001601c  # should print nothing
 '
-EXPECT='"\t"
+EXPECT='Csa 2 @ 0x140016018 # \t
+"\t"
 ascii[2] "\t"
+Cs 19 @ 0x140016018 # \twide\esc: \x1b[0m\xa1\r\n
 "\twide\esc: \x1b[0m\xa1\r\n"
 latin1[19] "\twide\esc: \x1b[0m\xa1\r\n"
 ascii[4] "\t"
