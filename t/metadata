@@ -428,3 +428,30 @@ ascii[4] "\t"
 ascii[4] "\twid"
 '
 run_test
+
+NAME="Cd- <size> <repeat>"
+ARGS=
+CMDS='s 0x100
+Cd 4 5
+Cd
+?e ----
+Cd- 4 3
+Cd
+?e ----
+s 0x10c
+Cd- 0 2
+Cd
+'
+EXPECT='0x00000100 data Cd 4
+0x00000104 data Cd 4
+0x00000108 data Cd 4
+0x0000010c data Cd 4
+0x00000110 data Cd 4
+----
+0x0000010c data Cd 4
+0x00000110 data Cd 4
+----
+0x0000010c data Cd 4
+0x00000110 data Cd 4
+'
+run_test
