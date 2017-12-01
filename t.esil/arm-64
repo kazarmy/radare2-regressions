@@ -728,3 +728,17 @@ EXPECT='0x00000000
 0x00000000
 '
 run_test
+
+NAME='no esil string on cbz'
+ARGS=
+CMDS='e asm.arch=arm
+e asm.bits=64
+e asm.emustr=true
+wx 35008052b5000034
+w hello @ 0x18
+pd 2
+'
+EXPECT='            0x00000000      35008052       movz w21, 0x1               
+        ,=< 0x00000004      b5000034       cbz w21, 0x18               ; likely
+'
+run_test
