@@ -733,8 +733,10 @@ NAME='no esil string on cbz'
 ARGS=
 CMDS='e asm.arch=arm
 e asm.bits=64
+e cfg.bigendian=false
 e asm.emustr=true
-wx 35008052b5000034
+wv 0x52800035
+wv 0x340000b5 @ 4
 w hello @ 0x18
 pd 2
 '
