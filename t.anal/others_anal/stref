@@ -48,3 +48,32 @@ EXPECT='     ; [0x1048:8]=0x500 "Hello"
  0x00000000      mov rsi, qword [rip + 0x1041]
 '
 run_test
+
+NAME='no string on jmp'
+ARGS=
+CMDS='e asm.arch=x86
+e asm.bits=32
+e asm.emustr=true
+wa jmp 0x100
+w hello @ 0x100
+pd 1
+'
+EXPECT='        ,=< 0x00000000      e9fb000000     jmp 0x100
+'
+run_test
+
+NAME='no string on cbz'
+ARGS=
+CMDS='e asm.arch=arm
+e asm.bits=64
+e cfg.bigendian=false
+e asm.emustr=true
+wv 0x52800035
+wv 0x340000b5 @ 4
+w hello @ 0x18
+pd 2
+'
+EXPECT='            0x00000000      35008052       movz w21, 0x1
+        ,=< 0x00000004      b5000034       cbz w21, 0x18               ; likely
+'
+run_test
