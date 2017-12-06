@@ -68,12 +68,12 @@ CMDS='e asm.arch=arm
 e asm.bits=64
 e cfg.bigendian=false
 e asm.emustr=true
-wv 0x52800035
+wv 0x52800015
 wv 0x340000b5 @ 4
 w hello @ 0x18
 pd 2
 '
-EXPECT='            0x00000000      35008052       movz w21, 0x1
+EXPECT='            0x00000000      15008052       movz w21, 0
         ,=< 0x00000004      b5000034       cbz w21, 0x18               ; likely
 '
 run_test

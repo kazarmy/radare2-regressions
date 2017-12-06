@@ -728,3 +728,30 @@ EXPECT='0x00000000
 0x00000000
 '
 run_test
+
+NAME='cbz/cbnz likeliness'
+ARGS=
+CMDS='e asm.arch=arm
+e asm.bits=64
+e cfg.bigendian=false
+e asm.emustr=true
+wv 0x52800015
+wv 0x34000035 @ 4
+wv 0x52800035 @ 8
+wv 0x34000035 @ 12
+wv 0x52800015 @ 16
+wv 0x35000035 @ 20
+wv 0x52800035 @ 24
+wv 0x35000035 @ 28
+pd 8
+'
+EXPECT='            0x00000000      15008052       movz w21, 0
+        ,=< 0x00000004      35000034       cbz w21, 8                  ; likely
+        `-> 0x00000008      35008052       movz w21, 0x1
+        ,=< 0x0000000c      35000034       cbz w21, 0x10               ; unlikely
+        `-> 0x00000010      15008052       movz w21, 0
+        ,=< 0x00000014      35000035       cbnz w21, 0x18              ; unlikely
+        `-> 0x00000018      35008052       movz w21, 0x1
+        ,=< 0x0000001c      35000035       cbnz w21, 0x20              ; likely
+'
+run_test
