@@ -1208,3 +1208,24 @@ FILE='-'
 CMDS='pC 0x200'
 FILTER='grep dummy_search_string'
 run_test
+
+NAME="pd bin.strpurge"
+FILE=../bins/elf/analysis/ls2
+ARGS=
+CMDS='e asm.bytes=false
+s main
+af
+s 0x00404886
+e bin.strpurge=false
+pd 2
+?e ----
+e bin.strpurge=true
+pd 2
+'
+EXPECT='            0x00404886      mov rcx, 0x412420                          ; "AWAVA\x89\xffAUATL\x8d%\xbe\x99 "
+            0x0040488d      mov rdi, main                              ; section..text ; 0x4028a0 ; "AWAVAUATUS\x89\xfbH\x89\xf5H\x81\xec\x98\x03"
+----
+            0x00404886      mov rcx, 0x412420
+            0x0040488d      mov rdi, main                              ; section..text ; 0x4028a0
+'
+run_test
