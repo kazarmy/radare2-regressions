@@ -112,7 +112,8 @@ case "$KW" in
 					while : ; do
 						read LINE
 						[ -z "${LINE}" ] && break
-						CMDS="${CMDS}${LINE}"
+						CMDS="${CMDS}
+${LINE}"
 					done
 				else
 					CMDS=${ARG0}
