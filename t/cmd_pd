@@ -1221,11 +1221,37 @@ pd 2
 ?e ----
 e bin.strpurge=true
 pd 2
+?e ----
+e bin.strpurge=0x4028a0
+pd 2
+?e ----
+e bin.strpurge=0x412420+0x4028a0
+pd 2
+?e ----
+e bin.strpurge=true
+pd 1 @ 0x004028e0
+pd 1 @ 0x00402abd
+?e ----
+e bin.strpurge=true+0x414fbf
+pd 1 @ 0x004028e0
+pd 1 @ 0x00402abd
 '
 EXPECT='            0x00404886      mov rcx, 0x412420                          ; "AWAVA\x89\xffAUATL\x8d%\xbe\x99 "
             0x0040488d      mov rdi, main                              ; section..text ; 0x4028a0 ; "AWAVAUATUS\x89\xfbH\x89\xf5H\x81\xec\x98\x03"
 ----
             0x00404886      mov rcx, 0x412420
             0x0040488d      mov rdi, main                              ; section..text ; 0x4028a0
+----
+            0x00404886      mov rcx, 0x412420                          ; "AWAVA\x89\xffAUATL\x8d%\xbe\x99 "
+            0x0040488d      mov rdi, main                              ; section..text ; 0x4028a0
+----
+            0x00404886      mov rcx, 0x412420
+            0x0040488d      mov rdi, main                              ; section..text ; 0x4028a0
+----
+|           0x004028e0      mov esi, str.usr_share_locale              ; 0x414fbf ; "/usr/share/locale"
+|           0x00402abd      mov edi, str.TABSIZE                       ; 0x414fe7
+----
+|           0x004028e0      mov esi, str.usr_share_locale              ; 0x414fbf
+|           0x00402abd      mov edi, str.TABSIZE                       ; 0x414fe7
 '
 run_test
