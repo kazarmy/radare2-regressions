@@ -1225,14 +1225,14 @@ pd 2
 e bin.strpurge=0x4028a0
 pd 2
 ?e --3--
-e bin.strpurge=0x412420+0x4028a0
+e bin.strpurge=0x412420,0x4028a0
 pd 2
 ?e --4--
 e bin.strpurge=true
 pd 1 @ 0x004028e0
 pd 1 @ 0x00402abd
 ?e --5--
-e bin.strpurge=true+0x414fbf
+e bin.strpurge=true,0x414fbf
 pd 1 @ 0x004028e0
 pd 1 @ 0x00402abd
 '
