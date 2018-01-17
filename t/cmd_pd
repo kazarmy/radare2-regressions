@@ -1255,3 +1255,44 @@ EXPECT='            0x00404886      mov rcx, 0x412420                          ;
 |           0x00402abd      mov edi, str.TABSIZE                       ; 0x414fe7
 '
 run_test
+
+NAME="iz/izz bin.strpurge"
+FILE=../bins/elf/analysis/ls2
+ARGS=
+CMDS='?e --1--
+e bin.strpurge=false
+izz~0x00412420
+?e --2--
+e bin.strpurge=true
+izz~0x00412420  # Should print nothing
+?e --3--
+(test_iz,iz~0x004131d8,iz~0x00413228,iz~0x00413233,iz~0x0041323a)
+e bin.strpurge=false
+.(test_iz)
+?e --4--
+e bin.strpurge=true
+.(test_iz)
+?e --5--
+e bin.strpurge=0x004131d8,0x00413228,0x0041323a
+.(test_iz)
+?e --6--
+e bin.strpurge=true,0x00413228
+.(test_iz)
+'
+EXPECT='--1--
+1063 0x00012420 0x00412420   5   6 (.text) ascii AWAVA
+--2--
+--3--
+000 0x000131d8 0x004131d8  11  12 (.rodata) ascii dev_ino_pop
+001 0x00013228 0x00413228  10  11 (.rodata) ascii sort_files
+002 0x00013233 0x00413233   6   7 (.rodata) ascii posix-
+003 0x0001323a 0x0041323a   4   5 (.rodata) ascii main
+--4--
+000 0x000131d8 0x004131d8  11  12 (.rodata) ascii dev_ino_pop
+001 0x00013228 0x00413228  10  11 (.rodata) ascii sort_files
+--5--
+002 0x00013233 0x00413233   6   7 (.rodata) ascii posix-
+--6--
+000 0x000131d8 0x004131d8  11  12 (.rodata) ascii dev_ino_pop
+'
+run_test
