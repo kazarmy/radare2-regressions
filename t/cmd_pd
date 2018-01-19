@@ -1278,6 +1278,15 @@ e bin.strpurge=0x004131d8,0x00413228,0x0041323a
 ?e --6--
 e bin.strpurge=true,0x00413228
 .(test_iz)
+?e --7--
+e bin.strpurge=0x4131d8-0x413233
+.(test_iz)
+?e --8--
+e bin.strpurge=0x413230-0x413240,0x4131d8
+.(test_iz)
+?e --9--
+e bin.strpurge=true,0x413228-0x413228
+.(test_iz)
 '
 EXPECT='--1--
 1063 0x00012420 0x00412420   5   6 (.text) ascii AWAVA
@@ -1293,6 +1302,12 @@ EXPECT='--1--
 --5--
 002 0x00013233 0x00413233   6   7 (.rodata) ascii posix-
 --6--
+000 0x000131d8 0x004131d8  11  12 (.rodata) ascii dev_ino_pop
+--7--
+003 0x0001323a 0x0041323a   4   5 (.rodata) ascii main
+--8--
+001 0x00013228 0x00413228  10  11 (.rodata) ascii sort_files
+--9--
 000 0x000131d8 0x004131d8  11  12 (.rodata) ascii dev_ino_pop
 '
 run_test
