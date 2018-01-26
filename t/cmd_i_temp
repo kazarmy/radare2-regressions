@@ -1,0 +1,14 @@
+#!/bin/sh
+# GPL 3+ - Copyright (C) 2018 kazarmy
+[ -e tests.sh ] && . ./tests.sh || . ../tests.sh
+
+NAME=iz-
+CMDS='iz- @ 0x412420
+e bin.strpurge
+iz- @ 0x4028a0
+e bin.strpurge
+'
+EXPECT='0x412420
+0x412420,0x4028a0
+'
+run_test
