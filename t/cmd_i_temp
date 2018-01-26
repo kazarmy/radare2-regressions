@@ -2,7 +2,7 @@
 # GPL 3+ - Copyright (C) 2018 kazarmy
 [ -e tests.sh ] && . ./tests.sh || . ../tests.sh
 
-NAME=iz-
+NAME="iz-"
 CMDS='iz- @ 0x412420
 e bin.strpurge
 iz- @ 0x4028a0
