@@ -7,8 +7,11 @@ CMDS='iz- @ 0x412420
 e bin.strpurge
 iz- @ 0x4028a0
 e bin.strpurge
+iz- 0x414fbf
+e bin.strpurge
 '
 EXPECT='0x412420
 0x412420,0x4028a0
+0x412420,0x4028a0,0x414fbf
 '
 run_test
