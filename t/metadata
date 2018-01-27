@@ -437,7 +437,7 @@ run_test
 
 NAME="Csg, Csa and Csj"
 FILE=../bins/pe/testapp-msvc64.exe
-ARGS="-e bin.strpurge=0-0xffffffffffffffff,!0x140016018"
+ARGS="-e bin.strpurge=all,!0x140016018"
 CMDS='s 0x140016018
 Csj
 Csa
@@ -481,7 +481,7 @@ run_test
 
 NAME="Cs8 and Csj"
 FILE=../bins/elf/strenc
-ARGS="-e bin.strpurge=0-0xffffffffffffffff,!0x004021ff"
+ARGS="-e bin.strpurge=all,!0x004021ff"
 CMDS='s 0x004021ff
 Csj
 Cs8
