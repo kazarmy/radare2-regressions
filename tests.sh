@@ -83,16 +83,19 @@ dump_test() {
     echo "BROKEN=1"
   fi
   printf "EXPECT64="
-  echo "$EXPECT" | base64
+  echo "$EXPECT" | base64 -w 0
+  echo
   if [ -n "$EXPECT_ERR" ]; then
     printf "EXPECT_ERR64="
-    echo "$EXPECT_ERR" | base64
+    echo "$EXPECT_ERR" | base64 -w 0
+    echo
   fi
   if [ -n "$ARGS" ]; then
     echo "ARGS=$ARGS"
   fi
   printf "CMDS64="
-  echo "$CMDS" | base64
+  echo "$CMDS" | base64 -w 0
+  echo
   echo "RUN"
   test_reset
 }
