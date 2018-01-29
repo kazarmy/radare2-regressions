@@ -83,16 +83,16 @@ dump_test() {
     echo "BROKEN=1"
   fi
   printf "EXPECT64="
-  echo "$EXPECT" | rax2 -E
+  echo "$EXPECT" | rax2 -l -E
   if [ -n "$EXPECT_ERR" ]; then
     printf "EXPECT_ERR64="
-    echo "$EXPECT_ERR" | rax2 -E
+    echo "$EXPECT_ERR" | rax2 -l -E
   fi
   if [ -n "$ARGS" ]; then
     echo "ARGS=$ARGS"
   fi
   printf "CMDS64="
-  echo "$CMDS" | rax2 -E
+  echo "$CMDS" | rax2 -l -E
   echo "RUN"
   test_reset
 }
