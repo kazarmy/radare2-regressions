@@ -24,6 +24,7 @@ MACHINE_OS=$(uname -o 2> /dev/null)
 GREP="$1"
 GREP=""
 DIFF=""
+BASE64="rax2 -l -E"
 SKIP=0
 cd `dirname $0` 2>/dev/null
 
@@ -83,16 +84,16 @@ dump_test() {
     echo "BROKEN=1"
   fi
   printf "EXPECT64="
-  echo "$EXPECT" | rax2 -l -E
+  echo "$EXPECT" | ${BASE64}
   if [ -n "$EXPECT_ERR" ]; then
     printf "EXPECT_ERR64="
-    echo "$EXPECT_ERR" | rax2 -l -E
+    echo "$EXPECT_ERR" | ${BASE64}
   fi
   if [ -n "$ARGS" ]; then
     echo "ARGS=$ARGS"
   fi
   printf "CMDS64="
-  echo "$CMDS" | rax2 -l -E
+  echo "$CMDS" | ${BASE64}
   echo "RUN"
   test_reset
 }
