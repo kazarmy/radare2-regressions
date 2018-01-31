@@ -64,3 +64,19 @@ FILE=-
 CMDS64=CmFnbiAiUHJvY2VzcyBmb3JtIEEjIEIjIGluIGNsb3VkIgphZ2cK
 EXPECT64=Li0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0uCnwgIFByb2Nlc3MgZm9ybSBBIyBCIyBpbiBjbG91ZCAgfApgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScK
 RUN
+NAME=cmd outputting trailing space
+FILE=-
+CMDS='# do not convert test to base64
+?e aaa
+"?e bbb  "
+?e ccc
+"?e ddd     "
+?e eee
+'
+EXPECT='aaa
+bbb  
+ccc
+ddd     
+eee
+'
+RUN

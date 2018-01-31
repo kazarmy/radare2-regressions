@@ -497,7 +497,7 @@ class NewRegressions {
          * Note that process.platform is always win32 even on Windows 64 bits */
         test.stdout = test.stdout.replace(/\r/g, '');
       }
-      test.passes = test.expect.trim() === test.stdout.trim();
+      test.passes = test.expect64 ? test.expect.trim() === test.stdout.trim() : test.expect === test.stdout;
     }
     const status = (test.passes)
     ? (test.broken ? colors.yellow('[FX]') : colors.green('[OK]'))
@@ -576,9 +576,17 @@ class NewRegressions {
         console.log('EXPECT64=' + base64(test.stdout));
       } else if (test.expect64 !== undefined) {
         if (test.expectDelim === undefined) {
-          test.expectDelim = '';
+          test.expectDelim = '%';
         }
-        console.log('EXPECT=' + test.expectDelim + test.stdout + test.expectDelim);
+        const wsTrailing = /[ \t]+$/gm;
+        var curIndex = 0;
+        var match;
+        process.stdout.write('EXPECT=' + test.expectDelim);
+        while ((match = wsTrailing.exec(test.stdout)) !== null) {
+          process.stdout.write(test.stdout.substring(curIndex, wsTrailing.lastIndex - match[0].length) + colors.bgRed(match[0]));
+          curIndex = wsTrailing.lastIndex;
+        }
+        process.stdout.write(test.stdout.substring(curIndex) + test.expectDelim + "\n");
       }
       if (this.interactive) {
 //        console.log('TODO: interactive thing should happen here');
