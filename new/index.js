@@ -300,7 +300,33 @@ class NewRegressions {
       editMode.name = 'cmd_graph';
       process.exit(1);
     }
+    const punc = /["'`%]/;
+    const stateEnum = Object.freeze({NORMAL: 0, CMDS_CONT: 1, EXPECT_CONT: 2});
+    var state = stateEnum.NORMAL;
+    var delim;
+    var endDelim;
     for (let l of lines) {
+      switch (state) {
+        case stateEnum.CMDS_CONT:
+          endDelim = l.indexOf(delim);
+          if (endDelim == -1) {
+            test.cmdScript += l + "\n";
+          } else {
+            test.cmdScript += l.substring(0, endDelim);
+            test.cmds = test.cmdScript.trim().split('\n');
+            state = stateEnum.NORMAL;
+          }
+          continue;
+        case stateEnum.EXPECT_CONT:
+          endDelim = l.indexOf(delim);
+          if (endDelim == -1) {
+            test.expect += l + "\n";
+          } else {
+            test.expect += l.substring(0, endDelim);
+            state = stateEnum.NORMAL;
+          }
+          continue;
+      }
       const line = l.trim();
       if (line.length === 0 || line[0] === '#') {
         continue;
@@ -349,7 +375,20 @@ class NewRegressions {
           test.args = v || [];
           break;
         case 'CMDS':
-          test.cmdScript = v ? v + "\n" : v;
+          delim = v.trim().charAt(0);
+          if (punc.test(delim)) {
+            const startDelim = v.indexOf(delim);
+            const endDelim = v.indexOf(delim, startDelim + 1);
+            if (endDelim == -1) {
+              test.cmdScript = v.substring(startDelim + 1) + "\n";
+              state = stateEnum.CMDS_CONT;
+              break;
+            } else {
+              test.cmdScript = v.substring(startDelim + 1, endDelim) + "\n";
+            }
+          } else {
+            test.cmdScript = v ? v + "\n" : v;
+          }
           test.cmds = test.cmdScript ? test.cmdScript.trim().split('\n') : [];
           break;
         case 'CMDS64':
@@ -366,7 +405,20 @@ class NewRegressions {
           test.broken = true;
           break;
         case 'EXPECT':
-          test.expect = v;
+          delim = v.trim().charAt(0);
+          if (punc.test(delim)) {
+            const startDelim = v.indexOf(delim);
+            const endDelim = v.indexOf(delim, startDelim + 1);
+            if (endDelim == -1) {
+              test.expect = v.substring(startDelim + 1) + "\n";
+              state = stateEnum.EXPECT_CONT;
+              break;
+            } else {
+              test.expect = v.substring(startDelim + 1, endDelim) + "\n";
+            }
+          } else {
+            test.expect = v;
+          }
           break;
         case 'EXPECT64':
           test.expect = debase64(v);
