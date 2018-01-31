@@ -300,7 +300,7 @@ class NewRegressions {
       editMode.name = 'cmd_graph';
       process.exit(1);
     }
-    const punc = /['"%]/;
+    const delims = /['"%]/;
     const stateEnum = Object.freeze({NORMAL: 0, CMDS_CONT: 1, EXPECT_CONT: 2});
     var state = stateEnum.NORMAL;
     var delim;
@@ -376,7 +376,7 @@ class NewRegressions {
           break;
         case 'CMDS':
           delim = v.trim().charAt(0);
-          if (punc.test(delim)) {
+          if (delims.test(delim)) {
             const startDelim = v.indexOf(delim);
             const endDelim = v.indexOf(delim, startDelim + 1);
             if (endDelim == -1) {
@@ -406,7 +406,7 @@ class NewRegressions {
           break;
         case 'EXPECT':
           delim = v.trim().charAt(0);
-          if (punc.test(delim)) {
+          if (delims.test(delim)) {
             const startDelim = v.indexOf(delim);
             const endDelim = v.indexOf(delim, startDelim + 1);
             if (endDelim == -1) {
