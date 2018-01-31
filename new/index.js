@@ -405,8 +405,10 @@ class NewRegressions {
           test.broken = true;
           break;
         case 'EXPECT':
+          test.expect64 = false;
           delim = v.trim().charAt(0);
           if (delims.test(delim)) {
+            test.expectDelim = delim;
             const startDelim = v.indexOf(delim);
             const endDelim = v.indexOf(delim, startDelim + 1);
             if (endDelim == -1) {
@@ -572,6 +574,11 @@ class NewRegressions {
       // console.log('===');
       if (test.expect64) {
         console.log('EXPECT64=' + base64(test.stdout));
+      } else if (test.expect64 !== undefined) {
+        if (test.expectDelim === undefined) {
+          test.expectDelim = '';
+        }
+        console.log('EXPECT=' + test.expectDelim + test.stdout + test.expectDelim);
       }
       if (this.interactive) {
 //        console.log('TODO: interactive thing should happen here');
