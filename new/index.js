@@ -300,7 +300,7 @@ class NewRegressions {
       editMode.name = 'cmd_graph';
       process.exit(1);
     }
-    const punc = /["'`%]/;
+    const punc = /['"%]/;
     const stateEnum = Object.freeze({NORMAL: 0, CMDS_CONT: 1, EXPECT_CONT: 2});
     var state = stateEnum.NORMAL;
     var delim;
