@@ -437,6 +437,9 @@ class NewRegressions {
           throw new Error('Invalid database, key =(', k, ')');
       }
     }
+    if (state !== stateEnum.NORMAL) {
+      throw new Error('Unexpected EOF, state = ' + state);
+    }
     if (Object.keys(test) !== 0) {
       if (test.file && test.cmds) {
         this.promises.push(this.runTest(test));
