@@ -36,6 +36,7 @@ const flagMap = {
 const args = process.argv.slice(2).map(_ => {
   return flagMap[_] || _;
 });
+const delims = /['"%]/;
 
 main(minimist(args, {
   boolean: ['v', 'verbose', 'i', 'interactive']
@@ -243,11 +244,36 @@ function fixTest (test, next) {
   try {
     let lines = fs.readFileSync(filePath).toString().trim().split('\n');
     let target = null;
+    const stateEnum = Object.freeze({NORMAL: 0, EXPECT_CONT: 1});
+    var state = stateEnum.NORMAL;
+    var delim;
     for (let line of lines) {
       if (target) {
+        if (state === stateEnum.EXPECT_CONT) {
+          const endDelim = line.indexOf(delim);
+          if (endDelim !== -1) {
+            output += 'EXPECT=' + delim + test.stdout + delim + '\n';
+            state = stateEnum.NORMAL;
+          }
+          continue;
+        }
         if (line.startsWith('EXPECT64=')) {
           const msg = Buffer.from(test.stdout).toString('base64');
           output += 'EXPECT64=' + msg + '\n';
+        } else if (line.startsWith('EXPECT=')) {
+          const val = line.substring(7)
+          var delim = val.trim().charAt(0);
+          if (delims.test(delim)) {
+            const startDelim = val.indexOf(delim);
+            const endDelim = val.indexOf(delim, startDelim + 1);
+            if (endDelim === -1) {
+              state = stateEnum.EXPECT_CONT;
+              continue;
+            }
+          } else {
+            delim = '%';
+          }
+          output += 'EXPECT=' + delim + test.stdout + delim + '\n';
         } else {
           output += line + '\n';
         }
@@ -284,14 +310,55 @@ function fixCommands (test, next) {
   try {
     let lines = fs.readFileSync(filePath).toString().trim().split('\n');
     let target = null;
+    var msg;
+    const stateEnum = Object.freeze({NORMAL: 0, CMDS_CONT: 1});
+    var state = stateEnum.NORMAL;
+    var delim;
     for (let line of lines) {
       if (target) {
+        if (state === stateEnum.CMDS_CONT) {
+          const endDelim = line.indexOf(delim);
+          if (endDelim == -1) {
+            msg += line + '\n';
+          } else {
+            msg += line.substring(0, endDelim);
+            fs.writeFileSync('.cmds.txt', msg);
+            editFile('.cmds.txt');
+            const cmds = fs.readFileSync('.cmds.txt').toString();
+            output += 'CMDS=' + delim + cmds + delim + '\n';
+            state = stateEnum.NORMAL;
+          }
+          continue;
+        }
         if (line.startsWith('CMDS64=')) {
-          const msg = Buffer.from(line.substring(7), 'base64');
+          msg = Buffer.from(line.substring(7), 'base64');
           fs.writeFileSync('.cmds.txt', msg);
           editFile('.cmds.txt');
           const cmds = fs.readFileSync('.cmds.txt').toString('base64');
           output += 'CMDS64=' + cmds + '\n';
+        } else if (line.startsWith('CMDS=')) {
+          const val = line.substring(5);
+          delim = val.trim().charAt(0);
+          if (delims.test(delim)) {
+            const startDelim = val.indexOf(delim);
+            const endDelim = val.indexOf(delim, startDelim + 1);
+            if (endDelim == -1) {
+              msg = val.substring(startDelim + 1) + '\n';
+              state = stateEnum.CMDS_CONT;
+              continue;
+            } else {
+              msg = val.substring(startDelim + 1, endDelim) + '\n';
+            }
+          } else {
+            msg = val;
+          }
+          fs.writeFileSync('.cmds.txt', msg);
+          editFile('.cmds.txt');
+          const cmds = fs.readFileSync('.cmds.txt').toString();
+          if (!delims.test(delim)) {
+            delim = '%';
+          }
+          output += 'CMDS=' + delim + cmds + delim + '\n';
         } else {
           output += line + '\n';
         }
