@@ -405,8 +405,10 @@ e bin.strfilter=
 pd 1
 e bin.strfilter=U
 pd 1
+pd 1 @ 0x004029a5
 '
 EXPECT='            0x004028e0      mov esi, str.usr_share_locale              ; "/usr/share/locale"
             0x004028e0      mov esi, str.usr_share_locale
+            0x004029a5      mov edi, str.QUOTING_STYLE                 ; "QUOTING_STYLE"
 '
 RUN
