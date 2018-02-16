@@ -425,6 +425,19 @@ EXPECT='            0x0008049c      0800023c       lui v0, 8                   ;
             0x000804a0      10054424       addiu a0, v0, 0x510         ; section..rodata
 '
 RUN
+NAME=asm.emu.pre and double pd
+FILE=../bins/elf/analysis/hello-android-mips
+CMDS='e asm.emu.pre=true
+e asm.emu.str=true
+f start @ 0x0008049c
+s 0x000804a0
+pd 1
+pd 1  # should print the same as above
+'
+EXPECT='            0x000804a0      10054424       addiu a0, v0, 0x510         ; "Hello World" section..rodata
+            0x000804a0      10054424       addiu a0, v0, 0x510         ; "Hello World" section..rodata
+'
+RUN
 NAME=pd bin.strfilter
 FILE=../bins/elf/analysis/ls2
 CMDS='e asm.bytes=false
