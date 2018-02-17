@@ -425,3 +425,11 @@ EXPECT='            0x004028e0      mov esi, str.usr_share_locale              ;
             0x004028e0      mov esi, str.usr_share_locale
 '
 RUN
+NAME=asm.emu.str dup str cmt fix
+FILE=../bins/elf/analysis/ls2
+CMDS='e asm.emu.str=true
+pd 1 @ 0x00402a5f
+'
+EXPECT='            0x00402a5f      bfdf4f4100     mov edi, str.COLUMNS        ; 0x414fdf ; "COLUMNS" ; str.COLUMNS
+'
+RUN
