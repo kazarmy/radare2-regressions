@@ -56,7 +56,7 @@ ar scr=screen
 ar kbd=input
 ar ptr=data
 s 0
-150aes
+aes
 pd 3 @ 0xa
 '
 BROKEN=
