@@ -171,7 +171,7 @@ function main (argv) {
           } else if (part.removed) {
             common.highlightTrailingWs(k, '-' + v.split(/\n/g).join('\n-') + '\n');
           } else {
-            common.highlightTrailingWs(null, ' ' + v.split(/\n/g).join('\n ') + '\n');
+            console.log(' ' + v.split(/\n/g).join('\n '));
           }
         });
 

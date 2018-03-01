@@ -559,7 +559,7 @@ class NewRegressions {
         } else if (part.removed) {
           common.highlightTrailingWs(k, '-' + v.split(/\n/g).join('\n-') + '\n');
         } else {
-          common.highlightTrailingWs(null, ' ' + v.split(/\n/g).join('\n ') + '\n');
+          console.log(' ' + v.split(/\n/g).join('\n '));
         }
       });
 /*
@@ -580,8 +580,7 @@ class NewRegressions {
         if (test.expectDelim === undefined) {
           test.expectDelim = '%';
         }
-        common.highlightTrailingWs(null, '\nEXPECT=' + test.expectDelim + test.stdout + test.expectDelim + '\n',
-                                   false);
+        common.highlightTrailingWs(null, '\nEXPECT=' + test.expectDelim + test.stdout + test.expectDelim + '\n');
       }
       if (this.interactive) {
 //        console.log('TODO: interactive thing should happen here');
