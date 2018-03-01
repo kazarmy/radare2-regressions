@@ -10,6 +10,7 @@ const path = require('path');
 const spawn = require('child_process').spawn;
 const spawnSync = require('child_process').spawnSync;
 const r2promise = require('r2pipe-promise');
+const common = require('./common');
 
 const timeoutFuzzed = 60 * 1000;
 
@@ -552,13 +553,13 @@ class NewRegressions {
       const changes = jsdiff.diffLines(test.expect, test.stdout);
       changes.forEach(function (part) {
         const k = part.added ? colors.green : colors.magenta;
-        const v = part.value.replace(/\s*$/, '');
+        const v = part.value.replace(/[\r\n]*$/, '');
         if (part.added) {
-          console.log(k('+' + v.split(/\n/g).join('\n+')));
+          common.highlightTrailingWs(k, '+' + v.split(/\n/g).join('\n+') + '\n');
         } else if (part.removed) {
-          console.log(k('-' + v.split(/\n/g).join('\n-')));
+          common.highlightTrailingWs(k, '-' + v.split(/\n/g).join('\n-') + '\n');
         } else {
-          console.log(' ' + v.split(/\n/g).join('\n '));
+          common.highlightTrailingWs(null, ' ' + v.split(/\n/g).join('\n ') + '\n');
         }
       });
 /*
@@ -579,15 +580,8 @@ class NewRegressions {
         if (test.expectDelim === undefined) {
           test.expectDelim = '%';
         }
-        const wsTrailing = /[ \t]+$/gm;
-        var curIndex = 0;
-        var match;
-        process.stdout.write('\nEXPECT=' + test.expectDelim);
-        while ((match = wsTrailing.exec(test.stdout)) !== null) {
-          process.stdout.write(test.stdout.substring(curIndex, wsTrailing.lastIndex - match[0].length) + colors.bgRed(match[0]));
-          curIndex = wsTrailing.lastIndex;
-        }
-        process.stdout.write(test.stdout.substring(curIndex) + test.expectDelim + "\n");
+        common.highlightTrailingWs(null, '\nEXPECT=' + test.expectDelim + test.stdout + test.expectDelim + '\n',
+                                   false);
       }
       if (this.interactive) {
 //        console.log('TODO: interactive thing should happen here');

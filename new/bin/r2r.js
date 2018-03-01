@@ -10,6 +10,7 @@ const minimist = require('minimist');
 const walk = require('walk').walk;
 const path = require('path');
 const readline = require('readline');
+const common = require('../common');
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -164,13 +165,13 @@ function main (argv) {
         const changes = jsdiff.diffLines(test.expect, test.stdout);
         changes.forEach(function (part) {
           const k = part.added ? colors.green : colors.magenta;
-          const v = part.value.replace(/\s*$/, '');
+          const v = part.value.replace(/[\r\n]*$/, '');
           if (part.added) {
-            console.log(k('+' + v.split(/\n/g).join('\n+')));
+            common.highlightTrailingWs(k, '+' + v.split(/\n/g).join('\n+') + '\n');
           } else if (part.removed) {
-            console.log(k('-' + v.split(/\n/g).join('\n-')));
+            common.highlightTrailingWs(k, '-' + v.split(/\n/g).join('\n-') + '\n');
           } else {
-            console.log(' ' + v.split(/\n/g).join('\n '));
+            common.highlightTrailingWs(null, ' ' + v.split(/\n/g).join('\n ') + '\n');
           }
         });
 

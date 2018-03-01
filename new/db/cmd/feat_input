@@ -72,11 +72,13 @@ CMDS='# do not convert test to base64
 ?e ccc
 "?e ddd     "
 ?e eee
+"?e fff        "
 '
 EXPECT='aaa
 bbb  
 ccc
 ddd     
 eee
+fff        
 '
 RUN
