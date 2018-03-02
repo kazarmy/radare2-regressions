@@ -180,7 +180,7 @@ EXPECT="fastcall
 |           ; var int local_ch @ ebp-0xc
 |           ; arg int arg_8h @ ebp+0x8
 |           ; arg int arg_ch @ ebp+0xc
-|              ; CALL XREF from 0x080484c7 (sym.main)
+|           ; CALL XREF from 0x080484c7 (sym.main)
 |           0x0804841b      55             push ebp
 |           0x0804841c      89e5           mov ebp, esp
 |           0x0804841e      83ec28         sub esp, 0x28               ; '('
@@ -222,7 +222,7 @@ EXPECT='cdecl
 |           ; arg int arg_ch @ ebp+0xc
 |           ; arg int arg_10h @ ebp+0x10
 |           ; arg int arg_14h @ ebp+0x14
-|              ; CALL XREF from 0x080484db (sym.main)
+|           ; CALL XREF from 0x080484db (sym.main)
 |           0x08048456      55             push ebp
 |           0x08048457      89e5           mov ebp, esp
 |           0x08048459      83ec18         sub esp, 0x18
