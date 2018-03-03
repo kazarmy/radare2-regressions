@@ -195,6 +195,24 @@ FILE=../bins/elf/analysis/hello-linux-x86_64
 EXPECT64=ZiBzdHIuOCAxMCBAIDB4MDA0MDAwMzQKQ3MgMTAgQCAweDAwNDAwMDM0
 CMDS64=aXp6eip+OjAKaXp6eip+OjEKCg==
 RUN
+NAME=izz (no rbin - file x86_64)
+FILE=../bins/elf/analysis/hello-linux-x86_64
+ARGS=-n
+CMDS=izz~puts
+EXPECT='004 0x000002fa 0x000002fa   4   5 () ascii puts
+065 0x00001953 0x00001953  17  18 () ascii puts@@GLIBC_2.2.5
+'
+RUN
+NAME=izzj (no rbin - file x86_64)
+FILE=../bins/elf/analysis/hello-linux-x86_64
+ARGS=-n
+CMDS='e bin.strpurge=all,!0x2fa,!0x1953
+izzj
+'
+EXPECT='{"strings":[,{"vaddr":762,"paddr":762,"ordinal":4,"size":5,"length":4,"section":"","type":"ascii","string":"cHV0cw=="},{"vaddr":6483,"paddr":6483,"ordinal":65,"size":18,"length":17,"section":"","type":"ascii","string":"cHV0c0BAR0xJQkNfMi4yLjU="}]}
+
+'
+RUN
 NAME=i (no rbin - file x86_64)
 FILE=../bins/elf/analysis/hello-linux-x86_64
 EXPECT64=Ymxrc3ogICAgMHgwCmJsb2NrICAgIDB4MTAwCmZkICAgICAgIDMKaW9ydyAgICAgZmFsc2UKbW9kZSAgICAgLXIteApzaXplICAgICAweDFhMzYKaHVtYW5zeiAgNi42Swo=
