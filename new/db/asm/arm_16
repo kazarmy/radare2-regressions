@@ -1,15 +1,17 @@
+#!/usr/bin/env node bin/r2r.js
 a "ldr r0, [r1]" 0868
 a "ldr r1, [r3]" 1968
 a "ldr r0, [r0, 0x74]" 406f
 a "ldr r0, [r0, 0x7]" d0f80700
 a "ldr r1, [r2, 0x124]" d2f82411
-a "str r0, [r1, 0x74]" 4867
+adB "str r0, [r1, 0x74]" 4867
+d "str r0, [r1, 0x74]" 4867
 a "blx lr" f047
 a "bl -0x2a" fff7e9ff
-a "mov fp, r1" 8b46
+ad "mov fp, r1" 8b46
 a "mov r9, r1" 8946
 a "mov r4, r1" 0c46
-a "add sp, 0x10" 04b0
+ad "add sp, 0x10" 04b0
 a "add sp, 0x16" 0df1160d
 a "add ip, 0x26" 0cf1260c
 a "add r7, 0xaa" 07f1aa07
@@ -17,8 +19,8 @@ a "sub sp, 0x30" 8cb0
 a "sub ip, 0x33" acf1330c
 a "sub r4, 0x69" a4f16904
 a "sub r8, 0xf9" a8f1f908
-a "pop {r0}" 01bc
-a "pop {r0, r1}" 03bc
+ad "pop {r0}" 01bc
+ad "pop {r0, r1}" 03bc
 a "pop {r0-r1}" 03bc
 a "pop {r0, r1, r2}" 07bc
 a "pop {r0-r2}" 07bc
