@@ -1238,6 +1238,17 @@ EXPECT='0xdeadbeef
 '
 run_test
 
+NAME="inline x86 esi thunk"
+FILE=../bins/elf/redpill
+CMDS='e asm.bytes=false
+e asm.emu.pre=true
+e asm.emu.str=true
+pd 1 @ 0x1557
+'
+EXPECT='            0x00001557      lea eax, [esi - 0x220c]                    ; "  fwhibbit{" str.fwhibbit
+'
+run_test
+
 test_cmov "" "cmova eax, ecx"  "0x00000008"
 test_cmov "aer zf=1" "cmova eax, ecx"  "0x00000000"
 test_cmov "aer cf=1" "cmova eax, ecx"  "0x00000000"
