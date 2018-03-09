@@ -1238,7 +1238,7 @@ EXPECT='0xdeadbeef
 '
 run_test
 
-NAME="inline x86 esi thunk"
+NAME="inline x86 esi pic thunk"
 FILE=../bins/elf/redpill
 CMDS='e asm.bytes=false
 e asm.emu.pre=true
