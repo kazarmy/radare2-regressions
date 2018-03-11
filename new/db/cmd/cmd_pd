@@ -457,6 +457,6 @@ CMDS='e asm.bytes=false
 e asm.cmt.off=false
 pd 1 @ 0x0040040b
 '
-EXPECT='            0x0040040b      mov edi, str.Control_chars:______________a ; "Control chars: \b\v\f\n\r\t\a"
+EXPECT='            0x0040040b      mov edi, str.Control_chars:                ; "Control chars: \b\v\f\n\r\t\a"
 '
 RUN
