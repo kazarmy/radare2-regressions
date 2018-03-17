@@ -201,7 +201,7 @@ function main (argv) {
             case 'd':
               const changes = jsdiff.diffChars(test.expect, test.stdout);
               changes.forEach(function (part) {
-                const k = part.added ? colors.black.bgGreen : colors.red.strikethrough;
+                const k = part.added ? colors.black.bgGreen : colors.white.bold.bgMagenta.strikethrough;
                 const v = part.value;
                 if (part.added || part.removed) {
                   process.stdout.write(k(v));
