@@ -20,7 +20,6 @@ rl.on('line', line => {
           // rl.close();
   if (rl.cb) {
     rl.cb(null, line.trim());
-    rl.cb = null;
   }
 });
 rl.on('error', err => {
@@ -176,11 +175,12 @@ function main (argv) {
           }
         });
 
-        console.log('Wat du? (f)ix (i)gnore (b)roken (q)uit (c)ommands');
-        readLine((err, line) => {
+        console.log('Wat du? (f)ix (i)gnore (b)roken (q)uit (c)ommands (d)iffChars');
+        readLine(function handleKey(err, line) {
           if (err) {
             return cb(err);
           }
+          rl.cb = null;
           switch (line) {
             case 'q':
               console.error('Aborted');
@@ -197,6 +197,20 @@ function main (argv) {
               break;
             case 'c':
               fixCommands(test, next);
+              break;
+            case 'd':
+              const changes = jsdiff.diffChars(test.expect, test.stdout);
+              changes.forEach(function (part) {
+                const k = part.added ? colors.black.bgGreen : colors.red.strikethrough;
+                const v = part.value;
+                if (part.added || part.removed) {
+                  process.stdout.write(k(v));
+                } else {
+                  process.stdout.write(colors.grey(v));
+                }
+              });
+              console.log('Wat du? (f)ix (i)gnore (b)roken (q)uit (c)ommands');
+              readLine(handleKey);
               break;
           }
         });
