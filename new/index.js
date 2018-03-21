@@ -305,29 +305,54 @@ class NewRegressions {
     const delims = /['"%]/;
     const stateEnum = Object.freeze({NORMAL: 0, CMDS_CONT: 1, EXPECT_CONT: 2});
     var state = stateEnum.NORMAL;
-    var delim;
+    var delim = null;
+    var endString = null;
     var endDelim;
     for (let l of lines) {
       switch (state) {
         case stateEnum.CMDS_CONT:
-          endDelim = l.indexOf(delim);
-          if (endDelim == -1) {
-            test.cmdScript += l + "\n";
+          if (delim !== null) {
+            endDelim = l.indexOf(delim);
+            if (endDelim == -1) {
+              test.cmdScript += l + '\n';
+            } else {
+              test.cmdScript += l.substring(0, endDelim);
+              test.cmds = test.cmdScript.trim().split('\n');
+              state = stateEnum.NORMAL;
+            }
+            continue;
+          } else if (endString !== null) {
+            if (l.startsWith(endString)) {
+              state = stateEnum.NORMAL;
+              break; // not continue
+            } else {
+              test.cmdScript += l + '\n';
+              continue;
+            }
           } else {
-            test.cmdScript += l.substring(0, endDelim);
-            test.cmds = test.cmdScript.trim().split('\n');
-            state = stateEnum.NORMAL;
+            throw new Error('Internal error, CMDS_CONT');
           }
-          continue;
         case stateEnum.EXPECT_CONT:
-          endDelim = l.indexOf(delim);
-          if (endDelim == -1) {
-            test.expect += l + "\n";
+          if (delim !== null) {
+            endDelim = l.indexOf(delim);
+            if (endDelim == -1) {
+              test.expect += l + '\n';
+            } else {
+              test.expect += l.substring(0, endDelim);
+              state = stateEnum.NORMAL;
+            }
+            continue;
+          } else if (endString !== null) {
+            if (l.startsWith(endString)) {
+              state = stateEnum.NORMAL;
+              break; // not continue
+            } else {
+              test.expect += l + '\n';
+              continue;
+            }
           } else {
-            test.expect += l.substring(0, endDelim);
-            state = stateEnum.NORMAL;
+            throw new Error('Internal error, EXPECT_CONT');
           }
-          continue;
       }
       const line = l.trim();
       if (line.length === 0 || line[0] === '#') {
@@ -363,6 +388,7 @@ class NewRegressions {
       }
       const k = l.substring(0, eq);
       const v = l.substring(eq + 1);
+      const vt = v.trim();
       switch (k) {
         case 'NAME':
           test.name = v;
@@ -377,7 +403,15 @@ class NewRegressions {
           test.args = v || [];
           break;
         case 'CMDS':
-          delim = v.trim().charAt(0);
+          delim = null;
+          endString = null;
+          if (vt.startsWith('<<')) {
+            endString = vt.substring(2);
+            test.cmdScript = '';
+            state = stateEnum.CMDS_CONT;
+            break;
+          }
+          delim = vt.charAt(0);
           if (delims.test(delim)) {
             const startDelim = v.indexOf(delim);
             const endDelim = v.indexOf(delim, startDelim + 1);
@@ -408,7 +442,16 @@ class NewRegressions {
           break;
         case 'EXPECT':
           test.expect64 = false;
-          delim = v.trim().charAt(0);
+          delim = null;
+          endString = null;
+          if (vt.startsWith('<<')) {
+            endString = vt.substring(2);
+            test.endString = endString;
+            test.expect = '';
+            state = stateEnum.EXPECT_CONT;
+            break;
+          }
+          delim = vt.charAt(0);
           if (delims.test(delim)) {
             test.expectDelim = delim;
             const startDelim = v.indexOf(delim);
@@ -577,10 +620,14 @@ class NewRegressions {
       if (test.expect64) {
         console.log('EXPECT64=' + base64(test.stdout));
       } else if (test.expect64 !== undefined) {
-        if (test.expectDelim === undefined) {
-          test.expectDelim = '%';
+        if (test.endString !== undefined) {
+          common.highlightTrailingWs(null, '\nEXPECT=<<' + test.endString + '\n' + test.stdout);
+        } else {
+          if (test.expectDelim === undefined) {
+            test.expectDelim = '%';
+          }
+          common.highlightTrailingWs(null, '\nEXPECT=' + test.expectDelim + test.stdout + test.expectDelim + '\n');
         }
-        common.highlightTrailingWs(null, '\nEXPECT=' + test.expectDelim + test.stdout + test.expectDelim + '\n');
       }
       if (this.interactive) {
 //        console.log('TODO: interactive thing should happen here');

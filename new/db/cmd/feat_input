@@ -66,19 +66,19 @@ EXPECT64=Li0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0uCnwgIFByb2Nlc3MgZm9ybSBBIyB
 RUN
 NAME=cmd outputting trailing space
 FILE=-
-CMDS='# do not convert test to base64
+CMDS=<<EXPECT
+# do not convert test to base64
 ?e aaa
 "?e bbb  "
 ?e ccc
 "?e ddd     "
 ?e eee
 "?e fff        "
-'
-EXPECT='aaa
+EXPECT=<<RUN
+aaa
 bbb  
 ccc
 ddd     
 eee
 fff        
-'
 RUN
