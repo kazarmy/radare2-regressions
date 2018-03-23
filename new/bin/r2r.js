@@ -263,9 +263,9 @@ function fixTest (test, next) {
     let lines = fs.readFileSync(filePath).toString().trim().split('\n');
     let target = null;
     const stateEnum = Object.freeze({NORMAL: 0, EXPECT_CONT: 1});
-    var state = stateEnum.NORMAL;
-    var delim = null;
-    var endString = null;
+    let state = stateEnum.NORMAL;
+    let delim = null;
+    let endString = null;
     for (let line of lines) {
       if (target) {
         if (state === stateEnum.EXPECT_CONT) {
@@ -349,11 +349,11 @@ function fixCommands (test, next) {
   try {
     let lines = fs.readFileSync(filePath).toString().trim().split('\n');
     let target = null;
-    var msg;
+    let msg;
     const stateEnum = Object.freeze({NORMAL: 0, CMDS_CONT: 1});
-    var state = stateEnum.NORMAL;
-    var delim = null;
-    var endString = null;
+    let state = stateEnum.NORMAL;
+    let delim = null;
+    let endString = null;
     for (let line of lines) {
       if (target) {
         if (state === stateEnum.CMDS_CONT) {

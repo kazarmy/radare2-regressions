@@ -304,10 +304,10 @@ class NewRegressions {
     }
     const delims = /['"%]/;
     const stateEnum = Object.freeze({NORMAL: 0, CMDS_CONT: 1, EXPECT_CONT: 2});
-    var state = stateEnum.NORMAL;
-    var delim = null;
-    var endString = null;
-    var endDelim;
+    let state = stateEnum.NORMAL;
+    let delim = null;
+    let endString = null;
+    let endDelim;
     for (let l of lines) {
       switch (state) {
         case stateEnum.CMDS_CONT:
