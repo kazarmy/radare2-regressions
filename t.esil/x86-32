@@ -1238,14 +1238,16 @@ EXPECT='0xdeadbeef
 '
 run_test
 
-NAME="inline x86 esi pic thunk"
+NAME="inline x86 pic thunk"
 FILE=../bins/elf/redpill
 CMDS='e asm.bytes=false
 e asm.emu.pre=true
 e asm.emu.str=true
 pd 1 @ 0x1557
+pd 1 @ 0x11c0
 '
 EXPECT='            0x00001557      lea eax, [esi - 0x220c]                    ; "  fwhibbit{" str.fwhibbit
+            0x000011c0      lea eax, [ebx - 0x2448]                    ; "   -os--/sosdmmNNMMNy         .+// " str.os___sosdmmNNMMNy_________.
 '
 run_test
 
