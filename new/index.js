@@ -506,10 +506,16 @@ class NewRegressions {
     this.name = fileName;
     const blob = fs.readFileSync(path.join(__dirname, fileName));
     zlib.gunzip(blob, (err, data) => {
+      let tests;
       if (err) {
-        this.runTests(fileName, blob.toString().replace(/\r\n/g, '\n').split('\n'));
+        tests = blob.toString();
       } else {
-        this.runTests(fileName, data.toString().replace(/\r\n/g, '\n').split('\n'));
+        tests = data.toString();
+      }
+      if (process.platform === 'win32') {
+        this.runTests(fileName, tests.replace(/\r\n/g, '\n').split('\n'));
+      } else {
+        this.runTests(fileName, tests.split('\n'));
       }
       Promise.all(this.promises).then(res => {
         this.printReport();
