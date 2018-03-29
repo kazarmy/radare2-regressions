@@ -137,6 +137,7 @@ class NewRegressions {
           const args = [
             '-escr.utf8=0',
             '-escr.color=0',
+            '-escr.interactive=0',
             '-c',
             '?e init',
             '-qcq',
@@ -201,6 +202,7 @@ class NewRegressions {
         const args = [
           '-escr.utf8=0',
           '-escr.color=0',
+          '-escr.interactive=0',
           '-N',
           '-Q'
         ];
