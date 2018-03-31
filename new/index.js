@@ -305,57 +305,8 @@ class NewRegressions {
       process.exit(1);
     }
     const delims = /['"%]/;
-    const stateEnum = Object.freeze({NORMAL: 0, CMDS_CONT: 1, EXPECT_CONT: 2});
-    let state = stateEnum.NORMAL;
-    let delim = null;
-    let endString = null;
-    let endDelim;
-    for (let l of lines) {
-      switch (state) {
-        case stateEnum.CMDS_CONT:
-          if (delim !== null) {
-            endDelim = l.indexOf(delim);
-            if (endDelim == -1) {
-              test.cmdScript += l + '\n';
-            } else {
-              test.cmdScript += l.substring(0, endDelim);
-              test.cmds = test.cmdScript.trim().split('\n');
-              state = stateEnum.NORMAL;
-            }
-            continue;
-          } else if (endString !== null) {
-            if (l.startsWith(endString)) {
-              state = stateEnum.NORMAL;
-              break; // not continue
-            } else {
-              test.cmdScript += l + '\n';
-              continue;
-            }
-          } else {
-            throw new Error('Internal error, CMDS_CONT');
-          }
-        case stateEnum.EXPECT_CONT:
-          if (delim !== null) {
-            endDelim = l.indexOf(delim);
-            if (endDelim == -1) {
-              test.expect += l + '\n';
-            } else {
-              test.expect += l.substring(0, endDelim);
-              state = stateEnum.NORMAL;
-            }
-            continue;
-          } else if (endString !== null) {
-            if (l.startsWith(endString)) {
-              state = stateEnum.NORMAL;
-              break; // not continue
-            } else {
-              test.expect += l + '\n';
-              continue;
-            }
-          } else {
-            throw new Error('Internal error, EXPECT_CONT');
-          }
-      }
+    for (let i = 0; i < lines.length; i++) {
+      let l = lines[i];
       const line = l.trim();
       if (line.length === 0 || line[0] === '#') {
         continue;
@@ -405,27 +356,34 @@ class NewRegressions {
           test.args = v || [];
           break;
         case 'CMDS':
-          delim = null;
-          endString = null;
           if (vt.startsWith('<<')) {
-            endString = vt.substring(2);
+            const endString = vt.substring(2);
             test.cmdScript = '';
-            state = stateEnum.CMDS_CONT;
-            break;
-          }
-          delim = vt.charAt(0);
-          if (delims.test(delim)) {
-            const startDelim = v.indexOf(delim);
-            const endDelim = v.indexOf(delim, startDelim + 1);
-            if (endDelim == -1) {
-              test.cmdScript = v.substring(startDelim + 1) + "\n";
-              state = stateEnum.CMDS_CONT;
-              break;
-            } else {
-              test.cmdScript = v.substring(startDelim + 1, endDelim) + "\n";
+            i++;
+            while (!lines[i].startsWith(endString)) {
+              test.cmdScript += lines[i] + '\n';
+              i++;
             }
+            i--;
           } else {
-            test.cmdScript = v ? v + "\n" : v;
+            const delim = vt.charAt(0);
+            if (delims.test(delim)) {
+              const startDelim = v.indexOf(delim);
+              let endDelim = v.indexOf(delim, startDelim + 1);
+              if (endDelim == -1) {
+                test.cmdScript = v.substring(startDelim + 1) + "\n";
+                i++;
+                while ((endDelim = lines[i].indexOf(delim)) == -1) {
+                  test.cmdScript += lines[i] + '\n';
+                  i++;
+                }
+                test.cmdScript += lines[i].substring(0, endDelim);
+              } else {
+                test.cmdScript = v.substring(startDelim + 1, endDelim) + "\n";
+              }
+            } else {
+              test.cmdScript = v ? v + "\n" : v;
+            }
           }
           test.cmds = test.cmdScript ? test.cmdScript.trim().split('\n') : [];
           break;
@@ -444,29 +402,36 @@ class NewRegressions {
           break;
         case 'EXPECT':
           test.expect64 = false;
-          delim = null;
-          endString = null;
           if (vt.startsWith('<<')) {
-            endString = vt.substring(2);
+            const endString = vt.substring(2);
             test.endString = endString;
             test.expect = '';
-            state = stateEnum.EXPECT_CONT;
-            break;
-          }
-          delim = vt.charAt(0);
-          if (delims.test(delim)) {
-            test.expectDelim = delim;
-            const startDelim = v.indexOf(delim);
-            const endDelim = v.indexOf(delim, startDelim + 1);
-            if (endDelim == -1) {
-              test.expect = v.substring(startDelim + 1) + "\n";
-              state = stateEnum.EXPECT_CONT;
-              break;
-            } else {
-              test.expect = v.substring(startDelim + 1, endDelim) + "\n";
+            i++;
+            while (!lines[i].startsWith(endString)) {
+              test.expect += lines[i] + '\n';
+              i++;
             }
+            i--;
           } else {
-            test.expect = v + "\n";
+            const delim = vt.charAt(0);
+            if (delims.test(delim)) {
+              test.expectDelim = delim;
+              const startDelim = v.indexOf(delim);
+              let endDelim = v.indexOf(delim, startDelim + 1);
+              if (endDelim == -1) {
+                test.expect = v.substring(startDelim + 1) + "\n";
+                i++;
+                while ((endDelim = lines[i].indexOf(delim)) == -1) {
+                  test.expect += lines[i] + '\n';
+                  i++;
+                }
+                test.expect += lines[i].substring(0, endDelim);
+              } else {
+                test.expect = v.substring(startDelim + 1, endDelim) + "\n";
+              }
+            } else {
+              test.expect = v + "\n";
+            }
           }
           break;
         case 'EXPECT64':
@@ -485,9 +450,6 @@ class NewRegressions {
         default:
           throw new Error('Invalid database, key =(', k, ')');
       }
-    }
-    if (state !== stateEnum.NORMAL) {
-      throw new Error('Unexpected EOF, state = ' + state);
     }
     if (Object.keys(test) !== 0) {
       if (test.file && test.cmds) {

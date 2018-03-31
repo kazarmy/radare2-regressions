@@ -262,57 +262,39 @@ function fixTest (test, next) {
   try {
     let lines = fs.readFileSync(filePath).toString().trim().split('\n');
     let target = null;
-    const stateEnum = Object.freeze({NORMAL: 0, EXPECT_CONT: 1});
-    let state = stateEnum.NORMAL;
-    let delim = null;
-    let endString = null;
-    for (let line of lines) {
+    for (let i = 0; i < lines.length; i++) {
+      let line = lines[i];
       if (target) {
-        if (state === stateEnum.EXPECT_CONT) {
-          if (delim !== null) {
-            const endDelim = line.indexOf(delim);
-            if (endDelim !== -1) {
-              output += 'EXPECT=' + delim + test.stdout + delim + '\n';
-              state = stateEnum.NORMAL;
-            }
-            continue;
-          } else if (endString !== null) {
-            if (line.startsWith(endString)) {
-              output += 'EXPECT=<<' + endString + '\n' + test.stdout;
-              state = stateEnum.NORMAL;
-              // no continue
-            } else {
-              continue;
-            }
-          } else {
-            throw new Error('Internal error, EXPECT_CONT');
-          }
-        }
         if (line.startsWith('EXPECT64=')) {
           const msg = Buffer.from(test.stdout).toString('base64');
           output += 'EXPECT64=' + msg + '\n';
         } else if (line.startsWith('EXPECT=')) {
-          delim = null;
-          endString = null;
           const val = line.substring(7);
           const valTrim = val.trim();
           if (valTrim.startsWith('<<')) {
-            endString = valTrim.substring(2);
-            state = stateEnum.EXPECT_CONT;
-            continue;
-          }
-          delim = valTrim.charAt(0);
-          if (delims.test(delim)) {
-            const startDelim = val.indexOf(delim);
-            const endDelim = val.indexOf(delim, startDelim + 1);
-            if (endDelim === -1) {
-              state = stateEnum.EXPECT_CONT;
-              continue;
+            const endString = valTrim.substring(2);
+            i++;
+            while (!lines[i].startsWith(endString)) {
+              i++;
             }
+            i--;
+            output += 'EXPECT=<<' + endString + '\n' + test.stdout;
           } else {
-            delim = '%';
+            const delim = valTrim.charAt(0);
+            if (delims.test(delim)) {
+              const startDelim = val.indexOf(delim);
+              const endDelim = val.indexOf(delim, startDelim + 1);
+              if (endDelim === -1) {
+                i++;
+                while (lines[i].indexOf(delim) == -1) {
+                  i++;
+                }
+              }
+            } else {
+              delim = '%';
+            }
+            output += 'EXPECT=' + delim + test.stdout + delim + '\n';
           }
-          output += 'EXPECT=' + delim + test.stdout + delim + '\n';
         } else {
           output += line + '\n';
         }
@@ -342,6 +324,12 @@ function editFile (someFile) {
   spawnSync(editor, [someFile], { stdio: 'inherit' });
 }
 
+function editCmds (cmds) {
+  fs.writeFileSync('.cmds.txt', cmds);
+  editFile('.cmds.txt');
+  return fs.readFileSync('.cmds.txt').toString();
+}
+
 function fixCommands (test, next) {
   const filePath = test.from;
   let output = '';
@@ -350,42 +338,9 @@ function fixCommands (test, next) {
     let lines = fs.readFileSync(filePath).toString().trim().split('\n');
     let target = null;
     let msg;
-    const stateEnum = Object.freeze({NORMAL: 0, CMDS_CONT: 1});
-    let state = stateEnum.NORMAL;
-    let delim = null;
-    let endString = null;
-    for (let line of lines) {
+    for (let i = 0; i < lines.length; i++) {
+      let line = lines[i];
       if (target) {
-        if (state === stateEnum.CMDS_CONT) {
-          if (delim !== null) {
-            const endDelim = line.indexOf(delim);
-            if (endDelim == -1) {
-              msg += line + '\n';
-            } else {
-              msg += line.substring(0, endDelim);
-              fs.writeFileSync('.cmds.txt', msg);
-              editFile('.cmds.txt');
-              const cmds = fs.readFileSync('.cmds.txt').toString();
-              output += 'CMDS=' + delim + cmds + delim + '\n';
-              state = stateEnum.NORMAL;
-            }
-            continue;
-          } else if (endString !== null) {
-            if (line.startsWith(endString)) {
-              fs.writeFileSync('.cmds.txt', msg);
-              editFile('.cmds.txt');
-              const cmds = fs.readFileSync('.cmds.txt').toString();
-              output += 'CMDS=<<' + endString + '\n' + cmds;
-              state = stateEnum.NORMAL;
-              // no continue
-            } else {
-              msg += line + '\n';
-              continue;
-            }
-          } else {
-            throw new Error('Internal error, CMDS_CONT');
-          }
-        }
         if (line.startsWith('CMDS64=')) {
           msg = Buffer.from(line.substring(7), 'base64');
           fs.writeFileSync('.cmds.txt', msg);
@@ -393,37 +348,44 @@ function fixCommands (test, next) {
           const cmds = fs.readFileSync('.cmds.txt').toString('base64');
           output += 'CMDS64=' + cmds + '\n';
         } else if (line.startsWith('CMDS=')) {
-          delim = null;
-          endString = null;
           const val = line.substring(5);
           const valTrim = val.trim();
           if (valTrim.startsWith('<<')) {
-            endString = valTrim.substring(2);
+            const endString = valTrim.substring(2);
             msg = '';
-            state = stateEnum.CMDS_CONT;
-            continue;
-          }
-          delim = valTrim.charAt(0);
-          if (delims.test(delim)) {
-            const startDelim = val.indexOf(delim);
-            const endDelim = val.indexOf(delim, startDelim + 1);
-            if (endDelim == -1) {
-              msg = val.substring(startDelim + 1) + '\n';
-              state = stateEnum.CMDS_CONT;
-              continue;
-            } else {
-              msg = val.substring(startDelim + 1, endDelim) + '\n';
+            i++;
+            while (!lines[i].startsWith(endString)) {
+              msg += lines[i] + '\n';
+              i++;
             }
+            i--;
+            const cmds = editCmds(msg);
+            output += 'CMDS=<<' + endString + '\n' + cmds;
           } else {
-            msg = val;
+            const delim = valTrim.charAt(0);
+            if (delims.test(delim)) {
+              const startDelim = val.indexOf(delim);
+              let endDelim = val.indexOf(delim, startDelim + 1);
+              if (endDelim == -1) {
+                msg = val.substring(startDelim + 1) + '\n';
+                i++;
+                while ((endDelim = lines[i].indexOf(delim)) == -1) {
+                  msg += lines[i] + '\n';
+                  i++;
+                }
+                msg += lines[i].substring(0, endDelim);
+              } else {
+                msg = val.substring(startDelim + 1, endDelim) + '\n';
+              }
+            } else {
+              msg = val;
+            }
+            const cmds = editCmds(msg);
+            if (!delims.test(delim)) {
+              delim = '%';
+            }
+            output += 'CMDS=' + delim + cmds + delim + '\n';
           }
-          fs.writeFileSync('.cmds.txt', msg);
-          editFile('.cmds.txt');
-          const cmds = fs.readFileSync('.cmds.txt').toString();
-          if (!delims.test(delim)) {
-            delim = '%';
-          }
-          output += 'CMDS=' + delim + cmds + delim + '\n';
         } else {
           output += line + '\n';
         }
