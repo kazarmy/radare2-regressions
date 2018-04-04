@@ -479,16 +479,24 @@ EXPECT='            0x00402a5f      bfdf4f4100     mov edi, str.COLUMNS        ;
             0x00402a5f      bfdf4f4100     mov edi, 0x414fdf           ; str.COLUMNS ; "COLUMNS"
 '
 RUN
-NAME=asm.emu.str string colors
+NAME=asm.emu.strinvert
 FILE=../bins/elf/redpill
 CMDS=<<EXPECT
 e scr.color=1
 e asm.bytes=false
 e asm.emu.pre=true
 e asm.emu.str=true
+e io.cache=true
+wz abcdefghi @ 0x21f7
+f abcdefghi @ 0x21f7
+axd 0x21f7 @ 0x161d
+e asm.emu.strinvert=true
+pd 1 @ 0x161d
+e asm.emu.strinvert=false
 pd 1 @ 0x161d
 EXPECT=<<RUN
-  [36m          [0m[32m0x0000161d[0m      [37mlea[36m eax[0m,[36m [0m[[36mesi [0m-[36m[36m [33m0x21f7[0m][36m[0m[0m[0m[31m                    ; [7m"\n  Blue Pill"[27m str.Blue_Pill[0m
+  [36m          [0m[32m0x0000161d[0m      [37mlea[36m eax[0m,[36m [0m[[36mesi [0m-[36m[36m [33m0x21f7[0m][36m[0m[0m[31m                    ; "abcdefghi"[0m[31m ; [7m"\n  Blue Pill"[27m str.Blue_Pill[0m
+  [36m          [0m[32m0x0000161d[0m      [37mlea[36m eax[0m,[36m [0m[[36mesi [0m-[36m[36m [33m0x21f7[0m][36m[0m[0m[31m                    ; [7m"abcdefghi"[27m[0m[31m ; "\n  Blue Pill" str.Blue_Pill[0m
 RUN
 NAME=ctrl chars
 FILE=../bins/elf/strenc-ctrlchars
