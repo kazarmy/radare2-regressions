@@ -60,3 +60,23 @@ FILE=malloc://1024
 EXPECT64=KCoweDIyKXB1c2ggZWJwCigqMHgyMylwb3AgZWF4Cg==
 CMDS64=ZSBhc20uYml0cz0zMgp3eCA1NTU4IEAgMHgyMgp3djQgMHgyMiBAIDB4NTAKd3Y0IDB4MjMgQCAweDU0CnBmICpEKkQgQCAweDUwCg==
 RUN
+NAME=pf *z (64bit addr)
+FILE=-
+CMDS=<<EXPECT
+e io.cache=true
+e asm.bits=64
+wz root @ 0x0000000100000faf
+pf z @ 0x0000000100000faf
+e cfg.bigendian=false
+16wxs cc @ 0x200
+wv8 0x0000000100000faf @ 0x204
+pf *z @ 0x204
+e cfg.bigendian=true
+16wxs cc @ 0x200
+wv8 0x0000000100000faf @ 0x204
+pf *z @ 0x204
+EXPECT=<<RUN
+0x100000faf = root
+(*0x100000faf)0x00000204 = root
+(*0x100000faf)0x00000204 = root
+RUN
