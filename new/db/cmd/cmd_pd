@@ -566,3 +566,22 @@ EXPECT='            0x00000000      0000a0e1       mov r0, r0
             0x00000010      00c09fe5       ldr ip, [pc]                ; [0x18:4]=13 ; 24
 '
 RUN
+NAME=asm.seekline
+FILE=../bins/elf/before-after-main
+CMDS=<<EXPECT
+e asm.seekline=true
+e asm.bytes=false
+s 0x0804855b
+pd 2
+?e %%%%%
+pd 3 @ 0x08048558
+EXPECT=<<RUN
+            0x0804855b      push ecx
+          ----------------------------------------------------------------------
+            0x0804855c      sub esp, 4
+%%%%%
+            0x08048558      push ebp
+            0x08048559      mov ebp, esp
+            0x0804855b      push ecx
+          ----------------------------------------------------------------------
+RUN
