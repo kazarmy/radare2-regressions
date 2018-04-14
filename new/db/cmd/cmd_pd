@@ -429,15 +429,15 @@ FILE=../bins/elf/analysis/ls2
 EXPECT64=ICAgICAgICAgICAgMHgwMDQwNDg4NiAgICAgIG1vdiByY3gsIDB4NDEyNDIwICAgICAgICAgICAgICAgICAgICAgICAgICA7ICJBV0FWQVx4ODlceGZmQVVBVExceDhkJVx4YmVceDk5ICIKICAgICAgICAgICAgMHgwMDQwNDg4ZCAgICAgIG1vdiByZGksIG1haW4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICA7IHNlY3Rpb24uLnRleHQgOyAweDQwMjhhMCA7ICJBV0FWQVVBVFVTXHg4OVx4ZmJIXHg4OVx4ZjVIXHg4MVx4ZWNceDk4XHgwMyIKLS0xLS0KICAgICAgICAgICAgMHgwMDQwNDg4NiAgICAgIG1vdiByY3gsIDB4NDEyNDIwCiAgICAgICAgICAgIDB4MDA0MDQ4OGQgICAgICBtb3YgcmRpLCBtYWluICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgOyBzZWN0aW9uLi50ZXh0IDsgMHg0MDI4YTAKLS0yLS0KICAgICAgICAgICAgMHgwMDQwNDg4NiAgICAgIG1vdiByY3gsIDB4NDEyNDIwICAgICAgICAgICAgICAgICAgICAgICAgICA7ICJBV0FWQVx4ODlceGZmQVVBVExceDhkJVx4YmVceDk5ICIKICAgICAgICAgICAgMHgwMDQwNDg4ZCAgICAgIG1vdiByZGksIG1haW4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICA7IHNlY3Rpb24uLnRleHQgOyAweDQwMjhhMAotLTMtLQogICAgICAgICAgICAweDAwNDA0ODg2ICAgICAgbW92IHJjeCwgMHg0MTI0MjAKICAgICAgICAgICAgMHgwMDQwNDg4ZCAgICAgIG1vdiByZGksIG1haW4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICA7IHNlY3Rpb24uLnRleHQgOyAweDQwMjhhMAotLTQtLQp8ICAgICAgICAgICAweDAwNDAyOGUwICAgICAgbW92IGVzaSwgc3RyLnVzcl9zaGFyZV9sb2NhbGUgICAgICAgICAgICAgIDsgMHg0MTRmYmYgOyAiL3Vzci9zaGFyZS9sb2NhbGUiCnwgICAgICAgICAgIDB4MDA0MDJhYmQgICAgICBtb3YgZWRpLCBzdHIuVEFCU0laRSAgICAgICAgICAgICAgICAgICAgICAgOyAweDQxNGZlNwotLTUtLQp8ICAgICAgICAgICAweDAwNDAyOGUwICAgICAgbW92IGVzaSwgc3RyLnVzcl9zaGFyZV9sb2NhbGUgICAgICAgICAgICAgIDsgMHg0MTRmYmYKfCAgICAgICAgICAgMHgwMDQwMmFiZCAgICAgIG1vdiBlZGksIHN0ci5UQUJTSVpFICAgICAgICAgICAgICAgICAgICAgICA7IDB4NDE0ZmU3Cg==
 CMDS64=ZSBhc20uYnl0ZXM9ZmFsc2UKcyBtYWluCmFmCnMgMHgwMDQwNDg4NgplIGJpbi5zdHJwdXJnZT1mYWxzZQpwZCAyCj9lIC0tMS0tCmUgYmluLnN0cnB1cmdlPXRydWUKcGQgMgo/ZSAtLTItLQplIGJpbi5zdHJwdXJnZT0weDQwMjhhMApwZCAyCj9lIC0tMy0tCmUgYmluLnN0cnB1cmdlPTB4NDEyNDIwLDB4NDAyOGEwCnBkIDIKP2UgLS00LS0KZSBiaW4uc3RycHVyZ2U9dHJ1ZQpwZCAxIEAgMHgwMDQwMjhlMApwZCAxIEAgMHgwMDQwMmFiZAo/ZSAtLTUtLQplIGJpbi5zdHJwdXJnZT10cnVlLDB4NDE0ZmJmCnBkIDEgQCAweDAwNDAyOGUwCnBkIDEgQCAweDAwNDAyYWJkCgo=
 RUN
-NAME=pd, esil, asm.emu.stroff and bin.strpurge
+NAME=pd, esil, emu.stroff and bin.strpurge
 FILE=../bins/elf/analysis/hello-android-mips
 EXPECT64=ICAgICAgICAgICAgMHgwMDA4MDQ5YyAgICAgIDA4MDAwMjNjICAgICAgIGx1aSB2MCwgOCAgICAgICAgICAgICAgICAgICA7IHNlY3Rpb24uZWhkcgogICAgICAgICAgICAweDAwMDgwNGEwICAgICAgMTAwNTQ0MjQgICAgICAgYWRkaXUgYTAsIHYwLCAweDUxMCAgICAgICAgIDsgIkhlbGxvIFdvcmxkIiBzZWN0aW9uLi5yb2RhdGEKLS0tLQogICAgICAgICAgICAweDAwMDgwNDljICAgICAgMDgwMDAyM2MgICAgICAgbHVpIHYwLCA4ICAgICAgICAgICAgICAgICAgIDsgc2VjdGlvbi5laGRyCiAgICAgICAgICAgIDB4MDAwODA0YTAgICAgICAxMDA1NDQyNCAgICAgICBhZGRpdSBhMCwgdjAsIDB4NTEwICAgICAgICAgOyAweDgwNTEwICJIZWxsbyBXb3JsZCIgc2VjdGlvbi4ucm9kYXRhCi0tLS0KICAgICAgICAgICAgMHgwMDA4MDQ5YyAgICAgIDA4MDAwMjNjICAgICAgIGx1aSB2MCwgOCAgICAgICAgICAgICAgICAgICA7IHNlY3Rpb24uZWhkcgogICAgICAgICAgICAweDAwMDgwNGEwICAgICAgMTAwNTQ0MjQgICAgICAgYWRkaXUgYTAsIHYwLCAweDUxMCAgICAgICAgIDsgc2VjdGlvbi4ucm9kYXRhCg==
-CMDS64=ZSBhc20uZW11LnN0cj10cnVlCnMgMHgwMDA4MDQ5YwplIGJpbi5zdHJwdXJnZT0KZSBhc20uZW11LnN0cm9mZj1mYWxzZQpwZCAyCj9lIC0tLS0KZSBhc20uZW11LnN0cm9mZj10cnVlCnBkIDIKP2UgLS0tLQplIGJpbi5zdHJwdXJnZT0weDgwNTEwCnBkIDIK
+CMDS64=ZSBlbXUuc3RyPXRydWUKcyAweDAwMDgwNDljCmUgYmluLnN0cnB1cmdlPQplIGVtdS5zdHJvZmY9ZmFsc2UKcGQgMgo/ZSAtLS0tCmUgZW11LnN0cm9mZj10cnVlCnBkIDIKP2UgLS0tLQplIGJpbi5zdHJwdXJnZT0weDgwNTEwCnBkIDIK
 RUN
-NAME=asm.emu.pre and double pd
+NAME=emu.pre and double pd
 FILE=../bins/elf/analysis/hello-android-mips
 EXPECT64=ICAgICAgICAgICAgMHgwMDA4MDRhMCAgICAgIDEwMDU0NDI0ICAgICAgIGFkZGl1IGEwLCB2MCwgMHg1MTAgICAgICAgICA7ICJIZWxsbyBXb3JsZCIgc2VjdGlvbi4ucm9kYXRhCiAgICAgICAgICAgIDB4MDAwODA0YTAgICAgICAxMDA1NDQyNCAgICAgICBhZGRpdSBhMCwgdjAsIDB4NTEwICAgICAgICAgOyAiSGVsbG8gV29ybGQiIHNlY3Rpb24uLnJvZGF0YQo=
-CMDS64=ZSBhc20uZW11LnByZT10cnVlCmUgYXNtLmVtdS5zdHI9dHJ1ZQpmIHN0YXJ0IEAgMHgwMDA4MDQ5YwpzIDB4MDAwODA0YTAKcGQgMQpwZCAxICAjIHNob3VsZCBwcmludCB0aGUgc2FtZSBhcyBhYm92ZQo=
+CMDS64=ZSBlbXUucHJlPXRydWUKZSBlbXUuc3RyPXRydWUKZiBzdGFydCBAIDB4MDAwODA0OWMKcyAweDAwMDgwNGEwCnBkIDEKcGQgMSAgIyBzaG91bGQgcHJpbnQgdGhlIHNhbWUgYXMgYWJvdmUK
 RUN
 NAME=pd @B
 FILE=-
@@ -467,9 +467,9 @@ EXPECT='            0x004028e0      mov esi, str.usr_share_locale              ;
             0x004028e0      mov esi, str.usr_share_locale
 '
 RUN
-NAME=asm.emu.str dup str/flag cmt fix
+NAME=emu.str dup str/flag cmt fix
 FILE=../bins/elf/analysis/ls2
-CMDS='e asm.emu.str=true
+CMDS='e emu.str=true
 e asm.filter=true
 pd 1 @ 0x00402a5f
 e asm.filter=false
@@ -479,34 +479,34 @@ EXPECT='            0x00402a5f      bfdf4f4100     mov edi, str.COLUMNS        ;
             0x00402a5f      bfdf4f4100     mov edi, 0x414fdf           ; str.COLUMNS ; "COLUMNS"
 '
 RUN
-NAME=asm.emu.strinv
+NAME=emu.strinv
 FILE=../bins/elf/redpill
 CMDS=<<EXPECT
 e scr.color=1
 e asm.bytes=false
-e asm.emu.pre=true
-e asm.emu.str=true
+e emu.pre=true
+e emu.str=true
 e io.cache=true
 wz abcdefghi @ 0x21f7
 f abcdefghi @ 0x21f7
 axd 0x21f7 @ 0x161d
-e asm.emu.strinv=true
+e emu.strinv=true
 pd 1 @ 0x161d
-e asm.emu.strinv=false
+e emu.strinv=false
 pd 1 @ 0x161d
 EXPECT=<<RUN
   [36m          [0m[32m0x0000161d[0m      [37mlea[36m eax[0m,[36m [0m[[36mesi [0m-[36m[36m [33m0x21f7[0m][36m[0m[0m[31m                    ; "abcdefghi"[0m[31m ; [7m"\n  Blue Pill"[27m str.Blue_Pill[0m
   [36m          [0m[32m0x0000161d[0m      [37mlea[36m eax[0m,[36m [0m[[36mesi [0m-[36m[36m [33m0x21f7[0m][36m[0m[0m[31m                    ; [7m"abcdefghi"[27m[0m[31m ; "\n  Blue Pill" str.Blue_Pill[0m
 RUN
-NAME=asm.emu.strflag
+NAME=emu.strflag
 FILE=../bins/elf/redpill
 CMDS=<<EXPECT
 e asm.bytes=false
-e asm.emu.pre=true
-e asm.emu.str=true
-e asm.emu.strflag=true
+e emu.pre=true
+e emu.str=true
+e emu.strflag=true
 pd 1 @ 0x161d
-e asm.emu.strflag=false
+e emu.strflag=false
 pd 1 @ 0x161d
 pd 1 @ 0x1447
 EXPECT=<<RUN

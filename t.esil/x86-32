@@ -1241,8 +1241,8 @@ run_test
 NAME="inline x86 pic thunk"
 FILE=../bins/elf/redpill
 CMDS='e asm.bytes=false
-e asm.emu.pre=true
-e asm.emu.str=true
+e emu.pre=true
+e emu.str=true
 pd 1 @ 0x1557
 pd 1 @ 0x11c0
 pd 1 @ 0x1523
