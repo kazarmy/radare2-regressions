@@ -19,6 +19,20 @@ FILE=malloc://1024
 EXPECT64=MHgwCjB4MmEKMHgwCgo=
 CMDS64=P3YgJCQKcyA0Mgo/diAkJApzLQo/diAkJAo=
 RUN
+NAME=$$$ (malloc)
+FILE=-
+CMDS=<<EXPECT
+?v $$ @ 0x300
+?v $$$ @ 0x300
+s 0x123
+?v $$ @ 0x300
+?v $$$ @ 0x300
+EXPECT=<<RUN
+0x300
+0x0
+0x300
+0x123
+RUN
 NAME=$o (malloc)
 FILE=malloc://1024
 EXPECT64=MHgwCjB4MmEKMHgwCgo=
