@@ -33,6 +33,23 @@ EXPECT=<<RUN
 0x300
 0x123
 RUN
+NAME=no seek change on pdf @ addr (#10007)
+FILE=../bins/elf/redpill
+CMDS=<<EXPECT
+e asm.bytes=false
+af @ 0x1a71
+s entry0
+s
+pdf @ 0x1a71
+s  # should be the same as before
+EXPECT=<<RUN
+0xf40
+/ (fcn) fcn.00001a71 4
+|   fcn.00001a71 ();
+|           0x00001a71      mov esi, dword [esp]
+\           0x00001a74      ret
+0xf40
+RUN
 NAME=$o (malloc)
 FILE=malloc://1024
 EXPECT64=MHgwCjB4MmEKMHgwCgo=
