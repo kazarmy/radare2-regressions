@@ -27,10 +27,24 @@ CMDS=<<EXPECT
 s 0x123
 ?v $$ @ 0x300
 ?v $$$ @ 0x300
+?e
+(test, ?v $$$)
+.(test)
+.(test) @ 0x300
+s 0x123  # Bug workaround
+(test2, .(test) @ 0x400)
+.(test2)
+s 0x123  # Bug workaround
+.(test2) @ 0x300
 EXPECT=<<RUN
 0x300
 0x0
 0x300
+0x123
+
+0x123
+0x123
+0x123
 0x123
 RUN
 NAME=no seek change on pdf @ addr (#10007)
