@@ -31,11 +31,12 @@ s 0x123
 (test, ?v $$$)
 .(test)
 .(test) @ 0x300
-s 0x123  # Bug workaround
+s
 (test2, .(test) @ 0x400)
 .(test2)
-s 0x123  # Bug workaround
+s
 .(test2) @ 0x300
+s
 EXPECT=<<RUN
 0x300
 0x0
@@ -46,6 +47,22 @@ EXPECT=<<RUN
 0x123
 0x123
 0x123
+0x123
+0x123
+0x123
+RUN
+NAME=nested $$
+FILE=-
+CMDS=<<EXPECT
+(nested_seek, ?v $$)
+.(nested_seek) @ 0x500
+(nested_seek2, ?v $$, .(nested_seek) @ 0x600, ?v $$)
+.(nested_seek2) @ 0x700
+EXPECT=<<RUN
+0x500
+0x700
+0x600
+0x700
 RUN
 NAME=no seek change on pdf @ addr (#10007)
 FILE=../bins/elf/redpill
