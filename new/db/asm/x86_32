@@ -2179,6 +2179,6 @@ a "nop" 90
 a "int 0x80" cd80
 a "mov eax, 33" b821000000
 a "mov rax, 33" 48c7c021000000
-a "mov [ebp+4],0" c7450400000000
+aB "mov [ebp+4],0" c7450400000000
 a "jmp 0x1b" eb05 0x14
 ad "sete al" 0f94c0
