@@ -592,3 +592,54 @@ EXPECT=<<RUN
   [38;2;0;255;255m          [0m[48;2;0;255;255m[38;2;0;255;0m0x00001457[22;24;25;27;28;39m      [38;2;255;255;255m8d[38;2;255;255;255m86[38;2;255;255;255m89[38;2;255;255;255mdd[38;2;255;0;0mff[38;2;255;0;0mff[22;24;25;27;28;39m   [38;2;255;255;255mlea[38;2;0;255;255m eax[22;24;25;27;28;39m,[38;2;0;255;255m [22;24;25;27;28;39m[[38;2;0;255;255mesi [22;24;25;27;28;39m-[38;2;0;255;255m[38;2;0;255;255m [38;2;255;255;0m0x2277[22;24;25;27;28;39m][38;2;0;255;255m[22;24;25;27;28;39m[0m[0m[0m[38;2;255;0;0m     ; " Take the Red Pill!! \n"[0m
   [38;2;0;255;255m          [0m[48;2;0;127;0m[38;2;0;255;0m0x00001457[22;24;25;27;28;39m      [38;2;255;255;255m8d[38;2;255;255;255m86[38;2;255;255;255m89[38;2;255;255;255mdd[38;2;255;0;0mff[38;2;255;0;0mff[22;24;25;27;28;39m   [38;2;255;255;255mlea[38;2;0;255;255m eax[22;24;25;27;28;39m,[38;2;0;255;255m [22;24;25;27;28;39m[[38;2;0;255;255mesi [22;24;25;27;28;39m-[38;2;0;255;255m[38;2;0;255;255m [38;2;255;255;0m0x2277[22;24;25;27;28;39m][38;2;0;255;255m[22;24;25;27;28;39m[0m[0m[0m[38;2;255;0;0m     ; " Take the Red Pill!! \n"[0m
 RUN
+NAME=pdJ with backslashes, quotation marks, str.escbslash and asm.strenc
+FILE=-
+CMDS=<<EXPECT
+e io.cache=true
+e asm.arch=x86
+e asm.bits=32
+e asm.bytes=false
+s 0x1000
+wz path"C:\\Program\n
+f ansi_str
+s 0x2000
+"wa mov eax, 0x1000"
+e str.escbslash=true
+pd 1
+pdJ 1
+e str.escbslash=false
+pd 1
+pdJ 1
+s 0x3000
+  # ww doesn't support esc seqs
+ww path"C:\Program
+f wide_str
+s 0x4000
+"wa mov ebx, 0x3000"
+e asm.strenc=guess
+pd 1
+pdJ 1
+e asm.strenc=latin1
+pd 1
+pdJ 1
+e asm.strenc=utf16le
+e str.escbslash=true
+pd 1
+pdJ 1
+e str.escbslash=false
+pd 1
+pdJ 1
+EXPECT=<<RUN
+            0x00002000      mov eax, 0x1000                            ; ansi_str ; "path\"C:\\Program\n"
+[{"offset":8192,"text":"            0x00002000      mov eax, 0x1000    ; ansi_str ; \"path\\\"C:\\\\Program\\n\""}]
+            0x00002000      mov eax, 0x1000                            ; ansi_str ; "path\"C:\Program\n"
+[{"offset":8192,"text":"            0x00002000      mov eax, 0x1000    ; ansi_str ; \"path\\\"C:\\Program\\n\""}]
+            0x00004000      mov ebx, 0x3000                            ; wide_str ; u"path\"C:\Program"
+[{"offset":16384,"text":"            0x00004000      mov ebx, 0x3000   ; wide_str ; u\"path\\\"C:\\Program\""}]
+            0x00004000      mov ebx, 0x3000                            ; wide_str ; "p"
+[{"offset":16384,"text":"            0x00004000      mov ebx, 0x3000   ; wide_str ; \"p\""}]
+            0x00004000      mov ebx, 0x3000                            ; wide_str ; u"path\"C:\\Program"
+[{"offset":16384,"text":"            0x00004000      mov ebx, 0x3000   ; wide_str ; u\"path\\\"C:\\\\Program\""}]
+            0x00004000      mov ebx, 0x3000                            ; wide_str ; u"path\"C:\Program"
+[{"offset":16384,"text":"            0x00004000      mov ebx, 0x3000   ; wide_str ; u\"path\\\"C:\\Program\""}]
+RUN
