@@ -643,3 +643,16 @@ EXPECT=<<RUN
             0x00004000      mov ebx, 0x3000                            ; wide_str ; u"path\"C:\Program"
 [{"offset":16384,"text":"            0x00004000      mov ebx, 0x3000   ; wide_str ; u\"path\\\"C:\\Program\""}]
 RUN
+NAME=arm asm.varsub and asm.pseudo (fp)
+FILE=../bins/elf/analysis/armcall
+CMDS=<<EXPECT
+e asm.bytes=false
+e asm.comments=false
+af @ main
+e asm.varsub=true
+e asm.pseudo=true
+pd 2 @ 0x00010460
+EXPECT=<<RUN
+|           0x00010460      [fp - local_ch] = r1
+|           0x00010464      r0 = [fp - local_8h]
+RUN
