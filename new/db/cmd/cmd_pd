@@ -652,12 +652,19 @@ af @ main
 e io.cache=true
 wv4 0xe59b0008 @ 0x00010464
 wv4 0xe59b100c @ 0x00010468
-e asm.varsub=false
 e asm.pseudo=false
+e asm.varsub=false
 pd 4 @ 0x0001045c
 ?e
-e asm.varsub=true
 e asm.pseudo=true
+e asm.varsub=true
+e asm.varsub_only=false
+pd 4 @ 0x0001045c
+?e
+e asm.varsub_only=true
+s main
+afvn local_ch local2
+afvn arg_8h arg1
 pd 4 @ 0x0001045c
 EXPECT=<<RUN
 |           0x0001045c      str r0, [fp, -8]
@@ -669,4 +676,9 @@ EXPECT=<<RUN
 |           0x00010460      [fp - local_ch] = r1
 |           0x00010464      r0 = [fp + arg_8h]
 |           0x00010468      r1 = [fp + arg_ch]
+
+|           0x0001045c      [local_8h] = r0
+|           0x00010460      [local2] = r1
+|           0x00010464      r0 = [arg1]
+|           0x00010468      r1 = [arg_ch]
 RUN
