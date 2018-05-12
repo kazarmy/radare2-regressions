@@ -21,7 +21,7 @@ BROKEN=
 CMDS='e asm.dwarf=true
 e asm.arch=x86.udis
 e anal.eobjmp=false
-e asm.varsub=false
+e asm.var.sub=false
 e anal.nopskip=true # if set to true it fucks the test
 af@main # full analysis fuckups main
 pd 1 @main'
@@ -41,7 +41,7 @@ CMDS='e dir.source=/tmp/r2-regressions
 e asm.dwarf=true
 e asm.arch=x86.udis
 e anal.eobjmp=false
-e asm.varsub=false
+e asm.var.sub=false
 e anal.nopskip=true # if set to true it fucks the test
 af@main # full analysis fuckups main
 pd 1 @main'
@@ -61,7 +61,7 @@ CMDS='e asm.dwarf=true
 e scr.interactive=false
 e dir.source=/tmp/r2-regressions
 e asm.arch=x86.udis
-e asm.varsub=false
+e asm.var.sub=false
 e anal.eobjmp=false
 e anal.nopskip=true
 af@main
@@ -99,7 +99,7 @@ e scr.interactive=false
 e dir.source=
 e asm.comments=true
 e asm.arch=x86.udis
-e asm.varsub=false
+e asm.var.sub=false
 e anal.eobjmp=false
 e anal.nopskip=true
 af@main
@@ -136,7 +136,7 @@ e scr.interactive=false
 e dir.source=
 e asm.comments=false
 e asm.arch=x86.udis
-e asm.varsub=false
+e asm.var.sub=false
 e anal.eobjmp=false
 e anal.nopskip=true
 af@main
