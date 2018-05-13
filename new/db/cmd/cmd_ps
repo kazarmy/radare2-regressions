@@ -15,3 +15,11 @@ FILE=-
 EXPECT64=eyJzdHJpbmciOiIuLi5cIi4uXHUwMGVmXHUwMGJmXHUwMGJkXHUwMGVmXHUwMGJmXHUwMGJkXHUwMGVmIiwib2Zmc2V0IjowLCJzZWN0aW9uIjoidW5rbm93biIsImxlbmd0aCI6MTMsInR5cGUiOiJ1dGYifQo=
 CMDS64=d3ogLi4uIi4u/////y4uLgpwc2ogMTMKCg==
 RUN
+NAME=psx escapes newlines (#10037)
+FILE=-
+CMDS=<<EXPECT
+wz abc\n123\n
+psx 9
+EXPECT=<<RUN
+abc\x0a123\x0a\x00
+RUN
