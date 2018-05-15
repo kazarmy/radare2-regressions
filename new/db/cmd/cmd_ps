@@ -23,3 +23,18 @@ psx 9
 EXPECT=<<RUN
 abc\x0a123\x0a\x00
 RUN
+NAME=ps N and initial nulls (#10037)
+FILE=-
+CMDS=<<EXPECT
+ps 1
+ps 2
+ps 3
+ps 4
+ps 8
+EXPECT=<<RUN
+\x00
+\x00\x00
+\x00\x00\x00
+\x00\x00\x00\x00
+\x00\x00\x00\x00\x00\x00\x00\x00
+RUN
