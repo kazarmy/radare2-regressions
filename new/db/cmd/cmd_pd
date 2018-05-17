@@ -512,7 +512,7 @@ pd 1 @ 0x1447
 EXPECT=<<RUN
             0x0000161d      lea eax, [esi - 0x21f7]                    ; "\n  Blue Pill" str.Blue_Pill
             0x0000161d      lea eax, [esi - 0x21f7]                    ; "\n  Blue Pill"
-            0x00001447      add esi, 0x2bb9                            ; section_end.GNU_RELRO
+            0x00001447      add esi, 0x2bb9                            ; section..got.plt
 RUN
 NAME=ctrl chars
 FILE=../bins/elf/strenc-ctrlchars
