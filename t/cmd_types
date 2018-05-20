@@ -423,3 +423,41 @@ NAME='tk - crash'
 FILE='-'
 CMDS="tk -!!!! d'B%CCCC!9!!!!_"
 run_test
+
+NAME='struct of struct with ts and pf'
+FILE='-'
+CMDS='"td struct bar { int a; int b; };"
+"td struct foo { int x; struct bar moo; };"
+ts foo
+.ts foo
+'
+EXPECT='pf d? x (bar)moo
+   x : 0x00000000 = 0
+ moo : 
+                struct<bar>
+   a : 0x00000004 = 0
+   b : 0x00000008 = 0
+'
+run_test
+
+NAME='Array of struct with ts'
+FILE='-'
+CMDS='"td struct bar { int a; int b; };"
+"td struct foo { int x; struct bar moo[2]; };"
+ts foo
+.ts foo
+'
+EXPECT='pf d[2]? x (bar)moo
+   x : 0x00000000 = 0
+ moo : 
+[
+                struct<bar>
+   a : 0x00000004 = 0
+   b : 0x00000008 = 0
+
+                struct<bar>
+   a : 0x0000000c = 0
+   b : 0x00000010 = 0
+]
+'
+run_test

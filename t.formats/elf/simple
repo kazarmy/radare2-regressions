@@ -22,20 +22,20 @@ EXPECT='0x08000060    section..text:
 '
 run_test
 
-NAME='ELF: asm.midflags=0 + local symbols'
+NAME='ELF: asm.flags.middle=0 + local symbols'
 FILE=../../bins/elf/analysis/example.elf
 ARGS=''
-CMDS="e asm.midflags=0;pd 3 @ 0x356"
+CMDS="e asm.flags.middle=0;pd 3 @ 0x356"
 EXPECT='        :   0x00000356      00f033f9       bl sym.app_uart_get
         :   0x0000035a      0028           cmp r0, 0
         `=< 0x0000035c      fad1           bne 0x354
 '
 run_test
 
-NAME='ELF: asm.midflags=1 + local symbols'
+NAME='ELF: asm.flags.middle=1 + local symbols'
 FILE=../../bins/elf/analysis/example.elf
 ARGS=''
-CMDS="e asm.midflags=1;pd 3 @ 0x356"
+CMDS="e asm.flags.middle=1;pd 3 @ 0x356"
 EXPECT='        :   ;-- $d:
         :   0x00000356  ~   00f033f9       bl sym.app_uart_get
         :   0x0000035a      0028           cmp r0, 0
@@ -43,7 +43,7 @@ EXPECT='        :   ;-- $d:
 '
 run_test
 
-NAME='ELF: asm.midflags + local symbols'
+NAME='ELF: asm.flags.middle + local symbols'
 FILE=../../bins/elf/analysis/example.elf
 ARGS=''
 CMDS="pd 3 @ 0x356"
@@ -53,10 +53,10 @@ EXPECT='        :   0x00000356  ~   00f033f9       bl sym.app_uart_get
 '
 run_test
 
-NAME='ELF: asm.midflags2 + local symbols'
+NAME='ELF: asm.flags.middle2 + local symbols'
 FILE=../../bins/elf/analysis/example.elf
 ARGS=''
-CMDS="e asm.midflags=0
+CMDS="e asm.flags.middle=0
 pd 3 @ 0x356"
 EXPECT='        :   0x00000356      00f033f9       bl sym.app_uart_get
         :   0x0000035a      0028           cmp r0, 0

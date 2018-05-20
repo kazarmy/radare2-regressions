@@ -7,7 +7,6 @@ CMDS='e asm.calls=false
 e asm.bits=32
 e asm.leahints=false
 e asm.cpu=x86
-e asm.linesup=false
 e asm.arch=x86
 e anal.cpu=x86
 e scr.utf8=true
@@ -219,7 +218,7 @@ e asm.bytes=false
 e asm.leahints=false
 e scr.utf8=false
 e scr.color=false
-e asm.lineswide=true
+e asm.lines.wide=true
 s $S
 aaa >/dev/null
 s 0x00003ca6
@@ -261,7 +260,7 @@ e asm.bytes=false
 e asm.leahints=false
 e scr.utf8=false
 e scr.color=false
-e asm.lineswide=true
+e asm.lines.wide=true
 aaa >/dev/null
 s 0x00003ca6
 pd 19
@@ -302,7 +301,7 @@ e asm.bytes=false
 e asm.leahints=false
 e scr.utf8=false
 e scr.color=false
-e asm.lineswide=true
+e asm.lines.wide=true
 e asm.comments=0
 aaa >/dev/null
 s 0x00012740

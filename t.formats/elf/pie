@@ -83,10 +83,10 @@ EXPECT='1
 '
 run_test
 
-NAME='ELF: pd around a reloc with asm.midflags'
+NAME='ELF: pd around a reloc with asm.flags.middle'
 FILE=../../bins/elf/analysis/hello-linux-i386-pie
 ARGS=''
-CMDS='e asm.midflags=2;pd 3 @0x000004a6 ~?invalid'
+CMDS='e asm.flags.middle=2;pd 3 @0x000004a6 ~?invalid'
 EXPECT='0
 '
 run_test

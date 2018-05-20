@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 const NewRegressions = require('..');
-console.error('Running the testsuite');
 const fs = require('fs');
 const jsdiff = require('diff');
 const colors = require('colors/safe');
@@ -17,7 +16,7 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 rl.on('line', line => {
-          // rl.close();
+  // rl.close();
   if (rl.cb) {
     rl.cb(null, line.trim());
   }
@@ -33,6 +32,7 @@ const flagMap = {
   '-h': '--help',
   '-g': '--grep',
   '-i': '--interactive',
+  '-l': '--list',
   '-v': '--verbose'
 };
 const args = process.argv.slice(2).map(_ => {
@@ -41,7 +41,8 @@ const args = process.argv.slice(2).map(_ => {
 const delims = /['"%]/;
 
 main(minimist(args, {
-  boolean: ['v', 'verbose', 'i', 'interactive']
+  boolean: ['v', 'verbose', 'i', 'interactive', 'l', 'list'],
+  string: ['g', 'grep']
 }));
 
 function main (argv) {
@@ -59,7 +60,7 @@ function main (argv) {
  -l    list all tests
  -u    unmark broken in fixed tests
  -v    be verbose (show broken tests and use more newlines)`);
-    rl.close()
+    rl.close();
     return 0;
   }
 
@@ -67,7 +68,16 @@ function main (argv) {
     if (err) {
       return 1;
     }
-
+    if (argv.g) {
+      console.error('TODO: grep');
+      nr.quit();
+      return 0;
+    }
+    if (argv.l) {
+      console.error('TODO: list');
+      nr.quit();
+      return 0;
+    }
     if (argv.e) {
       console.error('TODO');
       nr.quit();
@@ -75,7 +85,7 @@ function main (argv) {
     }
     if (argv.a) {
       console.error('TODO: Use: r2r -a instead of r2r.js for now');
-/*
+
       const test = {
         from: argv.a,
         name: argv._[0],
@@ -87,11 +97,11 @@ function main (argv) {
         // TODO: include this into the given test
         console.log(JSON.stringify(res, null, '  '));
       }).then(res => {
-      // console.log('RESULT', res);
+        // console.log('RESULT', res);
       }).catch(err => {
         console.error(err);
       });
-*/
+
       nr.quit();
       return 0;
     }
@@ -106,7 +116,7 @@ function main (argv) {
       }
       // console.log('[--]', 'run', testFile);
       if (testFile.indexOf('/.') !== -1) {
-        // skip hidden files
+      // skip hidden files
         return next();
       }
       nr.load(testFile, (err, data) => {
@@ -152,8 +162,8 @@ function main (argv) {
         console.log('File:', test.file);
         console.log('Script:', test.from);
         console.log('Name:', test.name);
-      //  console.log('-', test.expect);
-       // console.log('+', test.stdout);
+        //  console.log('-', test.expect);
+        // console.log('+', test.stdout);
 
         try {
           verifyTest(test);
@@ -176,7 +186,7 @@ function main (argv) {
         });
 
         console.log('Wat du? (f)ix (i)gnore (b)roken (q)uit (c)ommands (d)iffChars');
-        readLine(function handleKey(err, line) {
+        readLine(function handleKey (err, line) {
           if (err) {
             return cb(err);
           }
@@ -185,7 +195,7 @@ function main (argv) {
             case 'q':
               console.error('Aborted');
               process.exit(1);
-              // unreachable break;
+            // unreachable break;
             case 'i':
               next();
               break;
@@ -201,8 +211,8 @@ function main (argv) {
             case 'd':
               const changes = jsdiff.diffChars(test.expect, test.stdout);
               changes.forEach(function (part) {
-                const k = part.added ? colors.black.bgGreen :
-                                       colors.white.bold.bgMagenta.strikethrough;
+                const k = part.added ? colors.black.bgGreen
+                  : colors.white.bold.bgMagenta.strikethrough;
                 const v = part.value;
                 if (part.added || part.removed) {
                   process.stdout.write(k(v));
@@ -280,13 +290,13 @@ function fixTest (test, next) {
             i--;
             output += 'EXPECT=<<' + endString + '\n' + test.stdout;
           } else {
-            const delim = valTrim.charAt(0);
+            let delim = valTrim.charAt(0);
             if (delims.test(delim)) {
               const startDelim = val.indexOf(delim);
               const endDelim = val.indexOf(delim, startDelim + 1);
               if (endDelim === -1) {
                 i++;
-                while (lines[i].indexOf(delim) == -1) {
+                while (lines[i].indexOf(delim) === -1) {
                   i++;
                 }
               }
@@ -362,7 +372,7 @@ function fixCommands (test, next) {
             const cmds = editCmds(msg);
             output += 'CMDS=<<' + endString + '\n' + cmds;
           } else {
-            const delim = valTrim.charAt(0);
+            let delim = valTrim.charAt(0);
             if (delims.test(delim)) {
               const startDelim = val.indexOf(delim);
               let endDelim = val.indexOf(delim, startDelim + 1);
@@ -396,7 +406,7 @@ function fixCommands (test, next) {
         target = null;
       }
       if (line.startsWith('NAME=')) {
-// TODO: ensure expect is valid
+        // TODO: ensure expect is valid
         const name = line.substring(5);
         if (name === test.name) {
           target = name;
@@ -412,7 +422,7 @@ function fixCommands (test, next) {
 }
 
 const tests = [];
-function verifyTest(test) {
+function verifyTest (test) {
   if (tests.indexOf(test.name) !== -1) {
     throw new Error('Found two tests with the same name', JSON.stringify(test, null, 2));
   }

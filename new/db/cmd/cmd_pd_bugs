@@ -84,7 +84,7 @@ EXPECT64=LyAoZmNuKSB0ZXN0IDAKfCAgIHRlc3QgKCk7CnwgMHgwMDAwMDAwMCAgICAgIDAwMDAgICA
 RUN
 NAME=asm.flgoff indent
 FILE=../bins/elf/crackme0x05
-CMDS='e asm.flgoff=1
+CMDS='e asm.flags.offset=1
 s sym.check
 pd 1
 '

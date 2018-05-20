@@ -6,7 +6,7 @@ RUN
 NAME=e asm.os
 FILE=../bins/elf/analysis/hello-linux-x86_64
 EXPECT64=aW9zCmRvcwpkYXJ3aW4KbGludXgKZnJlZWJzZApvcGVuYnNkCm5ldGJzZAp3aW5kb3dzCgo=
-CMDS64=ZSBhc20ub3M9PwoK
+CMDS64=ZSBhc20ub3M9Pwo=
 RUN
 NAME=e asm.cpu
 FILE=../bins/elf/analysis/hello-linux-x86_64
