@@ -648,7 +648,7 @@ EXPECT=<<RUN
             0x00004000      mov ebx, 0x3000                            ; wide_str ; u"path\"C:\Program"
 [{"offset":16384,"text":"            0x00004000      mov ebx, 0x3000   ; wide_str ; u\"path\\\"C:\\Program\""}]
 RUN
-NAME=arm asm.var.sub and asm.pseudo (fp)
+NAME=arm asm.var.sub, asm.ucase and asm.pseudo (fp)
 FILE=../bins/elf/analysis/armcall
 CMDS=<<EXPECT
 e asm.bytes=false
@@ -658,7 +658,12 @@ wv4 0xe59b0008 @ 0x00010464
 wv4 0xe59b100c @ 0x00010468
 af @ main
 e asm.pseudo=false
+e asm.var.sub=true
+e asm.ucase=true
+pd 4 @ 0x0001045c
+?e
 e asm.var.sub=false
+e asm.ucase=false
 pd 4 @ 0x0001045c
 ?e
 e asm.pseudo=true
@@ -672,6 +677,11 @@ afvn local_ch local2
 afvn arg_8h arg1
 pd 4 @ 0x0001045c
 EXPECT=<<RUN
+|           0x0001045c      STR R0, [local_8h]
+|           0x00010460      STR R1, [local_ch]
+|           0x00010464      LDR R0, [arg_8h]
+|           0x00010468      LDR R1, [arg_ch]
+
 |           0x0001045c      str r0, [fp, -8]
 |           0x00010460      str r1, [fp, -0xc]
 |           0x00010464      ldr r0, [fp, 8]
