@@ -71,14 +71,10 @@ e asm.bytes=false
 af @ 0x1a71
 s entry0
 s
-pdf @ 0x1a71
+pdf @ 0x1a71 > /dev/null
 s  # should be the same as before
 EXPECT=<<RUN
 0xf40
-/ (fcn) fcn.00001a71 4
-|   fcn.00001a71 ();
-|           0x00001a71      mov esi, dword [esp]
-\           0x00001a74      ret
 0xf40
 RUN
 NAME=$o (malloc)
