@@ -484,7 +484,7 @@ class NewRegressions {
         tests = data.toString();
       }
       if (process.platform === 'win32') {
-        this.runTests(fileName, tests.replace(/\r\n/g, '\n').split('\n'));
+        this.runTests(fileName, tests.replace(/\/dev\/null/g, 'nul').replace(/\r\n/g, '\n').split('\n'));
       } else {
         this.runTests(fileName, tests.split('\n'));
       }

@@ -502,3 +502,124 @@ tpx foo 4141414144141414141442001000000
 EXPECT=' a : 0x00000000 = AAAAD.....B
  b : 0x0000000c = 16
 '
+run_test
+
+NAME="ta and arm"
+FILE='-'
+CMDS='e asm.arch = arm
+e asm.bits = 32
+wx 082090e5040081e5
+"td struct foo {int a; int b; int c;};"
+ta foo.c @ 0x00000000
+ta foo.b @ 0x00000004
+?e
+pd 2
+'
+EXPECT='
+            0x00000000      082090e5       ldr r2, [r0, foo.c]
+            0x00000004      040081e5       str r0, [r1, foo.b]
+'
+run_test
+
+NAME="ta and mips"
+FILE='-'
+CMDS='e asm.arch = mips
+wx 08007fac040053800800538c
+"td struct foo {int a; int b; int c;};"
+ta foo.c @ 0x00000000
+ta foo.c @ 0x00000008
+ta foo.b @ 0x00000004
+?e
+pd 3
+'
+EXPECT='
+            0x00000000      08007fac       sw ra, foo.c(v1)
+            0x00000004      04005380       lb s3, foo.b(v0)
+            0x00000008      0800538c       lw s3, foo.c(v0)
+'
+run_test
+
+NAME="struct offset for dst operand with ta"
+FILE='-'
+CMDS='e asm.bits = 32
+"td struct foo {int a; int b ; int c;}"
+wx 8b40048951048d500883780800
+?e
+ta foo.b @ 0x00000000
+ta foo.b @ 0x00000003
+ta foo.c @ 0x00000006
+ta foo.c @ 0x00000009
+pd 4
+'
+EXPECT='
+            0x00000000      8b4004         mov eax, dword [eax + foo.b] ; [0x4:4]=0x508d0451
+            0x00000003      895104         mov dword [ecx + foo.b], edx
+            0x00000006      8d5008         lea edx, [eax + foo.c]      ; 0x8
+            0x00000009      83780800       cmp dword [eax + foo.c], 0
+'
+run_test
+
+NAME="struct offset propagate via tl"
+FILE='-'
+CMDS='e asm.comments = false
+"td struct bar {int a ; int b; int c;}"
+wx 48C7C058190000488B5004488B4808483B500448BBEFBEADDE00000000488958089090C3
+af
+tl bar = 0x1958
+?e
+pdf~bar.
+'
+EXPECT='
+|           0x00000007      488b5004       mov rdx, qword [rax + bar.b]
+|           0x0000000b      488b4808       mov rcx, qword [rax + bar.c]
+|           0x0000000f      483b5004       cmp rdx, qword [rax + bar.b]
+|           0x0000001d      48895808       mov qword [rax + bar.c], rbx
+'
+run_test
+
+NAME="taa with single struct"
+FILE='-'
+CMDS='e asm.comments = false
+"td struct bar {int a ; int b; int c;}"
+wx 48C7C058190000488B5004488B4808483B500448BBEFBEADDE00000000488958089090C3
+tl bar = 0x1958
+af
+taa @ fcn.00000000
+?e
+pdf~bar.
+'
+EXPECT='
+|           0x00000007      488b5004       mov rdx, qword [rax + bar.b]
+|           0x0000000b      488b4808       mov rcx, qword [rax + bar.c]
+|           0x0000000f      483b5004       cmp rdx, qword [rax + bar.b]
+|           0x0000001d      48895808       mov qword [rax + bar.c], rbx
+'
+run_test
+
+NAME="taa with multiple struct"
+FILE='-'
+CMDS='e asm.comments = false
+"td struct bar {int x; int y; int z;};"
+"td struct foo {int a; int b; int c;};"
+wx 48C7C000010000488B5008488B480448C7C000020000488B5008488B48049090C3
+tl bar = 0x200
+tl foo = 0x100
+af
+taa @ fcn.00000000
+?e
+pdf
+'
+EXPECT='
+/ (fcn) fcn.00000000 33
+|   fcn.00000000 ();
+|           0x00000000      48c7c0000100.  mov rax, 0x100
+|           0x00000007      488b5008       mov rdx, qword [rax + foo.c]
+|           0x0000000b      488b4804       mov rcx, qword [rax + foo.b]
+|           0x0000000f      48c7c0000200.  mov rax, 0x200
+|           0x00000016      488b5008       mov rdx, qword [rax + bar.z]
+|           0x0000001a      488b4804       mov rcx, qword [rax + bar.y]
+|           0x0000001e      90             nop
+|           0x0000001f      90             nop
+\           0x00000020      c3             ret
+'
+run_test

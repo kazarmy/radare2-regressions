@@ -338,12 +338,12 @@ CMDS64=d3ggOTA5MAplIGFzbS5saW5lcz0wCnBkSiAyCgo=
 RUN
 NAME=pdJ comments
 FILE=malloc://128
-EXPECT64=W3sib2Zmc2V0IjowLCJ0ZXh0IjoiICAweDAwMDAwMDAwICAgICAgOTAgICAgICAgICAgICAgbm9wICAgICAgICAgICAgICA7IHRlc3QifV0KW3sib2Zmc2V0IjowLCJ0ZXh0IjoiICAweDAwMDAwMDAwICAgICAgOTAgICAgICAgICAgICAgbm9wICAgICAgICAgICAgICA7IHRlc3QgXCJ3aXRoIHF1b3Rlc1wiIn1dClt7Im9mZnNldCI6MCwidGV4dCI6IiAgOyB0ZXN0IFwid2l0aCBxdW90ZXNcIlxuIn0seyJvZmZzZXQiOjAsInRleHQiOiIgIDB4MDAwMDAwMDAgICAgICA5MCAgICAgICAgICAgICBub3AifV0K
+EXPECT64=W3sib2Zmc2V0IjowLCJ0ZXh0IjoiICAweDAwMDAwMDAwICAgICAgOTAgICAgICAgICAgICAgbm9wICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA7IHRlc3QifV0KW3sib2Zmc2V0IjowLCJ0ZXh0IjoiICAweDAwMDAwMDAwICAgICAgOTAgICAgICAgICAgICAgbm9wICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA7IHRlc3QgXCJ3aXRoIHF1b3Rlc1wiIn1dClt7Im9mZnNldCI6MCwidGV4dCI6IiAgOyB0ZXN0IFwid2l0aCBxdW90ZXNcIlxuIn0seyJvZmZzZXQiOjAsInRleHQiOiIgIDB4MDAwMDAwMDAgICAgICA5MCAgICAgICAgICAgICBub3AifV0K
 CMDS64=d3ggOTAKZSBhc20ubGluZXM9MApDQ3UgYmFzZTY0OmRHVnpkQW89CnBkSiAxCkNDdSBiYXNlNjQ6ZEdWemRDQWlkMmwwYUNCeGRXOTBaWE1pQ2c9PQpwZEogMQplIGFzbS5jbXQucmlnaHQ9ZmFsc2UKcGRKIDEK
 RUN
 NAME=pdJ string comment
 FILE=../bins/elf/analysis/main
-EXPECT64=W3sib2Zmc2V0Ijo0MTk1NTk0LCJ0ZXh0IjoifCAgICAgICAgICAgMHgwMDQwMDUwYSAgICAgIGJmYzQwNTQwMDAgICAgIG1vdiBlZGksIHN0ci5IZWxsb19Xb3JsZCA7IDB4NDAwNWM0IDsgXCJIZWxsbyBXb3JsZFwiIn1dCgo=
+EXPECT64=W3sib2Zmc2V0Ijo0MTk1NTk0LCJ0ZXh0IjoifCAgICAgICAgICAgMHgwMDQwMDUwYSAgICAgIGJmYzQwNTQwMDAgICAgIG1vdiBlZGksIHN0ci5IZWxsb19Xb3JsZCAgICA7IDB4NDAwNWM0IDsgXCJIZWxsbyBXb3JsZFwiIn1dCg==
 CMDS64=CmFhCnBkSiAxIEAgMHgwMDQwMDUwYQoK
 RUN
 NAME=pdJ flags
@@ -391,14 +391,14 @@ pdJ 1 @ 0x080483ec
 RUN
 NAME=pdJ asm.emu=1 comment
 FILE=../bins/elf/crackme0x05
-EXPECT64=W3sib2Zmc2V0IjoxMzQ1MTQwMjIsInRleHQiOiIgICAgICAgICAgICAweDA4MDQ4NTY2ICAgICAgZTgyOWZlZmZmZiAgICAgY2FsbCBzeW0uaW1wLnByaW50ZiA7IGVzcD0weGZmZmZmZmZmZmZmZmZmZmMgOyBlaXA9MHg4MDQ4Mzk0IC0+IDB4YTAwYzI1ZmYifSx7Im9mZnNldCI6MTM0NTE0MDIyLCJ0ZXh0IjoiIDsgaW50IHByaW50Zihjb25zdCBjaGFyICogZm9ybWF0IDogKCoweGZmZmZmZmZmKTB4MDAwMDAwMDAgPSAuLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4pIn1dCg==
+EXPECT64=W3sib2Zmc2V0IjoxMzQ1MTQwMjIsInRleHQiOiIgICAgICAgICAgICAweDA4MDQ4NTY2ICAgICAgZTgyOWZlZmZmZiAgICAgY2FsbCBzeW0uaW1wLnByaW50ZiAgICAgICAgIDsgZXNwPTB4ZmZmZmZmZmZmZmZmZmZmYyA7IGVpcD0weDgwNDgzOTQgLT4gMHhhMDBjMjVmZiJ9LHsib2Zmc2V0IjoxMzQ1MTQwMjIsInRleHQiOiIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgOyBpbnQgcHJpbnRmKGNvbnN0IGNoYXIgKiBmb3JtYXQgOiAoKjB4ZmZmZmZmZmYpMHgwMDAwMDAwMCA9IC4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLikifV0K
 CMDS='e asm.emu=1
 pdJ 1 @ 0x08048566
 '
 RUN
 NAME=pdJ asm.emu=1 string
 FILE=../bins/elf/crackme0x00b
-EXPECT64=ICAgICAgICAgICAgMHgwODA0ODRhYSAgICAgIGI4ZTE4NTA0MDggICAgIG1vdiBlYXgsIDB4ODA0ODVlMSAgICAgICAgICA7IGVheD0weDgwNDg1ZTEgIiVscyIKW3sib2Zmc2V0IjoxMzQ1MTM4MzQsInRleHQiOiIgICAgICAgICAgICAweDA4MDQ4NGFhICAgICAgYjhlMTg1MDQwOCAgICAgbW92IGVheCwgMHg4MDQ4NWUxIDsgZWF4PTB4ODA0ODVlMSBcIiVsc1wiIn1dCiAgG1szNm0gICAgICAgICAgG1swbRtbMzJtMHgwODA0ODRhYRtbMG0gICAgICAbWzM3bWI4G1szN21lMRtbMzdtODUbWzM3bTA0G1szN20wOBtbMG0gICAgIBtbMzdtbW92G1szNm0gZWF4G1swbSwbWzM2bRtbMzZtIBtbMzNtMHg4MDQ4NWUxG1swbRtbMG0bWzBtG1szMW0gICAgICAgICAgOyBlYXg9MHg4MDQ4NWUxIBtbN20iJWxzIhtbMjdtG1swbQpbeyJvZmZzZXQiOjEzNDUxMzgzNCwidGV4dCI6IiAgG1szNm0gICAgICAgICAgG1swbRtbMzJtMHgwODA0ODRhYRtbMG0gICAgICAbWzM3bWI4G1szN21lMRtbMzdtODUbWzM3bTA0G1szN20wOBtbMG0gICAgIBtbMzdtbW92IGVheCwgMHg4MDQ4NWUxG1swbRtbMG0bWzMxbSA7IGVheD0weDgwNDg1ZTEgG1s3bVwiJWxzXCIbWzI3bRtbMG0ifV0K
+EXPECT64=ICAgICAgICAgICAgMHgwODA0ODRhYSAgICAgIGI4ZTE4NTA0MDggICAgIG1vdiBlYXgsIDB4ODA0ODVlMSAgICAgICAgICA7IGVheD0weDgwNDg1ZTEgIiVscyIKW3sib2Zmc2V0IjoxMzQ1MTM4MzQsInRleHQiOiIgICAgICAgICAgICAweDA4MDQ4NGFhICAgICAgYjhlMTg1MDQwOCAgICAgbW92IGVheCwgMHg4MDQ4NWUxICAgICAgICAgIDsgZWF4PTB4ODA0ODVlMSBcIiVsc1wiIn1dCiAgG1szNm0gICAgICAgICAgG1swbRtbMzJtMHgwODA0ODRhYRtbMG0gICAgICAbWzM3bWI4G1szN21lMRtbMzdtODUbWzM3bTA0G1szN20wOBtbMG0gICAgIBtbMzdtbW92G1szNm0gZWF4G1swbSwbWzM2bRtbMzZtIBtbMzNtMHg4MDQ4NWUxG1swbRtbMG0bWzBtG1szMW0gICAgICAgICAgOyBlYXg9MHg4MDQ4NWUxIBtbN20iJWxzIhtbMjdtG1swbQpbeyJvZmZzZXQiOjEzNDUxMzgzNCwidGV4dCI6IiAgG1szNm0gICAgICAgICAgG1swbRtbMzJtMHgwODA0ODRhYRtbMG0gICAgICAbWzM3bWI4G1szN21lMRtbMzdtODUbWzM3bTA0G1szN20wOBtbMG0gICAgIBtbMzdtbW92IGVheCwgMHg4MDQ4NWUxG1swbRtbMG0bWzMxbSAgICAgICAgICA7IGVheD0weDgwNDg1ZTEgG1s3bVwiJWxzXCIbWzI3bRtbMG0ifV0K
 CMDS='s 0x080484aa
 e asm.emu=1
 e scr.color=0
@@ -636,17 +636,17 @@ pd 1
 pdJ 1
 EXPECT=<<RUN
             0x00002000      mov eax, 0x1000                            ; ansi_str ; "path\"C:\\Program\n"
-[{"offset":8192,"text":"            0x00002000      mov eax, 0x1000    ; ansi_str ; \"path\\\"C:\\\\Program\\n\""}]
+[{"offset":8192,"text":"            0x00002000      mov eax, 0x1000                            ; ansi_str ; \"path\\\"C:\\\\Program\\n\""}]
             0x00002000      mov eax, 0x1000                            ; ansi_str ; "path\"C:\Program\n"
-[{"offset":8192,"text":"            0x00002000      mov eax, 0x1000    ; ansi_str ; \"path\\\"C:\\Program\\n\""}]
+[{"offset":8192,"text":"            0x00002000      mov eax, 0x1000                            ; ansi_str ; \"path\\\"C:\\Program\\n\""}]
             0x00004000      mov ebx, 0x3000                            ; wide_str ; u"path\"C:\Program"
-[{"offset":16384,"text":"            0x00004000      mov ebx, 0x3000   ; wide_str ; u\"path\\\"C:\\Program\""}]
+[{"offset":16384,"text":"            0x00004000      mov ebx, 0x3000                            ; wide_str ; u\"path\\\"C:\\Program\""}]
             0x00004000      mov ebx, 0x3000                            ; wide_str ; "p"
-[{"offset":16384,"text":"            0x00004000      mov ebx, 0x3000   ; wide_str ; \"p\""}]
+[{"offset":16384,"text":"            0x00004000      mov ebx, 0x3000                            ; wide_str ; \"p\""}]
             0x00004000      mov ebx, 0x3000                            ; wide_str ; u"path\"C:\\Program"
-[{"offset":16384,"text":"            0x00004000      mov ebx, 0x3000   ; wide_str ; u\"path\\\"C:\\\\Program\""}]
+[{"offset":16384,"text":"            0x00004000      mov ebx, 0x3000                            ; wide_str ; u\"path\\\"C:\\\\Program\""}]
             0x00004000      mov ebx, 0x3000                            ; wide_str ; u"path\"C:\Program"
-[{"offset":16384,"text":"            0x00004000      mov ebx, 0x3000   ; wide_str ; u\"path\\\"C:\\Program\""}]
+[{"offset":16384,"text":"            0x00004000      mov ebx, 0x3000                            ; wide_str ; u\"path\\\"C:\\Program\""}]
 RUN
 NAME=arm asm.var.sub, asm.ucase and asm.pseudo (fp)
 FILE=../bins/elf/analysis/armcall
@@ -696,4 +696,52 @@ EXPECT=<<RUN
 |           0x00010460      [local2] = r1
 |           0x00010464      r0 = [arg1]
 |           0x00010468      r1 = [arg_ch]
+RUN
+NAME=pdfj with padding
+FILE=../bins/elf/padding_in_func
+CMDS=<<EXPECT
+s main
+af
+pdfj~{} | grep opcode
+EXPECT=<<RUN
+      "opcode": "push rbp",
+      "opcode": "push rbx",
+      "opcode": "push rax",
+      "opcode": "mov ebx, edi",
+      "opcode": "cmp ebx, 2",
+      "opcode": "mov eax, 0x5758554a",
+      "opcode": "mov ebp, 0x10c2377a",
+      "opcode": "cmovl ebp, eax",
+      "opcode": "mov eax, 0xbaad0c8f",
+      "opcode": "cmp eax, 0xccdab13a",
+      "opcode": "jg 0x40058a",
+      "opcode": "jmp 0x4005ae",
+      "opcode": "mov edi, 0x400664",
+      "opcode": "xor eax, eax",
+      "opcode": "mov esi, ebx",
+      "opcode": "call 0x400440",
+      "opcode": "mov eax, 0xccdab13b",
+      "opcode": "cmp eax, 0xccdab13a",
+      "opcode": "jle 0x4005ae",
+      "opcode": "cmp eax, 0x10c2377a",
+      "opcode": "je 0x400570",
+      "opcode": "cmp eax, 0x5758554a",
+      "opcode": "jne 0x4005b9",
+      "opcode": "mov edi, 0x40066d",
+      "opcode": "call 0x400430",
+      "opcode": "mov eax, 0xccdab13b",
+      "opcode": "cmp eax, 0xccdab13a",
+      "opcode": "jg 0x40058a",
+      "opcode": "cmp eax, 0xbaad0c8f",
+      "opcode": "mov eax, ebp",
+      "opcode": "je 0x400583",
+      "opcode": "jmp 0x4005d0",
+      "opcode": "cmp eax, 0xccdab13b",
+      "opcode": "jne 0x4005d0",
+      "opcode": "xor eax, eax",
+      "opcode": "add rsp, 8",
+      "opcode": "pop rbx",
+      "opcode": "pop rbp",
+      "opcode": "ret",
+      "opcode": "jmp 0x4005d0",
 RUN
