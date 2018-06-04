@@ -580,9 +580,9 @@ pd 3
 e scr.color=1
 pd 1
 e scr.color=3
-ec line_highlight cyan
+ec linehl cyan
 pd 1
-ec line_highlight #007f00
+ec linehl #007f00
 pd 1
 ecHw eax red
 e asm.highlight=0x1457
