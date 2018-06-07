@@ -101,7 +101,7 @@ CMDS='!rabin2 -S ${R2_FILE}|wc -l|awk "{print \$1}"
 !rabin2 -rS ${R2_FILE}|wc -l|awk "{print \$1}"
 !env RABIN2_PREFIX=prixfixe rabin2 -S ${R2_FILE} |grep prixfixe. |wc -l
 !env RABIN2_PREFIX=prixfixe rabin2 -rS ${R2_FILE} |grep prixfixe. |wc -l'
-EXPECT='40
+EXPECT='42
 157
 39
 156

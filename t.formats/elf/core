@@ -6,7 +6,7 @@ NAME='ELF: core sections'
 FILE=../../bins/elf/analysis/core.1159
 ARGS=''
 CMDS="iS~?"
-EXPECT='19
+EXPECT='20
 '
 run_test
 
