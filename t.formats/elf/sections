@@ -6,7 +6,7 @@ for a in . .. ../.. ; do [ -e $a/tests.sh ] && . $a/tests.sh ; done
 NAME="sections list"
 FILE=../../bins/elf/analysis/main_wrong_sect
 ARGS=
-CMDS='iS
+CMDS='iS;iSS
 '
 EXPECT='[Sections]
 00 0x00000000     0 0x00000000     0 ---- 
@@ -45,7 +45,6 @@ EXPECT='[Sections]
 33 0x00000e70   342 0x00000000   342 ---- .shstrtab
 34 0x000018c8  1752 0x00000000  1752 ---- .symtab
 35 0x00001fa0   570 0x00000000   570 ---- .strtab
-
 [Segments]
 00 0x00000040   448 0x00400040   448 -r-x PHDR
 01 0x00000200    28 0x00400200    28 -r-- INTERP

@@ -2,11 +2,11 @@
 for a in . .. ../.. ; do [ -e $a/tests.sh ] && . $a/tests.sh ; done
 
 # probably wrong
-NAME='ELF: core sections'
+NAME='ELF: core segments'
 FILE=../../bins/elf/analysis/core.1159
 ARGS=''
-CMDS="iS~?"
-EXPECT='20
+CMDS="iSS~?"
+EXPECT='19
 '
 run_test
 

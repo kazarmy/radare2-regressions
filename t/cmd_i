@@ -3,7 +3,7 @@
 
 NAME='iS'
 FILE='../bins/elf/crackme0x05'
-CMDS='iS entropy'
+CMDS='iS entropy; iSS entropy'
 EXPECT='[Sections]
 00 0x00000000     0 0x00000000     0 ---- entropy=0.00000000 
 01 0x00000154    19 0x08048154    19 -r-- entropy=3.68188080 .interp
@@ -34,7 +34,6 @@ EXPECT='[Sections]
 26 0x000011dd   219 0x00000000   219 ---- entropy=4.21638420 .shstrtab
 27 0x00001740  1120 0x00000000  1120 ---- entropy=3.06854806 .symtab
 28 0x00001ba0   584 0x00000000   584 ---- entropy=4.85613827 .strtab
-
 [Segments]
 00 0x00000034   288 0x08048034   288 -r-x entropy=2.77947373 PHDR
 01 0x00000154    19 0x08048154    19 -r-- entropy=3.68188080 INTERP

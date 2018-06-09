@@ -98,12 +98,16 @@ FILE=../../bins/elf/analysis/x86-helloworld-gcc
 ARGS=
 FILTER='sed "s/\ *//g"'
 CMDS='!rabin2 -S ${R2_FILE}|wc -l|awk "{print \$1}"
+!rabin2 -SS ${R2_FILE}|wc -l|awk "{print \$1}"
 !rabin2 -rS ${R2_FILE}|wc -l|awk "{print \$1}"
 !env RABIN2_PREFIX=prixfixe rabin2 -S ${R2_FILE} |grep prixfixe. |wc -l
+!env RABIN2_PREFIX=prixfixe rabin2 -SS ${R2_FILE} |grep prixfixe. |wc -l
 !env RABIN2_PREFIX=prixfixe rabin2 -rS ${R2_FILE} |grep prixfixe. |wc -l'
-EXPECT='42
+EXPECT='31
+10
 157
-39
+30
+9
 156
 '
 run_test

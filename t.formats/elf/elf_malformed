@@ -3,7 +3,7 @@ for a in . .. ../.. ; do [ -e $a/tests.sh ] && . $a/tests.sh && break ; done
 
 NAME='elf_stripped'
 FILE=../../bins/elf/elf_stripped
-CMDS='is;ir;iS
+CMDS='is;ir;iS;iSS
 '
 EXPECT='[Symbols]
 004 0x000004ac 0x080484ac GLOBAL OBJECT    4 _IO_stdin_used
@@ -21,7 +21,6 @@ vaddr=0x080496a8 paddr=0x000006a8 type=SET_32 __libc_start_main
 00 0x00000270     8 0x08048270     8 ---- .rel.dyn
 01 0x00000278    24 0x08048278    24 ---- .rela.plt
 02 0x00000694    24 0x08049694    24 ---- .got.plt
-
 [Segments]
 00 0x00000034   256 0x08048034   256 -r-x PHDR
 01 0x00000134    19 0x08048134    19 -r-- INTERP
@@ -39,7 +38,7 @@ run_test
 
 NAME='elf_one_symbol_shdr'
 FILE=../../bins/elf/elf_one_symbol_shdr
-CMDS='is;ir;iS
+CMDS='is;ir;iS;iSS
 '
 EXPECT='[Symbols]
 004 0x000004ac 0x080484ac GLOBAL OBJECT    4 _IO_stdin_used
@@ -84,7 +83,6 @@ vaddr=0x080496a8 paddr=0x000006a8 type=SET_32 __libc_start_main
 27 0x000006c5   262 0x00000000   262 ---- .shstrtab
 28 0x00000c7c    16 0x00000000    16 ---- .symtab
 29 0x000010cc   599 0x00000000   599 ---- .strtab
-
 [Segments]
 00 0x00000034   256 0x08048034   256 -r-x PHDR
 01 0x00000134    19 0x08048134    19 -r-- INTERP
