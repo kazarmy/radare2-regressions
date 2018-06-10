@@ -91,6 +91,13 @@ EXPECT=<<RUN
 07 0x00000000     0 0x00000000     0 -rw- GNU_STACK
 08 0x00000000    52 0x08048000    52 -rw- ehdr
 RUN
+NAME=iSSj
+FILE=../bins/elf/analysis/x86-helloworld-gcc
+CMDS=<<EXPECT
+iSSj
+EXPECT=<<RUN
+[{"name":"PHDR","size":256,"vsize":256,"flags":"-r-x","paddr":52,"vaddr":134512692},{"name":"INTERP","size":19,"vsize":19,"flags":"-r--","paddr":308,"vaddr":134512948},{"name":"LOAD0","size":1436,"vsize":1436,"flags":"-r-x","paddr":0,"vaddr":134512640},{"name":"LOAD1","size":280,"vsize":284,"flags":"-rw-","paddr":1436,"vaddr":134518172},{"name":"DYNAMIC","size":232,"vsize":232,"flags":"-rw-","paddr":1448,"vaddr":134518184},{"name":"NOTE","size":68,"vsize":68,"flags":"-r--","paddr":328,"vaddr":134512968},{"name":"GNU_EH_FRAME","size":44,"vsize":44,"flags":"-r--","paddr":1216,"vaddr":134513856},{"name":"GNU_STACK","size":0,"vsize":0,"flags":"-rw-","paddr":0,"vaddr":0},{"name":"ehdr","size":52,"vsize":52,"flags":"-rw-","paddr":0,"vaddr":134512640}]
+RUN
 NAME=il (file x86)
 FILE=../bins/elf/analysis/x86-helloworld-gcc
 EXPECT64=W0xpbmtlZCBsaWJyYXJpZXNdCmxpYmMuc28uNgoKMSBsaWJyYXJ5Cgo=
