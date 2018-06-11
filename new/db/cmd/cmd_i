@@ -105,6 +105,55 @@ iSSj
 EXPECT=<<RUN
 [{"name":"PHDR","size":256,"vsize":256,"flags":"-r-x","paddr":52,"vaddr":134512692},{"name":"INTERP","size":19,"vsize":19,"flags":"-r--","paddr":308,"vaddr":134512948},{"name":"LOAD0","size":1436,"vsize":1436,"flags":"-r-x","paddr":0,"vaddr":134512640},{"name":"LOAD1","size":280,"vsize":284,"flags":"-rw-","paddr":1436,"vaddr":134518172},{"name":"DYNAMIC","size":232,"vsize":232,"flags":"-rw-","paddr":1448,"vaddr":134518184},{"name":"NOTE","size":68,"vsize":68,"flags":"-r--","paddr":328,"vaddr":134512968},{"name":"GNU_EH_FRAME","size":44,"vsize":44,"flags":"-r--","paddr":1216,"vaddr":134513856},{"name":"GNU_STACK","size":0,"vsize":0,"flags":"-rw-","paddr":0,"vaddr":0},{"name":"ehdr","size":52,"vsize":52,"flags":"-rw-","paddr":0,"vaddr":134512640}]
 RUN
+NAME=iSq
+FILE=../bins/elf/analysis/x86-helloworld-gcc
+CMDS=iSq
+EXPECT=<<RUN
+0x0 0x0 ---- 
+0x8048134 0x8048147 -r-- .interp
+0x8048148 0x8048168 -r-- .note.ABI_tag
+0x8048168 0x804818c -r-- .note.gnu.build_id
+0x804818c 0x80481ac -r-- .gnu.hash
+0x80481ac 0x80481fc -r-- .dynsym
+0x80481fc 0x8048246 -r-- .dynstr
+0x8048246 0x8048250 -r-- .gnu.version
+0x8048250 0x8048270 -r-- .gnu.version_r
+0x8048270 0x8048278 -r-- .rel.dyn
+0x8048278 0x8048290 -r-- .rel.plt
+0x8048290 0x80482b3 -r-x .init
+0x80482c0 0x8048300 -r-x .plt
+0x8048300 0x8048494 -r-x .text
+0x8048494 0x80484a8 -r-x .fini
+0x80484a8 0x80484bd -r-- .rodata
+0x80484c0 0x80484ec -r-- .eh_frame_hdr
+0x80484ec 0x804859c -r-- .eh_frame
+0x804959c 0x80495a0 -rw- .init_array
+0x80495a0 0x80495a4 -rw- .fini_array
+0x80495a4 0x80495a8 -rw- .jcr
+0x80495a8 0x8049690 -rw- .dynamic
+0x8049690 0x8049694 -rw- .got
+0x8049694 0x80496ac -rw- .got.plt
+0x80496ac 0x80496b4 -rw- .data
+0x80496b4 0x80496b4 -rw- .bss
+0x0 0x11 ---- .comment
+0x0 0x106 ---- .shstrtab
+0x0 0x450 ---- .symtab
+0x0 0x257 ---- .strtab
+RUN
+NAME=iSSq
+FILE=../bins/elf/analysis/x86-helloworld-gcc
+CMDS=iSSq
+EXPECT=<<RUN
+0x8048034 0x8048134 -r-x PHDR
+0x8048134 0x8048147 -r-- INTERP
+0x8048000 0x804859c -r-x LOAD0
+0x804959c 0x80496b4 -rw- LOAD1
+0x80495a8 0x8049690 -rw- DYNAMIC
+0x8048148 0x804818c -r-- NOTE
+0x80484c0 0x80484ec -r-- GNU_EH_FRAME
+0x0 0x0 -rw- GNU_STACK
+0x8048000 0x8048034 -rw- ehdr
+RUN
 NAME=il (file x86)
 FILE=../bins/elf/analysis/x86-helloworld-gcc
 EXPECT64=W0xpbmtlZCBsaWJyYXJpZXNdCmxpYmMuc28uNgoKMSBsaWJyYXJ5Cgo=
