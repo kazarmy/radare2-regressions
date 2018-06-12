@@ -23,19 +23,19 @@ FILE=-
 EXPECT64=Cg==
 CMDS64=ZioKCg==
 RUN
-NAME=fs *
+NAME=1: fs *
 FILE=../bins/elf/analysis/main
-EXPECT64=Ngo=
+EXPECT64=MAoK
 CMDS64=ZnMgKgpmc34/XioKCg==
 RUN
-NAME=fs *
+NAME=2: fs *
 FILE=../bins/elf/analysis/main
 EXPECT64=Ngo=
 CMDS64=ZnMgKgpmc34/KgoK
 RUN
-NAME=fs *
+NAME=3: fs *
 FILE=malloc://1024
-EXPECT64=Ngo=
+EXPECT64=MHgwMDAwMDAwMCAxIGZsYWdfaW5fZnMxCjB4MDAwMDAwMDAgMSBmbGFnX2luX2ZzMgoK
 CMDS64=ZnMtKgpmcyBmbGFnc3BhY2VfMQpmIGZsYWdfaW5fZnMxCmZzIGZsYWdzcGFjZV8yCmYgZmxhZ19pbl9mczIKZnMgKgpmCgo=
 RUN
 NAME=fs test_flagspace
