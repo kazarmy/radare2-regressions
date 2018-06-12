@@ -154,6 +154,174 @@ EXPECT=<<RUN
 0x0 0x0 -rw- GNU_STACK
 0x8048000 0x8048034 -rw- ehdr
 RUN
+NAME=iS*
+FILE=../bins/elf/analysis/x86-helloworld-gcc
+CMDS=iS*
+EXPECT=<<RUN
+fs sections
+S 0x00000000 0x00000000 0x00000000 0x00000000  0
+f section. 0 0x00000000
+f section_end. 1 0x00000000
+CC section 0 va=0x00000000 pa=0x00000000 sz=0 vsz=0 rwx=----  @ 0x00000000
+S 0x00000134 0x08048134 0x00000013 0x00000013 .interp 4
+f section..interp 19 0x08048134
+f section_end..interp 1 0x08048147
+CC section 1 va=0x08048134 pa=0x00000134 sz=19 vsz=19 rwx=-r-- .interp @ 0x08048134
+S 0x00000148 0x08048148 0x00000020 0x00000020 .note.ABI_tag 4
+f section..note.ABI_tag 32 0x08048148
+f section_end..note.ABI_tag 1 0x08048168
+CC section 2 va=0x08048148 pa=0x00000148 sz=32 vsz=32 rwx=-r-- .note.ABI_tag @ 0x08048148
+S 0x00000168 0x08048168 0x00000024 0x00000024 .note.gnu.build_id 4
+f section..note.gnu.build_id 36 0x08048168
+f section_end..note.gnu.build_id 1 0x0804818c
+CC section 3 va=0x08048168 pa=0x00000168 sz=36 vsz=36 rwx=-r-- .note.gnu.build_id @ 0x08048168
+S 0x0000018c 0x0804818c 0x00000020 0x00000020 .gnu.hash 4
+f section..gnu.hash 32 0x0804818c
+f section_end..gnu.hash 1 0x080481ac
+CC section 4 va=0x0804818c pa=0x0000018c sz=32 vsz=32 rwx=-r-- .gnu.hash @ 0x0804818c
+S 0x000001ac 0x080481ac 0x00000050 0x00000050 .dynsym 4
+f section..dynsym 80 0x080481ac
+f section_end..dynsym 1 0x080481fc
+CC section 5 va=0x080481ac pa=0x000001ac sz=80 vsz=80 rwx=-r-- .dynsym @ 0x080481ac
+S 0x000001fc 0x080481fc 0x0000004a 0x0000004a .dynstr 4
+f section..dynstr 74 0x080481fc
+f section_end..dynstr 1 0x08048246
+CC section 6 va=0x080481fc pa=0x000001fc sz=74 vsz=74 rwx=-r-- .dynstr @ 0x080481fc
+S 0x00000246 0x08048246 0x0000000a 0x0000000a .gnu.version 4
+f section..gnu.version 10 0x08048246
+f section_end..gnu.version 1 0x08048250
+CC section 7 va=0x08048246 pa=0x00000246 sz=10 vsz=10 rwx=-r-- .gnu.version @ 0x08048246
+S 0x00000250 0x08048250 0x00000020 0x00000020 .gnu.version_r 4
+f section..gnu.version_r 32 0x08048250
+f section_end..gnu.version_r 1 0x08048270
+CC section 8 va=0x08048250 pa=0x00000250 sz=32 vsz=32 rwx=-r-- .gnu.version_r @ 0x08048250
+S 0x00000270 0x08048270 0x00000008 0x00000008 .rel.dyn 4
+f section..rel.dyn 8 0x08048270
+f section_end..rel.dyn 1 0x08048278
+CC section 9 va=0x08048270 pa=0x00000270 sz=8 vsz=8 rwx=-r-- .rel.dyn @ 0x08048270
+S 0x00000278 0x08048278 0x00000018 0x00000018 .rel.plt 4
+f section..rel.plt 24 0x08048278
+f section_end..rel.plt 1 0x08048290
+CC section 10 va=0x08048278 pa=0x00000278 sz=24 vsz=24 rwx=-r-- .rel.plt @ 0x08048278
+S 0x00000290 0x08048290 0x00000023 0x00000023 .init 5
+f section..init 35 0x08048290
+f section_end..init 1 0x080482b3
+CC section 11 va=0x08048290 pa=0x00000290 sz=35 vsz=35 rwx=-r-x .init @ 0x08048290
+S 0x000002c0 0x080482c0 0x00000040 0x00000040 .plt 5
+f section..plt 64 0x080482c0
+f section_end..plt 1 0x08048300
+CC section 12 va=0x080482c0 pa=0x000002c0 sz=64 vsz=64 rwx=-r-x .plt @ 0x080482c0
+S 0x00000300 0x08048300 0x00000194 0x00000194 .text 5
+f section..text 404 0x08048300
+f section_end..text 1 0x08048494
+CC section 13 va=0x08048300 pa=0x00000300 sz=404 vsz=404 rwx=-r-x .text @ 0x08048300
+S 0x00000494 0x08048494 0x00000014 0x00000014 .fini 5
+f section..fini 20 0x08048494
+f section_end..fini 1 0x080484a8
+CC section 14 va=0x08048494 pa=0x00000494 sz=20 vsz=20 rwx=-r-x .fini @ 0x08048494
+S 0x000004a8 0x080484a8 0x00000015 0x00000015 .rodata 4
+f section..rodata 21 0x080484a8
+f section_end..rodata 1 0x080484bd
+CC section 15 va=0x080484a8 pa=0x000004a8 sz=21 vsz=21 rwx=-r-- .rodata @ 0x080484a8
+S 0x000004c0 0x080484c0 0x0000002c 0x0000002c .eh_frame_hdr 4
+f section..eh_frame_hdr 44 0x080484c0
+f section_end..eh_frame_hdr 1 0x080484ec
+CC section 16 va=0x080484c0 pa=0x000004c0 sz=44 vsz=44 rwx=-r-- .eh_frame_hdr @ 0x080484c0
+S 0x000004ec 0x080484ec 0x000000b0 0x000000b0 .eh_frame 4
+f section..eh_frame 176 0x080484ec
+f section_end..eh_frame 1 0x0804859c
+CC section 17 va=0x080484ec pa=0x000004ec sz=176 vsz=176 rwx=-r-- .eh_frame @ 0x080484ec
+S 0x0000059c 0x0804959c 0x00000004 0x00000004 .init_array 6
+f section..init_array 4 0x0804959c
+f section_end..init_array 1 0x080495a0
+CC section 18 va=0x0804959c pa=0x0000059c sz=4 vsz=4 rwx=-rw- .init_array @ 0x0804959c
+S 0x000005a0 0x080495a0 0x00000004 0x00000004 .fini_array 6
+f section..fini_array 4 0x080495a0
+f section_end..fini_array 1 0x080495a4
+CC section 19 va=0x080495a0 pa=0x000005a0 sz=4 vsz=4 rwx=-rw- .fini_array @ 0x080495a0
+S 0x000005a4 0x080495a4 0x00000004 0x00000004 .jcr 6
+f section..jcr 4 0x080495a4
+f section_end..jcr 1 0x080495a8
+CC section 20 va=0x080495a4 pa=0x000005a4 sz=4 vsz=4 rwx=-rw- .jcr @ 0x080495a4
+S 0x000005a8 0x080495a8 0x000000e8 0x000000e8 .dynamic 6
+f section..dynamic 232 0x080495a8
+f section_end..dynamic 1 0x08049690
+CC section 21 va=0x080495a8 pa=0x000005a8 sz=232 vsz=232 rwx=-rw- .dynamic @ 0x080495a8
+S 0x00000690 0x08049690 0x00000004 0x00000004 .got 6
+f section..got 4 0x08049690
+f section_end..got 1 0x08049694
+CC section 22 va=0x08049690 pa=0x00000690 sz=4 vsz=4 rwx=-rw- .got @ 0x08049690
+S 0x00000694 0x08049694 0x00000018 0x00000018 .got.plt 6
+f section..got.plt 24 0x08049694
+f section_end..got.plt 1 0x080496ac
+CC section 23 va=0x08049694 pa=0x00000694 sz=24 vsz=24 rwx=-rw- .got.plt @ 0x08049694
+S 0x000006ac 0x080496ac 0x00000008 0x00000008 .data 6
+f section..data 8 0x080496ac
+f section_end..data 1 0x080496b4
+CC section 24 va=0x080496ac pa=0x000006ac sz=8 vsz=8 rwx=-rw- .data @ 0x080496ac
+S 0x000006b4 0x080496b4 0x00000000 0x00000004 .bss 6
+f section..bss 0 0x080496b4
+f section_end..bss 1 0x080496b8
+CC section 25 va=0x080496b4 pa=0x000006b4 sz=0 vsz=4 rwx=-rw- .bss @ 0x080496b4
+S 0x000006b4 0x00000000 0x00000011 0x00000011 .comment 0
+f section..comment 17 0x00000000
+f section_end..comment 1 0x00000011
+CC section 26 va=0x00000000 pa=0x000006b4 sz=17 vsz=17 rwx=---- .comment @ 0x00000000
+S 0x000006c5 0x00000000 0x00000106 0x00000106 .shstrtab 0
+f section..shstrtab 262 0x00000000
+f section_end..shstrtab 1 0x00000106
+CC section 27 va=0x00000000 pa=0x000006c5 sz=262 vsz=262 rwx=---- .shstrtab @ 0x00000000
+S 0x00000c7c 0x00000000 0x00000450 0x00000450 .symtab 0
+f section..symtab 1104 0x00000000
+f section_end..symtab 1 0x00000450
+CC section 28 va=0x00000000 pa=0x00000c7c sz=1104 vsz=1104 rwx=---- .symtab @ 0x00000000
+S 0x000010cc 0x00000000 0x00000257 0x00000257 .strtab 0
+f section..strtab 599 0x00000000
+f section_end..strtab 1 0x00000257
+CC section 29 va=0x00000000 pa=0x000010cc sz=599 vsz=599 rwx=---- .strtab @ 0x00000000
+RUN
+NAME=iSS*
+FILE=../bins/elf/analysis/x86-helloworld-gcc
+CMDS=iSS*
+EXPECT=<<RUN
+fs segments
+S 0x00000034 0x08048034 0x00000100 0x00000100 PHDR 5
+f segment.PHDR 256 0x08048034
+f segment_end.PHDR 1 0x08048134
+CC segment 0 va=0x08048034 pa=0x00000034 sz=256 vsz=256 rwx=-r-x PHDR @ 0x08048034
+S 0x00000134 0x08048134 0x00000013 0x00000013 INTERP 4
+f segment.INTERP 19 0x08048134
+f segment_end.INTERP 1 0x08048147
+CC segment 1 va=0x08048134 pa=0x00000134 sz=19 vsz=19 rwx=-r-- INTERP @ 0x08048134
+S 0x00000000 0x08048000 0x0000059c 0x0000059c LOAD0 5
+f segment.LOAD0 1436 0x08048000
+f segment_end.LOAD0 1 0x0804859c
+CC segment 2 va=0x08048000 pa=0x00000000 sz=1436 vsz=1436 rwx=-r-x LOAD0 @ 0x08048000
+S 0x0000059c 0x0804959c 0x00000118 0x0000011c LOAD1 6
+f segment.LOAD1 280 0x0804959c
+f segment_end.LOAD1 1 0x080496b8
+CC segment 3 va=0x0804959c pa=0x0000059c sz=280 vsz=284 rwx=-rw- LOAD1 @ 0x0804959c
+S 0x000005a8 0x080495a8 0x000000e8 0x000000e8 DYNAMIC 6
+f segment.DYNAMIC 232 0x080495a8
+f segment_end.DYNAMIC 1 0x08049690
+CC segment 4 va=0x080495a8 pa=0x000005a8 sz=232 vsz=232 rwx=-rw- DYNAMIC @ 0x080495a8
+S 0x00000148 0x08048148 0x00000044 0x00000044 NOTE 4
+f segment.NOTE 68 0x08048148
+f segment_end.NOTE 1 0x0804818c
+CC segment 5 va=0x08048148 pa=0x00000148 sz=68 vsz=68 rwx=-r-- NOTE @ 0x08048148
+S 0x000004c0 0x080484c0 0x0000002c 0x0000002c GNU_EH_FRAME 4
+f segment.GNU_EH_FRAME 44 0x080484c0
+f segment_end.GNU_EH_FRAME 1 0x080484ec
+CC segment 6 va=0x080484c0 pa=0x000004c0 sz=44 vsz=44 rwx=-r-- GNU_EH_FRAME @ 0x080484c0
+S 0x00000000 0x00000000 0x00000000 0x00000000 GNU_STACK 6
+f segment.GNU_STACK 0 0x00000000
+f segment_end.GNU_STACK 1 0x00000000
+CC segment 7 va=0x00000000 pa=0x00000000 sz=0 vsz=0 rwx=-rw- GNU_STACK @ 0x00000000
+S 0x00000000 0x08048000 0x00000034 0x00000034 ehdr 6
+f segment.ehdr 52 0x08048000
+f segment_end.ehdr 1 0x08048034
+CC segment 8 va=0x08048000 pa=0x00000000 sz=52 vsz=52 rwx=-rw- ehdr @ 0x08048000
+RUN
 NAME=il (file x86)
 FILE=../bins/elf/analysis/x86-helloworld-gcc
 EXPECT64=W0xpbmtlZCBsaWJyYXJpZXNdCmxpYmMuc28uNgoKMSBsaWJyYXJ5Cgo=
