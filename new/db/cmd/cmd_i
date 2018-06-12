@@ -322,7 +322,7 @@ f segment.ehdr 52 0x08048000
 f segment_end.ehdr 1 0x08048034
 CC segment 8 va=0x08048000 pa=0x00000000 sz=52 vsz=52 rwx=-rw- ehdr @ 0x08048000
 RUN
-NAME=segment. prefix for segment flags
+NAME=section comment
 FILE=../bins/elf/analysis/x86-helloworld-gcc
 CMDS=<<EXPECT
 e asm.bytes = false
