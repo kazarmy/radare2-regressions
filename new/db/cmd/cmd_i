@@ -332,7 +332,7 @@ EXPECT=<<RUN
             ;-- section..dynamic:
             ;-- segment.DYNAMIC:
             ;-- _DYNAMIC:
-            0x080495a8      add dword [eax], eax                       ; [04] -rw- segment size 232 named DYNAMIC
+            0x080495a8      add dword [eax], eax                       ; [21] -rw- section size 232 named .dynamic
 RUN
 NAME=il (file x86)
 FILE=../bins/elf/analysis/x86-helloworld-gcc
