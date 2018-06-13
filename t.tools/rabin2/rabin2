@@ -92,7 +92,7 @@ EXPECT='66
 '
 run_test
 
-NAME='rabin2 -S and -rS file elf'
+NAME='rabin2 -S, -SS, -rS and -rSS file elf'
 BROKEN=
 FILE=../../bins/elf/analysis/x86-helloworld-gcc
 ARGS=
@@ -100,15 +100,19 @@ FILTER='sed "s/\ *//g"'
 CMDS='!rabin2 -S ${R2_FILE}|wc -l|awk "{print \$1}"
 !rabin2 -SS ${R2_FILE}|wc -l|awk "{print \$1}"
 !rabin2 -rS ${R2_FILE}|wc -l|awk "{print \$1}"
+!rabin2 -rSS ${R2_FILE}|wc -l|awk "{print \$1}"
 !env RABIN2_PREFIX=prixfixe rabin2 -S ${R2_FILE} |grep prixfixe. |wc -l
 !env RABIN2_PREFIX=prixfixe rabin2 -SS ${R2_FILE} |grep prixfixe. |wc -l
-!env RABIN2_PREFIX=prixfixe rabin2 -rS ${R2_FILE} |grep prixfixe. |wc -l'
+!env RABIN2_PREFIX=prixfixe rabin2 -rS ${R2_FILE} |grep prixfixe. |wc -l
+!env RABIN2_PREFIX=prixfixe rabin2 -rSS ${R2_FILE} |grep prixfixe. |wc -l'
 EXPECT='31
 10
-157
+121
+37
 30
 9
-156
+120
+36
 '
 run_test
 
