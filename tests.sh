@@ -79,21 +79,25 @@ COUNT=0
 
 dump_test() {
   echo "NAME=$NAME"
-  echo "FILE=$FILE"
   if [ 1 = "$BROKEN" ]; then
     echo "BROKEN=1"
   fi
-  printf "EXPECT64="
-  echo "$EXPECT" | ${BASE64}
-  if [ -n "$EXPECT_ERR" ]; then
-    printf "EXPECT_ERR64="
-    echo "$EXPECT_ERR" | ${BASE64}
-  fi
+  echo "FILE=$FILE"
   if [ -n "$ARGS" ]; then
     echo "ARGS=$ARGS"
   fi
-  printf "CMDS64="
-  echo "$CMDS" | ${BASE64}
+  echo "CMDS=<<EXPECT"
+  echo "$CMDS"
+  if [ -n "$EXPECT_ERR" ]; then
+    echo "EXPECT=<<EXPECT_ERR"
+  else
+    echo "EXPECT=<<RUN"
+  fi
+  printf "$EXPECT"
+  if [ -n "$EXPECT_ERR" ]; then
+    echo "EXPECT_ERR=<<RUN"
+    echo "$EXPECT_ERR"
+  fi
   echo "RUN"
   test_reset
 }
