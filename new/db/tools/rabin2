@@ -1,3 +1,272 @@
+NAME=baddr ==
+FILE=../bins/elf/analysis/hello-linux-x86_64
+CMDS=<<EXPECT
+!rabin2 -qe ${R2_FILE};!rabin2 -B 0x400000 -qe ${R2_FILE}
+EXPECT=<<RUN
+0x00400410
+0x00400410
+RUN
+NAME=baddr > 0
+FILE=../bins/elf/analysis/hello-linux-x86_64
+CMDS=<<EXPECT
+!rabin2 -qe ${R2_FILE};!rabin2 -B 0x800000 -qe ${R2_FILE}
+EXPECT=<<RUN
+0x00400410
+0x00800410
+RUN
+NAME=baddr 0
+FILE=../bins/elf/analysis/hello-linux-x86_64
+CMDS=<<EXPECT
+!rabin2 -qe ${R2_FILE};!rabin2 -B 0 -qe ${R2_FILE}
+EXPECT=<<RUN
+0x00400410
+0x00000410
+RUN
+NAME=laddr 0
+FILE=../bins/elf/analysis/hello-linux-x86_64
+CMDS=<<EXPECT
+!rabin2 -G 0 -e ${R2_FILE}
+EXPECT=<<RUN
+[Entrypoints]
+vaddr=0x00400410 paddr=0x00000410 baddr=0x00400000 laddr=0x00000000 haddr=0x00000018 type=program
+
+1 entrypoints
+RUN
+NAME=laddr 0 && baddr 0
+FILE=../bins/elf/analysis/hello-linux-x86_64
+CMDS=<<EXPECT
+!rabin2 -G 0 -B 0 -e ${R2_FILE}
+EXPECT=<<RUN
+[Entrypoints]
+vaddr=0x00000410 paddr=0x00000410 baddr=0x00000000 laddr=0x00000000 haddr=0x00000018 type=program
+
+1 entrypoints
+RUN
+NAME=rabin -k file
+FILE=../bins/elf/analysis/hello-linux-x86_64
+CMDS=<<EXPECT
+!rabin2 -k ${R2_FILE}
+EXPECT=<<EXPECT_ERR
+EXPECT_ERR=<<RUN
+r_core: Cannot open file
+
+RUN
+NAME=rabin2 -K md5 -S file
+FILE=../bins/pe/a.exe
+CMDS=<<EXPECT
+!rabin2 -K md5 -S ${R2_FILE}
+EXPECT=<<RUN
+[Sections]
+00 0x00000400  2560 0x00401000  4096 -r-x md5=3d6a5b8dc5e41b09659638ad5735e5b5 .text
+01 0x00000e00   512 0x00402000  4096 -rw- md5=b3c542ba67f2d1a949fa1a25ce22f7e3 .data
+02 0x00001000   512 0x00403000  4096 -r-- md5=c9a877a4e945b087b8323830442c88d6 .rdata
+03 0x00000000     0 0x00404000  4096 -rw- md5=d41d8cd98f00b204e9800998ecf8427e .bss
+04 0x00001200  1024 0x00405000  4096 -rw- md5=963212dc58a74f32e0f6ffce84dcf7ea .idata
+RUN
+NAME=rabin2 -s file pe
+FILE=../bins/pe/a.exe
+CMDS=<<EXPECT
+!rabin2 -s ${R2_FILE}|wc -l|awk "{print \$1}"
+EXPECT=<<RUN
+21
+RUN
+NAME=rabin2 -s file elf
+FILE=../bins/elf/analysis/x86-helloworld-gcc
+CMDS=<<EXPECT
+!rabin2 -s ${R2_FILE}|wc -l|awk "{print \$1}"
+EXPECT=<<RUN
+66
+RUN
+NAME=rabin2 -S, -SS, -rS and -rSS file elf
+FILE=../bins/elf/analysis/x86-helloworld-gcc
+CMDS=<<EXPECT
+!rabin2 -S ${R2_FILE}|wc -l|awk "{print \$1}"
+!rabin2 -SS ${R2_FILE}|wc -l|awk "{print \$1}"
+!rabin2 -rS ${R2_FILE}|wc -l|awk "{print \$1}"
+!rabin2 -rSS ${R2_FILE}|wc -l|awk "{print \$1}"
+!env RABIN2_PREFIX=prixfixe rabin2 -S ${R2_FILE} |grep prixfixe. |wc -l
+!env RABIN2_PREFIX=prixfixe rabin2 -SS ${R2_FILE} |grep prixfixe. |wc -l
+!env RABIN2_PREFIX=prixfixe rabin2 -rS ${R2_FILE} |grep prixfixe. |wc -l
+!env RABIN2_PREFIX=prixfixe rabin2 -rSS ${R2_FILE} |grep prixfixe. |wc -l
+EXPECT=<<RUN
+31
+10
+121
+37
+30
+9
+120
+36
+RUN
+NAME=rabin2 -z pe
+FILE=../bins/pe/a.exe
+CMDS=<<EXPECT
+!rabin2 -z ${R2_FILE}|wc -l|awk "{print \$1}"
+EXPECT=<<RUN
+4
+RUN
+NAME=rabin2 -z elf
+FILE=../bins/elf/analysis/x86-helloworld-gcc
+CMDS=<<EXPECT
+!rabin2 -z ${R2_FILE}|wc -l|awk "{print \$1}"
+EXPECT=<<RUN
+1
+RUN
+NAME=rabin2 -G 0x1000 -rs fatmach0
+FILE=../bins/mach0/fatmach0-3true
+CMDS=<<EXPECT
+!rabin2 -G 0x1000 -rs ${R2_FILE}|grep "f " | wc -l|awk "{print \$1}"
+EXPECT=<<RUN
+3
+RUN
+NAME=rabin2 -G 0x1300 -rs fatmach0
+FILE=../bins/mach0/fatmach0-3true
+CMDS=<<EXPECT
+!rabin2 -G 0x1300 -rs ${R2_FILE}|wc -l|awk "{print \$1}"
+EXPECT=<<RUN
+1
+RUN
+NAME=rabin2 -G 0x1000 -e fatmach0
+FILE=../bins/mach0/fatmach0-3true
+CMDS=<<EXPECT
+!rabin2 -G 0x1000 -e ${R2_FILE}
+EXPECT=<<RUN
+[Entrypoints]
+vaddr=0x100000ef8 paddr=0x00001ef8 baddr=0x100000000 laddr=0x00001000 haddr=0x00000570 type=program
+
+1 entrypoints
+RUN
+NAME=rabin2 -e fatmach0
+BROKEN=1
+FILE=../bins/mach0/fatmach0-3true
+CMDS=<<EXPECT
+!rabin2 -e ${R2_FILE}
+EXPECT=<<RUN
+[Entrypoints]
+vaddr=0x100000ef8 paddr=0x00001ef8 baddr=0x100000000 laddr=0x00001000 haddr=0x00000570 type=program
+
+1 entrypoints
+RUN
+NAME=rabin2 -G 0x5000 -e fatmach0
+FILE=../bins/mach0/fatmach0-3true
+CMDS=<<EXPECT
+!rabin2 -G 0x5000 -e ${R2_FILE}
+EXPECT=<<RUN
+[Entrypoints]
+vaddr=0x00001f44 paddr=0x00005f44 baddr=0x00001000 laddr=0x00005000 haddr=0x00000420 type=program
+
+1 entrypoints
+RUN
+NAME=rabin2 -a x86 -b 32 -e fatmach0
+BROKEN=1
+FILE=../bins/mach0/fatmach0-3true
+CMDS=<<EXPECT
+!rabin2 -a x86 -b 32 -e ${R2_FILE}
+EXPECT=<<RUN
+[Entrypoints]
+vaddr=0x00001f44 paddr=0x00005f44 baddr=0x00001000 laddr=0x00005000 haddr=0x00000420 type=program
+
+1 entrypoints
+RUN
+NAME=rabin2 -B 0x2000000 -G 0x1000 -e fatmach0
+FILE=../bins/mach0/fatmach0-3true
+CMDS=<<EXPECT
+!rabin2 -B 0x2000000 -G 0x1000 -e ${R2_FILE}
+EXPECT=<<RUN
+[Entrypoints]
+vaddr=0x02000ef8 paddr=0x00001ef8 baddr=0x02000000 laddr=0x00001000 haddr=0x00000570 type=program
+
+1 entrypoints
+RUN
+NAME=TODO: test on pie fatmach0
+BROKEN=1
+FILE=../bins/mach0/fatmach0-3true
+CMDS=<<EXPECT
+!rabin2 -B 0x2000000 -G 0x1000 -e ${R2_FILE}
+EXPECT=<<RUN
+???RUN
+NAME=rabin2 -B 0x2000000 -e arm64
+FILE=../bins/mach0/hello-ios-arm64
+CMDS=<<EXPECT
+!rabin2 -B 0x2000000 -e ${R2_FILE}
+EXPECT=<<RUN
+[Entrypoints]
+vaddr=0x02007f34 paddr=0x00007f34 baddr=0x02000000 laddr=0x00000000 haddr=0x00000468 type=program
+
+1 entrypoints
+RUN
+NAME=rabin2 -B 0x2000000 -e arm64
+FILE=../bins/mach0/hello-ios-arm64
+CMDS=<<EXPECT
+!rabin2 -B 0x2000000 -e ${R2_FILE}
+EXPECT=<<RUN
+[Entrypoints]
+vaddr=0x02007f34 paddr=0x00007f34 baddr=0x02000000 laddr=0x00000000 haddr=0x00000468 type=program
+
+1 entrypoints
+RUN
+NAME=rabin2 -a x86 -b 32 -i fatmach0
+FILE=../bins/mach0/fatmach0-3true
+CMDS=<<EXPECT
+!rabin2 -a x86 -b 32 -i ${R2_FILE}
+EXPECT=<<RUN
+[Imports]
+   0 0x00001f94    NONE    FUNC exit
+   1 0x00000000    NONE    FUNC dyld_stub_binder
+RUN
+NAME=rabin2 -G 0x5000 -i fatmach0
+FILE=../bins/mach0/fatmach0-3true
+CMDS=<<EXPECT
+!rabin2 -G 0x5000 -i ${R2_FILE}
+EXPECT=<<RUN
+[Imports]
+   0 0x00001f94    NONE    FUNC exit
+   1 0x00000000    NONE    FUNC dyld_stub_binder
+RUN
+NAME=rabin2 -qqz
+FILE=../bins/elf/analysis/hello-linux-x86_64
+CMDS=<<EXPECT
+!rabin2 -qqz ${R2_FILE}
+EXPECT=<<RUN
+Hello World
+RUN
+NAME=rabin2 -qOr
+FILE=../bins/elf/analysis/ls-linux-x86_64-zlul
+CMDS=<<EXPECT
+!rabin2 -qOr/.data/-1 ${FILE}
+!rabin2 -qOr/.data/-1 ${FILE}
+EXPECT=<<RUN
+RUN
+NAME=rabin2 -qOp/.data/rwx on PE32
+FILE=../bins/pe/test.exe
+CMDS=<<EXPECT
+rm /tmp/rabin2testpe.exe
+!rabin2 -qOp/.data/rwx -o/tmp/rabin2testpe.exe ${R2_FILE}
+!rabin2 -S /tmp/rabin2testpe.exe
+rm /tmp/rabin2testpe.exe
+
+EXPECT=<<RUN
+wx e0000040 @ 0x244
+[Sections]
+00 0x00000400 35328 0x00401000 36864 -r-x .text
+01 0x00008e00  9216 0x0040a000 12288 -r-- .rdata
+02 0x0000b200  4096 0x0040d000 12288 -rwx .data
+03 0x0000c200   512 0x00410000  4096 -r-- .rsrc
+04 0x0000c400  3584 0x00411000  4096 -r-- .reloc
+RUN
+NAME=rabin2 -qOp//8 on PE32+
+FILE=../bins/pe/normal64.exe
+CMDS=<<EXPECT
+rm /tmp/rabin2testpe.exe
+!rabin2 -qOp//8 -o/tmp/rabin2testpe.exe ${R2_FILE}
+!rabin2 -S /tmp/rabin2testpe.exe
+rm /tmp/rabin2testpe.exe
+
+EXPECT=<<RUN
+wx 10000000 @ 0x16c
+[Sections]
+00 0x00000200   512 0x00401000  4096 s--- sect_0
+RUN
 NAME=rabin2 -g
 FILE=../bins/elf/analysis/x86-helloworld-gcc
 CMDS=!rabin2 -g ${R2_FILE}
