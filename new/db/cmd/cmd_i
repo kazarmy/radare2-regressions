@@ -648,3 +648,40 @@ EXPECT=<<RUN
 08 0x00000000     0 0x00000000     0 ---- entropy=0.00000000 UNKNOWN
 09 0x00000000    52 0x08048000    52 -rw- entropy=2.79887339 ehdr
 RUN
+NAME=bin.maxuniblocks
+FILE=../bins/pe/testapp-msvc64.exe
+CMDS=<<EXPECT
+(max val, e bin.maxuniblocks=$0, izz~(.reloc))
+.(max -1)
+?e
+.(max 3)
+?e
+.(max 0)
+?e
+.(max 4)
+EXPECT=<<RUN
+1623 0x0001641e 0x14001a01e   4   9 (.reloc)  utf8 "ȢТآ blocks=Basic Latin,Latin Extended-B,Cyrillic,Arabic
+1624 0x00016452 0x14001a052   4   9 (.reloc)  utf8 $ȤФؤ blocks=Basic Latin,Latin Extended-B,Cyrillic,Arabic
+1625 0x00016492 0x14001a092   4   9 (.reloc)  utf8 %ȥХإ blocks=Basic Latin,Latin Extended-B,Cyrillic,Arabic
+1626 0x000164d2 0x14001a0d2   4   9 (.reloc)  utf8 &ȦЦئ blocks=Basic Latin,Latin Extended-B,Cyrillic,Arabic
+1627 0x000164f6 0x14001a0f6   4   9 (.reloc)  utf8 .ȮЮخ blocks=Basic Latin,Latin Extended-B,Cyrillic,Arabic
+1628 0x00016552 0x14001a152   4   8 (.reloc)  utf8 &ȦЦ  blocks=Basic Latin,Latin Extended-B,Cyrillic
+1629 0x00016580 0x14001a180   4   9 (.reloc)  utf8 'ȧЧا blocks=Basic Latin,Latin Extended-B,Cyrillic,Arabic
+1630 0x000165be 0x14001a1be   4   9 (.reloc)  utf8 (ȨШب blocks=Basic Latin,Latin Extended-B,Cyrillic,Arabic
+1631 0x000165fe 0x14001a1fe   4   9 (.reloc)  utf8 )ȩЩة blocks=Basic Latin,Latin Extended-B,Cyrillic,Arabic
+1632 0x00016a04 0x14001a604   4   9 (.reloc)  utf8 )ȩЩة blocks=Basic Latin,Latin Extended-B,Cyrillic,Arabic
+
+1628 0x00016552 0x14001a152   4   8 (.reloc)  utf8 &ȦЦ  blocks=Basic Latin,Latin Extended-B,Cyrillic
+
+
+1623 0x0001641e 0x14001a01e   4   9 (.reloc)  utf8 "ȢТآ blocks=Basic Latin,Latin Extended-B,Cyrillic,Arabic
+1624 0x00016452 0x14001a052   4   9 (.reloc)  utf8 $ȤФؤ blocks=Basic Latin,Latin Extended-B,Cyrillic,Arabic
+1625 0x00016492 0x14001a092   4   9 (.reloc)  utf8 %ȥХإ blocks=Basic Latin,Latin Extended-B,Cyrillic,Arabic
+1626 0x000164d2 0x14001a0d2   4   9 (.reloc)  utf8 &ȦЦئ blocks=Basic Latin,Latin Extended-B,Cyrillic,Arabic
+1627 0x000164f6 0x14001a0f6   4   9 (.reloc)  utf8 .ȮЮخ blocks=Basic Latin,Latin Extended-B,Cyrillic,Arabic
+1628 0x00016552 0x14001a152   4   8 (.reloc)  utf8 &ȦЦ  blocks=Basic Latin,Latin Extended-B,Cyrillic
+1629 0x00016580 0x14001a180   4   9 (.reloc)  utf8 'ȧЧا blocks=Basic Latin,Latin Extended-B,Cyrillic,Arabic
+1630 0x000165be 0x14001a1be   4   9 (.reloc)  utf8 (ȨШب blocks=Basic Latin,Latin Extended-B,Cyrillic,Arabic
+1631 0x000165fe 0x14001a1fe   4   9 (.reloc)  utf8 )ȩЩة blocks=Basic Latin,Latin Extended-B,Cyrillic,Arabic
+1632 0x00016a04 0x14001a604   4   9 (.reloc)  utf8 )ȩЩة blocks=Basic Latin,Latin Extended-B,Cyrillic,Arabic
+RUN
