@@ -773,3 +773,12 @@ EXPECT=<<RUN
 
 [{"offset":2483,"text":"            ; '>>>[<<+<'"},{"offset":2483,"text":"            0x000009b3      48b83e3e3e5b.  movabs rax, 0x3c2b3c3c5b3e3e3e"}]
 RUN
+NAME=asm.imm.str short false positive
+FILE=../bins/elf/analysis/fast
+CMDS=<<EXPECT
+e asm.bytes=false
+e asm.imm.str=true
+pd 1 @ 0x08048444
+EXPECT=<<RUN
+            0x08048444      push str.i__i__i                           ; 0x8048574 ; "%i %i %i\n"
+RUN
