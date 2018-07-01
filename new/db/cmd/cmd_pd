@@ -783,3 +783,12 @@ pd 1 @ 0x08048444
 EXPECT=<<RUN
             0x08048444      push 0x8048574
 RUN
+NAME=asm.imm.str and flag
+FILE=../bins/elf/strenc
+CMDS=<<EXPECT
+e asm.bytes=false
+e asm.imm.str=true
+pd 1 @ 0x004016e3
+EXPECT=<<RUN
+            0x004016e3      mov edi, sym.std::wcout                    ; obj.std::wcout ; 0x604160
+RUN
