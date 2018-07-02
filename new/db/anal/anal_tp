@@ -69,3 +69,16 @@ var size_t size @ ebp-0x10
 var char * dest @ ebp-0xc
 var int local_8h @ ebp-0x8
 RUN
+
+NAME=Register based var
+FILE=../bins/anal/arg
+CMDS=<<EXPECT
+aa
+s sym.funcarg
+afvr
+EXPECT=<<RUN
+arg int arg1 @ rdi
+arg int arg2 @ rsi
+arg int arg3 @ rdx
+arg int arg4 @ rcx
+RUN

@@ -677,7 +677,7 @@ pd 3
 '
 EXPECT='
 |           0x000005a8      c70206000000   mov dword [edx], 6          ; Test.a
-|           0x000005ae      8b55f4         mov edx, dword [local_ch]   ; Test.a
+|           0x000005ae      8b55f4         mov edx, dword [Test]       ; Test.a
 |           0x000005b1      c74204070000.  mov dword [edx + Test.b], 7
 '
 run_test

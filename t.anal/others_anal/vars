@@ -13,6 +13,8 @@ afv
 EXPECT='var int local_14h @ rbp-0x14
 var int local_10h @ rbp-0x10
 var int local_8h @ rbp-0x8
+arg int arg1 @ rdi
+arg int arg2 @ rsi
 '
 run_test
 
@@ -172,19 +174,21 @@ pdf
 '
 EXPECT="fastcall
 / (fcn) sym.fastcaslled 59
-|   sym.fastcaslled (int arg_8h, int arg_ch);
+|   sym.fastcaslled (int arg2, int arg1, int arg_8h, int arg_ch);
 |           ; var int local_20h @ ebp-0x20
 |           ; var int local_1ch @ ebp-0x1c
 |           ; var int local_10h @ ebp-0x10
 |           ; var int local_ch @ ebp-0xc
 |           ; arg int arg_8h @ ebp+0x8
 |           ; arg int arg_ch @ ebp+0xc
+|           ; arg int arg2 @ edx
+|           ; arg int arg1 @ ecx
 |           ; CALL XREF from 0x080484c7 (sym.main)
 |           0x0804841b      55             push ebp
 |           0x0804841c      89e5           mov ebp, esp
 |           0x0804841e      83ec28         sub esp, 0x28               ; '('
-|           0x08048421      894de4         mov dword [local_1ch], ecx
-|           0x08048424      8955e0         mov dword [local_20h], edx
+|           0x08048421      894de4         mov dword [local_1ch], ecx  ; arg1
+|           0x08048424      8955e0         mov dword [local_20h], edx  ; arg2
 |           0x08048427      8b55e4         mov edx, dword [local_1ch]
 |           0x0804842a      8b45e0         mov eax, dword [local_20h]
 |           0x0804842d      01d0           add eax, edx
@@ -269,6 +273,7 @@ pd 1
 '
 EXPECT="/ (fcn) fcn.00000000 62
 |           ; var int my_local @ rbp-0x18
+|           ; arg int arg1 @ rdi
 |           0x00000000      0000           add byte [rax], al
 "
 run_test

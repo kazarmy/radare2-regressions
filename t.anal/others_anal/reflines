@@ -308,8 +308,9 @@ s 0x00012740
 pdf
 '
 EXPECT='/ (fcn) sub.__stack_chk_fail_740 76
-|   sub.__stack_chk_fail_740 ();
+|   sub.__stack_chk_fail_740 (int arg2);
 |           ; var int local_8h @ rbp-0x8
+|           ; arg int arg2 @ rsi
 |           0x00012740      push rbp
 |           0x00012741      mov rbp, rsp
 |           0x00012744      sub rsp, 0x1030

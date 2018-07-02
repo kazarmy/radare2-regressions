@@ -33,34 +33,55 @@ af
 pdsf
 '
 EXPECT='0x00002918 "alloc"
+0x00002920 arg2
 0x00002920 str.alloc
 0x00002928 bl sym.imp.objc_msgSend
 0x00002934 "init"
+0x0000293c arg2
 0x0000293c str.init
 0x00002940 bl sym.imp.objc_msgSend
 0x0000294c "X\x10\x9d\xe5"
+0x00002958 arg2
 0x0000295c bl sym.imp.objc_msgSend
+0x00002968 arg1
 0x00002970 bl sym.imp.objc_msgSend
 0x00002998 "Usage: FileDP [-f/-d] [Full path to file/directory] "
 0x0000299c bl sym.imp.puts
 0x00002e90 [02] -r-x section size 149 named 2.__TEXT.__cstring
+0x000029bc arg2
 0x000029c8 bl sym.imp.strcmp
+0x000029f4 arg3
+0x000029f8 arg3
+0x000029fc arg3
+0x00002a00 arg3
 0x00002a1c bl sym.imp.objc_msgSend
 0x00002a38 bl sym.imp.objc_msgSend
 0x00002a64 bl sym.imp.objc_msgSend
+0x00002a80 arg1
 0x00002a90 bl sym.imp.objc_msgSend
 0x00002aa4 bl sym.imp.NSLog
 0x00002ab0 str.File_Not_Found
 0x00002ab4 bl sym.imp.puts
+0x00002ad8 arg3
+0x00002adc arg3
+0x00002ae0 arg3
+0x00002ae4 arg3
 0x00002b00 bl sym.imp.objc_msgSend
 0x00002b1c bl sym.imp.objc_msgSend
 0x00002b48 bl sym.imp.objc_msgSend
 0x00002b64 bl sym.imp.objc_msgSend
 0x00002ba4 bl sym.imp.objc_msgSend
 0x00002c00 bl sym.imp.objc_msgSend
+0x00002c20 arg1
+0x00002c34 arg1
 0x00002c54 bl sym.imp.objc_enumerationMutation
+0x00002c60 arg1
+0x00002c64 arg1
+0x00002c68 arg1
+0x00002c6c arg1
 0x00002ca0 bl sym.imp.objc_msgSend
 0x00002cc0 bl sym.imp.objc_msgSend
+0x00002cdc arg1
 0x00002cec bl sym.imp.objc_msgSend
 0x00002cfc str.cstr.file_name_is:_____protection_class:
 0x00002d04 bl sym.imp.NSLog
