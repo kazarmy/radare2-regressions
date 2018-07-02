@@ -1676,6 +1676,7 @@ e asm.emu=true
 e emu.write=true
 e asm.lines.bb=false
 e asm.lines.fcn=false
+e asm.imm.str=false
 aei
 aeim
 pdf~0x00400828[7]
@@ -1683,4 +1684,3 @@ pdf~0x00400828[7]
 EXPECT='0x415424
 '
 run_test
-
