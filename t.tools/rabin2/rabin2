@@ -2,16 +2,6 @@
 # GPL 3+ - Copyright (C) 2014-2015  pancake, Maijin
 for a in . .. ../.. ; do [ -e $a/tests.sh ] && . $a/tests.sh ; done
 
-NAME='rabin -k file'
-BROKEN=
-FILE=../../bins/elf/analysis/hello-linux-x86_64
-ARGS=
-CMDS='!rabin2 -k ${R2_FILE}'
-EXPECT=''
-EXPECT_ERR="r_core: Cannot open file
-"
-run_test
-
 NAME='rabin2 -qOp/.data/rwx on PE32'
 FILE=../../bins/pe/test.exe
 ARGS=

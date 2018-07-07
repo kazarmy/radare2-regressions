@@ -47,6 +47,14 @@ vaddr=0x00000410 paddr=0x00000410 baddr=0x00000000 laddr=0x00000000 haddr=0x0000
 1 entrypoints
 RUN
 
+NAME=rabin -k file
+FILE=../bins/elf/analysis/hello-linux-x86_64
+CMDS=<<EXPECT
+!rabin2 -k ${R2_FILE}
+EXPECT=<<EXPECT_ERR
+EXPECT_ERR=Missing file.
+RUN
+
 NAME=rabin2 -K md5 -S file
 FILE=../bins/pe/a.exe
 CMDS=<<EXPECT

@@ -452,7 +452,10 @@ class NewRegressions {
           test.expect64 = true;
           break;
         case 'EXPECT_ERR':
-          test.expect = v;
+          if (vt.startsWith('<<') || delims.test(vt.charAt(0))) {
+            throw new Error("Multiline or delimited EXPECT_ERR is not supported");
+          }
+          test.expectErr = v + '\n';
           break;
         case 'EXPECT_ERR64':
           test.expect = debase64(v);
@@ -525,15 +528,22 @@ class NewRegressions {
   }
 
   checkTest (test) {
-    test.passes = test.expectErr ? test.expectErr.trim() === test.stderr.trim() : true;
-    if (test.passes && typeof test.stdout !== 'undefined') { // && test.expect) {
+    if (test.expect) {
+      test.stdoutFail = test.expect64 || test.expect64 === undefined
+        ? test.expect.trim() !== test.stdout.trim()
+        : test.expect !== test.stdout;
+    } else {
+      test.stdoutFail = false;
+    }
+    test.stderrFail = test.expectErr ? test.expectErr !== test.stderr : false;
+    if (typeof test.stdout !== 'undefined') { // && test.expect) {
       if (process.platform === 'win32') {
         /* Delete \r on windows.
          * Note that process.platform is always win32 even on Windows 64 bits */
         test.stdout = test.stdout.replace(/\r/g, '');
       }
-      test.passes = test.expect64 || test.expect64 === undefined ? test.expect.trim() === test.stdout.trim() : test.expect === test.stdout;
     }
+    test.passes = !test.stdoutFail && !test.stderrFail;
     const status = (test.passes)
     ? (test.broken ? colors.yellow('[FX]') : colors.green('[OK]'))
     : (test.broken ? colors.blue('[BR]') : colors.red('[XX]'));
@@ -583,18 +593,22 @@ class NewRegressions {
         console.log(test.cmdScript);
       }
 
-      const changes = jsdiff.diffLines(test.expect, test.stdout);
-      changes.forEach(function (part) {
-        const k = part.added ? colors.green : colors.magenta;
-        const v = part.value.replace(/[\r\n]*$/, '');
-        if (part.added) {
-          common.highlightTrailingWs(k, '+' + v.split(/\n/g).join('\n+') + '\n');
-        } else if (part.removed) {
-          common.highlightTrailingWs(k, '-' + v.split(/\n/g).join('\n-') + '\n');
-        } else {
-          console.log(' ' + v.split(/\n/g).join('\n '));
+      let showHeaders = test.stderrFail;
+      if (test.stdoutFail) {
+        if (showHeaders) {
+          console.log('--> stdout\n');
         }
-      });
+        common.showDiff(test.expect, test.stdout);
+      }
+      if (test.stdoutFail && test.stderrFail) {
+        console.log();
+      }
+      if (test.stderrFail) {
+        if (showHeaders) {
+          console.log('--> stderr\n');
+        }
+        common.showDiff(test.expectErr, test.stderr);
+      }
 /*
       console.log('===');
       if (test.expect !== null) {
@@ -607,16 +621,28 @@ class NewRegressions {
       }
 */
       // console.log('===');
-      if (test.expect64) {
-        console.log('EXPECT64=' + base64(test.stdout));
-      } else if (test.expect64 !== undefined) {
-        if (test.endString !== undefined) {
-          common.highlightTrailingWs(null, '\nEXPECT=<<' + test.endString + '\n' + test.stdout);
-        } else {
-          if (test.expectDelim === undefined) {
-            test.expectDelim = '%';
+      if (test.stdoutFail) {
+        if (test.expect64) {
+          console.log('EXPECT64=' + base64(test.stdout));
+        } else if (test.expect64 !== undefined) {
+          if (test.endString !== undefined) {
+            common.highlightTrailingWs(null, '\nEXPECT=<<' + test.endString + '\n' + test.stdout);
+          } else {
+            if (test.expectDelim === undefined) {
+              test.expectDelim = '%';
+            }
+            common.highlightTrailingWs(null, '\nEXPECT=' + test.expectDelim + test.stdout + test.expectDelim + '\n');
           }
-          common.highlightTrailingWs(null, '\nEXPECT=' + test.expectDelim + test.stdout + test.expectDelim + '\n');
+        }
+      }
+      if (!test.stdoutFail && test.stderrFail) {
+        console.log();
+      }
+      if (test.stderrFail) {
+        if ((test.stderr.match(/\n/g) || []).length > 1) {
+          console.log('<Multiline EXPECT_ERR is not supported>');
+        } else {
+          common.highlightTrailingWs(null, 'EXPECT_ERR=' + test.stderr);
         }
       }
       if (this.interactive) {

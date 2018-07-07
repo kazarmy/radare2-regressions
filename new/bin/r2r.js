@@ -172,18 +172,23 @@ function main (argv) {
         }
 
         console.log('Input:', test.cmds);
-        const changes = jsdiff.diffLines(test.expect, test.stdout);
-        changes.forEach(function (part) {
-          const k = part.added ? colors.green : colors.magenta;
-          const v = part.value.replace(/[\r\n]*$/, '');
-          if (part.added) {
-            common.highlightTrailingWs(k, '+' + v.split(/\n/g).join('\n+') + '\n');
-          } else if (part.removed) {
-            common.highlightTrailingWs(k, '-' + v.split(/\n/g).join('\n-') + '\n');
-          } else {
-            console.log(' ' + v.split(/\n/g).join('\n '));
+
+        let showHeaders = test.stderrFail;
+        if (test.stdoutFail) {
+          if (showHeaders) {
+            console.log('Stream: stdout\n');
           }
-        });
+          common.showDiff(test.expect, test.stdout);
+        }
+        if (test.stdoutFail && test.stderrFail) {
+          console.log();
+        }
+        if (test.stderrFail) {
+          if (showHeaders) {
+            console.log('Stream: stderr\n');
+          }
+          common.showDiff(test.expectErr, test.stderr);
+        }
 
         console.log('Wat du? (f)ix (i)gnore (b)roken (q)uit (c)ommands (d)iffChars');
         readLine(function handleKey (err, line) {
@@ -209,17 +214,22 @@ function main (argv) {
               fixCommands(test, next);
               break;
             case 'd':
-              const changes = jsdiff.diffChars(test.expect, test.stdout);
-              changes.forEach(function (part) {
-                const k = part.added ? colors.black.bgGreen
-                  : colors.white.bold.bgMagenta.strikethrough;
-                const v = part.value;
-                if (part.added || part.removed) {
-                  process.stdout.write(k(v));
-                } else {
-                  process.stdout.write(colors.grey(v));
+              let showHeaders = test.stdoutFail && test.stderrFail;
+              if (test.stdoutFail) {
+                if (showHeaders) {
+                  console.log('Stream: stdout\n');
                 }
-              });
+                common.showDiffChars(test.expect, test.stdout);
+              }
+              if (test.stdoutFail && test.stderrFail) {
+                console.log();
+              }
+              if (test.stderrFail) {
+                if (showHeaders) {
+                  console.log('Stream: stderr\n');
+                }
+                common.showDiffChars(test.expectErr, test.stderr);
+              }
               console.log('Wat du? (f)ix (i)gnore (b)roken (q)uit (c)ommands');
               readLine(handleKey);
               break;
@@ -305,6 +315,11 @@ function fixTest (test, next) {
             }
             output += 'EXPECT=' + delim + test.stdout + delim + '\n';
           }
+        } else if (line.startsWith('EXPECT_ERR=')) {
+          if ((test.stderr.match(/\n/g) || []).length > 1) {
+            throw new Error("Multiline stderr output is not supported");
+          }
+          output += 'EXPECT_ERR=' + test.stderr;
         } else {
           output += line + '\n';
         }

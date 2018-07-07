@@ -103,8 +103,15 @@ dump_test() {
     echo
   fi
   if [ -n "$EXPECT_ERR" ]; then
-    echo "EXPECT_ERR=<<RUN"
-    echo "$EXPECT_ERR"
+    COUNT_NL=$(printf "$EXPECT_ERR" | wc -l)
+    if [ ${COUNT_NL} -gt 1 ]; then
+      echo "ERROR: Multiline EXPECT_ERR not supported"
+      exit 1
+    fi
+    printf "EXPECT_ERR=$EXPECT_ERR"
+    if [ ${COUNT_NL} -eq 0 ]; then
+      echo
+    fi
   fi
   echo "RUN"
   echo

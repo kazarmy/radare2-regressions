@@ -1,4 +1,5 @@
 const colors = require('colors/safe');
+const jsdiff = require('diff');
 
 module.exports = {
   identity (arg) {
@@ -17,5 +18,33 @@ module.exports = {
       curIndex = wsTrailing.lastIndex;
     }
     process.stdout.write(colorFunc(text.substring(curIndex)));
+  },
+  showDiff (expected, actual) {
+    const common = this;
+    const changes = jsdiff.diffLines(expected, actual);
+    changes.forEach(function (part) {
+      const k = part.added ? colors.green : colors.magenta;
+      const v = part.value.replace(/[\r\n]*$/, '');
+      if (part.added) {
+        common.highlightTrailingWs(k, '+' + v.split(/\n/g).join('\n+') + '\n');
+      } else if (part.removed) {
+        common.highlightTrailingWs(k, '-' + v.split(/\n/g).join('\n-') + '\n');
+      } else {
+        console.log(' ' + v.split(/\n/g).join('\n '));
+      }
+    });
+  },
+  showDiffChars (expected, actual) {
+    const changes = jsdiff.diffChars(expected, actual);
+    changes.forEach(function (part) {
+      const k = part.added ? colors.black.bgGreen
+            : colors.white.bold.bgMagenta.strikethrough;
+      const v = part.value;
+      if (part.added || part.removed) {
+        process.stdout.write(k(v));
+      } else {
+        process.stdout.write(colors.grey(v));
+      }
+    });
   }
 };
