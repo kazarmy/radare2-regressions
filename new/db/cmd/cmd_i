@@ -656,7 +656,9 @@ RUN
 
 NAME=iIj
 FILE=../bins/elf/analysis/x86-helloworld-gcc
-CMDS=iIj
+CMDS=<<EXPECT
+e scr.interactive=true
+iIj
 EXPECT=<<RUN
 {"arch":"x86","binsz":4899,"bintype":"elf","bits":32,"canary":false,"class":"ELF32","compiled":"","crypto":false,"dbg_file":"","endian":"little","havecode":true,"guid":"","intrp":"/lib/ld-linux.so.2","lang":"c","linenum":true,"lsyms":true,"machine":"Intel 80386","maxopsz":16,"minopsz":1,"nx":true,"os":"linux","pcalign":0,"pic":false,"relocs":true,"relro":"no","rpath":"NONE","static":false,"stripped":false,"subsys":"linux","va":true,"checksums":{}}
 RUN
