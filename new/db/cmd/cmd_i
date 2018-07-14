@@ -739,12 +739,13 @@ type     EXEC (Executable file)
 RUN
 
 NAME=iIIj
-FILE=-
+FILE=--
 CMDS=<<EXPECT
+o ../bins/elf/analysis/x86-helloworld-gcc
 e scr.interactive=true
 iIIj
 EXPECT=<<RUN
-{"type":"","file":"malloc://512","fd":3,"size":512,"humansz":"512","iorw":true,"mode":"rwx","obsz":0,"block":256,"format":"any"}
+{"type":"EXEC (Executable file)","file":"../bins/elf/analysis/x86-helloworld-gcc","fd":3,"size":4899,"humansz":"4.8K","iorw":false,"mode":"r-x","obsz":0,"block":256,"format":"elf"}
 RUN
 
 NAME=iaj
