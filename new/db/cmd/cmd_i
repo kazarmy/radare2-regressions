@@ -680,7 +680,9 @@ RUN
 
 NAME=iIIj
 FILE=-
-CMDS=iIIj
+CMDS=<<EXPECT
+e scr.interactive=true
+iIIj
 EXPECT=<<RUN
 {"type":"","file":"malloc://512","fd":3,"size":512,"humansz":"512","iorw":true,"mode":"rwx","obsz":0,"block":256,"format":"any"}
 RUN
