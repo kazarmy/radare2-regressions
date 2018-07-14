@@ -26,7 +26,7 @@ pd 1 @main'
 EXPECT='/ (fcn) main 44
 |   main ();
 |           ; var int local_4h @ rbp-0x4
-|           ; DATA XREF from 0x0040045d (entry0)
+|           ; DATA XREF from entry0 (0x40045d)
 |           0x0040052d      55             push rbp                    ; dwarftest.c:4 {
 '
 run_test
