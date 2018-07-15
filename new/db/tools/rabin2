@@ -292,10 +292,132 @@ wx 10000000 @ 0x16c
 00 0x00000200   512 0x00401000  4096 s--- sect_0
 RUN
 
-NAME=rabin2 -g
-FILE=../bins/elf/analysis/x86-helloworld-gcc
-CMDS=!rabin2 -g ${R2_FILE}
+NAME=rabin2 -I
+FILE=--
+CMDS=!rabin2 -I ../bins/elf/analysis/x86-helloworld-gcc
 EXPECT=<<RUN
+arch     x86
+binsz    4899
+bintype  elf
+bits     32
+canary   false
+class    ELF32
+crypto   false
+endian   little
+havecode true
+intrp    /lib/ld-linux.so.2
+lang     c
+linenum  true
+lsyms    true
+machine  Intel 80386
+maxopsz  16
+minopsz  1
+nx       true
+os       linux
+pcalign  0
+pic      false
+relocs   true
+relro    no
+rpath    NONE
+static   false
+stripped false
+subsys   linux
+va       true
+RUN
+
+NAME=rabin2 -I -j
+FILE=--
+CMDS=!!rabin2 -I -j ../bins/elf/analysis/x86-helloworld-gcc~{}
+EXPECT=<<RUN
+{
+  "info": {
+    "arch": "x86",
+    "binsz": 4899,
+    "bintype": "elf",
+    "bits": 32,
+    "canary": false,
+    "class": "ELF32",
+    "compiled": "",
+    "crypto": false,
+    "dbg_file": "",
+    "endian": "little",
+    "havecode": true,
+    "guid": "",
+    "intrp": "/lib/ld-linux.so.2",
+    "lang": "c",
+    "linenum": true,
+    "lsyms": true,
+    "machine": "Intel 80386",
+    "maxopsz": 16,
+    "minopsz": 1,
+    "nx": true,
+    "os": "linux",
+    "pcalign": 0,
+    "pic": false,
+    "relocs": true,
+    "relro": "no",
+    "rpath": "NONE",
+    "static": false,
+    "stripped": false,
+    "subsys": "linux",
+    "va": true,
+    "checksums": {
+      
+    }
+  }
+}
+RUN
+
+NAME=rabin2 -II
+FILE=--
+CMDS=!rabin2 -II ../bins/elf/analysis/x86-helloworld-gcc
+EXPECT=<<RUN
+blksz    0x0
+block    0x100
+fd       3
+file     ../bins/elf/analysis/x86-helloworld-gcc
+format   elf
+iorw     false
+mode     r--
+size     0x1323
+humansz  4.8K
+type     EXEC (Executable file)
+RUN
+
+NAME=rabin2 -II -j
+FILE=--
+CMDS=!!rabin2 -II -j ../bins/elf/analysis/x86-helloworld-gcc~{}
+EXPECT=<<RUN
+{
+  "core": {
+    "type": "EXEC (Executable file)",
+    "file": "../bins/elf/analysis/x86-helloworld-gcc",
+    "fd": 3,
+    "size": 4899,
+    "humansz": "4.8K",
+    "iorw": false,
+    "mode": "r--",
+    "obsz": 0,
+    "block": 256,
+    "format": "elf"
+  }
+}
+RUN
+
+NAME=rabin2 -g
+FILE=--
+CMDS=!rabin2 -g ../bins/elf/analysis/x86-helloworld-gcc
+EXPECT=<<RUN
+blksz    0x0
+block    0x100
+fd       3
+file     ../bins/elf/analysis/x86-helloworld-gcc
+format   elf
+iorw     false
+mode     r--
+size     0x1323
+humansz  4.8K
+type     EXEC (Executable file)
 [Sections]
 00 0x00000000     0 0x00000000     0 ---- 
 01 0x00000134    19 0x08048134    19 -r-- .interp
@@ -478,4 +600,93 @@ Version need section '.gnu.version_r' contains 1 entries:
  Addr: 0x08048250  Offset: 0x00000250  Link to section: 6 (.dynstr)
   0x00000000: Version: 1  File: libc.so.6  Cnt: 1
   0x00000010:   Name: GLIBC_2.0  Flags: none Version: 2
+RUN
+
+NAME=rabin2 -g -j
+FILE=--
+CMDS=<<EXPECT
+  # inconsistent handling of empty keys
+!!rabin2 -g -j malloc://512~{}
+EXPECT=<<RUN
+{
+  "core": {
+    "type": "",
+    "file": "malloc://512",
+    "fd": 3,
+    "size": 512,
+    "humansz": "512",
+    "iorw": true,
+    "mode": "rw-",
+    "obsz": 0,
+    "block": 256,
+    "format": "any"
+  },
+  "sections": [
+    
+  ],
+  "segments": [
+    
+  ],
+  "entries": [
+    
+  ],
+  "entries": [
+    
+  ],
+  "main": false,
+  "imports": [
+    
+  ],
+  "classes": [
+    
+  ]false,
+  "symbols": [
+    
+  ],
+  "strings": [
+    
+  ]false,
+  "info": {
+    "arch": "",
+    "binsz": 512,
+    "bintype": "",
+    "bits": 64,
+    "canary": false,
+    "class": "",
+    "compiled": "",
+    "crypto": false,
+    "dbg_file": "",
+    "endian": "little",
+    "havecode": false,
+    "guid": "",
+    "intrp": "",
+    "lang": "",
+    "linenum": false,
+    "lsyms": false,
+    "machine": "",
+    "maxopsz": 16,
+    "minopsz": 1,
+    "nx": false,
+    "os": "",
+    "pcalign": 0,
+    "pic": false,
+    "relocs": false,
+    "rpath": "",
+    "static": true,
+    "stripped": false,
+    "subsys": "",
+    "va": false,
+    "checksums": {
+      
+    }
+  },
+  "fields": false,
+  "libs": false,
+  "relocs": [
+    
+  ]false,
+  "dwarf": false,
+  "size": 512,
+  "versioninfo": false
+}
 RUN
