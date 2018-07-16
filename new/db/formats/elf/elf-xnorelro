@@ -1,0 +1,10 @@
+NAME=PE: corkami elf-xnorelro - relro disabled
+FILE=../bins/elf/analysis/elf-xnorelro
+EXPECT64=ZWxmLnJlbHJvPW5vCgo=
+CMDS64=aWt+cmVscm8K
+RUN
+NAME=PE: corkami elf-nx - nx disabled
+FILE=../bins/elf/analysis/elf-xnorelro
+EXPECT64=bnggICAgICAgZmFsc2UKCg==
+CMDS64=aUl+Xm54Cg==
+RUN

@@ -1,0 +1,11 @@
+NAME=ELF: IOLI - crackme7 - with -A
+FILE=../bins/elf/ioli/crackme0x07
+ARGS=-A
+EXPECT64=c2l6ZTogOTkKCg==
+CMDS64=YWZpIDB4ODA0ODY3ZH5zaXplCg==
+RUN
+NAME=ELF: IOLI - crackme7 - with aa
+FILE=../bins/elf/ioli/crackme0x07
+EXPECT64=c2l6ZTogOTkKCg==
+CMDS64=YWE7YWZpIDB4ODA0ODY3ZH5zaXplCg==
+RUN

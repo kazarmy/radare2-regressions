@@ -1,0 +1,11 @@
+NAME=NES: Pong - open
+FILE=../bins/nes/Pong.nes
+ARGS=-A
+EXPECT64=Cg==
+CMDS64=cSEK
+RUN
+NAME=NES: Pong - detection
+FILE=../bins/nes/Pong.nes
+EXPECT64=b3MgICAgICAgbmVzCgo=
+CMDS64=aUl+b3MK
+RUN

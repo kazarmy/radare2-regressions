@@ -1,0 +1,11 @@
+NAME=ELF: core segments
+FILE=../bins/elf/analysis/core.1159
+EXPECT64=MTkKCg==
+CMDS64=aVNTfj8K
+RUN
+NAME=ELF: core sections with reg name
+FILE=../bins/elf/analysis/core.1159
+BROKEN=1
+EXPECT64=NgoK
+CMDS64=aVN+P3JlZztpUwo=
+RUN

@@ -42,4 +42,3 @@ rm /tmp/tiny32.elf
 EXPECT='85
 '
 run_test
-

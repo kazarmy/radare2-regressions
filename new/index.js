@@ -242,7 +242,7 @@ class NewRegressions {
             args.push('-c', test.cmds.join(';'));
           }
           // append testfile
-          args.push(binPath(test.file));
+          args.push(test.file);
 
           let res = '';
           let ree = '';
@@ -281,7 +281,7 @@ class NewRegressions {
         let res = '';
         let r2 = null;
         try {
-          const testPath = binPath(test.file);
+          const testPath = test.file;
           r2 = yield r2promise.open(testPath);
           for (let cmd in test.cmds) {
             res += yield r2.cmd(cmd);
@@ -771,13 +771,6 @@ function debase64 (msg) {
 
 function base64 (msg) {
   return Buffer.from(msg).toString('base64');
-}
-
-function binPath (file) {
-  if (file && file[0] === '.') {
-    return path.join(__dirname, file);
-  }
-  return file;
 }
 
 module.exports = NewRegressions;

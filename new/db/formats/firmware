@@ -1,0 +1,125 @@
+NAME=loading a BIOS file [64k]
+FILE=../bins/firmware/bios_64k.bin
+EXPECT64=Cg==
+CMDS64=cSEK
+RUN
+NAME=entrypoint decoding
+FILE=../bins/firmware/bios_64k.bin
+EXPECT64=dmFkZHI9MHgwMDBmZmZmMCBwYWRkcj0weDAwMDAwMDAwIGJhZGRyPTB4MDAwMDAwMDAgbGFkZHI9MHgwMDAwMDAwMCBoYWRkcj0tMSB0eXBlPXByb2dyYW0KCg==
+CMDS64=aWV+YWRkcgo=
+RUN
+NAME=corrupted section data
+FILE=../bins/firmware/bios_64k.bin
+EXPECT64=bGptcCAweGYwMDA6MHhmZmFhCgo=
+CMDS64=cGkgMQo=
+RUN
+NAME=ljmp follow
+FILE=../bins/firmware/bios_64k.bin
+EXPECT64=aGV4ICAgICAweGZmZmFhCm9jdGFsICAgMDM3Nzc2NTIKdW5pdCAgICAxMDIzLjlLCnNlZ21lbnQgZjAwMDowZmFhCmludDMyICAgMTA0ODQ5MApzdHJpbmcgICJceGFhXHhmZlx4MGYiCmJpbmFyeSAgMGIwMDAwMTExMTExMTExMTExMTAxMDEwMTAKZnZhbHVlOiAxMDQ4NDkwLjAKZmxvYXQ6ICAwLjAwMDAwMGYKZG91YmxlOiAwLjAwMDAwMAp0cml0cyAgIDB0MTIyMjAyMTAyMDIyMgo=
+CMDS64=cyAkago/ICQkCg==
+RUN
+NAME=loading a BIOS file [128k]
+FILE=../bins/firmware/bios_128k.bin
+EXPECT64=Cg==
+CMDS64=cSEK
+RUN
+NAME=entrypoint decoding
+FILE=../bins/firmware/bios_128k.bin
+EXPECT64=dmFkZHI9MHgwMDBmZmZmMCBwYWRkcj0weDAwMDAwMDAwIGJhZGRyPTB4MDAwMDAwMDAgbGFkZHI9MHgwMDAwMDAwMCBoYWRkcj0tMSB0eXBlPXByb2dyYW0KCg==
+CMDS64=aWV+YWRkcgo=
+RUN
+NAME=corrupted section data
+FILE=../bins/firmware/bios_128k.bin
+EXPECT64=bGptcCAweGYwMDA6MHhmZmFhCgo=
+CMDS64=cGkgMQo=
+RUN
+NAME=loading a BIOS file [256k]
+FILE=../bins/firmware/bios_256k.bin
+EXPECT64=Cg==
+CMDS64=cSEK
+RUN
+NAME=entrypoint decoding
+FILE=../bins/firmware/bios_256k.bin
+EXPECT64=dmFkZHI9MHgwMDBmZmZmMCBwYWRkcj0weDAwMDAwMDAwIGJhZGRyPTB4MDAwMDAwMDAgbGFkZHI9MHgwMDAwMDAwMCBoYWRkcj0tMSB0eXBlPXByb2dyYW0KCg==
+CMDS64=aWV+YWRkcgo=
+RUN
+NAME=corrupted section data
+FILE=../bins/firmware/bios_256k.bin
+EXPECT64=bGptcCAweGYwMDA6MHhmZmFhCgo=
+CMDS64=cGkgMQo=
+RUN
+NAME=loading a BIOS file [512k]
+FILE=../bins/firmware/bios_512k.bin
+EXPECT64=Cg==
+CMDS64=cSEK
+RUN
+NAME=entrypoint decoding
+FILE=../bins/firmware/bios_512k.bin
+EXPECT64=dmFkZHI9MHgwMDBmZmZmMCBwYWRkcj0weDAwMDAwMDAwIGJhZGRyPTB4MDAwMDAwMDAgbGFkZHI9MHgwMDAwMDAwMCBoYWRkcj0tMSB0eXBlPXByb2dyYW0KCg==
+CMDS64=aWV+YWRkcgo=
+RUN
+NAME=corrupted section data
+FILE=../bins/firmware/bios_512k.bin
+EXPECT64=bGptcCAweGYwMDA6MHhmZmFhCgo=
+CMDS64=cGkgMQo=
+RUN
+NAME=loading a BIOS file [1M]
+FILE=../bins/firmware/bios_1M.bin
+EXPECT64=Cg==
+CMDS64=cSEK
+RUN
+NAME=entrypoint decoding
+FILE=../bins/firmware/bios_1M.bin
+EXPECT64=dmFkZHI9MHgwMDBmZmZmMCBwYWRkcj0weDAwMDAwMDAwIGJhZGRyPTB4MDAwMDAwMDAgbGFkZHI9MHgwMDAwMDAwMCBoYWRkcj0tMSB0eXBlPXByb2dyYW0KCg==
+CMDS64=aWV+YWRkcgo=
+RUN
+NAME=corrupted section data
+FILE=../bins/firmware/bios_1M.bin
+EXPECT64=bGptcCAweGYwMDA6MHhmZmFhCgo=
+CMDS64=cGkgMQo=
+RUN
+NAME=loading a BIOS file [2M]
+FILE=../bins/firmware/bios_2M.bin
+EXPECT64=Cg==
+CMDS64=cSEK
+RUN
+NAME=entrypoint decoding
+FILE=../bins/firmware/bios_2M.bin
+EXPECT64=dmFkZHI9MHgwMDBmZmZmMCBwYWRkcj0weDAwMDAwMDAwIGJhZGRyPTB4MDAwMDAwMDAgbGFkZHI9MHgwMDAwMDAwMCBoYWRkcj0tMSB0eXBlPXByb2dyYW0KCg==
+CMDS64=aWV+YWRkcgo=
+RUN
+NAME=corrupted section data
+FILE=../bins/firmware/bios_2M.bin
+EXPECT64=bGptcCAweGYwMDA6MHhmZmFhCgo=
+CMDS64=cGkgMQo=
+RUN
+NAME=loading a BIOS file [4M]
+FILE=../bins/firmware/bios_4M.bin
+EXPECT64=Cg==
+CMDS64=cSEK
+RUN
+NAME=entrypoint decoding
+FILE=../bins/firmware/bios_4M.bin
+EXPECT64=dmFkZHI9MHgwMDBmZmZmMCBwYWRkcj0weDAwMDAwMDAwIGJhZGRyPTB4MDAwMDAwMDAgbGFkZHI9MHgwMDAwMDAwMCBoYWRkcj0tMSB0eXBlPXByb2dyYW0KCg==
+CMDS64=aWV+YWRkcgo=
+RUN
+NAME=corrupted section data
+FILE=../bins/firmware/bios_4M.bin
+EXPECT64=bGptcCAweGYwMDA6MHhmZmFhCgo=
+CMDS64=cGkgMQo=
+RUN
+NAME=loading a BIOS file [8M]
+FILE=../bins/firmware/bios_8M.bin
+EXPECT64=Cg==
+CMDS64=cSEK
+RUN
+NAME=entrypoint decoding
+FILE=../bins/firmware/bios_8M.bin
+EXPECT64=dmFkZHI9MHgwMDBmZmZmMCBwYWRkcj0weDAwMDAwMDAwIGJhZGRyPTB4MDAwMDAwMDAgbGFkZHI9MHgwMDAwMDAwMCBoYWRkcj0tMSB0eXBlPXByb2dyYW0KCg==
+CMDS64=aWV+YWRkcgo=
+RUN
+NAME=corrupted section data
+FILE=../bins/firmware/bios_8M.bin
+EXPECT64=bGptcCAweGYwMDA6MHhmZmFhCgo=
+CMDS64=cGkgMQo=
+RUN

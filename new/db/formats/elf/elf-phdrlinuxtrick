@@ -1,0 +1,5 @@
+NAME=ELF: PHDR Linux reload trick
+FILE=../bins/elf/textile_hitcon2017
+EXPECT64=Y2FsbCBzeW0uaW1wLnN0cmNtcF8xCgo=
+CMDS64=cGkgMSBAIDB4NDAxMUZBCgo=
+RUN

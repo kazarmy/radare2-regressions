@@ -58,39 +58,19 @@ io:
 esil:
 	$(SHELL) run_tests.sh t.esil
 
-formats: format.smd format.vsf format.elf format.firmware format.java format.mach0 format.mangling format.mdmp format.msil format.omf format.others format.pdb format.pe format.nes format.gba format.wasm
-format.vsf:
-	$(SHELL) run_tests.sh t.formats/vsf
-format.smd:
-	$(SHELL) run_tests.sh t.formats/smd
+formats: format.elf format.mach0 format.mangling format.others format.pdb format.pe
 format.elf:
 	$(SHELL) run_tests.sh t.formats/elf
-format.firmware:
-	$(SHELL) run_tests.sh t.formats/firmware
-format.java:
-	$(SHELL) run_tests.sh t.formats/java
 format.mach0:
 	$(SHELL) run_tests.sh t.formats/mach0
 format.mangling:
 	$(SHELL) run_tests.sh t.formats/mangling
-format.mdmp:
-	$(SHELL) run_tests.sh t.formats/mdmp
-format.msil:
-	$(SHELL) run_tests.sh t.formats/msil
-format.omf:
-	$(SHELL) run_tests.sh t.formats/omf
 format.others:
 	$(SHELL) run_tests.sh t.formats/others
 format.pdb:
 	$(SHELL) run_tests.sh t.formats/pdb
 format.pe:
 	$(SHELL) run_tests.sh t.formats/pe
-format.nes:
-	$(SHELL) run_tests.sh t.formats/nes
-format.gba:
-	$(SHELL) run_tests.sh t.formats/gba
-format.wasm:
-	$(SHELL) run_tests.sh t.formats/wasm
 
 
 tools: radiff2 ragg2 rahash2 rasm2 rax2 r2

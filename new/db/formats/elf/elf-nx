@@ -1,0 +1,6 @@
+NAME=ELF: elf-nx - nx enabled
+FILE=../bins/elf/analysis/elf-nx
+ARGS=-A
+EXPECT64=bnggICAgICAgdHJ1ZQoK
+CMDS64=aUl+Xm54Cg==
+RUN

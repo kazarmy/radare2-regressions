@@ -1,0 +1,5 @@
+NAME=ELF: IOLI - crackme3 - with -A
+FILE=../bins/elf/ioli/crackme0x03
+EXPECT64=MHgwODA0ODQ5OCAxMjggc3ltLm1haW4KCg==
+CMDS64=YWEgOyBmcyBzeW1ib2xzIDsgZn5zeW0ubWFpbgo=
+RUN

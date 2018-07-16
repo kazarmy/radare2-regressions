@@ -1,0 +1,25 @@
+NAME=avr entrypoint
+FILE=../bins/elf/analysis/bugurtos-avr.elf
+EXPECT64=dmFkZHI9MHgwMDAwMDAwMCBwYWRkcj0weDAwMDAwMDc0IGJhZGRyPTB4MDAwMDAwMDAgbGFkZHI9MHgwMDAwMDAwMCBoYWRkcj0weDAwMDAwMDE4IHR5cGU9cHJvZ3JhbQoK
+CMDS64=aWV+YWRkcgoK
+RUN
+NAME=avr baddr
+FILE=../bins/elf/analysis/bugurtos-avr.elf
+EXPECT64=MHgwMDAwMDAwMAoK
+CMDS64=aWV+YmFkZHJbNV0KCg==
+RUN
+NAME=avr main address
+FILE=../bins/elf/analysis/bugurtos-avr.elf
+EXPECT64=MHgzMDgKCg==
+CMDS64=P3Ygc3ltLm1haW4KCg==
+RUN
+NAME=avr use va
+FILE=../bins/elf/analysis/bugurtos-avr.elf
+EXPECT64=MGM5NDQ2MDAwYzk0MzAwNjBjOTQKZWY5MmZmOTIwZjkzZGY5M2NmOTMKCg==
+CMDS64=cDggMTAgQCBlbnRyeTAKcDggMTAgQCBzeW0ubWFpbgoK
+RUN
+NAME=avr main code
+FILE=../bins/elf/analysis/bugurtos-avr.elf
+EXPECT64=cHVzaCByMTQKcHVzaCByMTUKcHVzaCByMTYKCg==
+CMDS64=cGkgMyBAIHN5bS5tYWluCgo=
+RUN

@@ -1,0 +1,85 @@
+NAME=load 16 bits omf
+FILE=../bins/omf/hello_world
+EXPECT64=Yml0cyAgICAgMTYKCg==
+CMDS64=aUl+Yml0cwo=
+RUN
+NAME=entry point 16 bits omf
+FILE=../bins/omf/hello_world
+EXPECT64=dmFkZHI9MHgwMDAwMTAwMCBwYWRkcj0weDAwMDAwMDczIGJhZGRyPTB4MDAwMDEwMDAgbGFkZHI9MHgwMDAwMDAwMCBoYWRkcj0tMSB0eXBlPXByb2dyYW0KCg==
+CMDS64=aWV+YWRkcgo=
+RUN
+NAME=symbols 16 bits omf
+FILE=../bins/omf/hello_world
+EXPECT64=W1N5bWJvbHNdCjAwMSAweDAwMDAwMDczIDB4MDAwMDEwMDAgKG51bGwpIChudWxsKSAgICAwIF9zdGFydAoK
+CMDS64=aXMK
+RUN
+NAME=sections 16 bits omf
+FILE=../bins/omf/hello_world
+EXPECT64=W1NlY3Rpb25zXQowMCAweDAwMDAwMDczICAgIDE5IDB4MDAwMDEwMDAgICAgMTkgLXJ3eCB0ZXh0XzEKMDEgMHgwMDAwMDA5NSAgICAxNCAweDAwMDAxMDEzICAgIDE0IC1yd3ggZGF0YV8xCgo=
+CMDS64=aVMK
+RUN
+NAME=sections 16 bits omf - content
+FILE=../bins/omf/hello_world
+EXPECT64=LSBvZmZzZXQgLSAgMCAxICAyIDMgIDQgNSAgNiA3ICA4IDkgIEEgQiAgQyBEICBFIEYgIDAxMjM0NTY3ODlBQkNERUYKMDAwMDoxMDAwICBiYTBlIDAwYjkgMDAwMCBiYjAxIDAwYjggMDQwMCBjZDgwIGI4MDEgIC4uLi4uLi4uLi4uLi4uLi4KLSBvZmZzZXQgLSAgMCAxICAyIDMgIDQgNSAgNiA3ICA4IDkgIEEgQiAgQyBEICBFIEYgIDAxMjM0NTY3ODlBQkNERUYKMDAwMDoxMDEzICA0ODY1IDZjNmMgNmYyYyAyMDc3IDZmNzIgNmM2NCAyMTBhIGZmZmYgIEhlbGxvLCB3b3JsZCEuLi4KCg==
+CMDS64=cHggMTYgQCBzZWN0aW9uLnRleHRfMTsgcHggMTYgQCBzZWN0aW9uLmRhdGFfMQo=
+RUN
+NAME=virtual address 16 bits omf
+FILE=../bins/omf/hello_world
+EXPECT64=YmEwZTAwCgo=
+CMDS64=cGlkIDF+bW92WzFdCg==
+RUN
+NAME=load 32 bits omf
+FILE=../bins/omf/hello_world32
+EXPECT64=Yml0cyAgICAgMzIKCg==
+CMDS64=aUl+Yml0cwo=
+RUN
+NAME=entry point 32 bits omf
+FILE=../bins/omf/hello_world32
+EXPECT64=dmFkZHI9MHgwMDAwMTAwMCBwYWRkcj0weDAwMDAwMDc0IGJhZGRyPTB4MDAwMDEwMDAgbGFkZHI9MHgwMDAwMDAwMCBoYWRkcj0tMSB0eXBlPXByb2dyYW0KCg==
+CMDS64=aWV+YWRkcgo=
+RUN
+NAME=symbols 32 bits omf
+FILE=../bins/omf/hello_world32
+EXPECT64=W1N5bWJvbHNdCjAwMSAweDAwMDAwMDc0IDB4MDAwMDEwMDAgKG51bGwpIChudWxsKSAgICAwIF9zdGFydAoK
+CMDS64=aXMK
+RUN
+NAME=sections 32 bits omf
+FILE=../bins/omf/hello_world32
+EXPECT64=W1NlY3Rpb25zXQowMCAweDAwMDAwMDc0ICAgIDI5IDB4MDAwMDEwMDAgICAgMjkgLXJ3eCAudGV4dF8xCjAxIDB4MDAwMDAwYTMgICAgMTQgMHgwMDAwMTAxZCAgICAxNCAtcnd4IC5kYXRhXzEKCg==
+CMDS64=aVMK
+RUN
+NAME=virtual address 32 bits omf
+FILE=../bins/omf/hello_world32
+EXPECT64=YmEwZTAwMDAwMAoK
+CMDS64=cGlkIDF+bW92WzFdCg==
+RUN
+NAME=multiple symbols omf
+FILE=../bins/omf/multi_pubdef
+EXPECT64=W1N5bWJvbHNdCjAwMSAweDAwMDAwMDg0IDB4MDAwMDEwMDAgKG51bGwpIChudWxsKSAgICAwIF9zdGFydAowMDIgMHgwMDAwMDA5NyAweDAwMDAxMDEzIChudWxsKSAobnVsbCkgICAgMCBzZWNvbmRfc3ltYm9sCgo=
+CMDS64=aXMK
+RUN
+NAME=null checksum omf
+FILE=../bins/omf/null_checks
+EXPECT64=W1N5bWJvbHNdCjAwMSAweDAwMDAwMDczIDB4MDAwMDEwMDAgKG51bGwpIChudWxsKSAgICAwIF9zdGFydAoK
+CMDS64=aXMK
+RUN
+NAME=invalide index segment omf
+FILE=../bins/omf/invalid_idx
+EXPECT64=Cg==
+CMDS64=cSEK
+RUN
+NAME=invalide string size pubdef record omf
+FILE=../bins/omf/invalid_str_pubdef
+EXPECT64=Cg==
+CMDS64=cSEK
+RUN
+NAME=invalide string size lnames record omf
+FILE=../bins/omf/invalid_str_lname
+EXPECT64=Cg==
+CMDS64=cSEK
+RUN
+NAME=invalide record size omf
+FILE=../bins/omf/invalid_size
+EXPECT64=Cg==
+CMDS64=cSEK
+RUN

@@ -1,0 +1,18 @@
+NAME=VSF: Rocky Horror Picture Show- open
+FILE=../bins/vsf/c128-rhps-norom.vsf
+ARGS=-A
+EXPECT64=Cg==
+CMDS64=cSEK
+RUN
+NAME=VSF: Rocky Horror Picture Show- detection
+FILE=../bins/vsf/c128-rhps-norom.vsf
+ARGS=
+EXPECT64=b3MgICAgICAgQzEyOAoK
+CMDS64=aUl+b3MK
+RUN
+NAME=VSF: Rocky Horror Picture Show- ROMs
+FILE=../bins/vsf/c128-rhps-norom.vsf
+ARGS=
+EXPECT64=WzAwOjAwXSAqIHBhPTB4MDAwMDAwOGMgcnd4IHZhPTB4MDAwMDAwMDAgc3o9MHgxMDAwMCB2c3o9MHgxMDAwMCBSQU1fQkFOS18wClswMDowMV0gKiBwYT0weDAwMDEwMDhjIHJ3eCB2YT0weDAwMDAwMDAwIHN6PTB4MTAwMDAgdnN6PTB4MTAwMDAgUkFNX0JBTktfMQoK
+CMDS64=Uwo=
+RUN

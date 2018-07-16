@@ -1,0 +1,16 @@
+NAME=VSF: Rambo II- open
+FILE=../bins/vsf/c64-rambo2-norom.vsf
+ARGS=-A
+EXPECT64=Cg==
+CMDS64=cSEK
+RUN
+NAME=VSF: Rambo II- detection
+FILE=../bins/vsf/c64-rambo2-norom.vsf
+EXPECT64=b3MgICAgICAgQzY0Cgo=
+CMDS64=aUl+b3MK
+RUN
+NAME=VSF: Rambo II- ROMs
+FILE=../bins/vsf/c64-rambo2-norom.vsf
+EXPECT64=WzAwOjAwXSAqIHBhPTB4MDAwMDAwODQgcnd4IHZhPTB4MDAwMDAwMDAgc3o9MHgxMDAwMCB2c3o9MHgxMDAwMCBSQU0KCg==
+CMDS64=Uwo=
+RUN

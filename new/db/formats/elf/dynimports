@@ -1,0 +1,5 @@
+NAME=ELF: dynimports
+FILE=../bins/elf/analysis/dynimports
+EXPECT64=NgoK
+CMDS64=aWl+Pwo=
+RUN

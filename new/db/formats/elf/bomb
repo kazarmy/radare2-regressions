@@ -1,0 +1,15 @@
+NAME=ELF: bomb - open
+FILE=../bins/elf/bomb
+EXPECT64=Cg==
+CMDS64=cSEK
+RUN
+NAME=ELF: bomb - entrypoint
+FILE=../bins/elf/bomb
+EXPECT64=MHg0MDBjOTAKCg==
+CMDS64=CnMKCg==
+RUN
+NAME=ELF: bomb - pi 1
+FILE=../bins/elf/bomb
+EXPECT64=eG9yIGVicCwgZWJwCgo=
+CMDS64=ZSBhc20uZmlsdGVyPWZhbHNlCnBpIDEKCg==
+RUN

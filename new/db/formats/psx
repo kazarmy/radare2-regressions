@@ -1,0 +1,10 @@
+NAME=DOL: sqrxz4 - open
+FILE=../bins/psx/HITPSX.EXE
+EXPECT64=Cg==
+CMDS64=cSEK
+RUN
+NAME=DOL: sqrxz4 - iI
+FILE=../bins/psx/HITPSX.EXE
+EXPECT64=MQoK
+CMDS64=aUl+P3BzeAo=
+RUN

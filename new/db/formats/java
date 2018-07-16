@@ -1,0 +1,32 @@
+NAME=Java class parsing errors
+FILE=../bins/java/TryWithResources.class
+BROKEN=1
+EXPECT64=bm9wCgo=
+CMDS64=P2Ugbm9wCgo=
+RUN
+
+NAME=detect kotlin in java classes
+FILE=../bins/java/HiKt.class
+EXPECT64=a290bGluCgo=
+CMDS64=aX5sYW5nWzFdCgo=
+RUN
+NAME=java disasm crash
+FILE=../bins/java/ExCaseTableSwitch.class
+EXPECT64=Cg==
+CMDS64=cGQgMTAgPi9kZXYvbnVsbAoK
+RUN
+NAME=java switch crash
+FILE=../bins/fuzzed/zin7a5.class
+EXPECT64=Cg==
+CMDS64=ZSBzY3IubnVsbD10cnVlCnBkIDEwMAoK
+RUN
+NAME=java classes
+FILE=../bins/java/DemoTest.class
+EXPECT64=MHgwMDAwMDAwMCBbMHgwMDAwMDE5MCAtIDB4MDAwMDAyMTFdIChzeiAxMjkpIGNsYXNzIDAgRGVtb1Rlc3Qgc3VwZXI6IGphdmEvbGFuZy9PYmplY3QKMHgwMDAwMDE5MCBtZXRob2QgMCAgICAgIGZ1bgoweDAwMDAwMWI5IG1ldGhvZCAxICAgICAgPGluaXQ+CjB4MDAwMDAxZTggbWV0aG9kIDIgICAgICByZXMKMHgwMDAwMDIxMSBtZXRob2QgMyAgICAgIG1haW4KCg==
+CMDS64=aWMKCg==
+RUN
+NAME=java classes summary
+FILE=../bins/java/DemoTest.class
+EXPECT64=U3VtbWFyeSBmb3IgLi4vYmlucy9qYXZhL0RlbW9UZXN0LmNsYXNzOgogIFNpemUgMHgwOgogIENvbnN0YW50cyAgc2l6ZTogMHgxNjYgY291bnQ6IDM0OgogIE1ldGhvZHMgICAgc2l6ZTogMHhiNiBjb3VudDogNDoKICBGaWVsZHMgICAgIHNpemU6IDB4MiBjb3VudDogMDoKICBBdHRyaWJ1dGVzIHNpemU6IDB4YSBjb3VudDogMToKICBJbnRlcmZhY2VzIHNpemU6IDB4MiBjb3VudDogMDoKCg==
+CMDS64=amF2YSBzdW1tYXJ5Cgo=
+RUN

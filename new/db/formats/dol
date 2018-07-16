@@ -1,0 +1,10 @@
+NAME=DOL: sqrxz4 - open
+FILE=../bins/dol/sqrxz4-gc.dol
+EXPECT64=Cg==
+CMDS64=cSEK
+RUN
+NAME=DOL: sqrxz4 - iI
+FILE=../bins/dol/sqrxz4-gc.dol
+EXPECT64=MQoK
+CMDS64=aUl+P3dpaQo=
+RUN
