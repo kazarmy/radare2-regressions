@@ -335,6 +335,32 @@ EXPECT=<<RUN
 }
 RUN
 
+NAME=rabin2 -ee -j
+FILE=../bins/elf/analysis/x86-helloworld-gcc
+CMDS=!!rabin2 -ee -j ${R2_FILE}~{}
+EXPECT=<<RUN
+{
+  "initfini": [
+    {
+      "vaddr": 134513616,
+      "paddr": 134513616,
+      "baddr": 134512640,
+      "laddr": 0,
+      "haddr": 1436,
+      "type": "init"
+    },
+    {
+      "vaddr": 134513584,
+      "paddr": 134513584,
+      "baddr": 134512640,
+      "laddr": 0,
+      "haddr": 1440,
+      "type": "fini"
+    }
+  ]
+}
+RUN
+
 NAME=rabin2 -g
 FILE=../bins/elf/analysis/x86-helloworld-gcc
 CMDS=!rabin2 -g ${R2_FILE}
