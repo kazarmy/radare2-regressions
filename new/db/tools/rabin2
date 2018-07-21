@@ -268,54 +268,10 @@ wx 10000000 @ 0x16c
 00 0x00000200   512 0x00401000  4096 s--- sect_0
 RUN
 
-NAME=rabin2 json newline end
-FILE=../bins/elf/analysis/x86-helloworld-gcc
-CMDS=!!rabin2 -I -j ${R2_FILE}~{}
-EXPECT=<<RUN
-{
-  "info": {
-    "arch": "x86",
-    "binsz": 4899,
-    "bintype": "elf",
-    "bits": 32,
-    "canary": false,
-    "class": "ELF32",
-    "compiled": "",
-    "crypto": false,
-    "dbg_file": "",
-    "endian": "little",
-    "havecode": true,
-    "guid": "",
-    "intrp": "/lib/ld-linux.so.2",
-    "lang": "c",
-    "linenum": true,
-    "lsyms": true,
-    "machine": "Intel 80386",
-    "maxopsz": 16,
-    "minopsz": 1,
-    "nx": true,
-    "os": "linux",
-    "pcalign": 0,
-    "pic": false,
-    "relocs": true,
-    "relro": "no",
-    "rpath": "NONE",
-    "static": false,
-    "stripped": false,
-    "subsys": "linux",
-    "va": true,
-    "checksums": {
-      
-    }
-  }
-}
-RUN
-
 NAME=rabin2 -ee -j
 FILE=../bins/elf/analysis/x86-helloworld-gcc
 CMDS=!!rabin2 -ee -j ${R2_FILE}~{}
-EXPECT=<<RUN
-{
+EXPECT='{
   "initfini": [
     {
       "vaddr": 134513616,
@@ -334,7 +290,7 @@ EXPECT=<<RUN
       "type": "fini"
     }
   ]
-}
+}'
 RUN
 
 NAME=rabin2 -g
