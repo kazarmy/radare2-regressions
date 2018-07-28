@@ -342,6 +342,13 @@ EXPECT=<<RUN
 Fxc2f3c000
 RUN
 
+NAME=rax2 -0xf
+FILE=-
+CMDS=!rax2 -0xf
+EXPECT=<<RUN
+-15
+RUN
+
 NAME=rax2 -L 0
 FILE=-
 CMDS=!rax2 -L 0
