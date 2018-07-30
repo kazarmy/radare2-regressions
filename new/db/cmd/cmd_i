@@ -698,7 +698,7 @@ EXPECT=<<RUN
 }
 RUN
 
-NAME=iee elf Cd
+NAME=iee elf Cd (32-bit)
 FILE=../bins/elf/before-after-main
 CMDS=<<EXPECT
 pD $s{section..preinit_array} @ section..preinit_array
@@ -738,4 +738,28 @@ EXPECT=<<RUN
             ;-- __fini:
             0x08049efc      .dword 0x080485ce ; entry11.fini ; sym.fini
             0x08049f00      .dword 0x080485e7 ; entry12.fini ; sym.destructor
+RUN
+
+NAME=iee elf Cd (64-bit)
+FILE=../bins/elf/analysis/ls-linux64
+CMDS=<<EXPECT
+pD $s{section..init_array} @ section..init_array
+?e
+pD $s{section..fini_array} @ section..fini_array
+?e
+# Can't be first line for some reason
+pD $s{section..preinit_array} @ section..preinit_array
+EXPECT=<<EXPECT_ERR
+            ;-- section..init_array:
+            ;-- segment.LOAD1:
+            ;-- segment.GNU_RELRO:
+            0x0021bfa8      .qword 0x0000000000005d20 ; entry1.init    ; RELOC 64  ; [18] -rw- section size 8 named .init_array
+
+            ;-- section_end..init_array:
+            ;-- section..fini_array:
+            0x0021bfb0      .qword 0x0000000000005ce0 ; entry2.fini    ; RELOC 64  ; [19] -rw- section size 8 named .fini_array
+
+EXPECT_ERR=<<RUN
+Invalid address (section..preinit_array)
+|ERROR| Invalid command 'pD $s{section..preinit_array} @ section..preinit_array' (0x70)
 RUN
