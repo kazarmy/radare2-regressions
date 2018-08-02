@@ -596,8 +596,8 @@ iee~type=preinit
 e asm.bytes=false
 pd 1 @ 0x0804849f
 EXPECT=<<RUN
-vaddr=0x08048486 paddr=0x00000486 baddr=0x08048000 laddr=0x00000000 haddr=0x00000ed4 type=preinit
-vaddr=0x0804849f paddr=0x0000049f baddr=0x08048000 laddr=0x00000000 haddr=0x00000ed8 type=preinit
+vaddr=0x08048486 paddr=0x00000486 baddr=0x08048000 laddr=0x00000000 hvaddr=0x08049ed4 haddr=0x00000ed4 type=preinit
+vaddr=0x0804849f paddr=0x0000049f baddr=0x08048000 laddr=0x00000000 hvaddr=0x08049ed8 haddr=0x00000ed8 type=preinit
             ;-- entry2.preinit:
             ;-- preinit2:
             0x0804849f      push ebp
@@ -659,7 +659,7 @@ NAME=ieej
 FILE=../bins/elf/analysis/x86-helloworld-gcc
 CMDS=ieej
 EXPECT=<<RUN
-[{"vaddr":134513616,"paddr":976,"baddr":134512640,"laddr":0,"haddr":1436,"type":"init"},{"vaddr":134513584,"paddr":944,"baddr":134512640,"laddr":0,"haddr":1440,"type":"fini"}]
+[{"vaddr":134513616,"paddr":976,"baddr":134512640,"laddr":0,"hvaddr":134518172,"haddr":1436,"type":"init"},{"vaddr":134513584,"paddr":944,"baddr":134512640,"laddr":0,"hvaddr":134518176,"haddr":1440,"type":"fini"}]
 RUN
 
 NAME=ieeej
@@ -673,6 +673,7 @@ EXPECT=<<RUN
       "paddr": 976,
       "baddr": 134512640,
       "laddr": 0,
+      "hvaddr": 134518172,
       "haddr": 1436,
       "type": "init"
     },
@@ -681,6 +682,7 @@ EXPECT=<<RUN
       "paddr": 944,
       "baddr": 134512640,
       "laddr": 0,
+      "hvaddr": 134518176,
       "haddr": 1440,
       "type": "fini"
     }
