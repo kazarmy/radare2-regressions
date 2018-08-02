@@ -27,7 +27,7 @@ FILE=../bins/elf/analysis/hello-linux-x86_64
 CMDS=!rabin2 -G 0 -e ${R2_FILE}
 EXPECT=<<RUN
 [Entrypoints]
-vaddr=0x00400410 paddr=0x00000410 baddr=0x00400000 laddr=0x00000000 haddr=0x00000018 type=program
+vaddr=0x00400410 paddr=0x00000410 baddr=0x00400000 laddr=0x00000000 hpaddr=0x00000018 type=program
 
 1 entrypoints
 RUN
@@ -37,7 +37,7 @@ FILE=../bins/elf/analysis/hello-linux-x86_64
 CMDS=!rabin2 -G 0 -B 0 -e ${R2_FILE}
 EXPECT=<<RUN
 [Entrypoints]
-vaddr=0x00000410 paddr=0x00000410 baddr=0x00000000 laddr=0x00000000 haddr=0x00000018 type=program
+vaddr=0x00000410 paddr=0x00000410 baddr=0x00000000 laddr=0x00000000 hpaddr=0x00000018 type=program
 
 1 entrypoints
 RUN
@@ -130,7 +130,7 @@ FILE=../bins/mach0/fatmach0-3true
 CMDS=!rabin2 -G 0x1000 -e ${R2_FILE}
 EXPECT=<<RUN
 [Entrypoints]
-vaddr=0x100000ef8 paddr=0x00001ef8 baddr=0x100000000 laddr=0x00001000 haddr=0x00000570 type=program
+vaddr=0x100000ef8 paddr=0x00001ef8 baddr=0x100000000 laddr=0x00001000 hpaddr=0x00000570 type=program
 
 1 entrypoints
 RUN
@@ -151,7 +151,7 @@ FILE=../bins/mach0/fatmach0-3true
 CMDS=!rabin2 -G 0x5000 -e ${R2_FILE}
 EXPECT=<<RUN
 [Entrypoints]
-vaddr=0x00001f44 paddr=0x00005f44 baddr=0x00001000 laddr=0x00005000 haddr=0x00000420 type=program
+vaddr=0x00001f44 paddr=0x00005f44 baddr=0x00001000 laddr=0x00005000 hpaddr=0x00000420 type=program
 
 1 entrypoints
 RUN
@@ -172,7 +172,7 @@ FILE=../bins/mach0/fatmach0-3true
 CMDS=!rabin2 -B 0x2000000 -G 0x1000 -e ${R2_FILE}
 EXPECT=<<RUN
 [Entrypoints]
-vaddr=0x02000ef8 paddr=0x00001ef8 baddr=0x02000000 laddr=0x00001000 haddr=0x00000570 type=program
+vaddr=0x02000ef8 paddr=0x00001ef8 baddr=0x02000000 laddr=0x00001000 hpaddr=0x00000570 type=program
 
 1 entrypoints
 RUN
@@ -190,7 +190,7 @@ FILE=../bins/mach0/hello-ios-arm64
 CMDS=!rabin2 -B 0x2000000 -e ${R2_FILE}
 EXPECT=<<RUN
 [Entrypoints]
-vaddr=0x02007f34 paddr=0x00007f34 baddr=0x02000000 laddr=0x00000000 haddr=0x00000468 type=program
+vaddr=0x02007f34 paddr=0x00007f34 baddr=0x02000000 laddr=0x00000000 hpaddr=0x00000468 type=program
 
 1 entrypoints
 RUN
@@ -200,7 +200,7 @@ FILE=../bins/mach0/hello-ios-arm64
 CMDS=!rabin2 -B 0x2000000 -e ${R2_FILE}
 EXPECT=<<RUN
 [Entrypoints]
-vaddr=0x02007f34 paddr=0x00007f34 baddr=0x02000000 laddr=0x00000000 haddr=0x00000468 type=program
+vaddr=0x02007f34 paddr=0x00007f34 baddr=0x02000000 laddr=0x00000000 hpaddr=0x00000468 type=program
 
 1 entrypoints
 RUN
@@ -279,7 +279,7 @@ EXPECT='{
       "baddr": 134512640,
       "laddr": 0,
       "hvaddr": 134518172,
-      "haddr": 1436,
+      "hpaddr": 1436,
       "type": "init"
     },
     {
@@ -288,7 +288,7 @@ EXPECT='{
       "baddr": 134512640,
       "laddr": 0,
       "hvaddr": 134518176,
-      "haddr": 1440,
+      "hpaddr": 1440,
       "type": "fini"
     }
   ]
@@ -341,12 +341,12 @@ EXPECT=<<RUN
 07 0x00000000     0 0x00000000     0 -rw- GNU_STACK
 08 0x00000000    52 0x08048000    52 -rw- ehdr
 [Entrypoints]
-vaddr=0x08048300 paddr=0x00000300 baddr=0x08048000 laddr=0x00000000 haddr=0x00000018 type=program
+vaddr=0x08048300 paddr=0x00000300 baddr=0x08048000 laddr=0x00000000 hpaddr=0x00000018 type=program
 
 1 entrypoints
 [Constructors]
-vaddr=0x080483d0 paddr=0x080483d0 baddr=0x08048000 laddr=0x00000000 hvaddr=0x0804959c haddr=0x0000059c type=init
-vaddr=0x080483b0 paddr=0x080483b0 baddr=0x08048000 laddr=0x00000000 hvaddr=0x080495a0 haddr=0x000005a0 type=fini
+vaddr=0x080483d0 paddr=0x080483d0 baddr=0x08048000 laddr=0x00000000 hvaddr=0x0804959c hpaddr=0x0000059c type=init
+vaddr=0x080483b0 paddr=0x080483b0 baddr=0x08048000 laddr=0x00000000 hvaddr=0x080495a0 hpaddr=0x000005a0 type=fini
 
 2 entrypoints
 [Main]

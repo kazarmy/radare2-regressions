@@ -42,12 +42,12 @@ CMDS64=aWN+X0pOSUVudgppY35GaW5kQ2xhc3MKCg==
 RUN
 NAME=ie (file x86)
 FILE=../bins/elf/analysis/x86-helloworld-gcc
-EXPECT64=W0VudHJ5cG9pbnRzXQp2YWRkcj0weDA4MDQ4MzAwIHBhZGRyPTB4MDAwMDAzMDAgYmFkZHI9MHgwODA0ODAwMCBsYWRkcj0weDAwMDAwMDAwIGhhZGRyPTB4MDAwMDAwMTggdHlwZT1wcm9ncmFtCgoxIGVudHJ5cG9pbnRzCgo=
+EXPECT64=W0VudHJ5cG9pbnRzXQp2YWRkcj0weDA4MDQ4MzAwIHBhZGRyPTB4MDAwMDAzMDAgYmFkZHI9MHgwODA0ODAwMCBsYWRkcj0weDAwMDAwMDAwIGhwYWRkcj0weDAwMDAwMDE4IHR5cGU9cHJvZ3JhbQoKMSBlbnRyeXBvaW50cwo=
 CMDS64=aWUK
 RUN
 NAME=iej (file x86)
 FILE=../bins/elf/analysis/x86-helloworld-gcc
-EXPECT64=W3sidmFkZHIiOjEzNDUxMzQwOCwicGFkZHIiOjc2OCwiYmFkZHIiOjEzNDUxMjY0MCwibGFkZHIiOjAsImhhZGRyIjoyNCwidHlwZSI6InByb2dyYW0ifV0KCg==
+EXPECT64=W3sidmFkZHIiOjEzNDUxMzQwOCwicGFkZHIiOjc2OCwiYmFkZHIiOjEzNDUxMjY0MCwibGFkZHIiOjAsImhwYWRkciI6MjQsInR5cGUiOiJwcm9ncmFtIn1dCg==
 CMDS64=aWVqCg==
 RUN
 NAME=ii (file x86)
@@ -366,7 +366,7 @@ CMDS64=aUEK
 RUN
 NAME=ie (file x86_64)
 FILE=../bins/elf/analysis/hello-linux-x86_64
-EXPECT64=W0VudHJ5cG9pbnRzXQp2YWRkcj0weDAwNDAwNDEwIHBhZGRyPTB4MDAwMDA0MTAgYmFkZHI9MHgwMDQwMDAwMCBsYWRkcj0weDAwMDAwMDAwIGhhZGRyPTB4MDAwMDAwMTggdHlwZT1wcm9ncmFtCgoxIGVudHJ5cG9pbnRzCgo=
+EXPECT64=W0VudHJ5cG9pbnRzXQp2YWRkcj0weDAwNDAwNDEwIHBhZGRyPTB4MDAwMDA0MTAgYmFkZHI9MHgwMDQwMDAwMCBsYWRkcj0weDAwMDAwMDAwIGhwYWRkcj0weDAwMDAwMDE4IHR5cGU9cHJvZ3JhbQoKMSBlbnRyeXBvaW50cwo=
 CMDS64=aWUK
 RUN
 NAME=iH (file x86_64)
@@ -596,8 +596,8 @@ iee~type=preinit
 e asm.bytes=false
 pd 1 @ 0x0804849f
 EXPECT=<<RUN
-vaddr=0x08048486 paddr=0x00000486 baddr=0x08048000 laddr=0x00000000 hvaddr=0x08049ed4 haddr=0x00000ed4 type=preinit
-vaddr=0x0804849f paddr=0x0000049f baddr=0x08048000 laddr=0x00000000 hvaddr=0x08049ed8 haddr=0x00000ed8 type=preinit
+vaddr=0x08048486 paddr=0x00000486 baddr=0x08048000 laddr=0x00000000 hvaddr=0x08049ed4 hpaddr=0x00000ed4 type=preinit
+vaddr=0x0804849f paddr=0x0000049f baddr=0x08048000 laddr=0x00000000 hvaddr=0x08049ed8 hpaddr=0x00000ed8 type=preinit
             ;-- entry2.preinit:
             ;-- preinit2:
             0x0804849f      push ebp
@@ -659,7 +659,7 @@ NAME=ieej
 FILE=../bins/elf/analysis/x86-helloworld-gcc
 CMDS=ieej
 EXPECT=<<RUN
-[{"vaddr":134513616,"paddr":976,"baddr":134512640,"laddr":0,"hvaddr":134518172,"haddr":1436,"type":"init"},{"vaddr":134513584,"paddr":944,"baddr":134512640,"laddr":0,"hvaddr":134518176,"haddr":1440,"type":"fini"}]
+[{"vaddr":134513616,"paddr":976,"baddr":134512640,"laddr":0,"hvaddr":134518172,"hpaddr":1436,"type":"init"},{"vaddr":134513584,"paddr":944,"baddr":134512640,"laddr":0,"hvaddr":134518176,"hpaddr":1440,"type":"fini"}]
 RUN
 
 NAME=ieeej
@@ -674,7 +674,7 @@ EXPECT=<<RUN
       "baddr": 134512640,
       "laddr": 0,
       "hvaddr": 134518172,
-      "haddr": 1436,
+      "hpaddr": 1436,
       "type": "init"
     },
     {
@@ -683,7 +683,7 @@ EXPECT=<<RUN
       "baddr": 134512640,
       "laddr": 0,
       "hvaddr": 134518176,
-      "haddr": 1440,
+      "hpaddr": 1440,
       "type": "fini"
     }
   ],
@@ -693,7 +693,7 @@ EXPECT=<<RUN
       "paddr": 768,
       "baddr": 134512640,
       "laddr": 0,
-      "haddr": 24,
+      "hpaddr": 24,
       "type": "program"
     }
   ]
