@@ -10,7 +10,7 @@ CMDS64=aXNxCg==
 RUN
 NAME=sega megadrive rom entrypoint
 FILE=../bins/smd/LiquidSpaceDodgerV3.bin
-EXPECT64=dmFkZHI9MHgwMDAwMDIwMCBwYWRkcj0weDAwMDAwMjAwIGJhZGRyPTB4ZmZmZmZmZmZmZmZmZmZmZiBsYWRkcj0weDAwMDAwMDAwIGhhZGRyPS0xIHR5cGU9cHJvZ3JhbQoK
+EXPECT64=dmFkZHI9MHgwMDAwMDIwMCBwYWRkcj0weDAwMDAwMjAwIGJhZGRyPTB4ZmZmZmZmZmZmZmZmZmZmZiBsYWRkcj0weDAwMDAwMDAwIGhwYWRkcj0tMSB0eXBlPXByb2dyYW0K
 CMDS64=aWV+dmFkZAo=
 RUN
 NAME=sega megadrive rom maps and printing

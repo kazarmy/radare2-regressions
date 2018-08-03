@@ -3,9 +3,9 @@ FILE=../bins/firmware/bios_64k.bin
 EXPECT64=Cg==
 CMDS64=cSEK
 RUN
-NAME=entrypoint decoding
+NAME=entrypoint decoding [64k]
 FILE=../bins/firmware/bios_64k.bin
-EXPECT64=dmFkZHI9MHgwMDBmZmZmMCBwYWRkcj0weDAwMDAwMDAwIGJhZGRyPTB4MDAwMDAwMDAgbGFkZHI9MHgwMDAwMDAwMCBoYWRkcj0tMSB0eXBlPXByb2dyYW0KCg==
+EXPECT64=dmFkZHI9MHgwMDBmZmZmMCBwYWRkcj0weDAwMDAwMDAwIGJhZGRyPTB4MDAwMDAwMDAgbGFkZHI9MHgwMDAwMDAwMCBocGFkZHI9LTEgdHlwZT1wcm9ncmFtCg==
 CMDS64=aWV+YWRkcgo=
 RUN
 NAME=corrupted section data
@@ -23,9 +23,9 @@ FILE=../bins/firmware/bios_128k.bin
 EXPECT64=Cg==
 CMDS64=cSEK
 RUN
-NAME=entrypoint decoding
+NAME=entrypoint decoding [128k]
 FILE=../bins/firmware/bios_128k.bin
-EXPECT64=dmFkZHI9MHgwMDBmZmZmMCBwYWRkcj0weDAwMDAwMDAwIGJhZGRyPTB4MDAwMDAwMDAgbGFkZHI9MHgwMDAwMDAwMCBoYWRkcj0tMSB0eXBlPXByb2dyYW0KCg==
+EXPECT64=dmFkZHI9MHgwMDBmZmZmMCBwYWRkcj0weDAwMDAwMDAwIGJhZGRyPTB4MDAwMDAwMDAgbGFkZHI9MHgwMDAwMDAwMCBocGFkZHI9LTEgdHlwZT1wcm9ncmFtCg==
 CMDS64=aWV+YWRkcgo=
 RUN
 NAME=corrupted section data
@@ -38,9 +38,9 @@ FILE=../bins/firmware/bios_256k.bin
 EXPECT64=Cg==
 CMDS64=cSEK
 RUN
-NAME=entrypoint decoding
+NAME=entrypoint decoding [256k]
 FILE=../bins/firmware/bios_256k.bin
-EXPECT64=dmFkZHI9MHgwMDBmZmZmMCBwYWRkcj0weDAwMDAwMDAwIGJhZGRyPTB4MDAwMDAwMDAgbGFkZHI9MHgwMDAwMDAwMCBoYWRkcj0tMSB0eXBlPXByb2dyYW0KCg==
+EXPECT64=dmFkZHI9MHgwMDBmZmZmMCBwYWRkcj0weDAwMDAwMDAwIGJhZGRyPTB4MDAwMDAwMDAgbGFkZHI9MHgwMDAwMDAwMCBocGFkZHI9LTEgdHlwZT1wcm9ncmFtCg==
 CMDS64=aWV+YWRkcgo=
 RUN
 NAME=corrupted section data
@@ -53,9 +53,9 @@ FILE=../bins/firmware/bios_512k.bin
 EXPECT64=Cg==
 CMDS64=cSEK
 RUN
-NAME=entrypoint decoding
+NAME=entrypoint decoding [512k]
 FILE=../bins/firmware/bios_512k.bin
-EXPECT64=dmFkZHI9MHgwMDBmZmZmMCBwYWRkcj0weDAwMDAwMDAwIGJhZGRyPTB4MDAwMDAwMDAgbGFkZHI9MHgwMDAwMDAwMCBoYWRkcj0tMSB0eXBlPXByb2dyYW0KCg==
+EXPECT64=dmFkZHI9MHgwMDBmZmZmMCBwYWRkcj0weDAwMDAwMDAwIGJhZGRyPTB4MDAwMDAwMDAgbGFkZHI9MHgwMDAwMDAwMCBocGFkZHI9LTEgdHlwZT1wcm9ncmFtCg==
 CMDS64=aWV+YWRkcgo=
 RUN
 NAME=corrupted section data
@@ -68,9 +68,9 @@ FILE=../bins/firmware/bios_1M.bin
 EXPECT64=Cg==
 CMDS64=cSEK
 RUN
-NAME=entrypoint decoding
+NAME=entrypoint decoding [1M]
 FILE=../bins/firmware/bios_1M.bin
-EXPECT64=dmFkZHI9MHgwMDBmZmZmMCBwYWRkcj0weDAwMDAwMDAwIGJhZGRyPTB4MDAwMDAwMDAgbGFkZHI9MHgwMDAwMDAwMCBoYWRkcj0tMSB0eXBlPXByb2dyYW0KCg==
+EXPECT64=dmFkZHI9MHgwMDBmZmZmMCBwYWRkcj0weDAwMDAwMDAwIGJhZGRyPTB4MDAwMDAwMDAgbGFkZHI9MHgwMDAwMDAwMCBocGFkZHI9LTEgdHlwZT1wcm9ncmFtCg==
 CMDS64=aWV+YWRkcgo=
 RUN
 NAME=corrupted section data
@@ -83,9 +83,9 @@ FILE=../bins/firmware/bios_2M.bin
 EXPECT64=Cg==
 CMDS64=cSEK
 RUN
-NAME=entrypoint decoding
+NAME=entrypoint decoding [2M]
 FILE=../bins/firmware/bios_2M.bin
-EXPECT64=dmFkZHI9MHgwMDBmZmZmMCBwYWRkcj0weDAwMDAwMDAwIGJhZGRyPTB4MDAwMDAwMDAgbGFkZHI9MHgwMDAwMDAwMCBoYWRkcj0tMSB0eXBlPXByb2dyYW0KCg==
+EXPECT64=dmFkZHI9MHgwMDBmZmZmMCBwYWRkcj0weDAwMDAwMDAwIGJhZGRyPTB4MDAwMDAwMDAgbGFkZHI9MHgwMDAwMDAwMCBocGFkZHI9LTEgdHlwZT1wcm9ncmFtCg==
 CMDS64=aWV+YWRkcgo=
 RUN
 NAME=corrupted section data
@@ -98,9 +98,9 @@ FILE=../bins/firmware/bios_4M.bin
 EXPECT64=Cg==
 CMDS64=cSEK
 RUN
-NAME=entrypoint decoding
+NAME=entrypoint decoding [4M]
 FILE=../bins/firmware/bios_4M.bin
-EXPECT64=dmFkZHI9MHgwMDBmZmZmMCBwYWRkcj0weDAwMDAwMDAwIGJhZGRyPTB4MDAwMDAwMDAgbGFkZHI9MHgwMDAwMDAwMCBoYWRkcj0tMSB0eXBlPXByb2dyYW0KCg==
+EXPECT64=dmFkZHI9MHgwMDBmZmZmMCBwYWRkcj0weDAwMDAwMDAwIGJhZGRyPTB4MDAwMDAwMDAgbGFkZHI9MHgwMDAwMDAwMCBocGFkZHI9LTEgdHlwZT1wcm9ncmFtCg==
 CMDS64=aWV+YWRkcgo=
 RUN
 NAME=corrupted section data
@@ -113,9 +113,9 @@ FILE=../bins/firmware/bios_8M.bin
 EXPECT64=Cg==
 CMDS64=cSEK
 RUN
-NAME=entrypoint decoding
+NAME=entrypoint decoding [8M]
 FILE=../bins/firmware/bios_8M.bin
-EXPECT64=dmFkZHI9MHgwMDBmZmZmMCBwYWRkcj0weDAwMDAwMDAwIGJhZGRyPTB4MDAwMDAwMDAgbGFkZHI9MHgwMDAwMDAwMCBoYWRkcj0tMSB0eXBlPXByb2dyYW0KCg==
+EXPECT64=dmFkZHI9MHgwMDBmZmZmMCBwYWRkcj0weDAwMDAwMDAwIGJhZGRyPTB4MDAwMDAwMDAgbGFkZHI9MHgwMDAwMDAwMCBocGFkZHI9LTEgdHlwZT1wcm9ncmFtCg==
 CMDS64=aWV+YWRkcgo=
 RUN
 NAME=corrupted section data
