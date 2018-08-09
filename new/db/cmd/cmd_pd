@@ -797,3 +797,14 @@ EXPECT=<<RUN
             0x004016ca      mov edi, 0x40235a                          ; 'Z#@' ; u"\u2520\u2542-\u2500-\u2500\u2542\u2528 is a fence with embedded double zeros\n"
             0x004016ca      mov edi, str.fence                         ; u"\u2520\u2542-\u2500-\u2500\u2542\u2528 is a fence with embedded double zeros\n"
 RUN
+
+NAME=#10989 double pre-disasm
+FILE=../bins/elf/echo-bin
+CMDS=<<EXPECT
+e asm.bytes=false
+e asm.cmt.right=false
+pd 1 @ 0xe78
+EXPECT=<<RUN
+            ; 'f'
+            0x00000e78      mov byte [rbp - 0x274e], 0x66
+RUN
