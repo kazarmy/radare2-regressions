@@ -1,3 +1,4 @@
+ad "lea edx, [0x2c4b]" 8d154b2c0000
 d "aaa" 37
 d "aad" d50a
 d "aam" d40a
@@ -1359,8 +1360,8 @@ a "lea ebx, [eax+24]" 8d5818
 a "lea ebx, [eax+4]" 8d5804
 a "lea ebx, [ebp+324]" 8d9d44010000
 a "lea ebx, [ebp]" 8d5d00
-a "lea edx, [0x2c4b]" 8d154b2c0000
 a "lea edx, [0x4422221d]" 8d151d222244
+a "lea edx, 0x2c4b" 8d154b2c0000
 a "leave" c9
 a "les eax, [eax]" c400
 a "les eax, [eax+12]" c4400c

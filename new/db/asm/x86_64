@@ -1,3 +1,4 @@
+d "lea rax, [0x803]" 488d042503080000
 ad "nop" 90
 ad "ret" c3
 a "add r13, r15" 4d01fd
@@ -28,6 +29,8 @@ aB "lea rax,[rip+10]" 488d050a000000
 aB "lea rax,[rip-0]" 488d0500000000
 aB "lea rax,[rip-10]" 488d05f6ffffff
 aB "lea rax,[rip]" 488d0500000000
+aB "lea rax, [0x803]" 488d042503080000
+aB "lea rax, 0x803" 488d042503080000
 a "mov [rsi], rbx" 48891e
 a "mov rax, 0x1122334455667788" 48b88877665544332211
 aB "mov rax, 0x112233445566778899" 00
