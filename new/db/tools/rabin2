@@ -285,6 +285,19 @@ EXPECT='{
 }'
 RUN
 
+NAME=-ee baddr 0
+FILE=../bins/elf/analysis/x86-helloworld-gcc
+CMDS=<<EXPECT
+!rabin2 -ee -B 0 ${R2_FILE}
+  # paddr is buggy
+EXPECT=<<RUN
+[Constructors]
+vaddr=0x000003d0 paddr=0x080483d0 baddr=0x00000000 laddr=0x00000000 hvaddr=0x0000159c hpaddr=0x0000059c type=init
+vaddr=0x000003b0 paddr=0x080483b0 baddr=0x00000000 laddr=0x00000000 hvaddr=0x000015a0 hpaddr=0x000005a0 type=fini
+
+2 entrypoints
+RUN
+
 NAME=rabin2 -g
 FILE=../bins/elf/analysis/x86-helloworld-gcc
 CMDS=!rabin2 -g ${R2_FILE}
