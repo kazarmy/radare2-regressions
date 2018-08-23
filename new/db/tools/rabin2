@@ -265,7 +265,7 @@ EXPECT='{
   "initfini": [
     {
       "vaddr": 134513616,
-      "paddr": 134513616,
+      "paddr": 976,
       "baddr": 134512640,
       "laddr": 0,
       "hvaddr": 134518172,
@@ -274,7 +274,7 @@ EXPECT='{
     },
     {
       "vaddr": 134513584,
-      "paddr": 134513584,
+      "paddr": 944,
       "baddr": 134512640,
       "laddr": 0,
       "hvaddr": 134518176,
@@ -287,13 +287,11 @@ RUN
 
 NAME=-ee baddr 0
 FILE=../bins/elf/analysis/x86-helloworld-gcc
-CMDS=<<EXPECT
-!rabin2 -ee -B 0 ${R2_FILE}
-  # paddr is buggy
+CMDS=!rabin2 -ee -B 0 ${R2_FILE}
 EXPECT=<<RUN
 [Constructors]
-vaddr=0x000003d0 paddr=0x080483d0 baddr=0x00000000 laddr=0x00000000 hvaddr=0x0000159c hpaddr=0x0000059c type=init
-vaddr=0x000003b0 paddr=0x080483b0 baddr=0x00000000 laddr=0x00000000 hvaddr=0x000015a0 hpaddr=0x000005a0 type=fini
+vaddr=0x000003d0 paddr=0x000003d0 baddr=0x00000000 laddr=0x00000000 hvaddr=0x0000159c hpaddr=0x0000059c type=init
+vaddr=0x000003b0 paddr=0x000003b0 baddr=0x00000000 laddr=0x00000000 hvaddr=0x000015a0 hpaddr=0x000005a0 type=fini
 
 2 entrypoints
 RUN
@@ -348,8 +346,8 @@ vaddr=0x08048300 paddr=0x00000300 baddr=0x08048000 laddr=0x00000000 haddr=0x0000
 
 1 entrypoints
 [Constructors]
-vaddr=0x080483d0 paddr=0x080483d0 baddr=0x08048000 laddr=0x00000000 hvaddr=0x0804959c hpaddr=0x0000059c type=init
-vaddr=0x080483b0 paddr=0x080483b0 baddr=0x08048000 laddr=0x00000000 hvaddr=0x080495a0 hpaddr=0x000005a0 type=fini
+vaddr=0x080483d0 paddr=0x000003d0 baddr=0x08048000 laddr=0x00000000 hvaddr=0x0804959c hpaddr=0x0000059c type=init
+vaddr=0x080483b0 paddr=0x000003b0 baddr=0x08048000 laddr=0x00000000 hvaddr=0x080495a0 hpaddr=0x000005a0 type=fini
 
 2 entrypoints
 [Main]
