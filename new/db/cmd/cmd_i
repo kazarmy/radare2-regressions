@@ -816,3 +816,11 @@ EXPECT=<<RUN
 /home/landley/work/ab7/build/temp-armv6l/gcc-core/gcc/config/arm/ieee754-df.S
 /home/landley/work/ab7/build/temp-armv6l/gcc-core/gcc/config/arm/lib1funcs.asm
 RUN
+
+NAME=iM main sym
+FILE=../bins/elf/before-after-main
+CMDS=iM
+EXPECT=<<RUN
+[Main]
+vaddr=0x0804854e paddr=0x0000054e
+RUN
