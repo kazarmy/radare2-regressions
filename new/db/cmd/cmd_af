@@ -10,3 +10,38 @@ FILE=../bins/mach0/ls-osx-x86_64
 EXPECT64=MQo=
 CMDS64=YWEgOyBhZmxsfj9lbnRyeTAK
 RUN
+
+NAME=missing bb fix
+FILE=../bins/elf/before-after-main
+CMDS=<<EXPECT
+e asm.bytes=false
+e asm.comments=false
+s sym.register_tm_clones
+af
+pdf
+EXPECT=<<RUN
+/ (fcn) sym.register_tm_clones 53
+|   sym.register_tm_clones ();
+|           0x08048410      mov eax, obj.completed.6891
+|           0x08048415      sub eax, obj.completed.6891
+|           0x0804841a      sar eax, 2
+|           0x0804841d      mov edx, eax
+|           0x0804841f      shr edx, 0x1f
+|           0x08048422      add eax, edx
+|           0x08048424      sar eax, 1
+|       ,=< 0x08048426      je 0x8048448
+|       |   0x08048428      mov edx, 0
+|       |   0x0804842d      test edx, edx
+|      ,==< 0x0804842f      je 0x8048448
+|      ||   0x08048431      push ebp
+|      ||   0x08048432      mov ebp, esp
+|      ||   0x08048434      sub esp, 0x10
+|      ||   0x08048437      push eax
+|      ||   0x08048438      push obj.completed.6891
+|      ||   0x0804843d      call edx
+|      ||   0x0804843f      add esp, 0x10
+|      ||   0x08048442      leave
+|      ||   0x08048443      ret
+..
+\      ``-> 0x08048448      ret
+RUN
