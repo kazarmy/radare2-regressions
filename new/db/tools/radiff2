@@ -62,7 +62,7 @@ NAME=radiff2 -AC (elf files)
 FILE=-
 CMDS=!!radiff2 -AC ../bins/other/radiff2/true ../bins/other/radiff2/false~?(1.000000)
 EXPECT=<<RUN
-55
+54
 RUN
 
 NAME=radiff2 -AC (mach0 fat files)
