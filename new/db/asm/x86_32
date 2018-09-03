@@ -1466,6 +1466,7 @@ aB "mov dword ss:[eax], eax" 368900
 aB "mov eax, dword fs:[1]" 648b042501000000
 aB "movd xmm0, dword [eax]" 660f6e00
 a "mov eax, 0" b800000000
+a "mov [eax], 0" c70000000000
 a "mov eax, 0x8049000" b800900408
 a "mov eax, 1" b801000000
 a "mov [eax+2], ebx" 895802

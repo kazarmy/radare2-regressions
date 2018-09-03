@@ -116,6 +116,9 @@ ad "call r12" 41ffd4
 ad "call r13" 41ffd5
 ad "call r14" 41ffd6
 ad "call r15" 41ffd7
+a "mov dword ptr [rax],0x1" c70001000000
+a "mov qword [rax], 0x1" 48c70001000000
+a "mov [rax], 0x1" 48c70001000000
 a "mov byte ptr [rip+0x203cb8],0x1" c605b83c200001
 a "mov dword ptr [rip+0x203817],0x42" c7051738200042000000
 a "mov dword ptr [rip+0x20380b],0x54" c7050b38200054000000
@@ -223,7 +226,6 @@ a "mov qword ptr [rbp-0x248],0x0" 48c785b8fdffff00000000
 a "mov byte ptr [rip+0x205443],0x1" c6054354200001
 a "mov byte ptr [rax],0x0" c60000
 a "mov dword ptr [rbp-0x2c4],0x2" c7853cfdffff02000000
-a "mov dword ptr [rax],0x1" c70001000000
 a "mov dword ptr [rbp-0x2e4],0x2" c7851cfdffff02000000
 a "mov qword ptr [rbp-0x158],0x0" 48c785a8feffff00000000
 a "mov qword ptr [rbp-0x148],0x0" 48c785b8feffff00000000
@@ -243,7 +245,6 @@ a "mov qword ptr [rax+0x10],0x0" 48c7401000000000
 a "mov qword ptr [rbp-0x288],0x0" 48c78578fdffff00000000
 a "mov qword ptr [rbp-0x280],0x0" 48c78580fdffff00000000
 a "mov byte ptr [rip+0x2049a0],0x1" c605a049200001
-a "mov dword ptr [rax],0x1" c70001000000
 a "mov qword ptr [rip+0x20489f],0x0" 48c7059f48200000000000
 a "mov qword ptr [rip+0x2047f9],0x0" 48c705f947200000000000
 a "mov dword ptr [rip+0x2047c7],0x1" c705c747200001000000
