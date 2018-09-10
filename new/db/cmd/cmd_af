@@ -45,3 +45,31 @@ EXPECT=<<RUN
 ..
 \      ``-> 0x08048448      ret
 RUN
+
+NAME=__libc_start_main might return
+FILE=../bins/elf/before-after-main
+CMDS=<<EXPECT
+s sym._start
+af
+pif
+EXPECT=<<RUN
+xor ebp, ebp
+pop esi
+mov ecx, esp
+and esp, 0xfffffff0
+push eax
+push esp
+push edx
+call fcn.080483a3
+add ebx, 0x1c80
+lea eax, [ebx - 0x19a0]
+push eax
+lea eax, [ebx - 0x1a00]
+push eax
+push ecx
+push esi
+mov eax, sym.main
+push eax
+call sym.imp.__libc_start_main
+hlt
+RUN
