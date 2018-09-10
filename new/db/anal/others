@@ -226,12 +226,12 @@ CMDS64=YWYKYWZpfm5hbWUKCg==
 RUN
 NAME=anal hasnext on main
 FILE=../bins/elf/true32
-EXPECT64=c2l6ZTogMjYxCgo=
+EXPECT64=c2l6ZTogMjYyCg==
 CMDS64=ZSBhbmFsLmhhc25leHQ9dHJ1ZQphZkBtYWluCmFmaUBtYWlufnNpemUKCg==
 RUN
 NAME=anal without hasnext on main
 FILE=../bins/elf/true32
-EXPECT64=c2l6ZTogMjYxCgo=
+EXPECT64=c2l6ZTogMjYyCg==
 CMDS64=ZSBhbmFsLmhhc25leHQ9ZmFsc2UKYWZAbWFpbgphZmlAbWFpbn5zaXplCgo=
 RUN
 NAME=ahe
