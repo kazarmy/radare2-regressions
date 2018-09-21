@@ -1,0 +1,16 @@
+NAME=bytes for invalid insn (#11434)
+FILE=-
+CMDS=<<EXPECT
+e asm.arch=x86
+e asm.bits=64
+wx 60; pd 2
+?e
+wx 906090; pd 3
+EXPECT=<<RUN
+            0x00000000      60             invalid
+            0x00000001      0000           add byte [rax], al
+
+            0x00000000      90             nop
+            0x00000001      60             invalid
+            0x00000002      90             nop
+RUN
