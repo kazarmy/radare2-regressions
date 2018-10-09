@@ -14,3 +14,15 @@ EXPECT=<<RUN
             0x00000001      60             invalid
             0x00000002      90             nop
 RUN
+
+NAME=arm indirect relsub fix
+FILE=../bins/elf/analysis/arm_32_flags0
+CMDS=<<EXPECT
+e asm.bytes=false
+e asm.cmt.right=true
+pd 1 @ 0x000102e0
+pd 1 @ 0x000102e8
+EXPECT=<<RUN
+            0x000102e0      ldr ip, sym.__libc_csu_fini                ; [loc._d_2 0x102f8:4]=0x10494 sym.__libc_csu_fini
+            0x000102e8      ldr r0, sym.main                           ; [0x102fc:4]=0x10408 sym.main
+RUN
