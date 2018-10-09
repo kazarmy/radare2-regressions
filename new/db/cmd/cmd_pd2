@@ -15,7 +15,7 @@ EXPECT=<<RUN
             0x00000002      90             nop
 RUN
 
-NAME=arm indirect relsub fix
+NAME=arm indirect relsub fix (#11780)
 FILE=../bins/elf/analysis/arm_32_flags0
 CMDS=<<EXPECT
 e asm.bytes=false
