@@ -22,7 +22,16 @@ e asm.bytes=false
 e asm.cmt.right=true
 pd 1 @ 0x000102e0
 pd 1 @ 0x000102e8
+?e
+e asm.cmt.right=false
+pd 1 @ 0x000102e0
+pd 1 @ 0x000102e8
 EXPECT=<<RUN
-            0x000102e0      ldr ip, sym.__libc_csu_fini                ; [loc._d_2 0x102f8:4]=0x10494 sym.__libc_csu_fini
+            0x000102e0      ldr ip, sym.__libc_csu_fini                ; [loc._d_2:4]=0x10494 sym.__libc_csu_fini
             0x000102e8      ldr r0, sym.main                           ; [0x102fc:4]=0x10408 sym.main
+
+            ; [loc._d_2:4]=0x10494 sym.__libc_csu_fini
+            0x000102e0      ldr ip, sym.__libc_csu_fini
+            ; [0x102fc:4]=0x10408 sym.main
+            0x000102e8      ldr r0, sym.main
 RUN
