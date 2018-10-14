@@ -36,7 +36,7 @@ EXPECT=<<RUN
             0x000102e8      ldr r0, sym.main
 RUN
 
-NAME=realign after sparse
+NAME=realign after sparse (#11810)
 FILE=../bins/pe/3ba51ca4-d4ca-11e5-906b-78db8180b654.png
 CMDS=<<EXPECT
 e asm.bytes=false
