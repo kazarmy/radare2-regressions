@@ -37,7 +37,7 @@ EXPECT=<<RUN
 RUN
 
 NAME=realign after sparse (#11810)
-FILE=../bins/pe/3ba51ca4-d4ca-11e5-906b-78db8180b654.png
+FILE=../bins/pe/cmd_adf_sample0.exe
 CMDS=<<EXPECT
 e asm.bytes=false
 e asm.comments=false
