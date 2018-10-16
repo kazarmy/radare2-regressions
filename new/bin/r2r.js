@@ -41,7 +41,7 @@ const args = process.argv.slice(2).map(_ => {
 const delims = /['"%]/;
 
 main(minimist(args, {
-  boolean: ['v', 'verbose', 'i', 'interactive', 'l', 'list' ],
+  boolean: ['v', 'verbose', 'i', 'interactive', 'l', 'list', 'format'],
   string: ['g', 'grep']
 }));
 
@@ -59,7 +59,9 @@ function main (argv) {
  -j    output in JSON
  -l    list all tests
  -u    unmark broken in fixed tests
- -v    be verbose (show broken tests and use more newlines)`);
+ -v    be verbose (show broken tests and use more newlines)
+ --format
+       format tests (i.e. add blank lines between tests)`);
     rl.close();
     return 0;
   }

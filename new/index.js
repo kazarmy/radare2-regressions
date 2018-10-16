@@ -64,6 +64,12 @@ class NewRegressions {
     useScript = !this.argv.c;
     this.verbose = this.argv.verbose || this.argv.v;
     this.interactive = this.argv.interactive || this.argv.i;
+    this.format = this.argv.format;
+    if (this.format && process.platform === 'win32') {
+      // since r2r on Windows modifies tests on-the-fly...
+      console.log('Do not run --format on Windows!');
+      process.exit(1);
+    }
     this.promises = [];
     // reduce startup times of r2
     process.env.RABIN2_NOPLUGINS = 1;
@@ -541,7 +547,8 @@ class NewRegressions {
 
   load (fileName, cb) {
     this.name = fileName;
-    const blob = fs.readFileSync(path.join(__dirname, fileName));
+    const pathName = path.join(__dirname, fileName);
+    const blob = fs.readFileSync(pathName);
     // do we really need to support gzipped tests?
     zlib.gunzip(blob, (err, data) => {
       let tests;
@@ -562,6 +569,32 @@ class NewRegressions {
         tests = tests.split('\n');
       }
       if (this.argv.grep !== undefined) {
+        return cb(null, {});
+      }
+      if (this.argv.format) {
+        var newTests = [];
+        var writeTests = false;
+        var prevLineRUN = false;
+        process.stdout.write('Checking format of ' + fileName + '...');
+        for (let i = 0; i < tests.length; i++) {
+          if (prevLineRUN) {
+            prevLineRUN = false;
+            if (tests[i].trim() !== '') {
+              writeTests = true;
+              newTests.push('');
+            }
+          }
+          newTests.push(tests[i]);
+          if (tests[i].trim() === 'RUN') {
+            prevLineRUN = true;
+          }
+        }
+        if (writeTests) {
+          fs.writeFileSync(pathName, newTests.join('\n'));
+          console.log('FIXED');
+        } else {
+          console.log('OK');
+        }
         return cb(null, {});
       }
       this.runTests(fileName, tests);
