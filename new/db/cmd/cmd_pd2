@@ -156,3 +156,47 @@ EXPECT=<<RUN
 \     :`==< 0x00560fd5      jmp 0x43d3f7
 ..
 RUN
+
+NAME=esil func cmts
+FILE=../bins/elf/arm1.bin
+CMDS=<<EXPECT
+tk func.__libc_start_main.noreturn=false
+e asm.emu=true
+e emu.write=true
+s 0x8174
+af
+# TODO:
+#   e asm.cmt.right=true
+#   pdf
+#   ?e
+e asm.cmt.right=false
+pdf
+?e
+agf
+EXPECT=<<RUN
+/ (fcn) fcn.00008174 8
+|   fcn.00008174 ();
+|              ; lr=0x8178 -> 0xeb0002a4
+|              ; pc=0x845c -> 0xe92d41f0 sym.__libc_start_main
+|              ; int __libc_start_main(func: unk_size_format, int argc : 0x00000000 = 4294967295, char **: unk_size_format, func: unk_size_format, func: unk_size_format, func: unk_size_format, void * stack_end : (*0xffffffff)0x00000000 = 0xffffffff)
+|           0x00008174      b80000eb       bl sym.__libc_start_main
+|              ; lr=0x817c -> 0xe92d4030 loc._d_2
+|              ; pc=0x8c10 -> 0xe59f62a0 sym.abort
+|              ; void abort(void)
+\           0x00008178      a40200eb       bl sym.abort
+
+[0x00008174]> VV @ fcn.00008174 (nodes 1 edges 0 zoom 100%) BB-NORM mouse:canvas-y mov-speed:5
+.------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------.
+|  0x8174                                                                                                                                                                                                                                        |
+| (fcn) fcn.00008174 8                                                                                                                                                                                                                           |
+|   fcn.00008174 ();                                                                                                                                                                                                                             |
+|    ; lr=0x8178 -> 0xeb0002a4                                                                                                                                                                                                                   |
+|    ; pc=0x845c -> 0xe92d41f0 sym.__libc_start_main                                                                                                                                                                                             |
+|    ; int __libc_start_main(func: unk_size_format, int argc : 0x00000000 = 4294967295, char **: unk_size_format, func: unk_size_format, func: unk_size_format, func: unk_size_format, void * stack_end : (*0xffffffff)0x00000000 = 0xffffffff)  |
+| bl sym.__libc_start_main;[ga]                                                                                                                                                                                                                  |
+|    ; lr=0x817c -> 0xe92d4030 loc._d_2                                                                                                                                                                                                          |
+|    ; pc=0x8c10 -> 0xe59f62a0 sym.abort                                                                                                                                                                                                         |
+|    ; void abort(void)                                                                                                                                                                                                                          |
+| bl sym.abort;[gb]                                                                                                                                                                                                                              |
+`------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------'
+RUN
