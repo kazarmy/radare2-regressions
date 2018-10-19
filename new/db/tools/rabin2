@@ -27,7 +27,7 @@ FILE=../bins/elf/analysis/hello-linux-x86_64
 CMDS=!rabin2 -G 0 -e ${R2_FILE}
 EXPECT=<<RUN
 [Entrypoints]
-vaddr=0x00400410 paddr=0x00000410 baddr=0x00400000 laddr=0x00000000 haddr=0x00000018 type=program
+vaddr=0x00400410 paddr=0x00000410 baddr=0x00400000 laddr=0x00000000 haddr=0x00000018 hvaddr=0x00400018 type=program
 
 1 entrypoints
 RUN
@@ -37,7 +37,7 @@ FILE=../bins/elf/analysis/hello-linux-x86_64
 CMDS=!rabin2 -G 0 -B 0 -e ${R2_FILE}
 EXPECT=<<RUN
 [Entrypoints]
-vaddr=0x00000410 paddr=0x00000410 baddr=0x00000000 laddr=0x00000000 haddr=0x00000018 type=program
+vaddr=0x00000410 paddr=0x00000410 baddr=0x00000000 laddr=0x00000000 haddr=0x00000018 hvaddr=0x00000018 type=program
 
 1 entrypoints
 RUN
@@ -349,7 +349,7 @@ Nm Paddr       Size Vaddr      Memsz Perms Name
 07 0x00000000     0 0x00000000     0 -rw- GNU_STACK
 08 0x00000000    52 0x08048000    52 -rw- ehdr
 [Entrypoints]
-vaddr=0x08048300 paddr=0x00000300 baddr=0x08048000 laddr=0x00000000 haddr=0x00000018 type=program
+vaddr=0x08048300 paddr=0x00000300 baddr=0x08048000 laddr=0x00000000 haddr=0x00000018 hvaddr=0x08048018 type=program
 
 1 entrypoints
 [Constructors]
