@@ -282,7 +282,7 @@ wx 31c039d6724aeb72908db426000000008d7e0131d289e8f7f131d28944241c89f8f7f13944241
 aa > /dev/null
 pd 38
 EXPECT=<<RUN
-┌ (fcn) fcn.00000000 1015
+┌ (fcn) fcn.00000000 1645
 │           ; var int local_4h @ esp+0x4
 │           ; var int local_1ch @ esp+0x1c
 │           ; var int local_2ch @ esp+0x2c
@@ -343,7 +343,7 @@ wx 31c039d6724aeb72908db426000000008d7e0131d289e8f7f131d28944241c89f8f7f13944241
 aa >/dev/null
 pd 38
 EXPECT=<<RUN
-/ (fcn) fcn.00000000 1015
+/ (fcn) fcn.00000000 1645
 |           ; var int local_4h @ esp+0x4
 |           ; var int local_1ch @ esp+0x1c
 |           ; var int local_2ch @ esp+0x2c
