@@ -30,20 +30,13 @@ size: 7
 \       `=< 0x00000005      ebfd           jmp 4
 RUN
 
-NAME=overlapping basic blocks and anal.jmpmid (no loops)
+NAME=overlapping basic blocks and anal.jmpmid
 FILE=-
 CMDS=<<EXPECT
 e anal.jmpmid=true
 e io.cache=true
 e anal.endsize=false
-wx b8210000c1ebfdbb2c000000cc  # TODO: cc -> ebf6
-af
-afi~size
-afb
-?e
-pdr
-?e
-agf
+"(show_fcn bin, wx $0, af-, af, afi~size, afb, ?e, pdr, ?e, agf)"
 # Commented out because asm.bb.middle is broken in this case
 # ?e
 # e asm.bb.middle=true
@@ -51,6 +44,11 @@ agf
 # ?e
 # e asm.bb.middle=false
 # pdf
+.(show_fcn b8210000c1ebfdbb2c000000cc)
+?e
+.(show_fcn b8210000c1ebfdbb2c000000ebf6)
+?e
+.(show_fcn b8210000c1ebfdbb2c000000ebf7)
 EXPECT=<<RUN
 size: 13
 0x00000000 0x00000007 00:0000 7 j 0x00000004
@@ -90,4 +88,105 @@ size: 13
  | mov ebx, 0x2c                       |
  | int3                                |
  `-------------------------------------'
+
+size: 14
+0x00000000 0x00000007 00:0000 7 j 0x00000004
+0x00000004 0x0000000e 00:0000 10 j 0x00000004
+
+/ (fcn) fcn.00000000 17
+|   fcn.00000000 ();
+| ; CODE XREF from fcn.00000000 (0x5)
+| 0x00000000      b8210000c1     mov eax, 0xc1000021                   ; '!'
+| 0x00000005      ebfd           jmp 4
+| ----------- true: 0x00000004
+| ; CODE XREFS from fcn.00000000 (0x5, 0xc)
+| 0x00000004      c1ebfd         shr ebx, 0xfd
+| 0x00000007      bb2c000000     mov ebx, 0x2c                         ; ','
+\ 0x0000000c      ebf6           jmp 4
+| ----------- true: 0x00000004
+
+[0x00000000]> VV @ fcn.00000000 (nodes 2 edges 2 zoom 100%) BB-NORM mouse:canvas-y mov-speed:5
+   .--------------------------------------.
+   |  0x0                                 |
+   | (fcn) fcn.00000000 17                |
+   |   fcn.00000000 ();                   |
+   | ; CODE XREF from fcn.00000000 (0x5)  |
+   | ; '!'                                |
+   | mov eax, 0xc1000021                  |
+   | jmp 4;[ga]                           |
+   `--------------------------------------'
+       v
+       |
+       '---------------.
+                       |
+                       |
+                       |
+       .---------------'
+.--------.
+|      | |
+|.-------------------------------------------.
+||  0x4                                      |
+|| ; CODE XREFS from fcn.00000000 (0x5, 0xc) |
+|| shr ebx, 0xfd                             |
+|| ; ','                                     |
+|| mov ebx, 0x2c                             |
+|| jmp 4;[ga]                                |
+|`-------------------------------------------'
+|    v
+|    |
+`----'
+
+size: 14
+0x00000000 0x00000005 00:0000 5 j 0x00000005
+0x00000004 0x0000000e 00:0000 10 j 0x00000005
+0x00000005 0x00000007 00:0000 2 j 0x00000004
+
+/ (fcn) fcn.00000000 17
+|   fcn.00000000 ();
+| ; CODE XREF from fcn.00000000 (0x5)
+| 0x00000000      b8210000c1     mov eax, 0xc1000021                   ; '!'
+| ----------- true: 0x00000005
+| ; CODE XREF from fcn.00000000 (0x5)
+| ; CODE XREF from fcn.00000000 (+0xc)
+| 0x00000004      c1ebfd         shr ebx, 0xfd
+| 0x00000007      bb2c000000     mov ebx, 0x2c                         ; ','
+  0x0000000c      ebf7           jmp 5                                 ; fcn.00000000+0x5
+| ----------- true: 0x00000005
+| ; CODE XREF from fcn.00000000 (+0xc)
+| 0x00000005      ebfd           jmp 4
+| ----------- true: 0x00000004
+
+[0x00000000]> VV @ fcn.00000000 (nodes 3 edges 3 zoom 100%) BB-NORM mouse:canvas-y mov-speed:5
+ .--------------------------------------.
+ |  0x0                                 |
+ | (fcn) fcn.00000000 17                |
+ |   fcn.00000000 ();                   |
+ | ; CODE XREF from fcn.00000000 (0x5)  |
+ | ; '!'                                |
+ | mov eax, 0xc1000021                  |
+ `--------------------------------------'
+     v
+     |
+.--------.
+|      | |
+|.--------------------------------------.
+||  0x5                                 |
+|| ; CODE XREF from fcn.00000000 (+0xc) |
+|| jmp 4;[gb]                           |
+|`--------------------------------------'
+|    v
+|    |
+|    |
+|.---------------------------------------.
+||  0x4                                  |
+|| ; CODE XREF from fcn.00000000 (0x5)   |
+|| ; CODE XREF from fcn.00000000 (+0xc)  |
+|| shr ebx, 0xfd                         |
+|| ; ','                                 |
+|| mov ebx, 0x2c                         |
+|| jmp 5;[ga]                            |
+|`---------------------------------------'
+|    v
+|    |
+`----'
 RUN
