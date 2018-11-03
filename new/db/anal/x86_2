@@ -33,6 +33,7 @@ RUN
 NAME=overlapping basic blocks and anal.jmpmid
 FILE=-
 CMDS=<<EXPECT
+e asm.bb.middle=true
 e anal.jmpmid=true
 e io.cache=true
 e anal.endsize=false
