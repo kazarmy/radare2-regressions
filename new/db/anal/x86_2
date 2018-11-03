@@ -36,14 +36,7 @@ CMDS=<<EXPECT
 e anal.jmpmid=true
 e io.cache=true
 e anal.endsize=false
-"(show_fcn bin, wx $0, af-, af, afi~size, afb, ?e, pdr, ?e, agf)"
-# Commented out because asm.bb.middle is broken in this case
-# ?e
-# e asm.bb.middle=true
-# pdf
-# ?e
-# e asm.bb.middle=false
-# pdf
+"(show_fcn bin, wx $0, af-, af, afi~size, afb, ?e, pdr, ?e, agf, ?e, e asm.bb.middle=true, pdf, ?e, e asm.bb.middle=false, pdf)"
 .(show_fcn b8210000c1ebfdbb2c000000cc)
 ?e
 .(show_fcn b8210000c1ebfdbb2c000000ebf6)
@@ -91,6 +84,25 @@ size: 13
  | int3                                |
  `-------------------------------------'
 
+/ (fcn) fcn.00000000 16
+|   fcn.00000000 ();
+|           ; CODE XREF from fcn.00000000 (0x5)
+|           0x00000000  ~   b8210000c1     mov eax, 0xc1000021         ; '!'
+|           ; CODE XREF from fcn.00000000 (0x5)
+|       .-> 0x00000004      c1ebfd         shr ebx, 0xfd
+|           0x00000007      bb2c000000     mov ebx, 0x2c               ; ','
+\           0x0000000c      cc             int3
+..
+
+/ (fcn) fcn.00000000 16
+|   fcn.00000000 ();
+|           ; CODE XREF from fcn.00000000 (0x5)
+|           0x00000000      b8210000c1     mov eax, 0xc1000021         ; '!'
+|       `=< 0x00000005      ebfd           jmp 4
+|           0x00000007      bb2c000000     mov ebx, 0x2c               ; ','
+\           0x0000000c      cc             int3
+..
+
 size: 14
 0x00000000 0x00000007 00:0000 7 j 0x00000004
 0x00000004 0x0000000e 00:0000 10 j 0x00000004
@@ -137,6 +149,25 @@ size: 14
 |    v
 |    |
 `----'
+
+/ (fcn) fcn.00000000 17
+|   fcn.00000000 ();
+|           ; CODE XREF from fcn.00000000 (0x5)
+|           0x00000000  ~   b8210000c1     mov eax, 0xc1000021         ; '!'
+|           ; CODE XREFS from fcn.00000000 (0x5, 0xc)
+|      ..-> 0x00000004      c1ebfd         shr ebx, 0xfd
+|       :   0x00000007      bb2c000000     mov ebx, 0x2c               ; ','
+\       `=< 0x0000000c      ebf6           jmp 4
+..
+
+/ (fcn) fcn.00000000 17
+|   fcn.00000000 ();
+|           ; CODE XREF from fcn.00000000 (0x5)
+|           0x00000000      b8210000c1     mov eax, 0xc1000021         ; '!'
+|      `==< 0x00000005      ebfd           jmp 4
+|       :   0x00000007      bb2c000000     mov ebx, 0x2c               ; ','
+\       `=< 0x0000000c      ebf6           jmp 4
+..
 
 size: 14
 0x00000000 0x00000005 00:0000 5 j 0x00000005
@@ -191,6 +222,29 @@ size: 14
 |    v
 |    |
 `----'
+
+/ (fcn) fcn.00000000 17
+|   fcn.00000000 ();
+|           ; CODE XREF from fcn.00000000 (0x5)
+|           0x00000000  ~   b8210000c1     mov eax, 0xc1000021         ; '!'
+|           ; CODE XREF from fcn.00000000 (0x5)
+|           ; CODE XREF from fcn.00000000 (+0xc)
+|       .-> 0x00000004  ~   c1ebfd         shr ebx, 0xfd
+|       |   ; CODE XREF from fcn.00000000 (+0xc)
+|      .`=< 0x00000005      ebfd           jmp 4
+|      :    0x00000007      bb2c000000     mov ebx, 0x2c               ; ','
+       `==< 0x0000000c      ebf7           jmp 5                       ; fcn.00000000+0x5
+..
+
+/ (fcn) fcn.00000000 17
+|   fcn.00000000 ();
+|           ; CODE XREF from fcn.00000000 (0x5)
+|           0x00000000      b8210000c1     mov eax, 0xc1000021         ; '!'
+|       |   ; CODE XREF from fcn.00000000 (+0xc)
+|      .`=< 0x00000005      ebfd           jmp 4
+|      :    0x00000007      bb2c000000     mov ebx, 0x2c               ; ','
+       `==< 0x0000000c      ebf7           jmp 5                       ; fcn.00000000+0x5
+..
 
 size: 19
 0x00000000 0x00000005 00:0000 5 j 0x00000005
@@ -259,4 +313,29 @@ size: 19
 |    v
 |    |
 `----'
+
+/ (fcn) fcn.00000000 24
+|   fcn.00000000 ();
+|           ; CODE XREF from fcn.00000000 (0x5)
+|           0x00000000  ~   0f1f440000     nop dword [rax + rax]
+|           ; CODE XREF from fcn.00000000 (0x11)
+|       .-> 0x00000003      0000           add byte [rax], al
+|       :   ; CODE XREF from fcn.00000000 (0xc)
+|       :   0x00000005  ~   b8210000c1     mov eax, 0xc1000021         ; '!'
+|       :   ; CODE XREF from fcn.00000000 (0xa)
+|      .--> 0x00000009      c1ebfd         shr ebx, 0xfd
+|       :   0x0000000c      bb2c000000     mov ebx, 0x2c               ; ','
+\       `=< 0x00000011      ebf0           jmp 3
+..
+
+/ (fcn) fcn.00000000 24
+|   fcn.00000000 ();
+|           ; CODE XREF from fcn.00000000 (0x5)
+|           0x00000000      0f1f440000     nop dword [rax + rax]
+|       :   ; CODE XREF from fcn.00000000 (0xc)
+|       :   0x00000005      b8210000c1     mov eax, 0xc1000021         ; '!'
+|      `==< 0x0000000a      ebfd           jmp 9
+|       :   0x0000000c      bb2c000000     mov ebx, 0x2c               ; ','
+\       `=< 0x00000011      ebf0           jmp 3
+..
 RUN
