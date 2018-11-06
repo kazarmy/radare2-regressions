@@ -160,7 +160,7 @@ aaa
 s 6
 pdj -1
 EXPECT=<<RUN
-[{"offset":1,"ptr":4248444,"val":4248444,"esil":"4248444,4,esp,-,=[4],4,esp,-=","refptr":false,"fcn_addr":0,"fcn_last":1016,"size":5,"opcode":"push 0x40d37c","disasm":"push 0x40d37c","bytes":"687cd34000","family":"cpu","type":"push","type_num":13,"type2_num":0}]
+[{"offset":1,"ptr":4248444,"val":4248444,"esil":"4248444,4,esp,-,=[4],4,esp,-=","refptr":false,"fcn_addr":0,"fcn_last":1018,"size":5,"opcode":"push 0x40d37c","disasm":"push 0x40d37c","bytes":"687cd34000","family":"cpu","type":"push","type_num":13,"type2_num":0}]
 
 RUN
 
