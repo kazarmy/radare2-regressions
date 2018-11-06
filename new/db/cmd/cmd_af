@@ -64,6 +64,12 @@ afi~size
 afb
 ?e
 pdf
+?e
+afb+ 0x4017c0 0x4017c0 11 0x4017dd 0x4017cd
+afi~size
+afb
+?e
+pdf
 EXPECT=<<EXPECT_ERR
 size: 13
 0x004017c0 0x004017cd 00:0000 13 j 0x004017dd f 0x004017cd
@@ -84,5 +90,15 @@ size: 6
 |           0x004017c0      51             push ecx
 |           0x004017c1      89e1           mov ecx, esp
 \           0x004017c3      83c108         add ecx, 8
-EXPECT_ERR=<<RUN
+
+size: 11
+0x004017c0 0x004017cb 00:0000 11 j 0x004017dd f 0x004017cd
+
+/ (fcn) fcn2.0x004017c0 11
+|   fcn2.0x004017c0 ();
+|           0x004017c0      51             push ecx
+|           0x004017c1      89e1           mov ecx, esp
+|           0x004017c3      83c108         add ecx, 8
+\           0x004017c6      3d00100000     cmp eax, 0x1000
+EXPECT_ERR=''
 RUN
