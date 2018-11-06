@@ -45,3 +45,44 @@ EXPECT=<<RUN
 ..
 \      ``-> 0x08048448      ret
 RUN
+
+NAME=afb+
+FILE=../bins/pe/a.exe
+CMDS=<<EXPECT
+s 0x004017c0
+af+ 0x004017c0 fcn2.0x004017c0
+afb+ 0x4017c0 0x4017c0 13 0x4017dd 0x4017cd
+afi~size
+afb
+?e
+pdf
+?e
+af-
+af+ 0x004017c0 fcn2.0x004017c0
+afb+ 0x4017c0 0x4017c0 6 0x4017dd 0x4017cd
+afi~size
+afb
+?e
+pdf
+EXPECT=<<EXPECT_ERR
+size: 13
+0x004017c0 0x004017cd 00:0000 13 j 0x004017dd f 0x004017cd
+
+/ (fcn) fcn2.0x004017c0 13
+|   fcn2.0x004017c0 ();
+|           0x004017c0      51             push ecx
+|           0x004017c1      89e1           mov ecx, esp
+|           0x004017c3      83c108         add ecx, 8
+|           0x004017c6      3d00100000     cmp eax, 0x1000
+\       ,=< 0x004017cb      7210           jb 0x4017dd
+
+size: 6
+0x004017c0 0x004017c6 00:0000 6 j 0x004017dd f 0x004017cd
+
+/ (fcn) fcn2.0x004017c0 6
+|   fcn2.0x004017c0 ();
+|           0x004017c0      51             push ecx
+|           0x004017c1      89e1           mov ecx, esp
+\           0x004017c3      83c108         add ecx, 8
+EXPECT_ERR=<<RUN
+RUN
