@@ -102,3 +102,67 @@ size: 11
 \           0x004017c6      3d00100000     cmp eax, 0x1000
 EXPECT_ERR=''
 RUN
+
+NAME=afb+ with wrong size
+FILE=../bins/pe/a.exe
+CMDS=<<EXPECT
+s 0x004017c0
+af+ 0x004017c0 fcn2.0x004017c0
+afb+ 0x4017c0 0x4017c0 9 0x4017dd 0x4017cd
+afi~size
+afb
+?e
+pdf
+?e
+pdr
+?e
+afb+ 0x4017c0 0x4017c0 12 0x4017dd 0x4017cd
+afi~size
+afb
+?e
+pdf
+?e
+pdr
+EXPECT=<<EXPECT_ERR
+size: 9
+0x004017c0 0x004017c9 00:0000 9 j 0x004017dd f 0x004017cd
+
+/ (fcn) fcn2.0x004017c0 9
+|   fcn2.0x004017c0 ();
+|           0x004017c0      51             push ecx
+|           0x004017c1      89e1           mov ecx, esp
+|           0x004017c3      83c108         add ecx, 8
+..
+
+/ (fcn) fcn2.0x004017c0 9
+|   fcn2.0x004017c0 ();
+| 0x004017c0      51             push ecx
+| 0x004017c1      89e1           mov ecx, esp
+| 0x004017c3      83c108         add ecx, 8
+| 0x004017c6      3d             invalid
+\ 0x004017c7      0010           add byte [eax], dl
+| ----------- true: 0x004017dd  false: 0x004017cd
+
+size: 12
+0x004017c0 0x004017cc 00:0000 12 j 0x004017dd f 0x004017cd
+
+/ (fcn) fcn2.0x004017c0 12
+|   fcn2.0x004017c0 ();
+|           0x004017c0      51             push ecx
+|           0x004017c1      89e1           mov ecx, esp
+|           0x004017c3      83c108         add ecx, 8
+|           0x004017c6      3d00100000     cmp eax, 0x1000
+..
+
+/ (fcn) fcn2.0x004017c0 12
+|   fcn2.0x004017c0 ();
+| 0x004017c0      51             push ecx
+| 0x004017c1      89e1           mov ecx, esp
+| 0x004017c3      83c108         add ecx, 8
+| 0x004017c6      3d00100000     cmp eax, 0x1000
+| 0x004017cb      72             invalid
+| ----------- true: 0x004017dd  false: 0x004017cd
+EXPECT_ERR=<<RUN
+Invalid instruction (possibly truncated) at 0x4017c6
+Invalid instruction (possibly truncated) at 0x4017cb
+RUN
