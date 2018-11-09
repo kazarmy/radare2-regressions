@@ -39,7 +39,7 @@ e asm.bb.middle=true
 e anal.jmpmid=true
 e io.cache=true
 e anal.endsize=false
-"(show_fcn bin, wx $0, af-, af, afi~size, afi~realsz, afb, ?e, pdr, ?e, agf, ?e, e asm.bb.middle=true, pdf, ?e, e asm.bb.middle=false, pdf)"
+"(show_fcn bin, wx $0, af-*, af, afi~size, afi~realsz, afb, ?e, pdr, ?e, agf, ?e, e asm.bb.middle=true, pdf, ?e, e asm.bb.middle=false, pdf)"
 .(show_fcn b8210000c1ebfdbb2c000000cc)
 ?e
 .(show_fcn b8210000c1ebfdbb2c000000ebf6)
@@ -114,7 +114,6 @@ realsz: 17
 
 / (fcn) fcn.00000000 17
 |   fcn.00000000 ();
-| ; CODE XREF from fcn.00000000 (0x5)
 | 0x00000000      b8210000c1     mov eax, 0xc1000021                   ; '!'
 | 0x00000005      ebfd           jmp 4
 | ----------- true: 0x00000004
@@ -125,18 +124,17 @@ realsz: 17
 | ----------- true: 0x00000004
 
 [0x00000000]> VV @ fcn.00000000 (nodes 2 edges 2 zoom 100%) BB-NORM mouse:canvas-y mov-speed:5
-   .--------------------------------------.
-   |  0x0                                 |
-   | (fcn) fcn.00000000 17                |
-   |   fcn.00000000 ();                   |
-   | ; CODE XREF from fcn.00000000 (0x5)  |
-   | ; '!'                                |
-   | mov eax, 0xc1000021                  |
-   | jmp 4;[ga]                           |
-   `--------------------------------------'
-       v
-       |
-       '---------------.
+        .----------------------------.
+        |  0x0                       |
+        | (fcn) fcn.00000000 17      |
+        |   fcn.00000000 ();         |
+        | ; '!'                      |
+        | mov eax, 0xc1000021        |
+        | jmp 4;[ga]                 |
+        `----------------------------'
+            v
+            |
+            '----------.
                        |
                        |
                        |
@@ -157,7 +155,6 @@ realsz: 17
 
 / (fcn) fcn.00000000 17
 |   fcn.00000000 ();
-|           ; CODE XREF from fcn.00000000 (0x5)
 |           0x00000000  ~   b8210000c1     mov eax, 0xc1000021         ; '!'
 |           ; CODE XREFS from fcn.00000000 (0x5, 0xc)
 |      ..-> 0x00000004      c1ebfd         shr ebx, 0xfd
@@ -167,7 +164,6 @@ realsz: 17
 
 / (fcn) fcn.00000000 17
 |   fcn.00000000 ();
-|           ; CODE XREF from fcn.00000000 (0x5)
 |           0x00000000      b8210000c1     mov eax, 0xc1000021         ; '!'
 |      `==< 0x00000005      ebfd           jmp 4
 |       :   0x00000007      bb2c000000     mov ebx, 0x2c               ; ','
@@ -182,11 +178,9 @@ realsz: 17
 
 / (fcn) fcn.00000000 17
 |   fcn.00000000 ();
-| ; CODE XREF from fcn.00000000 (0x5)
 | 0x00000000      b8210000c1     mov eax, 0xc1000021                   ; '!'
 | ----------- true: 0x00000005
 | ; CODE XREF from fcn.00000000 (0x5)
-| ; CODE XREF from fcn.00000000 (+0xc)
 | 0x00000004      c1ebfd         shr ebx, 0xfd
 | 0x00000007      bb2c000000     mov ebx, 0x2c                         ; ','
   0x0000000c      ebf7           jmp 5                                 ; fcn.00000000+0x5
@@ -196,16 +190,16 @@ realsz: 17
 | ----------- true: 0x00000004
 
 [0x00000000]> VV @ fcn.00000000 (nodes 3 edges 3 zoom 100%) BB-NORM mouse:canvas-y mov-speed:5
- .--------------------------------------.
- |  0x0                                 |
- | (fcn) fcn.00000000 17                |
- |   fcn.00000000 ();                   |
- | ; CODE XREF from fcn.00000000 (0x5)  |
- | ; '!'                                |
- | mov eax, 0xc1000021                  |
- `--------------------------------------'
-     v
-     |
+      .----------------------------.
+      |  0x0                       |
+      | (fcn) fcn.00000000 17      |
+      |   fcn.00000000 ();         |
+      | ; '!'                      |
+      | mov eax, 0xc1000021        |
+      `----------------------------'
+          v
+          |
+       .--'
 .--------.
 |      | |
 |.--------------------------------------.
@@ -215,26 +209,24 @@ realsz: 17
 |`--------------------------------------'
 |    v
 |    |
-|    |
-|.---------------------------------------.
-||  0x4                                  |
-|| ; CODE XREF from fcn.00000000 (0x5)   |
-|| ; CODE XREF from fcn.00000000 (+0xc)  |
-|| shr ebx, 0xfd                         |
-|| ; ','                                 |
-|| mov ebx, 0x2c                         |
-|| jmp 5;[ga]                            |
-|`---------------------------------------'
-|    v
-|    |
-`----'
+|    '.
+|     |
+| .-------------------------------------.
+| |  0x4                                |
+| | ; CODE XREF from fcn.00000000 (0x5) |
+| | shr ebx, 0xfd                       |
+| | ; ','                               |
+| | mov ebx, 0x2c                       |
+| | jmp 5;[ga]                          |
+| `-------------------------------------'
+|     v
+|     |
+`-----'
 
 / (fcn) fcn.00000000 17
 |   fcn.00000000 ();
-|           ; CODE XREF from fcn.00000000 (0x5)
 |           0x00000000  ~   b8210000c1     mov eax, 0xc1000021         ; '!'
 |           ; CODE XREF from fcn.00000000 (0x5)
-|           ; CODE XREF from fcn.00000000 (+0xc)
 |       .-> 0x00000004  ~   c1ebfd         shr ebx, 0xfd
 |       |   ; CODE XREF from fcn.00000000 (+0xc)
 |      .`=< 0x00000005      ebfd           jmp 4
@@ -244,7 +236,6 @@ realsz: 17
 
 / (fcn) fcn.00000000 17
 |   fcn.00000000 ();
-|           ; CODE XREF from fcn.00000000 (0x5)
 |           0x00000000      b8210000c1     mov eax, 0xc1000021         ; '!'
 |       |   ; CODE XREF from fcn.00000000 (+0xc)
 |      .`=< 0x00000005      ebfd           jmp 4
@@ -261,13 +252,11 @@ realsz: 24
 
 / (fcn) fcn.00000000 24
 |   fcn.00000000 ();
-| ; CODE XREF from fcn.00000000 (0x5)
 | 0x00000000      0f1f440000     nop dword [rax + rax]
 | ----------- true: 0x00000005
 | ; CODE XREF from fcn.00000000 (0x11)
 | 0x00000003      0000           add byte [rax], al
 | ----------- true: 0x00000005
-| ; CODE XREF from fcn.00000000 (0xc)
 | 0x00000005      b8210000c1     mov eax, 0xc1000021                   ; '!'
 | 0x0000000a      ebfd           jmp 9
 | ----------- true: 0x00000009
@@ -278,27 +267,26 @@ realsz: 24
 | ----------- true: 0x00000003
 
 [0x00000000]> VV @ fcn.00000000 (nodes 4 edges 4 zoom 100%) BB-NORM mouse:canvas-y mov-speed:5
- .--------------------------------------.
- |  0x0                                 |
- | (fcn) fcn.00000000 24                |
- |   fcn.00000000 ();                   |
- | ; CODE XREF from fcn.00000000 (0x5)  |
- | nop dword [rax + rax]                |
- `--------------------------------------'
-     v
-     |
-     '--.
-.---------.
-|       | |
-| .-------------------------------------.
-| |  0x5                                |
-| | ; CODE XREF from fcn.00000000 (0xc) |
-| | ; '!'                               |
-| | mov eax, 0xc1000021                 |
-| | jmp 9;[ga]                          |
-| `-------------------------------------'
-|     v
-|     |
+     .------------------------------.
+     |  0x0                         |
+     | (fcn) fcn.00000000 24        |
+     |   fcn.00000000 ();           |
+     | nop dword [rax + rax]        |
+     `------------------------------'
+         v
+         |
+         '--.
+.-------------.
+|           | |
+|     .----------------------------.
+|     |  0x5                       |
+|     | ; '!'                      |
+|     | mov eax, 0xc1000021        |
+|     | jmp 9;[ga]                 |
+|     `----------------------------'
+|         v
+|         |
+|     .---'
 |     |
 | .-------------------------------------.
 | |  0x9                                |
@@ -323,11 +311,9 @@ realsz: 24
 
 / (fcn) fcn.00000000 24
 |   fcn.00000000 ();
-|           ; CODE XREF from fcn.00000000 (0x5)
 |           0x00000000  ~   0f1f440000     nop dword [rax + rax]
 |           ; CODE XREF from fcn.00000000 (0x11)
 |       .-> 0x00000003      0000           add byte [rax], al
-|       :   ; CODE XREF from fcn.00000000 (0xc)
 |       :   0x00000005  ~   b8210000c1     mov eax, 0xc1000021         ; '!'
 |       :   ; CODE XREF from fcn.00000000 (0xa)
 |      .--> 0x00000009      c1ebfd         shr ebx, 0xfd
@@ -337,9 +323,7 @@ realsz: 24
 
 / (fcn) fcn.00000000 24
 |   fcn.00000000 ();
-|           ; CODE XREF from fcn.00000000 (0x5)
 |           0x00000000      0f1f440000     nop dword [rax + rax]
-|       :   ; CODE XREF from fcn.00000000 (0xc)
 |       :   0x00000005      b8210000c1     mov eax, 0xc1000021         ; '!'
 |      `==< 0x0000000a      ebfd           jmp 9
 |       :   0x0000000c      bb2c000000     mov ebx, 0x2c               ; ','
