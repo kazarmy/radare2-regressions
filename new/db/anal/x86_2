@@ -38,7 +38,6 @@ CMDS=<<EXPECT
 e asm.bb.middle=true
 e anal.jmpmid=true
 e io.cache=true
-e anal.endsize=false
 "(show_fcn bin, wx $0, af-*, af, afi~size, afi~realsz, afb, ?e, pdr, ?e, agf, ?e, e asm.bb.middle=true, pdf, ?e, e asm.bb.middle=false, pdf)"
 .(show_fcn b8210000c1ebfdbb2c000000cc)
 ?e
