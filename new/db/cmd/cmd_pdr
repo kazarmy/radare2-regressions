@@ -14,7 +14,7 @@ EXPECT64=MHgwMDAwMDAwMCAgICAgIDgwMDMgICAgICAgICAgIHNqbXAgMHgwMDA1CjB4MDAwMDAwMDU
 CMDS64=ZSBhc20uYXJjaD04MDUxCmUgYXNtLmxpbmVzPWZhbHNlCnd4IDgwMDMwMDAwMDAyMjAwMDAKcGRSCg==
 RUN
 
-NAME=pdrj
+NAME=pdrj ignores asm.bb.middle
 FILE=-
 CMDS=<<EXPECT
 e anal.nopskip=false
@@ -26,7 +26,6 @@ e asm.bb.middle=true
 ?e
 pdr
 ?e
-e asm.bb.middle=false  # TODO: remove this
 pdrj~{}
 EXPECT=%
 / (fcn) fcn.00000000 24
