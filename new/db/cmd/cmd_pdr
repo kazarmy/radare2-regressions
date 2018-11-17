@@ -14,7 +14,7 @@ EXPECT64=MHgwMDAwMDAwMCAgICAgIDgwMDMgICAgICAgICAgIHNqbXAgMHgwMDA1CjB4MDAwMDAwMDU
 CMDS64=ZSBhc20uYXJjaD04MDUxCmUgYXNtLmxpbmVzPWZhbHNlCnd4IDgwMDMwMDAwMDAyMjAwMDAKcGRSCg==
 RUN
 
-NAME=pdrj ignores asm.bb.middle
+NAME=pdrj and pirj ignore asm.bb.middle
 FILE=-
 CMDS=<<EXPECT
 e anal.nopskip=false
@@ -27,6 +27,11 @@ e asm.bb.middle=true
 pdr
 ?e
 pdrj~{}
+?e
+?e
+pir
+?e
+pirj~{}
 EXPECT=%
 / (fcn) fcn.00000000 24
 |   fcn.00000000 ();
@@ -43,6 +48,145 @@ EXPECT=%
 | 0x0000000c      bb2c000000     mov ebx, 0x2c                         ; ','
 \ 0x00000011      ebf0           jmp 3
 | ----------- true: 0x00000003
+
+[
+  {
+    "offset": 0,
+    "esil": ",",
+    "refptr": false,
+    "fcn_addr": 0,
+    "fcn_last": 14,
+    "size": 5,
+    "opcode": "nop dword [rax + rax]",
+    "disasm": "nop dword [rax + rax]",
+    "bytes": "0f1f440000",
+    "family": "cpu",
+    "type": "nop",
+    "type_num": 8,
+    "type2_num": 0,
+    "flags": [
+      "fcn.00000000"
+    ]
+  },
+  {
+    "offset": 3,
+    "val": 2,
+    "esil": "al,rax,+=[1],$o,of,=,$s,sf,=,$z,zf,=,$c7,cf,=,$p,pf,=",
+    "refptr": false,
+    "fcn_addr": 0,
+    "fcn_last": 17,
+    "size": 2,
+    "opcode": "add byte [rax], al",
+    "disasm": "add byte [rax], al",
+    "bytes": "0000",
+    "family": "cpu",
+    "type": "add",
+    "type_num": 17,
+    "type2_num": 0,
+    "xrefs": [
+      {
+        "addr": 17,
+        "type": "CODE"
+      }
+    ]
+  },
+  {
+    "offset": 5,
+    "ptr": 3238002721,
+    "val": 3238002721,
+    "esil": "3238002721,rax,=",
+    "refptr": false,
+    "fcn_addr": 0,
+    "fcn_last": 14,
+    "size": 5,
+    "opcode": "mov eax, 0xc1000021",
+    "disasm": "mov eax, 0xc1000021",
+    "bytes": "b8210000c1",
+    "family": "cpu",
+    "type": "mov",
+    "type_num": 9,
+    "type2_num": 0
+  },
+  {
+    "offset": 10,
+    "esil": "0x9,rip,=",
+    "refptr": false,
+    "fcn_addr": 0,
+    "fcn_last": 17,
+    "size": 2,
+    "opcode": "jmp 9",
+    "disasm": "jmp 9",
+    "bytes": "ebfd",
+    "family": "cpu",
+    "type": "jmp",
+    "type_num": 1,
+    "type2_num": 0,
+    "jump": 9
+  },
+  {
+    "offset": 9,
+    "val": 253,
+    "esil": "$0,cf,=,1,253,-,1,<<,ebx,&,?{,$1,cf,=,},253,ebx,>>,ebx,=,$z,zf,=,$p,pf,=,$s,sf,=",
+    "refptr": false,
+    "fcn_addr": 0,
+    "fcn_last": 16,
+    "size": 3,
+    "opcode": "shr ebx, 0xfd",
+    "disasm": "shr ebx, 0xfd",
+    "bytes": "c1ebfd",
+    "family": "cpu",
+    "type": "shr",
+    "type_num": 22,
+    "type2_num": 0,
+    "xrefs": [
+      {
+        "addr": 10,
+        "type": "CODE"
+      }
+    ]
+  },
+  {
+    "offset": 12,
+    "ptr": 44,
+    "val": 44,
+    "esil": "44,rbx,=",
+    "refptr": false,
+    "fcn_addr": 0,
+    "fcn_last": 14,
+    "size": 5,
+    "opcode": "mov ebx, 0x2c",
+    "disasm": "mov ebx, 0x2c",
+    "bytes": "bb2c000000",
+    "family": "cpu",
+    "type": "mov",
+    "type_num": 9,
+    "type2_num": 0
+  },
+  {
+    "offset": 17,
+    "esil": "0x3,rip,=",
+    "refptr": false,
+    "fcn_addr": 0,
+    "fcn_last": 17,
+    "size": 2,
+    "opcode": "jmp 3",
+    "disasm": "jmp 3",
+    "bytes": "ebf0",
+    "family": "cpu",
+    "type": "jmp",
+    "type_num": 1,
+    "type2_num": 0,
+    "jump": 3
+  }
+]
+
+nop dword [rax + rax]
+add byte [rax], al
+mov eax, 0xc1000021
+jmp 9
+shr ebx, 0xfd
+mov ebx, 0x2c
+jmp 3
 
 [
   {
