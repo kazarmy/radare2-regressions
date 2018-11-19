@@ -480,6 +480,34 @@ EXPECT=<<RUN
 0x00000013                 0000  add byte [rax], al
 RUN
 
+NAME=asm.bb.middle and pif
+FILE=-
+CMDS=<<EXPECT
+e anal.nopskip=false
+e anal.jmpmid=true
+e io.cache=true
+wx 0f1f440000b8210000c1ebfdbb2c000000ebf0
+af
+e asm.bb.middle=true
+pif
+?e
+e asm.bb.middle=false
+pif
+EXPECT=<<RUN
+nop dword [rax + rax]
+add byte [rax], al
+mov eax, 0xc1000021
+shr ebx, 0xfd
+mov ebx, 0x2c
+jmp 3
+
+nop dword [rax + rax]
+mov eax, 0xc1000021
+jmp 9
+mov ebx, 0x2c
+jmp 3
+RUN
+
 NAME=asm.bb.middle and asm.flags.middle
 FILE=../bins/pe/cmd_adf_sample0.exe
 CMDS=<<EXPECT
