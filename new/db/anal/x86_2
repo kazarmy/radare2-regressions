@@ -35,7 +35,7 @@ code-xrefs:
 in-degree: 0
 out-degree: 0
 data-xrefs: 
-locals:0
+locals: 0
 args: 0
 diff: type: new
 
@@ -90,7 +90,7 @@ code-xrefs: 0x00000005 J
 in-degree: 1
 out-degree: 0
 data-xrefs: 
-locals:0
+locals: 0
 args: 0
 diff: type: new
 
@@ -167,7 +167,7 @@ code-xrefs: 0x00000005 J 0x0000000c J
 in-degree: 2
 out-degree: 0
 data-xrefs: 
-locals:0
+locals: 0
 args: 0
 diff: type: new
 
@@ -252,7 +252,7 @@ code-xrefs: 0x00000005 J 0x0000000c J
 in-degree: 2
 out-degree: 0
 data-xrefs: 
-locals:0
+locals: 0
 args: 0
 diff: type: new
 
@@ -347,7 +347,7 @@ code-xrefs: 0x00000011 J 0x0000000a J
 in-degree: 2
 out-degree: 0
 data-xrefs: 
-locals:0
+locals: 0
 args: 0
 diff: type: new
 
