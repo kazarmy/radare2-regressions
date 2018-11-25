@@ -352,7 +352,7 @@ function fixTest (test, next) {
               output += 'EXPECT_ERR=' + delim + test.stderr + delim + '\n';
             }
           } else {
-            output += 'EXPECT_ERR=' + test.stderr;
+            output += 'EXPECT_ERR=' + test.stderr + (test.stderr.length === 0 ? '\n' : '');
           }
         } else {
           output += line + '\n';

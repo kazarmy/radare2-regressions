@@ -516,7 +516,7 @@ class NewRegressions {
                 test.expectErr = v.substring(startDelim + 1, endDelim); // No newline added
               }
             } else {
-              test.expectErr = v + '\n';
+              test.expectErr = v + (v.length === 0 ? '' : '\n');
             }
           }
           break;
