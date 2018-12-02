@@ -261,3 +261,22 @@ EXPECT=<<RUN
 | bl sym.abort;[gb]                                                                                                                                                                                                                              |
 `------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------'
 RUN
+
+NAME=ta asm.cmt.right=false fix (#12330)
+FILE=-
+CMDS=<<EXPECT
+e asm.arch=x86
+e asm.bits=64
+e io.cache=true
+wx 488b4608
+"td struct ms { char b[8]; int member1; int member2; };"
+ta ms.member1
+e asm.cmt.right=true
+pd 1
+e asm.cmt.right=false
+pd 1
+EXPECT=<<RUN
+            0x00000000      488b4608       mov rax, qword [rsi + ms.member1] ; [0x8:8]=0
+            ; [0x8:8]=0
+            0x00000000      488b4608       mov rax, qword [rsi + ms.member1]
+RUN
