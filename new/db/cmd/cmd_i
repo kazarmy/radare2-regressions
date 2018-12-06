@@ -224,6 +224,23 @@ EXPECT=<<RUN
             ;-- _DYNAMIC:
             0x080495a8      add dword [eax], eax                       ; [21] -rw- section size 232 named .dynamic
 RUN
+
+NAME=bss section comment
+FILE=../bins/elf/analysis/x86-helloworld-gcc
+CMDS=<<EXPECT
+pd 3 @ section..bss
+EXPECT=<<RUN
+            ;-- section..bss:
+            ;-- completed.5979:
+            ;-- _edata:
+            ;-- __bss_start:
+            ;-- __TMC_END__:
+            0x080496b4      0000           add byte [eax], al          ; [25] -rw- section size 4 named .bss
+            0x080496b6      0000           add byte [eax], al
+            ;-- _end:
+            0x080496b8      ff             invalid
+RUN
+
 NAME=il (file x86)
 FILE=../bins/elf/analysis/x86-helloworld-gcc
 EXPECT64=W0xpbmtlZCBsaWJyYXJpZXNdCmxpYmMuc28uNgoKMSBsaWJyYXJ5Cgo=
