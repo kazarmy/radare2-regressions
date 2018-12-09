@@ -460,3 +460,22 @@ wx ea34002001
 ?v $j
 EXPECT=0x1234
 RUN
+
+NAME=so -N and overlapping basic blocks
+FILE=-
+CMDS=<<EXPECT
+e anal.jmpmid=true
+e io.cache=true
+e anal.nopskip=false
+wx 0f1f440000b8210000c1ebfdbb2c000000ebf0
+af
+s 0x4
+so -1
+s
+s 0x4
+so -2
+s
+EXPECT=<<RUN
+0x3
+0x0
+RUN
