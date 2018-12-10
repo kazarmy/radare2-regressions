@@ -513,7 +513,7 @@ pd 1 @ 0x0804849f
 EXPECT=<<RUN
 vaddr=0x08048486 paddr=0x00000486 baddr=0x08048000 laddr=0x00000000 hvaddr=0x08049ed4 hpaddr=0x00000ed4 type=preinit
 vaddr=0x0804849f paddr=0x0000049f baddr=0x08048000 laddr=0x00000000 hvaddr=0x08049ed8 hpaddr=0x00000ed8 type=preinit
-            ;-- entry2.preinit:
+            ;-- entry1.preinit:
             ;-- preinit2:
             0x0804849f      push ebp
 RUN
@@ -631,31 +631,31 @@ EXPECT=<<RUN
             ;-- segment.LOAD1:
             ;-- segment.GNU_RELRO:
             ;-- __preinit:
-            0x08049ed4      .dword 0x08048486 ; entry1.preinit ; sym.preinit ; [18] -rw- section size 8 named .preinit_array
+            0x08049ed4      .dword 0x08048486 ; entry0.preinit ; sym.preinit ; [18] -rw- section size 8 named .preinit_array
             ;-- __preinit2:
-            0x08049ed8      .dword 0x0804849f ; entry2.preinit ; sym.preinit2
+            0x08049ed8      .dword 0x0804849f ; entry1.preinit ; sym.preinit2
 
             ;-- section..init_array:
             ;-- __frame_dummy_init_array_entry:
             ;-- __init_array_start:
-            0x08049edc      .dword 0x08048480 ; entry3.init ; sym.frame_dummy ; [19] -rw- section size 20 named .init_array
-            0x08049ee0      .dword 0x080484b8 ; entry4.init ; sym.constructor
+            0x08049edc      .dword 0x08048480 ; entry0.init ; sym.frame_dummy ; [19] -rw- section size 20 named .init_array
+            0x08049ee0      .dword 0x080484b8 ; entry1.init ; sym.constructor
             ;-- __init:
-            0x08049ee4      .dword 0x080484d1 ; entry5.init ; sym.init
+            0x08049ee4      .dword 0x080484d1 ; entry2.init ; sym.init
             ;-- __init2:
-            0x08049ee8      .dword 0x080484ea ; entry6.init ; sym.init2
-            0x08049eec      .dword 0x08048503 ; entry7.init ; sym.constructor2
+            0x08049ee8      .dword 0x080484ea ; entry3.init ; sym.init2
+            0x08049eec      .dword 0x08048503 ; entry4.init ; sym.constructor2
 
             ;-- section..fini_array:
             ;-- __do_global_dtors_aux_fini_array_entry:
             ;-- __init_array_end:
-            0x08049ef0      .dword 0x08048450 ; entry8.fini ; sym.__do_global_dtors_aux ; [20] -rw- section size 20 named .fini_array
-            0x08049ef4      .dword 0x0804859c ; entry9.fini ; sym.destructor2
+            0x08049ef0      .dword 0x08048450 ; entry0.fini ; sym.__do_global_dtors_aux ; [20] -rw- section size 20 named .fini_array
+            0x08049ef4      .dword 0x0804859c ; entry1.fini ; sym.destructor2
             ;-- __fini2:
-            0x08049ef8      .dword 0x080485b5 ; entry10.fini ; sym.fini2
+            0x08049ef8      .dword 0x080485b5 ; entry2.fini ; sym.fini2
             ;-- __fini:
-            0x08049efc      .dword 0x080485ce ; entry11.fini ; sym.fini
-            0x08049f00      .dword 0x080485e7 ; entry12.fini ; sym.destructor
+            0x08049efc      .dword 0x080485ce ; entry3.fini ; sym.fini
+            0x08049f00      .dword 0x080485e7 ; entry4.fini ; sym.destructor
 RUN
 
 NAME=iee elf Cd (64-bit)
@@ -671,10 +671,10 @@ EXPECT=<<EXPECT_ERR
             ;-- section..init_array:
             ;-- segment.LOAD1:
             ;-- segment.GNU_RELRO:
-            0x0021bfa8      .qword 0x0000000000005d20 ; entry1.init    ; RELOC 64  ; [18] -rw- section size 8 named .init_array
+            0x0021bfa8      .qword 0x0000000000005d20 ; entry0.init    ; RELOC 64  ; [18] -rw- section size 8 named .init_array
 
             ;-- section..fini_array:
-            0x0021bfb0      .qword 0x0000000000005ce0 ; entry2.fini    ; RELOC 64  ; [19] -rw- section size 8 named .fini_array
+            0x0021bfb0      .qword 0x0000000000005ce0 ; entry0.fini    ; RELOC 64  ; [19] -rw- section size 8 named .fini_array
 
 EXPECT_ERR=<<RUN
 Invalid address (section..preinit_array)
