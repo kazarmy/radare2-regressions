@@ -60,7 +60,7 @@ CMDS=<<EXPECT
 e bin.baddr = 0xf00000
 k old_v = `ieq`
 oob
-ie~baddr[5]
+ie~baddr[2]
 ie~vaddr[1]
 p8 10 @ entry0
 p8 10 @ `k old_v`
@@ -78,8 +78,8 @@ CMDS=<<EXPECT
 e bin.laddr = 0x5000
 e bin.baddr = -1
 oob
-ie~laddr[7]
-ie~baddr[5]
+ie~laddr[5]
+ie~baddr[2]
 EXPECT=<<RUN
 0x00005000
 0x00001000
@@ -92,8 +92,8 @@ CMDS=<<EXPECT
 e bin.laddr = 0x5000
 e bin.baddr = -1
 oob
-ie~laddr[7]
-ie~baddr[5]
+ie~laddr[5]
+ie~baddr[2]
 EXPECT=<<RUN
 0x00005000
 0x00001000
