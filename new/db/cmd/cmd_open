@@ -60,12 +60,12 @@ CMDS=<<EXPECT
 e bin.baddr = 0xf00000
 k old_v = `ieq`
 oob
-ie~baddr[2]
+iI~baddr[1]
 ie~vaddr[1]
 p8 10 @ entry0
 p8 10 @ `k old_v`
 EXPECT=<<RUN
-0x00f00000
+0xf00000
 0x00f01058
 554889e5415741564155
 ffffffffffffffffffff
@@ -79,10 +79,10 @@ e bin.laddr = 0x5000
 e bin.baddr = -1
 oob
 ie~laddr[5]
-ie~baddr[2]
+iI~baddr[1]
 EXPECT=<<RUN
 0x00005000
-0x00001000
+0x1000
 RUN
 
 NAME=oob consider laddr 64bit
@@ -93,10 +93,10 @@ e bin.laddr = 0x5000
 e bin.baddr = -1
 oob
 ie~laddr[5]
-ie~baddr[2]
+iI~baddr[1]
 EXPECT=<<RUN
 0x00005000
-0x00001000
+0x1000
 RUN
 
 NAME=oob from malloc

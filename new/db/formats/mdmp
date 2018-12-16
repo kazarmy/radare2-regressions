@@ -15,7 +15,7 @@ CMDS64=aVN+Y2FsYwoK
 RUN
 NAME=: entrypoints nomem .dmp
 FILE=../bins/mdmp/calc.dmp
-EXPECT64=W0VudHJ5cG9pbnRzXSBiYWRkcj0weDAwMDAwMDAwCgowIGVudHJ5cG9pbnRzCg==
+EXPECT64=W0VudHJ5cG9pbnRzXQoKMCBlbnRyeXBvaW50cwo=
 CMDS64=aWUKCg==
 RUN
 NAME=: resolve vaddr to paddr
