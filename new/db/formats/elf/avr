@@ -8,7 +8,7 @@ RUN
 
 NAME=avr baddr
 FILE=../bins/elf/analysis/bugurtos-avr.elf
-CMDS=ie~baddr[5]
+CMDS=ie~baddr[2]
 EXPECT=<<RUN
 0x00000000
 RUN
