@@ -54,23 +54,40 @@ EXPECT64=MHgxMDAKZiB1bmRvXzAgQCAweDAKCjB4MjAwCmYgdW5kb18xIEAgMHgwCmYgdW5kb18wIEA
 CMDS64=CmUgYXNtLmFyY2g9eDg2CmUgYXNtLmJpdHM9MzIKZHIgZWF4PTB4MjAwCmRyIGVieD0weDMwMApzIDB4MTAwCnMKcyoKP2UKc3IgZWF4CnMKcyoKP2UKc3NyIGVieApzCnMqCgo=
 RUN
 
-NAME=so -N
+NAME=so -N, pd -N [wip]
 FILE=../bins/pe/cmd_adf_sample0.exe
 CMDS=<<EXPECT
 s 0x560e67
 af
 "(test_so addr, s $0, so -1, s)"
+"(test_so_pd addr, ?e --- From $0 ---, ?e, ?e -- 1 --, s $0, pd -1, so -1, s, pd 1, ?e, ?e -- 2 --, s $0, pd -2, so -2, s, pd 2)"
 .(test_so 0x560e7d)
 .(test_so 0x560e7c)
 .(test_so 0x560e7a)
-.(test_so 0x560e79)
+?e
+.(test_so_pd 0x560e79)
+?e
 .(test_so 0x560e97)
 .(test_so 0x560e96)
 EXPECT=<<RUN
 0x560e7a
 0x560e7a
 0x560e78
+
+--- From 0x560e79 ---
+
+-- 1 --
+            0x00560e78      d4             invalid
 0x560e78
+            0x00560e78      d41b           aam 0x1b
+
+-- 2 --
+            0x00560e76      3bd4           cmp edx, esp
+            0x00560e78      d4             invalid
+0x560e76
+            0x00560e76      3bd4           cmp edx, esp
+            0x00560e78      d41b           aam 0x1b
+
 0x560e96
 0x560e95
 RUN
