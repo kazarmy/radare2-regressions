@@ -57,10 +57,14 @@ RUN
 NAME=so -N, pd -N [wip]
 FILE=../bins/pe/cmd_adf_sample0.exe
 CMDS=<<EXPECT
-s 0x560e67
-af
 "(test_so addr, s $0, so -1, s)"
 "(test_so_pd addr, ?e --- From $0 ---, ?e, ?e -- 1 --, s $0, pd -1, so -1, s, pd 1, ?e, ?e -- 2 --, s $0, pd -2, so -2, s, pd 2)"
+.(test_so_pd 0x0)  # Special case
+?e
+.(test_so_pd 0x401000)
+?e
+s 0x560e67
+af
 .(test_so 0x560e7d)
 .(test_so 0x560e7c)
 .(test_so 0x560e7a)
@@ -70,6 +74,31 @@ af
 .(test_so 0x560e97)
 .(test_so 0x560e96)
 EXPECT=<<RUN
+--- From 0x0 ---
+
+-- 1 --
+0x0
+            0x00000000      ff             invalid
+
+-- 2 --
+0x0
+            0x00000000      ff             invalid
+            0x00000001      ff             invalid
+
+--- From 0x401000 ---
+
+-- 1 --
+            0x00400fff      ff             invalid
+0x400fff
+            0x00400fff  ~   ffcc           dec esp
+
+-- 2 --
+            0x00400ffe      ff             invalid
+            0x00400fff      ff             invalid
+0x400ffe
+            0x00400ffe      ff             invalid
+            0x00400fff  ~   ffcc           dec esp
+
 0x560e7a
 0x560e7a
 0x560e78
