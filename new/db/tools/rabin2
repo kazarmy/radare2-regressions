@@ -438,6 +438,7 @@ crypto   false
 endian   little
 havecode true
 intrp    /lib/ld-linux.so.2
+laddr    0x0
 lang     c
 linenum  true
 lsyms    true
@@ -517,6 +518,7 @@ crypto   false
 endian   little
 havecode true
 intrp    /lib64/ld-linux-x86-64.so.2
+laddr    0x0
 lang     c++
 linenum  true
 lsyms    true
@@ -552,6 +554,7 @@ crypto   false
 endian   little
 havecode true
 intrp    /lib64/ld-linux-x86-64.so.2
+laddr    0x0
 lang     c
 linenum  true
 lsyms    true
@@ -587,6 +590,7 @@ crypto   false
 endian   little
 havecode true
 intrp    /usr/lib/dyld
+laddr    0x0
 lang     c++ blocks ext.
 linenum  false
 lsyms    false
