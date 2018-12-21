@@ -27,7 +27,7 @@ FILE=../bins/elf/analysis/hello-linux-x86_64
 CMDS=!rabin2 -G 0 -e ${R2_FILE}
 EXPECT=<<RUN
 [Entrypoints]
-vaddr=0x00400410 paddr=0x00000410 laddr=0x00000000 haddr=0x00000018 hvaddr=0x00400018 type=program
+vaddr=0x00400410 paddr=0x00000410 haddr=0x00000018 hvaddr=0x00400018 type=program
 
 1 entrypoints
 RUN
@@ -37,7 +37,7 @@ FILE=../bins/elf/analysis/hello-linux-x86_64
 CMDS=!rabin2 -G 0 -B 0 -e ${R2_FILE}
 EXPECT=<<RUN
 [Entrypoints]
-vaddr=0x00000410 paddr=0x00000410 laddr=0x00000000 haddr=0x00000018 hvaddr=0x00000018 type=program
+vaddr=0x00000410 paddr=0x00000410 haddr=0x00000018 hvaddr=0x00000018 type=program
 
 1 entrypoints
 RUN
@@ -123,7 +123,7 @@ FILE=../bins/mach0/fatmach0-3true
 CMDS=!rabin2 -G 0x1000 -e ${R2_FILE}
 EXPECT=<<RUN
 [Entrypoints]
-vaddr=0x100000ef8 paddr=0x00001ef8 laddr=0x00001000 haddr=0x00000570 type=program
+vaddr=0x100000ef8 paddr=0x00001ef8 haddr=0x00000570 type=program
 
 1 entrypoints
 RUN
@@ -144,7 +144,7 @@ FILE=../bins/mach0/fatmach0-3true
 CMDS=!rabin2 -G 0x5000 -e ${R2_FILE}
 EXPECT=<<RUN
 [Entrypoints]
-vaddr=0x00001f44 paddr=0x00005f44 laddr=0x00005000 haddr=0x00000420 type=program
+vaddr=0x00001f44 paddr=0x00005f44 haddr=0x00000420 type=program
 
 1 entrypoints
 RUN
@@ -165,7 +165,7 @@ FILE=../bins/mach0/fatmach0-3true
 CMDS=!rabin2 -B 0x2000000 -G 0x1000 -e ${R2_FILE}
 EXPECT=<<RUN
 [Entrypoints]
-vaddr=0x02000ef8 paddr=0x00001ef8 laddr=0x00001000 haddr=0x00000570 type=program
+vaddr=0x02000ef8 paddr=0x00001ef8 haddr=0x00000570 type=program
 
 1 entrypoints
 RUN
@@ -183,7 +183,7 @@ FILE=../bins/mach0/hello-ios-arm64
 CMDS=!rabin2 -B 0x2000000 -e ${R2_FILE}
 EXPECT=<<RUN
 [Entrypoints]
-vaddr=0x02007f34 paddr=0x00007f34 laddr=0x00000000 haddr=0x00000468 type=program
+vaddr=0x02007f34 paddr=0x00007f34 haddr=0x00000468 type=program
 
 1 entrypoints
 RUN
@@ -287,8 +287,8 @@ FILE=../bins/elf/analysis/x86-helloworld-gcc
 CMDS=!rabin2 -ee -B 0 ${R2_FILE}
 EXPECT=<<RUN
 [Constructors]
-vaddr=0x000003d0 paddr=0x000003d0 laddr=0x00000000 hvaddr=0x0000159c hpaddr=0x0000059c type=init
-vaddr=0x000003b0 paddr=0x000003b0 laddr=0x00000000 hvaddr=0x000015a0 hpaddr=0x000005a0 type=fini
+vaddr=0x000003d0 paddr=0x000003d0 hvaddr=0x0000159c hpaddr=0x0000059c type=init
+vaddr=0x000003b0 paddr=0x000003b0 hvaddr=0x000015a0 hpaddr=0x000005a0 type=fini
 
 2 entrypoints
 RUN
@@ -341,12 +341,12 @@ Nm Paddr       Size Vaddr      Memsz Perms Name
 07 0x00000000     0 0x00000000     0 -rw- GNU_STACK
 08 0x00000000    52 0x08048000    52 -rw- ehdr
 [Entrypoints]
-vaddr=0x08048300 paddr=0x00000300 laddr=0x00000000 haddr=0x00000018 hvaddr=0x08048018 type=program
+vaddr=0x08048300 paddr=0x00000300 haddr=0x00000018 hvaddr=0x08048018 type=program
 
 1 entrypoints
 [Constructors]
-vaddr=0x080483d0 paddr=0x000003d0 laddr=0x00000000 hvaddr=0x0804959c hpaddr=0x0000059c type=init
-vaddr=0x080483b0 paddr=0x000003b0 laddr=0x00000000 hvaddr=0x080495a0 hpaddr=0x000005a0 type=fini
+vaddr=0x080483d0 paddr=0x000003d0 hvaddr=0x0804959c hpaddr=0x0000059c type=init
+vaddr=0x080483b0 paddr=0x000003b0 hvaddr=0x080495a0 hpaddr=0x000005a0 type=fini
 
 2 entrypoints
 [Main]

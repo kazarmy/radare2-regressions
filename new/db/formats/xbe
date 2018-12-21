@@ -5,7 +5,7 @@ CMDS64=cSEK
 RUN
 NAME=entrypoint decoding
 FILE=../bins/xbe/default.xbe
-EXPECT64=dmFkZHI9MHgwMDAxMTAwMCBwYWRkcj0weDAwMDAxMDAwIGxhZGRyPTB4MDAwMDAwMDAgaGFkZHI9LTEgdHlwZT1wcm9ncmFtCg==
+EXPECT64=dmFkZHI9MHgwMDAxMTAwMCBwYWRkcj0weDAwMDAxMDAwIGhhZGRyPS0xIHR5cGU9cHJvZ3JhbQo=
 CMDS64=aWV+YWRkcgo=
 RUN
 NAME=corrupted section data

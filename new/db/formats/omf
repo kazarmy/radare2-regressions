@@ -5,7 +5,7 @@ CMDS64=aUl+Yml0cwo=
 RUN
 NAME=entry point 16 bits omf
 FILE=../bins/omf/hello_world
-EXPECT64=dmFkZHI9MHgwMDAwMTAwMCBwYWRkcj0weDAwMDAwMDczIGxhZGRyPTB4MDAwMDAwMDAgaGFkZHI9LTEgdHlwZT1wcm9ncmFtCg==
+EXPECT64=dmFkZHI9MHgwMDAwMTAwMCBwYWRkcj0weDAwMDAwMDczIGhhZGRyPS0xIHR5cGU9cHJvZ3JhbQo=
 CMDS64=aWV+YWRkcgo=
 RUN
 NAME=symbols 16 bits omf
@@ -35,7 +35,7 @@ CMDS64=aUl+Yml0cwo=
 RUN
 NAME=entry point 32 bits omf
 FILE=../bins/omf/hello_world32
-EXPECT64=dmFkZHI9MHgwMDAwMTAwMCBwYWRkcj0weDAwMDAwMDc0IGxhZGRyPTB4MDAwMDAwMDAgaGFkZHI9LTEgdHlwZT1wcm9ncmFtCg==
+EXPECT64=dmFkZHI9MHgwMDAwMTAwMCBwYWRkcj0weDAwMDAwMDc0IGhhZGRyPS0xIHR5cGU9cHJvZ3JhbQo=
 CMDS64=aWV+YWRkcgo=
 RUN
 NAME=symbols 32 bits omf

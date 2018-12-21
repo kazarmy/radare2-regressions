@@ -78,10 +78,10 @@ CMDS=<<EXPECT
 e bin.laddr = 0x5000
 e bin.baddr = -1
 oob
-ie~laddr[5]
+iI~laddr[1]
 iI~baddr[1]
 EXPECT=<<RUN
-0x00005000
+0x5000
 0x1000
 RUN
 
@@ -92,10 +92,10 @@ CMDS=<<EXPECT
 e bin.laddr = 0x5000
 e bin.baddr = -1
 oob
-ie~laddr[5]
+iI~laddr[1]
 iI~baddr[1]
 EXPECT=<<RUN
-0x00005000
+0x5000
 0x1000
 RUN
 

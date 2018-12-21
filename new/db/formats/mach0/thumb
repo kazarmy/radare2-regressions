@@ -5,7 +5,7 @@ CMDS64=ZSBhc20uYml0cwoK
 RUN
 NAME=mach0 thumb entrypoint info
 FILE=../bins/mach0/thumb-test
-EXPECT64=dmFkZHI9MHgwMDAwYmZhNCBwYWRkcj0weDAwMDA3ZmE0IGxhZGRyPTB4MDAwMDAwMDAgaGFkZHI9MHgwMDAwMDM0NCB0eXBlPXByb2dyYW0K
+EXPECT64=dmFkZHI9MHgwMDAwYmZhNCBwYWRkcj0weDAwMDA3ZmE0IGhhZGRyPTB4MDAwMDAzNDQgdHlwZT1wcm9ncmFtCg==
 CMDS64=aWV+dmFkZHIKCg==
 RUN
 NAME=mach0 non-thumb symbol on thumb bin
