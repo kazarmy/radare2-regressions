@@ -54,33 +54,32 @@ EXPECT64=MHgxMDAKZiB1bmRvXzAgQCAweDAKCjB4MjAwCmYgdW5kb18xIEAgMHgwCmYgdW5kb18wIEA
 CMDS64=CmUgYXNtLmFyY2g9eDg2CmUgYXNtLmJpdHM9MzIKZHIgZWF4PTB4MjAwCmRyIGVieD0weDMwMApzIDB4MTAwCnMKcyoKP2UKc3IgZWF4CnMKcyoKP2UKc3NyIGVieApzCnMqCgo=
 RUN
 
-NAME=so -N, pd -N [wip]
+NAME=so -N, pd -N
 FILE=../bins/pe/cmd_adf_sample0.exe
 CMDS=<<EXPECT
-"(test_so addr, s $0, so -1, s)"
-"(test_so_pd addr, ?e --- From $0 ---, ?e, ?e -- 1 --, s $0, pd -1, so -1, s, pd 1, ?e, ?e -- 2 --, s $0, pd -2, so -2, s, pd 2)"
+"(test_so_pd addr, ?e, ?e --- From $0 ---, ?e, ?e -- 1 --, s $0, pd -1, so -1, s, pd 1, ?e, ?e -- 2 --, s $0, pd -2, so -2, s, pd 2)"
 .(test_so_pd 0x0)  # Special case
-?e
 .(test_so_pd 0x401000)
-?e
 s 0x560e67
 af
-.(test_so 0x560e7d)
-.(test_so 0x560e7c)
-.(test_so 0x560e7a)
-?e
+.(test_so_pd 0x560e7d)
+.(test_so_pd 0x560e7c)
+.(test_so_pd 0x560e7a)
 .(test_so_pd 0x560e79)
-?e
-.(test_so 0x560e97)
-.(test_so 0x560e96)
+.(test_so_pd 0x560e97)
+.(test_so_pd 0x560e96)
 EXPECT=<<RUN
+
 --- From 0x0 ---
 
 -- 1 --
+            0x00000000      ff             invalid
 0x0
             0x00000000      ff             invalid
 
 -- 2 --
+            0x00000000      ff             invalid
+            0x00000001      ff             invalid
 0x0
             0x00000000      ff             invalid
             0x00000001      ff             invalid
@@ -88,35 +87,102 @@ EXPECT=<<RUN
 --- From 0x401000 ---
 
 -- 1 --
-            0x00400fff      ff             invalid
+            0x00400fff  ~   ffcc           dec esp
 0x400fff
             0x00400fff  ~   ffcc           dec esp
 
 -- 2 --
             0x00400ffe      ff             invalid
-            0x00400fff      ff             invalid
+            0x00400fff  ~   ffcc           dec esp
 0x400ffe
             0x00400ffe      ff             invalid
             0x00400fff  ~   ffcc           dec esp
 
-0x560e7a
-0x560e7a
-0x560e78
-
---- From 0x560e79 ---
+--- From 0x560e7d ---
 
 -- 1 --
-            0x00560e78      d4             invalid
+            0x00560e7a  ~   0085965e5052   add byte [ebp + 0x52505e96], al
+0x560e7a
+            0x00560e7a  ~   0085965e5052   add byte [ebp + 0x52505e96], al
+
+-- 2 --
+            0x00560e78      d41b           aam 0x1b
+            0x00560e7a  ~   0085965e5052   add byte [ebp + 0x52505e96], al
+0x560e78
+            0x00560e78      d41b           aam 0x1b
+            0x00560e7a  ~   0085965e5052   add byte [ebp + 0x52505e96], al
+
+--- From 0x560e7c ---
+
+-- 1 --
+            0x00560e7a  ~   0085965e5052   add byte [ebp + 0x52505e96], al
+0x560e7a
+            0x00560e7a  ~   0085965e5052   add byte [ebp + 0x52505e96], al
+
+-- 2 --
+            0x00560e78      d41b           aam 0x1b
+            0x00560e7a  ~   0085965e5052   add byte [ebp + 0x52505e96], al
+0x560e78
+            0x00560e78      d41b           aam 0x1b
+            0x00560e7a  ~   0085965e5052   add byte [ebp + 0x52505e96], al
+
+--- From 0x560e7a ---
+
+-- 1 --
+            0x00560e78      d41b           aam 0x1b
 0x560e78
             0x00560e78      d41b           aam 0x1b
 
 -- 2 --
             0x00560e76      3bd4           cmp edx, esp
-            0x00560e78      d4             invalid
+            0x00560e78      d41b           aam 0x1b
 0x560e76
             0x00560e76      3bd4           cmp edx, esp
             0x00560e78      d41b           aam 0x1b
 
+--- From 0x560e79 ---
+
+-- 1 --
+            0x00560e78      d41b           aam 0x1b
+0x560e78
+            0x00560e78      d41b           aam 0x1b
+
+-- 2 --
+            0x00560e76      3bd4           cmp edx, esp
+            0x00560e78      d41b           aam 0x1b
+0x560e76
+            0x00560e76      3bd4           cmp edx, esp
+            0x00560e78      d41b           aam 0x1b
+
+--- From 0x560e97 ---
+
+-- 1 --
+|           ; CODE XREF from fcn.00560e67 (0x560e80)
+|           0x00560e96      0f31           rdtsc
 0x560e96
+|           ; CODE XREF from fcn.00560e67 (0x560e80)
+|           0x00560e96      0f31           rdtsc
+
+-- 2 --
+            0x00560e95  ~   ba0f31e914     mov edx, 0x14e9310f
+|           ; CODE XREF from fcn.00560e67 (0x560e80)
+|           0x00560e96      0f31           rdtsc
 0x560e95
+            0x00560e95  ~   ba0f31e914     mov edx, 0x14e9310f
+|           ; CODE XREF from fcn.00560e67 (0x560e80)
+|           0x00560e96      0f31           rdtsc
+
+--- From 0x560e96 ---
+
+-- 1 --
+            0x00560e95  ~   ba0f31e914     mov edx, 0x14e9310f
+0x560e95
+            0x00560e95  ~   ba0f31e914     mov edx, 0x14e9310f
+
+-- 2 --
+            0x00560e94      9e             sahf
+            0x00560e95  ~   ba0f31e914     mov edx, 0x14e9310f
+0x560e94
+            0x00560e94      9e             sahf
+            0x00560e95  ~   ba0f31e914     mov edx, 0x14e9310f
 RUN
