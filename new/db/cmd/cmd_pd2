@@ -287,8 +287,6 @@ CMDS=<<EXPECT
 e asm.bbline=true
 e asm.bytes=false
 e asm.comments=false
-s main
-aF
 s 0x0804859e
 pd 6
 ?e
