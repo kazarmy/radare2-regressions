@@ -280,3 +280,61 @@ EXPECT=<<RUN
             ; [0x8:8]=0
             0x00000000      488b4608       mov rax, qword [rsi + ms.member1]
 RUN
+
+NAME=asm.bbline glitch fix (#12330)
+FILE=../bins/elf/lab2
+CMDS=<<EXPECT
+e asm.bbline=true
+e asm.bytes=false
+e asm.comments=false
+s main
+aF
+s 0x0804859e
+pd 6
+?e
+pdJ 6~{}
+EXPECT=<<RUN
+        ,=< 0x0804859e      je 0x80485b3
+        |   |
+        |   0x080485a0      mov dword [esp], str.Wrong
+        |   0x080485a7      call sym.imp.puts
+        |   0x080485ac      mov eax, 1
+       ,==< 0x080485b1      jmp 0x80485f9
+       ||   |
+       |`-> 0x080485b3      add dword [esp + 0x20], 1
+
+[
+  {
+    "offset": 134514078,
+    "text": "        ,=< 0x0804859e      je 0x80485b3"
+  },
+  {
+    "offset": 134514078,
+    "text": "        |   |"
+  },
+  {
+    "offset": 134514080,
+    "text": "        |   0x080485a0      mov dword [esp], str.Wrong"
+  },
+  {
+    "offset": 134514087,
+    "text": "        |   0x080485a7      call sym.imp.puts"
+  },
+  {
+    "offset": 134514092,
+    "text": "        |   0x080485ac      mov eax, 1"
+  },
+  {
+    "offset": 134514097,
+    "text": "       ,==< 0x080485b1      jmp 0x80485f9"
+  },
+  {
+    "offset": 134514097,
+    "text": "       ||   |"
+  },
+  {
+    "offset": 134514099,
+    "text": "       |`-> 0x080485b3      add dword [esp + 0x20], 1"
+  }
+]
+RUN
