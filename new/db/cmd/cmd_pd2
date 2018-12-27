@@ -281,7 +281,7 @@ EXPECT=<<RUN
             0x00000000      488b4608       mov rax, qword [rsi + ms.member1]
 RUN
 
-NAME=asm.bbline no-anal glitch fix (#12330)
+NAME=asm.bbline no-anal glitch fix (#12330) [wip]
 FILE=../bins/elf/lab2
 CMDS=<<EXPECT
 e asm.bbline=true
@@ -289,10 +289,11 @@ e asm.bytes=false
 e asm.comments=false
 e io.cache=true
 wx 907f04 @ 0x08048597
+wx 75f3909090 @ 0x080485bc
 s 0x08048598
-pd 8
+pd 10
 ?e
-pdJ 8~{}
+pdJ 10~{}
 EXPECT=<<RUN
         ,=< 0x08048598      jg 0x804859e
         |   |
@@ -302,9 +303,12 @@ EXPECT=<<RUN
        |    0x080485a0      mov dword [esp], str.Wrong
        |    0x080485a7      call sym.imp.puts
        |    0x080485ac      mov eax, 1
-       |,=< 0x080485b1      jmp 0x80485f9
-       ||   |
-       `--> 0x080485b3      add dword [esp + 0x20], 1
+      ,=.-> 0x080485b1      jmp 0x80485f9
+      ||:   |
+      |`--> 0x080485b3      add dword [esp + 0x20], 1
+      | :   0x080485b8      mov ebx, dword [esp + 0x20]
+      | `=< 0x080485bc      jne 0x80485b1
+      | :   |
 
 [
   {
@@ -341,15 +345,27 @@ EXPECT=<<RUN
   },
   {
     "offset": 134514097,
-    "text": "       |,=< 0x080485b1      jmp 0x80485f9"
+    "text": "      ,=.-> 0x080485b1      jmp 0x80485f9"
   },
   {
     "offset": 134514097,
-    "text": "       ||   |"
+    "text": "      ||:   |"
   },
   {
     "offset": 134514099,
-    "text": "       `--> 0x080485b3      add dword [esp + 0x20], 1"
+    "text": "      |`--> 0x080485b3      add dword [esp + 0x20], 1"
+  },
+  {
+    "offset": 134514104,
+    "text": "      | :   0x080485b8      mov ebx, dword [esp + 0x20]"
+  },
+  {
+    "offset": 134514108,
+    "text": "      | `=< 0x080485bc      jne 0x80485b1"
+  },
+  {
+    "offset": 134514108,
+    "text": "      | :   |"
   }
 ]
 RUN
@@ -362,12 +378,13 @@ e asm.bytes=false
 e asm.comments=false
 e io.cache=true
 wx 907f03 @ 0x4232
+wx 72f1909090 @ 0x424a
 s main
 aF
 s 0x4233
-pd 6
+pd 8
 ?e
-pdJ 6~{}
+pdJ 8~{}
 EXPECT=<<RUN
 |       ,=< 0x00004233      jg 0x4238
 |       |   |
@@ -376,9 +393,12 @@ EXPECT=<<RUN
 |      ,`-> 0x00004238      je 0x4243
 |      |    |
 |      |    0x0000423a      cmp byte [rax], 0
-|      |,=< 0x0000423d      jne 0x4b1c
-|      ||   |
-|      `--> 0x00004243      lea r12, [local_30h]
+|      |    |
+|     ,=.-> 0x0000423d      jne 0x4b1c
+|     ||:   |
+|     |`--> 0x00004243      lea r12, [local_30h]
+|     | :   0x00004248      xor eax, eax
+|     | `=< 0x0000424a      jb 0x423d
 
 [
   {
@@ -411,15 +431,27 @@ EXPECT=<<RUN
   },
   {
     "offset": 16957,
-    "text": "|      |,=< 0x0000423d      jne 0x4b1c"
+    "text": "|      |    |"
+  },
+  {
+    "offset": 16957,
+    "text": "|     ,=.-> 0x0000423d      jne 0x4b1c"
   },
   {
     "offset": 16963,
-    "text": "|      ||   |"
+    "text": "|     ||:   |"
   },
   {
     "offset": 16963,
-    "text": "|      `--> 0x00004243      lea r12, [local_30h]"
+    "text": "|     |`--> 0x00004243      lea r12, [local_30h]"
+  },
+  {
+    "offset": 16968,
+    "text": "|     | :   0x00004248      xor eax, eax"
+  },
+  {
+    "offset": 16970,
+    "text": "|     | `=< 0x0000424a      jb 0x423d"
   }
 ]
 RUN
