@@ -281,7 +281,7 @@ EXPECT=<<RUN
             0x00000000      488b4608       mov rax, qword [rsi + ms.member1]
 RUN
 
-NAME=asm.bbline no-anal glitch fix (#12330) [wip]
+NAME=asm.bbline no-anal glitch fix (#12330)
 FILE=../bins/elf/lab2
 CMDS=<<EXPECT
 e asm.bbline=true
@@ -291,9 +291,9 @@ e io.cache=true
 wx 907f04 @ 0x08048597
 wx 75f3909090 @ 0x080485bc
 s 0x08048598
-pd 10
+pd 11
 ?e
-pdJ 10~{}
+pdJ 11~{}
 EXPECT=<<RUN
         ,=< 0x08048598      jg 0x804859e
         |   |
@@ -308,7 +308,8 @@ EXPECT=<<RUN
       |`--> 0x080485b3      add dword [esp + 0x20], 1
       | :   0x080485b8      mov ebx, dword [esp + 0x20]
       | `=< 0x080485bc      jne 0x80485b1
-      | :   |
+      |     |
+      |     0x080485be      nop
 
 [
   {
@@ -365,7 +366,11 @@ EXPECT=<<RUN
   },
   {
     "offset": 134514108,
-    "text": "      | :   |"
+    "text": "      |     |"
+  },
+  {
+    "offset": 134514110,
+    "text": "      |     0x080485be      nop"
   }
 ]
 RUN
@@ -382,9 +387,9 @@ wx 72f1909090 @ 0x424a
 s main
 aF
 s 0x4233
-pd 8
+pd 9
 ?e
-pdJ 8~{}
+pdJ 9~{}
 EXPECT=<<RUN
 |       ,=< 0x00004233      jg 0x4238
 |       |   |
@@ -399,6 +404,8 @@ EXPECT=<<RUN
 |     |`--> 0x00004243      lea r12, [local_30h]
 |     | :   0x00004248      xor eax, eax
 |     | `=< 0x0000424a      jb 0x423d
+|     |     |
+|     |     0x0000424c      nop
 
 [
   {
@@ -452,6 +459,14 @@ EXPECT=<<RUN
   {
     "offset": 16970,
     "text": "|     | `=< 0x0000424a      jb 0x423d"
+  },
+  {
+    "offset": 16972,
+    "text": "|     |     |"
+  },
+  {
+    "offset": 16972,
+    "text": "|     |     0x0000424c      nop"
   }
 ]
 RUN
