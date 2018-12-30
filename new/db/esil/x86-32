@@ -626,3 +626,32 @@ FILE=-
 EXPECT64=MHgwMDEwODAwMAoweDExMTExMTExCgo=
 CMDS64=ZSBpby52YT10cnVlCmUgYXNtLmFyY2g9eDg2CmUgYXNtLmJpdHM9MzIKYWVpCmFlaW0KYWVyIGVzcD0weDAwMTA4MDAwCmFlciBlYXg9MHgxMTExMTExMTEKLmFlcioKInd4IDU0NTAiCjJhZXMKLmFlcioKcHYgQCAweDAwMTA3ZmZjCnB2IEAgMHgwMDEwN2ZmOAoK
 RUN
+
+NAME=pdj: bts dword [esp], eax (#12575)
+FILE=-
+CMDS=<<EXPECT
+e asm.arch=x86
+e asm.bits=32
+e io.cache=true
+wx 0fab0424
+pdj 1~{}
+EXPECT=<<RUN
+[
+  {
+    "offset": 0,
+    "esil": "$0,cf,=,32,eax,%,1,<<,32,eax,/,esp,+,[4],&,?{,$1,cf,=,},32,eax,%,1,<<,32,eax,/,esp,+,|=[4]",
+    "refptr": false,
+    "fcn_addr": 0,
+    "fcn_last": 0,
+    "size": 4,
+    "opcode": "bts dword [esp], eax",
+    "disasm": "bts dword [esp], eax",
+    "bytes": "0fab0424",
+    "family": "cpu",
+    "type": "null",
+    "type_num": 0,
+    "type2_num": 0
+  }
+]
+
+RUN
