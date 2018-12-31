@@ -722,3 +722,25 @@ CMDS=iI~laddr
 EXPECT=<<RUN
 laddr    0x5000
 RUN
+
+NAME=utf8 filename with non-printable chars
+FILE=../bins/other/$¢€𝄞󠁁\".bin
+CMDS=<<EXPECT
+i~file
+ij
+EXPECT=<<RUN
+file     ../bins/other/$¢€𝄞󠁁\".bin
+{"core":{"type":"","file":"../bins/other/$\u001b¢\u0080€𝄞\udb40\udc41\\\".bin","fd":3,"size":0,"humansz":"0","iorw":false,"mode":"r-x","obsz":0,"block":256,"format":"any"}}
+RUN
+
+# NAME=malformed utf8 filename
+# FILE=../bins/other/@¢�€𝄞󠁁\".bin
+# BROKEN=1
+# CMDS=<<EXPECT
+# # Do test manually
+# i~file
+# ij
+# EXPECT=<<RUN
+# file     bins/other/@¢�€𝄞󠁁\".bin
+# {"core":{"type":"","file":"bins/other/@\u001b¢\u0080\x80€𝄞\udb40\udc41\\\".bin","fd":3,"size":0,"humansz":"0","iorw":false,"mode":"r-x","obsz":0,"block":256,"format":"any"}}
+# RUN
