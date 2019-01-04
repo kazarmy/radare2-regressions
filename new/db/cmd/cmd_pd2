@@ -268,6 +268,21 @@ EXPECT=<<RUN
 `------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------'
 RUN
 
+NAME=esil func cmt refline
+FILE=../bins/elf/ls
+CMDS=<<EXPECT
+e io.cache=true
+e asm.emu=true
+wx 7d0a7f08eb00 @ 0x5b02
+pd 4 @ 0x5b02
+EXPECT=<<RUN
+        ,=< 0x00005b02      7d0a           jge 0x5b0e                  ; rip=0x5b0e -> 0x8d4890f4 ; likely
+       ,==< 0x00005b04      7f08           jg 0x5b0e                   ; rip=0x5b0e -> 0x8d4890f4 ; likely
+      ,===< 0x00005b06      eb00           jmp 0x5b08                  ; rip=0x5b08 -> 0xc30a15ff
+      `---> 0x00005b08      ff150ac30100   call qword [reloc.__libc_start_main] ; [0x21e18:8]=0 ; rsp=0xfffffffffffffff8 ; rip=0x0
+       ||                                                              ; int __libc_start_main(func: unk_size_format, int argc : 0x00000000 = 1179403647, char **: unk_size_format, func: unk_size_format, func: unk_size_format, func: unk_size_format, void * stack_end : 0x00000000 = (qword)0x00010102464c457f)
+RUN
+
 NAME=ta asm.cmt.right=false fix (#12330)
 FILE=-
 CMDS=<<EXPECT
