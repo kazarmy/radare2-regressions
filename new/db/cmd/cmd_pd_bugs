@@ -1,92 +1,238 @@
 NAME=pd call sym bug
 FILE=../bins/mach0/hello-objc-arm
-EXPECT64=MQoxCgo=
-CMDS64=CmUgYXNtLmxpbmVzLmJiPTAKZSBhc20uYnl0ZXM9MAplIGFzbS5jb21tZW50cz0wCnMgc3ltLnN0YXRpY19pbnRfVGVzdDo6Y2FsbE1lTm90CnBkIDIwfj9OU0xvZwphZgpwZCAyMH4/TlNMb2cKCg==
+EXPECT=<<EOF
+1
+1
+EOF
+CMDS=<<EOF
+e asm.lines.bb=0
+e asm.bytes=0
+e asm.comments=0
+s sym.static_int_Test::callMeNot
+pd 20~?NSLog
+af
+pd 20~?NSLog
+EOF
 RUN
+
 NAME=pd arm cortex 0
 FILE=-
-EXPECT64=aW52YWxpZAoK
+EXPECT=<<EOF
+invalid
+EOF
 ARGS=-a arm -b 16
-CMDS64=d3ggODBmMzA5ODg7IHBpIDEK
+CMDS=<<EOF
+wx 80f30988; pi 1
+EOF
 RUN
+
 NAME=pd arm cortex 1
 FILE=-
-EXPECT64=bXNyIHBzcCwgcjAKCg==
+EXPECT=<<EOF
+msr psp, r0
+EOF
 ARGS=-a arm -b 16 -e asm.cpu=cortex
-CMDS64=d3ggODBmMzA5ODg7cGkgMQo=
+CMDS=<<EOF
+wx 80f30988;pi 1
+EOF
 RUN
+
 NAME=pd arm cortex 2
 FILE=-
-EXPECT64=bXNyIHBzcCwgcjAKCg==
+EXPECT=<<EOF
+msr psp, r0
+EOF
 ARGS=-a arm -b 16
-CMDS64=ZSBhc20uY3B1PWNvcnRleDt3eCA4MGYzMDk4ODtwaSAxCg==
+CMDS=<<EOF
+e asm.cpu=cortex;wx 80f30988;pi 1
+EOF
 RUN
+
 NAME=pd call sym bug
 FILE=../bins/mach0/hello-objc-arm
-EXPECT64=cHVzaCB7cjcsIGxyfQptb3YgcjcsIHNwCgo=
-CMDS64=CmUgYXNtLmxpbmVzLmJiPTAKZSBhc20uYnl0ZXM9MAplIGFzbS5jb21tZW50cz0wCnMgc3ltLnN0YXRpY19pbnRfVGVzdDo6Y2FsbE1lTm90CiMgcysyCnBpIDIKCg==
+EXPECT=<<EOF
+push {r7, lr}
+mov r7, sp
+EOF
+CMDS=<<EOF
+e asm.lines.bb=0
+e asm.bytes=0
+e asm.comments=0
+s sym.static_int_Test::callMeNot
+# s+2
+pi 2
+EOF
 RUN
+
 NAME=call fcn eip 32bit
 FILE=../bins/elf/analysis/ls-alxchk
-EXPECT64=ICAgICAgICAgICAgMHgwMDAwNWYxNiAgICAgIGU4MzVmZmZmZmYgICAgIGNhbGwgZmNuLmVpcAoK
-CMDS64=CnMgMHg1ZTUwCmUgYXNtLmJpdHM9MzIKYWY7IGFmbiBlaXAKcGQgMSBAIDB4NWYxNn46MAplIGFzbS5saW5lcy5iYj0wCmUgYXNtLmJ5dGVzPTAKZSBhc20uY29tbWVudHM9MAoK
+EXPECT=<<EOF
+            0x00005f16      e835ffffff     call fcn.eip
+EOF
+CMDS=<<EOF
+s 0x5e50
+e asm.bits=32
+af; afn eip
+pd 1 @ 0x5f16~:0
+e asm.lines.bb=0
+e asm.bytes=0
+e asm.comments=0
+EOF
 RUN
+
 NAME=call fcn eip 64bit
 FILE=../bins/elf/analysis/ls-alxchk
 BROKEN=1
-EXPECT64=fCAgICAgICAgICAgMHgwMDAwNWYxNiAgICAgIGU4MzVmZmZmZmYgICAgIGNhbGwgZmNuLmVpcAoK
-CMDS64=CnMgMHg1ZTUwCmUgYXNtLmJpdHM9NjQKYWY7IGFmbiBlaXAKcGQgMSBAIDB4NWYxNn46MAplIGFzbS5saW5lcy5iYj0wCmUgYXNtLmJ5dGVzPTAKZSBhc20uY29tbWVudHM9MAoK
+EXPECT=<<EOF
+|           0x00005f16      e835ffffff     call fcn.eip
+EOF
+CMDS=<<EOF
+s 0x5e50
+e asm.bits=64
+af; afn eip
+pd 1 @ 0x5f16~:0
+e asm.lines.bb=0
+e asm.bytes=0
+e asm.comments=0
+EOF
 RUN
+
 NAME=call fcn rip 64bit
 FILE=../bins/elf/analysis/ls-alxchk
-EXPECT64=ICAgICAgICAgICAgMHgwMDAwNWYxNiAgICAgIGU4MzVmZmZmZmYgICAgIGNhbGwgZmNuLnJpcAoK
-CMDS64=CnMgMHg1ZTUwCmUgYXNtLmJpdHM9NjQKYWY7IGFmbiByaXAKcGQgMSBAIDB4NWYxNn46MAplIGFzbS5saW5lcy5iYj0wCmUgYXNtLmJ5dGVzPTAKZSBhc20uY29tbWVudHM9MAoK
+EXPECT=<<EOF
+            0x00005f16      e835ffffff     call fcn.rip
+EOF
+CMDS=<<EOF
+s 0x5e50
+e asm.bits=64
+af; afn rip
+pd 1 @ 0x5f16~:0
+e asm.lines.bb=0
+e asm.bytes=0
+e asm.comments=0
+EOF
 RUN
+
 NAME=lea edx bug segfault for x86 32bit #5710@radare2
 FILE=malloc://128
-EXPECT64=IDB4MDAwMDAwMDAgICAgICA4ZDE1ZDA4MzA0MDggICBsZWEgZWR4LCBbMHg4MDQ4M2QwXQoK
-CMDS64=CmUgYXNtLmFyY2g9eDg2CmUgYXNtLmJpdHM9MzIKZSBhc20ubGluZXMuYmI9ZmFsc2UKZSBhc20uY29tbWVudHM9ZmFsc2UKcERAeDo4ZDE1ZDA4MzA0MDgKCg==
+EXPECT=<<EOF
+  0x00000000      8d15d0830408   lea edx, [0x80483d0]
+EOF
+CMDS=<<EOF
+e asm.arch=x86
+e asm.bits=32
+e asm.lines.bb=false
+e asm.comments=false
+pD@x:8d15d0830408
+EOF
 RUN
+
 NAME=lea edx bug segfault for x86 32bit #5710@radare2
 FILE=malloc://128
-EXPECT64=IDB4MDAwMDAwMDAgICAgICA4ZDE1ZDA4MzA0MDggICBsZWEgZWR4LCBbMHg4MDQ4M2QwXQoK
-CMDS64=CmUgYXNtLmFyY2g9eDg2CmUgYXNtLmJpdHM9MzIKZSBhc20ubGluZXMuYmI9ZmFsc2UKZSBhc20uY29tbWVudHM9ZmFsc2UKcERAeDo4ZDE1ZDA4MzA0MDgKCg==
+EXPECT=<<EOF
+  0x00000000      8d15d0830408   lea edx, [0x80483d0]
+EOF
+CMDS=<<EOF
+e asm.arch=x86
+e asm.bits=32
+e asm.lines.bb=false
+e asm.comments=false
+pD@x:8d15d0830408
+EOF
 RUN
+
 NAME=p8@x
 FILE=malloc://128
-EXPECT64=OGQxNWQwODMwNDA4Cgo=
-CMDS64=CmUgYXNtLmNvbW1lbnRzPWZhbHNlCnA4QHg6OGQxNWQwODMwNDA4Cgo=
+EXPECT=<<EOF
+8d15d0830408
+EOF
+CMDS=<<EOF
+e asm.comments=false
+p8@x:8d15d0830408
+EOF
 RUN
+
 NAME=px@x
 FILE=malloc://128
-EXPECT64=MHgwMDAwMDAwMCAgOGQxNSBkMDgzIDA0MDggICAgICAgICAgICAgICAgICAgICAgICAgICAuLi4uLi4KCg==
-CMDS64=CmUgYXNtLmNvbW1lbnRzPWZhbHNlCmUgaGV4LmhlYWRlcj1mYWxzZQpweEB4OjhkMTVkMDgzMDQwOAoK
+EXPECT=<<EOF
+0x00000000  8d15 d083 0408                           ......
+EOF
+CMDS=<<EOF
+e asm.comments=false
+e hex.header=false
+px@x:8d15d0830408
+EOF
 RUN
+
 NAME=size of function in elf x64 stub
 FILE=../bins/other/radiff2/hellocxx-osx-fat-intel_1
-EXPECT64=NgoK
-CMDS64=CnMgMHgxMDAwMDBkYWUKYWYKYWZpfl5zaXplWzFdCgo=
+EXPECT=<<EOF
+6
+EOF
+CMDS=<<EOF
+s 0x100000dae
+af
+afi~^size[1]
+EOF
 RUN
+
 NAME=crackme test
 FILE=../bins/elf/crackme
-EXPECT64=ICAgICAgICAgICAgOy0tIGVudHJ5MDoKICAgICAgICAgICAgOy0tIHNlY3Rpb24uLnRleHQ6CiAgICAgICAgICAgIDstLSBfc3RhcnQ6CiAgICAgICAgICAgIDB4MDA0MDA1YzAgICAgICAzMWVkICAgICAgICAgICB4b3IgZWJwLCBlYnAgICAgICAgICAgICAgICAgOyBbMTRdIC1yLXggc2VjdGlvbiBzaXplIDU4NCBuYW1lZCAudGV4dAogICAgICAgICAgICAweDAwNDAwNWMyICAgICAgNDk4OWQxICAgICAgICAgbW92IHI5LCByZHgKeG9yIGVicCwgZWJwCm1vdiByOSwgcmR4Cg==
-CMDS64=cGQgMgpwaSAyCgo=
+EXPECT=<<EOF
+            ;-- entry0:
+            ;-- section..text:
+            ;-- _start:
+            0x004005c0      31ed           xor ebp, ebp                ; [14] -r-x section size 584 named .text
+            0x004005c2      4989d1         mov r9, rdx
+xor ebp, ebp
+mov r9, rdx
+EOF
+CMDS=<<EOF
+pd 2
+pi 2
+EOF
 RUN
+
 NAME=indent asm.lines.fcn=0, asm.lines.bb=1 for issue 9316
 FILE=-
-CMDS64=CmFmKyAwIHRlc3QKZSBhc20ubGluZXMuZmNuPTAKZSBhc20ubGluZXMuYmI9MQpwZCAyCg==
-EXPECT64=KGZjbikgdGVzdCAwCiAgdGVzdCAoKTsKICAgICAgICAgIDB4MDAwMDAwMDAgICAgICAwMDAwICAgICAgICAgICBhZGQgYnl0ZSBbcmF4XSwgYWwKICAgICAgICAgIDB4MDAwMDAwMDIgICAgICAwMDAwICAgICAgICAgICBhZGQgYnl0ZSBbcmF4XSwgYWwK
+CMDS=<<EOF
+af+ 0 test
+e asm.lines.fcn=0
+e asm.lines.bb=1
+pd 2
+EOF
+EXPECT=<<EOF
+(fcn) test 0
+  test ();
+          0x00000000      0000           add byte [rax], al
+          0x00000002      0000           add byte [rax], al
+EOF
 RUN
+
 NAME=indent asm.lines.fcn=1, asm.lines.bb=0 for issue 9316
 FILE=-
-CMDS64=CmFmKyAwIHRlc3QKZSBhc20ubGluZXMuZmNuPTEKZSBhc20ubGluZXMuYmI9MApwZCAyCg==
-EXPECT64=LyAoZmNuKSB0ZXN0IDAKfCAgIHRlc3QgKCk7CnwgMHgwMDAwMDAwMCAgICAgIDAwMDAgICAgICAgICAgIGFkZCBieXRlIFtyYXhdLCBhbAogIDB4MDAwMDAwMDIgICAgICAwMDAwICAgICAgICAgICBhZGQgYnl0ZSBbcmF4XSwgYWwK
+CMDS=<<EOF
+af+ 0 test
+e asm.lines.fcn=1
+e asm.lines.bb=0
+pd 2
+EOF
+EXPECT=<<EOF
+/ (fcn) test 0
+|   test ();
+| 0x00000000      0000           add byte [rax], al
+  0x00000002      0000           add byte [rax], al
+EOF
 RUN
+
 NAME=asm.flgoff indent
 FILE=../bins/elf/crackme0x05
 CMDS='e asm.flags.offset=1
 s sym.check
 pd 1
 '
-EXPECT64=ICAgICAgICAgICAgMHgwODA0ODRjOCAgY2hlY2s6CiAgICAgICAgICAgIDB4MDgwNDg0YzggICAgICA1NSAgICAgICAgICAgICBwdXNoIGVicAo=
+EXPECT=<<EOF
+            0x080484c8  check:
+            0x080484c8      55             push ebp
+EOF
 RUN

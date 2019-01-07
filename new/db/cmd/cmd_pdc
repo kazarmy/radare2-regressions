@@ -1,5 +1,12 @@
 NAME=pdc @ main ioli0x0
 FILE=../bins/elf/ioli/crackme0x00
-EXPECT64=ICAgICAgIGR3b3JkIFtzMl0gPSAiMjUwMzgyIjggLy9bMHg4MDQ4NThmOjRdPTB4MzMzMDM1MzIgOyBzdHIuMjUwMzgyIDsgY29uc3QgY2hhciAqczIKICAgICAgIGludCBzdHJjbXAoY29uc3QgY2hhciAqIHMxIDogKCoweDE3N2ZlNCkweDAwMTc3ZmMwID0sIGNvbnN0IGNoYXIgKiBzMiA6ICgqMHg4MDQ4NThmKTB4MDAxNzdmYzQgPSAyNTAzODIpCg==
-CMDS64=CmFhYQpwZGMgQCBtYWlufnN0ci4yNTAzODIKcGRjIEAgbWFpbn5zdHJjbXAKCg==
+EXPECT=<<EOF
+       dword [s2] = "250382"8 //[0x804858f:4]=0x33303532 ; str.250382 ; const char *s2
+       int strcmp(const char * s1 : (*0x177fe4)0x00177fc0 =, const char * s2 : (*0x804858f)0x00177fc4 = 250382)
+EOF
+CMDS=<<EOF
+aaa
+pdc @ main~str.250382
+pdc @ main~strcmp
+EOF
 RUN

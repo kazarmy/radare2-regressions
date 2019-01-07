@@ -47,8 +47,11 @@ usage() {
 	echo "  -v    show version"
 	echo "  -t [type]   show travis status for type (pr, master, any)"
 	echo "  -S    enter shell (same as sh, shell or cd)"
+	echo "  --debase64"
+	echo "        debase64 tests"
 	echo "  --format"
 	echo "        format tests (i.e. add blank lines between tests)"
+	echo "  -df   --debase64 --format"
 }
 
 case "$KW" in
@@ -166,8 +169,14 @@ ${LINE}"
 -R)
 	(shift ; cd new ; node bin/r2r.js -i $@)
 	;;
+--debase64)
+	(shift ; cd new ; node bin/r2r.js --debase64 $@)
+	;;
 --format)
 	(shift ; cd new ; node bin/r2r.js --format $@)
+	;;
+-df)
+	(shift ; cd new ; node bin/r2r.js --debase64 --format $@)
 	;;
 -v)
 	echo "1.7.0"

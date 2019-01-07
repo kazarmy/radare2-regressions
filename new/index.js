@@ -64,10 +64,11 @@ class NewRegressions {
     useScript = !this.argv.c;
     this.verbose = this.argv.verbose || this.argv.v;
     this.interactive = this.argv.interactive || this.argv.i;
+    this.debase64 = this.argv.debase64;
     this.format = this.argv.format;
-    if (this.format && process.platform === 'win32') {
+    if ((this.debase64 || this.format) && process.platform === 'win32') {
       // since r2r on Windows modifies tests on-the-fly...
-      console.log('Do not run --format on Windows!');
+      console.log('Do not run --debase64 or --format on Windows!');
       process.exit(1);
     }
     this.promises = [];
@@ -531,10 +532,63 @@ class NewRegressions {
       if (this.argv.grep !== undefined) {
         return cb(null, {});
       }
+      if (this.argv.debase64) {
+        let newTests = [];
+        let writeTests = false;
+        process.stdout.write('Checking for base64 in ' + fileName + '...');
+        for (let i = 0; i < tests.length; i++) {
+          let line = tests[i].trim();
+          if (line.startsWith('CMDS64=')) {
+            writeTests = true;
+            line = debase64(line.substring(7)).trimStart().replace(/\n+$/, '');
+            newTests.push('CMDS=<<EOF');
+            newTests.push(line);
+            newTests.push('EOF');
+          } else if (line.startsWith('EXPECT64=')) {
+            writeTests = true;
+            line = debase64(line.substring(9)).replace(/\n+$/, '');
+            if (line.startsWith('[') && line.endsWith(']') ||
+                line.startsWith('{') && line.endsWith('}')) { // JSON
+              const delims = '\'"%';
+              let delim = null;
+              for(let i = 0; i < delims.length; i++) {
+                if (!line.includes(delims.charAt(i))) {
+                  delim = delims.charAt(i);
+                  break;
+                }
+              }
+              if (delim === null) {
+                throw new Error("No suitable delim char found from [" + delims + "]");
+              }
+              newTests.push('EXPECT=' + delim + line + '\n' + delim);
+            } else {
+              newTests.push('EXPECT=<<EOF');
+              if (line !== '') {
+                newTests.push(line);
+              }
+              newTests.push('EOF');
+            }
+          } else {
+            newTests.push(tests[i]);
+          }
+        }
+        if (writeTests) {
+          fs.writeFileSync(pathName, newTests.join('\n'));
+          console.log('DEBASE64ED');
+        } else {
+          console.log('OK');
+        }
+        if (this.argv.format) {
+          tests = newTests;
+          // fallthrough
+        } else {
+          return cb(null, {});
+        }
+      }
       if (this.argv.format) {
-        var newTests = [];
-        var writeTests = false;
-        var prevLineRUN = false;
+        let newTests = [];
+        let writeTests = false;
+        let prevLineRUN = false;
         process.stdout.write('Checking format of ' + fileName + '...');
         for (let i = 0; i < tests.length; i++) {
           if (prevLineRUN) {
