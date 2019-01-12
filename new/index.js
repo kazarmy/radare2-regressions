@@ -299,7 +299,7 @@ class NewRegressions {
       }
 
       // Execute json tests
-      if (source.indexOf('json') !== -1) {
+      if (source.indexOf('json/') !== -1) {
         let tests = parseTestJson(source, line);
         for (let t of tests) {
           this.promises.push(this.runTestJson.bind(this)(t, this.checkTestResult.bind(this)));
