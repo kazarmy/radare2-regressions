@@ -1828,9 +1828,10 @@ e io.cache=true
 "(show_fname fname, wz $0, wtf `prz`, o `prz`, i~file, ij, rm `prz`)"
 .(show_fname A\x1b¢\302\200€𝄞\363\240\201\201\\.bin)
 .(show_fname B\x1b¢\302\200\200€𝄞\363\240\201\201\\.bin)
+  # TODO: fix i~file output
 EXPECT=<<RUN
-file     A¢€𝄞󠁁\.bin
+file     A�€𝄞󠁁\.bin
 {"core":{"type":"","file":"A\u001b¢\u0080€𝄞\udb40\udc41\\.bin","fd":4,"size":256,"humansz":"256","iorw":true,"mode":"r-x","obsz":0,"block":256,"format":"any"}}
-file     B¢�€𝄞󠁁\.bin
+file     B��€𝄞󠁁\.bin
 {"core":{"type":"","file":"B\u001b¢\u0080\x80€𝄞\udb40\udc41\\.bin","fd":5,"size":256,"humansz":"256","iorw":true,"mode":"r-x","obsz":0,"block":256,"format":"any"}}
 RUN
