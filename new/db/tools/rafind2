@@ -132,12 +132,26 @@ EXPECT=<<RUN
 0x58f
 RUN
 
-NAME=rafind2 -S
+NAME=rafind2 -S ascii
 FILE=-
 CMDS=!rafind2 -S wide ../bins/pe/testapp-msvc64.exe
 EXPECT=<<RUN
 0x1481a
 0x14842
+RUN
+
+NAME=rafind2 -S U+00ff < utf8 < U+10000
+FILE=-
+CMDS=!rafind2 -S واسع ../bins/pe/testapp-msvc64.exe
+EXPECT=<<RUN
+0x14864
+RUN
+
+NAME=rafind2 -S utf8 >= U+10000
+FILE=-
+CMDS=!rafind2 -S 𐍈 ../bins/elf/strenc
+EXPECT=<<RUN
+0x22ac
 RUN
 
 NAME=rafind2 -Z
