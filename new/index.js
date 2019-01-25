@@ -383,10 +383,12 @@ class NewRegressions {
           }
           test.cmds = test.cmdScript ? test.cmdScript.trim().split('\n') : [];
           break;
+/*
         case 'CMDS64':
           test.cmdScript = debase64(v);
           test.cmds = test.cmdScript ? test.cmdScript.trim().split('\n') : [];
           break;
+*/
         case 'ARCH':
           test.arch = v;
           break;
@@ -435,10 +437,12 @@ class NewRegressions {
             }
           }
           break;
+/*
         case 'EXPECT64':
           test.expect = debase64(v);
           test.expect64 = true;
           break;
+*/
         case 'EXPECT_ERR':
           if (vt.startsWith('<<')) {
             const endString = vt.substring(2);
@@ -477,9 +481,11 @@ class NewRegressions {
             }
           }
           break;
+/*
         case 'EXPECT_ERR64':
           test.expect = debase64(v);
           break;
+*/
         case 'FILE':
           test.file = v;
           break;
