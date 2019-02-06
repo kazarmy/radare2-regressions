@@ -817,3 +817,29 @@ typedef char FILE_NAME;
 enum Foo {COW = 1, BAR = 2};
 EOF
 RUN
+
+NAME=typedef struct
+FILE=-
+CMDS=<<EXPECT
+t-*
+to db/cmd/12272.h
+tk
+?e
+ts
+EXPECT=<<RUN
+A=typedef
+B=typedef
+struct.A=num
+struct.A.num=float,0,0
+struct.A.num.meta=8
+struct.{=num,ch
+struct.{.ch=char,0,0
+struct.{.ch.meta=2
+struct.{.num=double,0,0
+struct.{.num.meta=9
+typedef.A=struct <anonymous>
+typedef.B=struct <anonymous>
+{=struct
+
+{
+RUN
