@@ -835,6 +835,7 @@ ts 1
 ?e ----
 ts A
 ts B
+ts O  # Broken but shouldn't hang
 ?e ----
 t-*
 to ../bins/headers/12272.h
@@ -852,6 +853,7 @@ pf c ch
 1=struct
 A=typedef
 B=typedef
+O=typedef
 struct.0=num,num2
 struct.0.num=int32_t,0,0
 struct.0.num.meta=0
@@ -863,11 +865,16 @@ struct.1.ch.meta=2
 struct.A=num
 struct.A.num=float,0,0
 struct.A.num.meta=8
+struct.O=ptr
+struct.O.ptr=char *,0,0
+struct.O.ptr.meta=4
 typedef.A=struct 0
 typedef.B=struct 1
+typedef.O=struct O
 
 0
 1
 A
 B
+O
 RUN

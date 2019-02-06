@@ -10,3 +10,7 @@ typedef struct {
 typedef struct {
   char ch;
 } B;
+
+typedef struct O {
+  char *ptr;
+} O;
