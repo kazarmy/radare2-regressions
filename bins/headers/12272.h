@@ -3,7 +3,8 @@ struct A {
 };
 
 typedef struct {
-  double num;
+  int num;
+  double num2;
 } A;
 
 typedef struct {

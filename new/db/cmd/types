@@ -295,9 +295,13 @@ unsigned int
 unsigned short
 void *
 addr
+addr_t
 date
+date_t
 dox
+dox_t
 name
+name_t
 pf [127]z[40]zd street city zip
 EOF
 RUN
@@ -334,9 +338,13 @@ unsigned int
 unsigned short
 void *
 addr
+addr_t
 date
+date_t
 dox
+dox_t
 name
+name_t
 pf [127]z[40]zd street city zip
 EOF
 RUN
@@ -821,25 +829,45 @@ RUN
 NAME=typedef struct
 FILE=-
 CMDS=<<EXPECT
+to ../bins/headers/12272.h
+ts 0
+ts 1
+?e ----
+ts A
+ts B
+?e ----
 t-*
-to db/cmd/12272.h
+to ../bins/headers/12272.h
 tk
 ?e
 ts
 EXPECT=<<RUN
+pf df num num2
+pf c ch
+----
+pf df num num2
+pf c ch
+----
+0=struct
+1=struct
 A=typedef
 B=typedef
+struct.0=num,num2
+struct.0.num=int32_t,0,0
+struct.0.num.meta=0
+struct.0.num2=double,8,0
+struct.0.num2.meta=9
+struct.1=ch
+struct.1.ch=char,0,0
+struct.1.ch.meta=2
 struct.A=num
 struct.A.num=float,0,0
 struct.A.num.meta=8
-struct.{=num,ch
-struct.{.ch=char,0,0
-struct.{.ch.meta=2
-struct.{.num=double,0,0
-struct.{.num.meta=9
-typedef.A=struct <anonymous>
-typedef.B=struct <anonymous>
-{=struct
+typedef.A=struct 0
+typedef.B=struct 1
 
-{
+0
+1
+A
+B
 RUN
