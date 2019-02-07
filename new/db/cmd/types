@@ -878,3 +878,37 @@ A
 B
 O
 RUN
+
+NAME=typedef struct double header
+FILE=-
+CMDS=<<EXPECT
+to ../bins/headers/hdr1.h
+to ../bins/headers/hdr2.h
+ts A
+ts B
+?e
+t-*
+to ../bins/headers/hdr1.h
+to ../bins/headers/hdr2.h
+tk
+?e
+ts
+EXPECT=<<RUN
+pf fc num ch
+pf fc num ch
+
+0=struct
+A=typedef
+B=typedef
+struct.0=num,ch
+struct.0.ch=char,0,0
+struct.0.ch.meta=2
+struct.0.num=float,0,0
+struct.0.num.meta=8
+typedef.A=struct 0
+typedef.B=struct 0
+
+0
+A
+B
+RUN
