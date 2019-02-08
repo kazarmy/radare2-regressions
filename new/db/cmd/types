@@ -843,10 +843,10 @@ tk
 ?e
 ts
 EXPECT=<<RUN
-pf df num num2
+pf dF num num2
 pf c ch
 ----
-pf df num num2
+pf dF num num2
 pf c ch
 ----
 0=struct
