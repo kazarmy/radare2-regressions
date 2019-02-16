@@ -1,0 +1,19 @@
+NAME=aac pe trampoline fcn name 32bit
+FILE=../bins/pe/testx32.exe
+CMDS=<<EXPECT
+e anal.autoname=false
+aac
+pd 1 @ 0x004017f6
+EXPECT=<<RUN
+|           0x004017f6      e8c5040000     call sub.KERNEL32.dll_IsProcessorFeaturePresent ; BOOL IsProcessorFeaturePresent(DWORD ProcessorFeature)
+RUN
+
+NAME=aac pe trampoline fcn name 64bit
+FILE=../bins/pe/testx64.exe
+CMDS=<<EXPECT
+e anal.autoname=false
+aac
+pd 1 @ 0x140001970
+EXPECT=<<RUN
+|           0x140001970      e8d1040000     call sub.KERNEL32.dll_IsProcessorFeaturePresent ; BOOL IsProcessorFeaturePresent(DWORD ProcessorFeature)
+RUN
