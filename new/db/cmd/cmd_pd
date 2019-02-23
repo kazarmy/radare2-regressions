@@ -852,7 +852,7 @@ CMDS=<<EOF
 e asm.bytes=false
 e asm.cmt.off=false
 e str.escbslash=true
-e asm.strenc=latin1
+e bin.strenc=latin1
 e scr.strconv=asciiesc
 pd 1 @ 0x0040169d
 e scr.strconv=asciidot
@@ -860,17 +860,17 @@ pd 1 @ 0x0040169d
 e asm.filter=false
 e asm.noisy=false
 pd 1 @ 0x00401693
-e asm.strenc=utf8
+e bin.strenc=utf8
 pd 1 @ 0x00401693
-e asm.strenc=utf16le
+e bin.strenc=utf16le
 pd 1 @ 0x004016ac
-e asm.strenc=utf32le
+e bin.strenc=utf32le
 pd 1 @ 0x004016ed
 pd 1 @ 0x004016f7
 EOF
 RUN
 
-NAME=asm.strenc utf8
+NAME=bin.strenc utf8
 FILE=../bins/elf/strenc
 EXPECT=<<EOF
             0x00401693      mov edi, 0x4021ff                          ; "utf8> \\u00a2\\u20ac\\U00010348 in yellow:\x1b[33m \u00a2\u20ac\U00010348 \x1b[0m\n"
@@ -882,16 +882,16 @@ e asm.bytes=false
 e asm.filter=false
 e asm.noisy=false
 e str.escbslash=true
-e asm.strenc=utf8
+e bin.strenc=utf8
 pd 1 @ 0x00401693
-e asm.strenc=latin1
+e bin.strenc=latin1
 pd 1 @ 0x00401693
-e asm.strenc=guess
+e bin.strenc=guess
 pd 1 @ 0x00401693
 EOF
 RUN
 
-NAME=asm.strenc latin1
+NAME=bin.strenc latin1
 FILE=../bins/pe/testapp-msvc64.exe
 EXPECT=<<EOF
             0x140001058      488d05415001.  lea rax, [0x1400160a0]     ; "latin1 gate: \xce\xbb\xab\xce"
@@ -900,14 +900,14 @@ EOF
 CMDS=<<EOF
 e asm.filter=false
 e asm.noisy=false
-e asm.strenc=latin1
+e bin.strenc=latin1
 pd 1 @ 0x140001058
-e asm.strenc=utf8
+e bin.strenc=utf8
 pd 1 @ 0x140001058
 EOF
 RUN
 
-NAME=asm.strenc utf16le
+NAME=bin.strenc utf16le
 FILE=../bins/elf/strenc
 EXPECT=<<EOF
             0x004016ac      mov edi, 0x40224a                          ; u"utf16le> \\u00a2\\u20ac\\U00010348 in green:\x1b[32m \xa2\u20ac\U00010348 \x1b[0m\n"
@@ -923,24 +923,24 @@ e asm.bytes=false
 e asm.filter=false
 e asm.noisy=false
 e str.escbslash=true
-e asm.strenc=guess
+e bin.strenc=guess
 pd 1 @ 0x004016ac
 e asm.filter=true
 e asm.cmt.off=false
-e asm.strenc=guess
+e bin.strenc=guess
 pd 1 @ 0x004016b6
-e asm.strenc=utf16le
+e bin.strenc=utf16le
 pd 1 @ 0x004016b6
-e asm.strenc=guess
+e bin.strenc=guess
 pd 1 @ 0x004016c0
-e asm.strenc=utf16le
+e bin.strenc=utf16le
 pd 1 @ 0x004016c0
 pd 1 @ 0x004016ca
 pd 1 @ 0x004016d4
 EOF
 RUN
 
-NAME=asm.strenc utf32le
+NAME=bin.strenc utf32le
 FILE=../bins/elf/strenc
 EXPECT=<<EOF
             0x004016de      mov esi, str.Linux_wide__esc:__e_0m        ; u"\t"
@@ -954,22 +954,22 @@ CMDS=<<EOF
 e asm.bytes=false
 e asm.cmt.off=false
 e str.escbslash=true
-e asm.strenc=utf16le
+e bin.strenc=utf16le
 pd 1 @ 0x004016de
-e asm.strenc=utf32le
+e bin.strenc=utf32le
 pd 1 @ 0x004016de
 e asm.filter=false
 e asm.noisy=false
-e asm.strenc=guess
+e bin.strenc=guess
 pd 1 @ 0x004016ed
 pd 1 @ 0x004016f7
 pd 1 @ 0x00401701
-e asm.strenc=utf32le
+e bin.strenc=utf32le
 pd 1 @ 0x00401701
 EOF
 RUN
 
-NAME=asm.strenc guess utf16le
+NAME=bin.strenc guess utf16le
 FILE=../bins/pe/testapp-msvc64.exe
 EXPECT=<<EOF
             0x14000104c      488d05455001.  lea rax, [0x140016098]     ; "@"
@@ -978,14 +978,14 @@ EOF
 CMDS=<<EOF
 e asm.filter=false
 e asm.noisy=false
-e asm.strenc=guess
+e bin.strenc=guess
 pd 1 @ 0x14000104c
-e asm.strenc=utf16le
+e bin.strenc=utf16le
 pd 1 @ 0x14000104c
 EOF
 RUN
 
-NAME=asm.strenc guess utf32le
+NAME=bin.strenc guess utf32le
 FILE=../bins/elf/strenc-guess-utf32le
 EXPECT=<<EOF
             0x00400463      mov edi, str.ABCDEF                        ; "A"
@@ -994,9 +994,9 @@ EOF
 CMDS=<<EOF
 e asm.cmt.off=false
 e asm.bytes=false
-e asm.strenc=guess
+e bin.strenc=guess
 pd 1 @ 0x00400463
-e asm.strenc=utf32le
+e bin.strenc=utf32le
 pd 1 @ 0x00400463
 EOF
 RUN
@@ -1700,7 +1700,7 @@ EXPECT=<<RUN
   [38;2;0;255;255m          [0m[48;2;0;127;0m[38;2;0;255;0m0x00001457[22;24;25;27;28;39m      [38;2;255;255;255m8d[38;2;255;255;255m86[38;2;255;255;255m89[38;2;255;255;255mdd[38;2;255;0;0mff[38;2;255;0;0mff[22;24;25;27;28;39m   [38;2;255;255;255mlea[38;2;0;255;255m [48;2;0;48;0meax[48;2;0;127;0m[22;24;25;27;28;39m,[38;2;0;255;255m [22;24;25;27;28;39m[[38;2;0;255;255mesi [22;24;25;27;28;39m-[38;2;0;255;255m[38;2;0;255;255m [38;2;255;255;0m0x2277[22;24;25;27;28;39m][38;2;0;255;255m[22;24;25;27;28;39m[0m[0m[0m[38;2;255;0;0m     ; " Take the Red Pill!! \n"[0m
 RUN
 
-NAME=pdJ with backslashes, quotation marks, str.escbslash and asm.strenc
+NAME=pdJ with backslashes, quotation marks, str.escbslash and bin.strenc
 FILE=-
 CMDS=<<EXPECT
 e io.cache=true
@@ -1724,13 +1724,13 @@ ww path"C:\Program
 f wide_str
 s 0x4000
 "wa mov ebx, 0x3000"
-e asm.strenc=guess
+e bin.strenc=guess
 pd 1
 pdJ 1
-e asm.strenc=latin1
+e bin.strenc=latin1
 pd 1
 pdJ 1
-e asm.strenc=utf16le
+e bin.strenc=utf16le
 e str.escbslash=true
 pd 1
 pdJ 1
@@ -1896,7 +1896,7 @@ FILE=../bins/elf/strenc
 CMDS=<<EXPECT
 e asm.bytes=false
 e asm.imm.str=true
-e asm.strenc=utf16le
+e bin.strenc=utf16le
 pd 1 @ 0x004016ca
 f str.fence @ 0x40235a
 e asm.cmt.off=false

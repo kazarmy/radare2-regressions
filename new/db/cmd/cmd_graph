@@ -340,7 +340,7 @@ af+ 0x0008049c super_mario_fix
 afb+ 0x0008049c 0x0008049c 8
 e io.cache=true
 wx c2a2c2a2c2a2 @ 0x80510
-e asm.strenc=utf8
+e bin.strenc=utf8
 agf
 e scr.strconv=asciidot
 agf
