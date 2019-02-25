@@ -2763,7 +2763,6 @@ RUN
 
 NAME=get function in, node before entry
 FILE=../bins/elf/fcn_in_test.elf
-BROKEN=1
 CMDS=<<EOF
 e asm.lines=false;e asm.comments=false;af @ main; pdr @ 0x1180
 EOF
@@ -2787,6 +2786,7 @@ EXPECT=<<EOF
 0x0000118f      90             nop
 0x00001190      90             nop
 0x00001191      c3             ret
+
 EOF
 RUN
 
