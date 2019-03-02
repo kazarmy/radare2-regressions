@@ -13,7 +13,6 @@ sym._obstack_free
 sym._obstack_newchunk
 main
 entry.init0
-loc.00005b40
 entry.fini0
 fcn.00005b10
 EOF
