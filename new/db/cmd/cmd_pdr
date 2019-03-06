@@ -371,8 +371,8 @@ aa
 pdr @ entry.init0
 EXPECT=<<RUN
 | ; CODE XREF from entry.init0 (0x5bd4)
-| 0x00005b40      488d3d21c701.  lea rdi, loc.__bss_start              ; 0x22268
-| 0x00005b47      488d351ac701.  lea rsi, loc.__bss_start              ; 0x22268
+| 0x00005b40      488d3d21c701.  lea rdi, loc._edata                   ; loc.__bss_start ; 0x22268
+| 0x00005b47      488d351ac701.  lea rsi, loc._edata                   ; loc.__bss_start ; 0x22268
 | 0x00005b4e      4829fe         sub rsi, rdi
 | 0x00005b51      48c1fe03       sar rsi, 3
 | 0x00005b55      4889f0         mov rax, rsi
