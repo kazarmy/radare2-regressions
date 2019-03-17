@@ -174,8 +174,8 @@ size: 12
 | 0x004017cb      72             invalid
 | ----------- true: 0x004017dd  false: 0x004017cd
 EXPECT_ERR=<<RUN
-Warning: Basic block truncated by 3 bytes at 0x4017c6
-Warning: Basic block truncated by 1 byte at 0x4017cb
+Warning: Basic block truncated by 3 bytes starting from 0x4017c6
+Warning: Basic block truncated by 1 byte starting from 0x4017cb
 RUN
 
 NAME=afcf
