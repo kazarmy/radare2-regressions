@@ -1377,7 +1377,7 @@ pC 0x200
 EOF
 RUN
 
-NAME=pd bin.strpurge
+NAME=pd bin.str.purge
 FILE=../bins/elf/analysis/ls2
 EXPECT=<<EOF
             0x00404886      mov rcx, 0x412420                          ; ' $A' ; "AWAVA\x89\xffAUATL\x8d%\xbe\x99 "
@@ -1403,29 +1403,29 @@ e asm.bytes=false
 s main
 af
 s 0x00404886
-e bin.strpurge=false
+e bin.str.purge=false
 pd 2
 ?e --1--
-e bin.strpurge=true
+e bin.str.purge=true
 pd 2
 ?e --2--
-e bin.strpurge=0x4028a0
+e bin.str.purge=0x4028a0
 pd 2
 ?e --3--
-e bin.strpurge=0x412420,0x4028a0
+e bin.str.purge=0x412420,0x4028a0
 pd 2
 ?e --4--
-e bin.strpurge=true
+e bin.str.purge=true
 pd 1 @ 0x004028e0
 pd 1 @ 0x00402abd
 ?e --5--
-e bin.strpurge=true,0x414fbf
+e bin.str.purge=true,0x414fbf
 pd 1 @ 0x004028e0
 pd 1 @ 0x00402abd
 EOF
 RUN
 
-NAME=pd, esil, emu.stroff and bin.strpurge
+NAME=pd, esil, emu.stroff and bin.str.purge
 FILE=../bins/elf/analysis/hello-android-mips
 EXPECT=<<EOF
             0x0008049c      0800023c       lui v0, 8                   ; segment.ehdr
@@ -1440,14 +1440,14 @@ EOF
 CMDS=<<EOF
 e emu.str=true
 s 0x0008049c
-e bin.strpurge=
+e bin.str.purge=
 e emu.str.off=false
 pd 2
 ?e ----
 e emu.str.off=true
 pd 2
 ?e ----
-e bin.strpurge=0x80510
+e bin.str.purge=0x80510
 pd 2
 EOF
 RUN

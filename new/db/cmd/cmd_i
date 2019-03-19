@@ -3341,7 +3341,7 @@ RUN
 NAME=izzj (no rbin - file x86_64)
 FILE=../bins/elf/analysis/hello-linux-x86_64
 ARGS=-n
-CMDS='e bin.strpurge=all,!0x2fa,!0x1953
+CMDS='e bin.str.purge=all,!0x2fa,!0x1953
 izzj
 '
 EXPECT='[{"vaddr":762,"paddr":762,"ordinal":4,"size":5,"length":4,"section":"","type":"ascii","string":"cHV0cw=="},{"vaddr":6483,"paddr":6483,"ordinal":65,"size":18,"length":17,"section":"","type":"ascii","string":"cHV0c0BAR0xJQkNfMi4yLjU="}]'
@@ -3350,7 +3350,7 @@ RUN
 NAME=izzj 2 (no rbin - file x86_64)
 FILE=../bins/elf/analysis/hello-linux-x86_64
 ARGS=
-CMDS='e bin.strpurge=all,!0x4002fa,!0x15b
+CMDS='e bin.str.purge=all,!0x4002fa,!0x15b
 izzj
 '
 EXPECT='[{"vaddr":4195066,"paddr":762,"ordinal":4,"size":5,"length":4,"section":".dynstr","type":"ascii","string":"cHV0cw=="},{"vaddr":347,"paddr":6483,"ordinal":65,"size":18,"length":17,"section":".strtab","type":"ascii","string":"cHV0c0BAR0xJQkNfMi4yLjU="}]'
@@ -3525,7 +3525,7 @@ NAME=izj unicode blocks
 FILE=../bins/elf/strenc
 EXPECT='[{"vaddr":4202996,"paddr":8692,"ordinal":2,"size":11,"length":10,"section":".rodata","type":"ascii","string":"ZW5fVVMudXRmOA=="},{"vaddr":4203007,"paddr":8703,"ordinal":3,"size":61,"length":54,"section":".rodata","type":"utf8","string":"dXRmOD4gXFx1MDBhMlxcdTIwYWNcXFUwMDAxMDM0OCBpbiB5ZWxsb3c6XGVbMzNtIMKi4oKs8JCNiCBcZVswbVxu","blocks":["Basic Latin","Latin-1 Supplement","Currency Symbols","Gothic"]},{"vaddr":4203208,"paddr":8904,"ordinal":7,"size":68,"length":33,"section":".rodata","type":"utf16le","string":"aXMgYSB3YWxsIHdpdGggbm8gZW1iZWRkZWQgemVyb3Ncbg=="}]'
 CMDS=<<EOF
-e bin.strpurge=all,!4202996,!4203007,!4203208
+e bin.str.purge=all,!4202996,!4203007,!4203208
 izj
 EOF
 RUN
@@ -3534,12 +3534,12 @@ NAME=izzj unicode blocks
 FILE=../bins/elf/strenc-guess-utf32le
 EXPECT='[{"vaddr":4195920,"paddr":1616,"ordinal":13,"size":44,"length":10,"section":".rodata","type":"utf32le","string":"YWJjZGVm8JCNiCAgZw==","blocks":["Basic Latin","Gothic"]}]'
 CMDS=<<EOF
-e bin.strpurge=all,!4195920
+e bin.str.purge=all,!4195920
 izzj
 EOF
 RUN
 
-NAME=iz/izz bin.strpurge
+NAME=iz/izz bin.str.purge
 FILE=../bins/elf/analysis/ls2
 EXPECT=<<EOF
 --1--
@@ -3581,47 +3581,47 @@ EXPECT=<<EOF
 EOF
 CMDS=<<EOF
 ?e --1--
-e bin.strpurge=false
+e bin.str.purge=false
 izz~0x00412420
 ?e --2--
-e bin.strpurge=true
+e bin.str.purge=true
 izz~0x00412420  # Should print nothing
 ?e --3--
 (test_iz,iz~0x004131d8,iz~0x00413228,iz~0x00413233,iz~0x0041323a)
-e bin.strpurge=false
+e bin.str.purge=false
 .(test_iz)
 ?e --4--
-e bin.strpurge=true
+e bin.str.purge=true
 .(test_iz)
 ?e --5--
-e bin.strpurge=0x004131d8,0x00413228,0x0041323a
+e bin.str.purge=0x004131d8,0x00413228,0x0041323a
 .(test_iz)
 ?e --6--
-e bin.strpurge=true,0x00413228
+e bin.str.purge=true,0x00413228
 .(test_iz)
 ?e --7--
-e bin.strpurge=0x4131d8-0x413233
+e bin.str.purge=0x4131d8-0x413233
 .(test_iz)
 ?e --8--
-e bin.strpurge=0x413230-0x413240,0x4131d8
+e bin.str.purge=0x413230-0x413240,0x4131d8
 .(test_iz)
 ?e --9--
-e bin.strpurge=true,0x413228-0x413228
+e bin.str.purge=true,0x413228-0x413228
 .(test_iz)
 ?e --10--
-e bin.strpurge=0x413100-0x413300,!0x413233
+e bin.str.purge=0x413100-0x413300,!0x413233
 .(test_iz)
 ?e --11--
-e bin.strpurge=true,!0x41323a
+e bin.str.purge=true,!0x41323a
 .(test_iz)
 ?e --12--
-e bin.strpurge=true,!0x41323a,0x41323a
+e bin.str.purge=true,!0x41323a,0x41323a
 .(test_iz)
 ?e --13--
-e bin.strpurge=true,0x4131d8,!0x4131d8
+e bin.str.purge=true,0x4131d8,!0x4131d8
 .(test_iz)
 ?e --14--
-e bin.strpurge=all,!0x413220-0x413235
+e bin.str.purge=all,!0x413220-0x413235
 .(test_iz)
 EOF
 RUN
@@ -3629,11 +3629,11 @@ RUN
 NAME=iz-
 FILE=-
 CMDS='iz- @ 0x412420
-e bin.strpurge
+e bin.str.purge
 iz- @ 0x4028a0
-e bin.strpurge
+e bin.str.purge
 iz- 0x414fbf
-e bin.strpurge
+e bin.str.purge
 '
 EXPECT='0x412420
 0x412420,0x4028a0

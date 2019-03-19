@@ -453,7 +453,7 @@ EXPECT='[{"offset":5368799256, "type":"Cs", "name":"XHR3aWRlXFxlc2M6IFxlWzBtwqFc
 [{"offset":5368799256, "type":"Cs", "name":"CQ==", "enc":"latin1", "ascii":true}]
 [{"offset":5368799256, "type":"Cs", "name":"CXdpZGVcZXNjOiAbWzBtoQ0K", "enc":"latin1", "ascii":false}]
 '
-ARGS=-e bin.strpurge=all,!0x140016018
+ARGS=-e bin.str.purge=all,!0x140016018
 CMDS=<<EOF
 s 0x140016018
 Csj
@@ -498,7 +498,7 @@ FILE=../bins/elf/strenc
 EXPECT='[{"offset":4203007, "type":"Cs", "name":"dXRmOD4gXFx1MDBhMlxcdTIwYWNcXFUwMDAxMDM0OCBpbiB5ZWxsb3c6XGVbMzNtIMKi4oKs8JCNiCBcZVswbVxu", "enc":"iz", "ascii":false}]
 [{"offset":4203007, "type":"Cs", "name":"dXRmOD4gXHUwMGEyXHUyMGFjXFUwMDAxMDM0OCBpbiB5ZWxsb3c6G1szM20gwqLigqzwkI2IIBtbMG0K", "enc":"utf8", "ascii":false}]
 '
-ARGS=-e bin.strpurge=all,!0x004021ff
+ARGS=-e bin.str.purge=all,!0x004021ff
 CMDS=<<EOF
 s 0x004021ff
 Csj
