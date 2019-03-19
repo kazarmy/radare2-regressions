@@ -1549,14 +1549,14 @@ ah*
 EOF
 RUN
 
-NAME=pd bin.strfilter
+NAME=pd bin.str.filter
 FILE=../bins/elf/analysis/ls2
 CMDS='e asm.bytes=false
 e asm.cmt.off=false
 s 0x004028e0
-e bin.strfilter=
+e bin.str.filter=
 pd 1
-e bin.strfilter=U
+e bin.str.filter=U
 pd 1
 '
 EXPECT='            0x004028e0      mov esi, str.usr_share_locale              ; "/usr/share/locale"
