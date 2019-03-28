@@ -156,9 +156,9 @@ EXPECT=<<RUN
             0x08048056      31c0           xor eax, eax
             0x08048058      40             inc eax
             0x08048059      cd80           int 0x80
-            0x0804805b      ff             invalid
+  0x0804805b   unmapped
   0x0804805c   unmapped
 
 - offset -   0 1  2 3  4 5  6 7  8 9  A B  C D  E F  0123456789ABCDEF
-0x08048054  b32a 31c0 40cd 80ff                      .*1.@...        
+0x08048054  b32a 31c0 40cd 80                        .*1.@..         
 RUN
