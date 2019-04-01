@@ -1,0 +1,72 @@
+NAME=ec* fgbg
+FILE=-
+CMDS=<<EXPECT
+eco sepia
+ec*
+EXPECT=<<RUN
+ec comment rgb:f0d090
+ec usrcmt rgb:f0f0f0
+ec args rgb:b0b070
+ec fname rgb:b0b070
+ec floc rgb:00ffff
+ec fline rgb:c0a060
+ec flag rgb:f0f0d0
+ec label rgb:708080
+ec help rgb:a0b070
+ec flow rgb:c0a060
+ec flow2 rgb:f0e0c0
+ec prompt rgb:906000
+ec offset rgb:906000
+ec input rgb:c0a060
+ec invalid rgb:c06040
+ec other rgb:b0a060
+ec b0x00 rgb:403010
+ec b0x7f rgb:f0d090
+ec b0xff rgb:906000
+ec math rgb:d0b070
+ec bin rgb:f0e0c0
+ec btext rgb:f0e0c0
+ec push rgb:d0b070
+ec pop rgb:b0b070
+ec crypto rgb:0000ff
+ec jmp rgb:f0e0c0
+ec cjmp rgb:f0e0c0
+ec call rgb:f0e0c0
+ec nop rgb:708080
+ec ret rgb:a0b070
+ec trap rgb:403010
+ec ucall rgb:f0e0c0
+ec ujmp rgb:f0e0c0
+ec swi rgb:b0b070
+ec cmp rgb:c0a060
+ec reg rgb:c0a060
+ec creg rgb:906000
+ec num rgb:906000
+ec mov rgb:d0b070
+ec func_var rgb:f0d090
+ec func_var_type rgb:805000
+ec func_var_addr rgb:906000
+ec widget_bg rgb:303030
+ec widget_sel rgb:ff0000
+ec ai.read rgb:c0b070
+ec ai.write rgb:c0a060
+ec ai.exec rgb:d0b070
+ec ai.seq rgb:906000
+ec ai.ascii rgb:f0e0c0
+ec graph.box rgb:403010
+ec graph.box2 rgb:c0a060
+ec graph.box3 rgb:c0a060
+ec graph.box4 rgb:c0a060
+ec graph.true rgb:f0d090
+ec graph.false rgb:403010
+ec graph.trufae rgb:f0d090
+ec graph.current rgb:0000ff
+ec graph.traced rgb:0000ff
+ec gui.cflow rgb:ffff00
+ec gui.dataoffset rgb:ffff00
+ec gui.background rgb:000000
+ec gui.alt_background rgb:ffffff
+ec gui.border rgb:000000
+ec wordhl rgb:ff0000
+ec linehl rgb:201000
+RUN
