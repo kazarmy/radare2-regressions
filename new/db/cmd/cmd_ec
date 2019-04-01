@@ -31,11 +31,11 @@ ec pop rgb:b0b070
 ec crypto rgb:0000ff
 ec jmp rgb:f0e0c0
 ec cjmp rgb:f0e0c0
-ec call rgb:f0e0c0
+ec call rgb:f0e0c0 rgb:302000
 ec nop rgb:708080
 ec ret rgb:a0b070
 ec trap rgb:403010
-ec ucall rgb:f0e0c0
+ec ucall rgb:f0e0c0 rgb:302000
 ec ujmp rgb:f0e0c0
 ec swi rgb:b0b070
 ec cmp rgb:c0a060
