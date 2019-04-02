@@ -145,3 +145,30 @@ CMDS=<<EOF
 pfj {1}? (elf_phdr) @ 0x0000000000000040
 EOF
 RUN
+
+NAME=32: Elf header
+FILE=../bins/elf/analysis/tiny1
+CMDS=<<EXPECT
+pfo elf32
+pf.elf_header @ 0x8048000
+EXPECT=<<RUN
+     ident : 
+                struct<elf_ident>
+           magic : 0x08048000 = ".ELF"
+           class : 0x08048004 = class (enum elf_class) = 0x1 ; ELFCLASS32
+            data : 0x08048005 = data (enum elf_data) = 0x1 ; ELFDATA2LSB
+         version : 0x08048006 = version (enum elf_hdr_version) = 0x1 ; EV_CURRENT
+      type : 0x08048010 = type (enum elf_type) = 0x2 ; ET_EXEC
+   machine : 0x08048012 = machine (enum elf_machine) = 0x3 ; EM_386
+   version : 0x08048014 = version (enum elf_obj_version) = 0x1 ; EV_CURRENT
+     entry : 0x08048018 = 0x08048054
+     phoff : 0x0804801c = 0x00000034
+     shoff : 0x08048020 = 0x00000000
+     flags : 0x08048024 = 0x00000000
+    ehsize : 0x08048028 = 0x0034
+ phentsize : 0x0804802a = 0x0020
+     phnum : 0x0804802c = 0x0001
+ shentsize : 0x0804802e = 0x0000
+     shnum : 0x08048030 = 0x0000
+  shstrndx : 0x08048032 = 0x0000
+RUN
