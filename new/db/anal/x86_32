@@ -405,7 +405,7 @@ NAME=Windows Function EMU printf
 FILE=../bins/pe/standard.exe
 EXPECT=<<EOF
   0x00402ae8      call dword [sym.imp.msvcrt.dll_printf] ; 0x402d48 ; esp=0x177ff8 ; eip=0x2d08 reloc.msvcrt.dll_printf
-                    ; int printf("  - RT_MANIFEST resource located.")
+                    ; int printf("  - RT_MANIFEST resource located\n")
 EOF
 CMDS=<<EOF
 e asm.arch=x86

@@ -568,7 +568,7 @@ CMDS=<<EOF
 tpx foo 4141414144141414141442001000000
 EOF
 EXPECT=<<EOF
- a : 0x00000000 = "AAAAD.....B"
+ a : 0x00000000 = "AAAAD\x14\x14\x14\x14\x14B"
  b : 0x0000000c = 16
 EOF
 RUN
@@ -780,7 +780,7 @@ EXPECT=<<EOF
 pf dpz x fp b
   x : 0x00000000 = 0
  fp : 0x00000004 = (qword)0x0000000000000000
-  b : 0x0000000c = ".hello"
+  b : 0x0000000c = "\x05hello"
 EOF
 RUN
 
