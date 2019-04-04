@@ -154,7 +154,7 @@ pf.elf_header @ 0x8048000
 EXPECT=<<RUN
      ident : 
                 struct<elf_ident>
-           magic : 0x08048000 = ".ELF"
+           magic : 0x08048000 = "\x7fELF"
            class : 0x08048004 = class (enum elf_class) = 0x1 ; ELFCLASS32
             data : 0x08048005 = data (enum elf_data) = 0x1 ; ELFDATA2LSB
          version : 0x08048006 = version (enum elf_hdr_version) = 0x1 ; EV_CURRENT
