@@ -179,10 +179,15 @@ CMDS=<<EXPECT
 pfo elf64
 pf.elf_header @ `i~baddr[1]`
 EXPECT=<<RUN
-     ident : 0x00400000 = "\x7fELF\x02\x01\x01"
+     ident : 
+                struct<elf_ident>
+           magic : 0x00400000 = "\x7fELF"
+           class : 0x00400004 = class (enum elf_class) = 0x2 ; ELFCLASS64
+            data : 0x00400005 = data (enum elf_data) = 0x1 ; ELFDATA2LSB
+         version : 0x00400006 = version (enum elf_hdr_version) = 0x1 ; EV_CURRENT
       type : 0x00400010 = type (enum elf_type) = 0x2 ; ET_EXEC
    machine : 0x00400012 = machine (enum elf_machine) = 0x3e ; EM_X86_64
-   version : 0x00400014 = 0x00000001
+   version : 0x00400014 = version (enum elf_obj_version) = 0x1 ; EV_CURRENT
      entry : 0x00400018 = (qword)0x0000000000400080
      phoff : 0x00400020 = (qword)0x0000000000000040
      shoff : 0x00400028 = (qword)0x00000000000000a8
