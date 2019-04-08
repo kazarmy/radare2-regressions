@@ -199,3 +199,49 @@ EXPECT=<<RUN
      shnum : 0x0040003c = 0x0003
   shstrndx : 0x0040003e = 0x0002
 RUN
+
+NAME=32: -nn elf header
+FILE=../bins/elf/analysis/tiny1
+ARGS=-nn
+CMDS=<<EXPECT
+e io.va=0
+pf.elf_header @ elf_header
+EXPECT=<<RUN
+     ident : 0x00000000 = "\x7fELF\x01\x01\x01"
+      type : 0x00000010 = type (enum elf_type) = 0x2 ; ET_EXEC
+   machine : 0x00000012 = machine (enum elf_machine) = 0x3 ; EM_386
+   version : 0x00000014 = 0x00000001
+     entry : 0x00000018 = 0x08048054
+     phoff : 0x0000001c = 0x00000034
+     shoff : 0x00000020 = 0x00000000
+     flags : 0x00000024 = 0x00000000
+    ehsize : 0x00000028 = 0x0034
+ phentsize : 0x0000002a = 0x0020
+     phnum : 0x0000002c = 0x0001
+ shentsize : 0x0000002e = 0x0000
+     shnum : 0x00000030 = 0x0000
+  shstrndx : 0x00000032 = 0x0000
+RUN
+
+NAME=64: -nn elf header
+FILE=../bins/elf/analysis/x64-simple
+ARGS=-nn
+CMDS=<<EXPECT
+e io.va=0
+pf.elf_header @ elf_header
+EXPECT=<<RUN
+     ident : 0x00000000 = "\x7fELF\x02\x01\x01"
+      type : 0x00000010 = type (enum elf_type) = 0x2 ; ET_EXEC
+   machine : 0x00000012 = machine (enum elf_machine) = 0x3e ; EM_X86_64
+   version : 0x00000014 = 0x00000001
+     entry : 0x00000018 = (qword)0x0000000000400080
+     phoff : 0x00000020 = (qword)0x0000000000000040
+     shoff : 0x00000028 = (qword)0x00000000000000a8
+     flags : 0x00000030 = 0x00000000
+    ehsize : 0x00000034 = 0x0040
+ phentsize : 0x00000036 = 0x0038
+     phnum : 0x00000038 = 0x0001
+ shentsize : 0x0000003a = 0x0040
+     shnum : 0x0000003c = 0x0003
+  shstrndx : 0x0000003e = 0x0002
+RUN
