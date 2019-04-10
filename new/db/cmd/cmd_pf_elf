@@ -206,6 +206,8 @@ ARGS=-nn
 CMDS=<<EXPECT
 e io.va=0
 pf.elf_header @ elf_header
+?e
+pfj.elf_header @ elf_header ~{}
 EXPECT=<<RUN
      ident : 
                 struct<elf_ident>
@@ -226,6 +228,107 @@ EXPECT=<<RUN
  shentsize : 0x0000002e = 0x0000
      shnum : 0x00000030 = 0x0000
   shstrndx : 0x00000032 = 0x0000
+
+[
+  {
+    "name": "ident",
+    "type": "elf_ident",
+    "offset": 0,
+    "value": [
+      {
+        "name": "magic",
+        "type": "z",
+        "offset": 0,
+        "value": 0,
+        "string": ".ELF..."
+      },
+      {
+        "name": "class",
+        "type": "E",
+        "offset": 4,
+        "value": "elf_class"
+      },
+      {
+        "name": "data",
+        "type": "E",
+        "offset": 5,
+        "value": "elf_data"
+      },
+      {
+        "name": "version",
+        "type": "E",
+        "offset": 6,
+        "value": "elf_hdr_version"
+      }
+    ]
+  },
+  {
+    "name": "type",
+    "type": "E",
+    "offset": 16,
+    "value": "elf_type"
+  }
+]},{
+  "name": "machine",
+  "type": "E",
+  "offset": 18,
+  "value": "elf_machine"
+}]},{
+  "name": "version",
+  "type": "E",
+  "offset": 20,
+  "value": "elf_obj_version"
+}]},{
+  "name": "entry",
+  "type": "x",
+  "offset": 24,
+  "value": 134512724
+}]},{
+  "name": "phoff",
+  "type": "x",
+  "offset": 28,
+  "value": 52
+}]},{
+  "name": "shoff",
+  "type": "x",
+  "offset": 32,
+  "value": 0
+}]},{
+  "name": "flags",
+  "type": "x",
+  "offset": 36,
+  "value": 0
+}]},{
+  "name": "ehsize",
+  "type": "w",
+  "offset": 40,
+  "value": 52
+}]},{
+  "name": "phentsize",
+  "type": "w",
+  "offset": 42,
+  "value": 32
+}]},{
+  "name": "phnum",
+  "type": "w",
+  "offset": 44,
+  "value": 1
+}]},{
+  "name": "shentsize",
+  "type": "w",
+  "offset": 46,
+  "value": 0
+}]},{
+  "name": "shnum",
+  "type": "w",
+  "offset": 48,
+  "value": 0
+}]},{
+  "name": "shstrndx",
+  "type": "w",
+  "offset": 50,
+  "value": 0
+}]
 RUN
 
 NAME=64: -nn elf header
