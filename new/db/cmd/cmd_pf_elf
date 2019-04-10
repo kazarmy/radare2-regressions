@@ -267,68 +267,80 @@ EXPECT=<<RUN
     "type": "E",
     "offset": 16,
     "value": "elf_type"
+  },
+  {
+    "name": "machine",
+    "type": "E",
+    "offset": 18,
+    "value": "elf_machine"
+  },
+  {
+    "name": "version",
+    "type": "E",
+    "offset": 20,
+    "value": "elf_obj_version"
+  },
+  {
+    "name": "entry",
+    "type": "x",
+    "offset": 24,
+    "value": 134512724
+  },
+  {
+    "name": "phoff",
+    "type": "x",
+    "offset": 28,
+    "value": 52
+  },
+  {
+    "name": "shoff",
+    "type": "x",
+    "offset": 32,
+    "value": 0
+  },
+  {
+    "name": "flags",
+    "type": "x",
+    "offset": 36,
+    "value": 0
+  },
+  {
+    "name": "ehsize",
+    "type": "w",
+    "offset": 40,
+    "value": 52
+  },
+  {
+    "name": "phentsize",
+    "type": "w",
+    "offset": 42,
+    "value": 32
+  },
+  {
+    "name": "phnum",
+    "type": "w",
+    "offset": 44,
+    "value": 1
+  },
+  {
+    "name": "shentsize",
+    "type": "w",
+    "offset": 46,
+    "value": 0
+  },
+  {
+    "name": "shnum",
+    "type": "w",
+    "offset": 48,
+    "value": 0
+  },
+  {
+    "name": "shstrndx",
+    "type": "w",
+    "offset": 50,
+    "value": 0
   }
-]},{
-  "name": "machine",
-  "type": "E",
-  "offset": 18,
-  "value": "elf_machine"
-}]},{
-  "name": "version",
-  "type": "E",
-  "offset": 20,
-  "value": "elf_obj_version"
-}]},{
-  "name": "entry",
-  "type": "x",
-  "offset": 24,
-  "value": 134512724
-}]},{
-  "name": "phoff",
-  "type": "x",
-  "offset": 28,
-  "value": 52
-}]},{
-  "name": "shoff",
-  "type": "x",
-  "offset": 32,
-  "value": 0
-}]},{
-  "name": "flags",
-  "type": "x",
-  "offset": 36,
-  "value": 0
-}]},{
-  "name": "ehsize",
-  "type": "w",
-  "offset": 40,
-  "value": 52
-}]},{
-  "name": "phentsize",
-  "type": "w",
-  "offset": 42,
-  "value": 32
-}]},{
-  "name": "phnum",
-  "type": "w",
-  "offset": 44,
-  "value": 1
-}]},{
-  "name": "shentsize",
-  "type": "w",
-  "offset": 46,
-  "value": 0
-}]},{
-  "name": "shnum",
-  "type": "w",
-  "offset": 48,
-  "value": 0
-}]},{
-  "name": "shstrndx",
-  "type": "w",
-  "offset": 50,
-  "value": 0
-}]
+]
 RUN
 
 NAME=64: -nn elf header
