@@ -239,8 +239,7 @@ EXPECT=<<RUN
         "name": "magic",
         "type": "z",
         "offset": 0,
-        "value": 0,
-        "string": ".ELF..."
+        "value": ".ELF..."
       },
       {
         "name": "class",
