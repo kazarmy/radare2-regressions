@@ -297,3 +297,24 @@ EXPECT=<<RUN
 0x00000001 = "ABCDE"
 [{"type":"b","offset":0,"value":70},{"type":"z","offset":1,"value":"ABCDE"}]
 RUN
+
+NAME=pf/pfj z with size
+FILE=-
+CMDS=<<EXPECT
+wz ABCDE
+(pf2 format, pf $0, pfj $0)
+.(pf2 z)
+?e
+.(pf2 [3]z)
+?e
+.(pf2 [7]z)
+EXPECT=<<RUN
+0x00000000 = "ABCDE"
+[{"type":"z","offset":0,"value":"ABCDE"}]
+
+0x00000000 = "ABC"
+[{"type":"z","offset":0,"value":"ABCDE"}]
+
+0x00000000 = "ABCDE"
+[{"type":"z","offset":0,"value":"ABCDE"}]
+RUN
