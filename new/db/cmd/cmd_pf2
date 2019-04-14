@@ -284,3 +284,16 @@ pf f
 EXPECT=<<RUN
 0x00000000 = 3.14159274
 RUN
+
+NAME=pfj z not-at-start fix
+FILE=-
+CMDS=<<EXPECT
+wx 46
+wz ABCDE @ 0x1
+pf bz
+pfj bz
+EXPECT=<<RUN
+0x00000000 = 0x46
+0x00000001 = "ABCDE"
+[{"type":"b","offset":0,"value":70},{"type":"z","offset":1,"value":"ABCDE"}]
+RUN
