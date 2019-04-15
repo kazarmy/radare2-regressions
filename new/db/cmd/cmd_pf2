@@ -313,7 +313,7 @@ EXPECT=<<RUN
 [{"type":"z","offset":0,"value":"ABCDE"}]
 
 0x00000000 = "ABC"
-[{"type":"z","offset":0,"value":"ABCDE"}]
+[{"type":"z","offset":0,"value":"ABC"}]
 
 0x00000000 = "ABCDE"
 [{"type":"z","offset":0,"value":"ABCDE"}]
