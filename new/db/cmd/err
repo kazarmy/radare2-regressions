@@ -27,3 +27,17 @@ p8 3
 f~?
 EOF
 RUN
+
+NAME=r2r stop-after-err fix
+FILE=-
+CMDS=<<EXPECT
+?e This is printed
+pd 1 @ main
+?e This should be printed
+af @ entry0
+EXPECT=<<EXPECT_ERR
+This is printed
+EXPECT_ERR=<<RUN
+Invalid address (main)
+|ERROR| Invalid command 'pd 1 @ main' (0x70)
+RUN
