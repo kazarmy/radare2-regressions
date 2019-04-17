@@ -37,7 +37,10 @@ pd 1 @ main
 af @ entry0
 EXPECT=<<EXPECT_ERR
 This is printed
+This should be printed
 EXPECT_ERR=<<RUN
 Invalid address (main)
 |ERROR| Invalid command 'pd 1 @ main' (0x70)
+Invalid address (entry0)
+|ERROR| Invalid command 'af @ entry0' (0x61)
 RUN

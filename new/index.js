@@ -189,6 +189,7 @@ class NewRegressions {
           '-escr.utf8=0',
           '-escr.color=0',
           '-escr.interactive=0',
+          '-ecfg.contaftererr=1',
           '-N',
           '-Q'
         ];
