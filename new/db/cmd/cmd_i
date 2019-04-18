@@ -3925,14 +3925,17 @@ RUN
 
 NAME=iee elf Cd (64-bit)
 FILE=../bins/elf/analysis/ls-linux64
+SUFFIX=2>&1
 CMDS=<<EXPECT
+e scr.interactive=true
+s section..preinit_array
+?e
 pD $SS @ section..init_array
 ?e
 pD $SS @ section..fini_array
-?e
-# Can't be first line for some reason
-pD $SS @ section..preinit_array
-EXPECT=<<EXPECT_ERR
+EXPECT=<<RUN
+Cannot seek to unknown address 'section..preinit_array'
+
             ;-- section..init_array:
             ;-- segment.LOAD1:
             ;-- segment.GNU_RELRO:
@@ -3940,10 +3943,6 @@ EXPECT=<<EXPECT_ERR
 
             ;-- section..fini_array:
             0x0021bfb0      .qword 0x0000000000005ce0 ; entry.fini0    ; RELOC 64  ; [19] -rw- section size 8 named .fini_array
-
-EXPECT_ERR=<<RUN
-Invalid address (section..preinit_array)
-|ERROR| Invalid command 'pD $SS @ section..preinit_array' (0x70)
 RUN
 
 NAME=iX
