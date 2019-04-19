@@ -217,8 +217,8 @@ class NewRegressions {
           }
           // Append testfile
           args.push(...test.file.split(' '));
-          if (test.suffix) {
-            args.push(...test.suffix.split(' '));
+          if (test.oneStream) {
+            args.push('2>&1');
           }
 
           let res = '';
@@ -236,7 +236,7 @@ class NewRegressions {
             process.env.R2_NOPLUGINS = 1;
           }
 
-          const child = spawn(r2bin, args, {shell: test.suffix ? true : false});
+          const child = spawn(r2bin, args, {shell: test.oneStream ? true : false});
           test.birth = new Date();
           child.stdout.on('data', data => {
             res += data.toString();
@@ -493,8 +493,8 @@ class NewRegressions {
         case 'FILE':
           test.file = v;
           break;
-        case 'SUFFIX':
-          test.suffix = v;
+        case 'ONE_STREAM':
+          test.oneStream = v === 'true';
           break;
         default:
           throw new Error('Invalid database, key = (' + k + ')');

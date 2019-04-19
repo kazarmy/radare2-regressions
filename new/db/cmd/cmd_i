@@ -3925,7 +3925,7 @@ RUN
 
 NAME=iee elf Cd (64-bit)
 FILE=../bins/elf/analysis/ls-linux64
-SUFFIX=2>&1
+ONE_STREAM=true
 CMDS=<<EXPECT
 e scr.interactive=true
 s section..preinit_array
