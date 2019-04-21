@@ -341,6 +341,20 @@ pf z
 pf [5]z
 pf z @ 0xfffff
 ?e
+e io.va=true
+om
+?e ----
+om- 1
+om 3 1000 1024 0 rwx
+om 3 2024 1024 1024 rwx
+om
+wz CD @ 2023
+pf z @ 2023
+om- 2
+pf z @ 2023
+om- 1
+om 3 1000 2048 0 rwx
+?e
 ?e --- io.unalloc = false ---
 ?e
 e io.unalloc=false
@@ -362,6 +376,13 @@ EXPECT=<<RUN
 0x000007fe = ovf "AB"
 0x000007fe = ovf "AB"
 0x000fffff = ovf ""
+
+ 1 fd: 3 +0x00000000 0x000003e8 - 0x00000be7 rwx 
+----
+ 2 fd: 3 +0x00000400 0x000007e8 - 0x00000be7 rwx 
+ 1 fd: 3 +0x00000000 0x000003e8 - 0x000007e7 rwx 
+0x000007e7 = "CD"
+0x000007e7 = ovf "C"
 
 --- io.unalloc = false ---
 
