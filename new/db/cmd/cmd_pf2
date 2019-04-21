@@ -323,6 +323,7 @@ NAME=pf z overflow
 FILE=malloc://2048
 ARGS=-m 1000
 CMDS=<<EXPECT
+e io.cache=false
 ?e --- io.unalloc = true ---
 ?e
 e io.unalloc=true
@@ -355,6 +356,11 @@ pf z @ 2023
 om- 1
 om 3 1000 2048 0 rwx
 ?e
+e io.cache=true
+wz 12 @ 0xfffff
+pf z @ 0xfffff
+e io.cache=false
+?e
 ?e --- io.unalloc = false ---
 ?e
 e io.unalloc=false
@@ -383,6 +389,8 @@ EXPECT=<<RUN
  1 fd: 3 +0x00000000 0x000003e8 - 0x000007e7 rwx 
 0x000007e7 = "CD"
 0x000007e7 = ovf "C"
+
+0x000fffff = "12"
 
 --- io.unalloc = false ---
 
