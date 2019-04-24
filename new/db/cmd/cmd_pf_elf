@@ -399,8 +399,8 @@ pf.elf_header ?[2]E[2]E[4]Exxxxwwwwww (elf_ident)ident (elf_type)type (elf_machi
 52
 
 pf.elf_header {1}?[2]E[2]E[4]Exxxxwwwwww (elf_ident)ident (elf_type)type (elf_machine)machine (elf_obj_version)version entry phoff shoff flags ehsize phentsize phnum shentsize shnum shstrndx
-36
+52
 
 pf.elf_header {2}?[2]E[2]E[4]Exxxxwwwwww (elf_ident)ident (elf_type)type (elf_machine)machine (elf_obj_version)version entry phoff shoff flags ehsize phentsize phnum shentsize shnum shstrndx
-36
+104
 RUN
