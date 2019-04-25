@@ -386,21 +386,21 @@ NAME=pf elf_header times fix
 FILE=-
 CMDS=<<EXPECT
 pfo elf32
-pf. ~pf.elf_header
+pf? elf_header
 pfs.elf_header
 ?e
-wz `pf. ~pf.elf_header`
-(pfelf num, pf.elf_header {$0}`psz @ 0xe`, pf. ~pf.elf_header, pfs.elf_header)
+wz `pf? elf_header`
+(pfelf num, pf.elf_header {$0}`psz`, pf? elf_header, pfs.elf_header)
 .(pfelf 1)
 ?e
 .(pfelf 2)
 EXPECT=<<RUN
-pf.elf_header ?[2]E[2]E[4]Exxxxwwwwww (elf_ident)ident (elf_type)type (elf_machine)machine (elf_obj_version)version entry phoff shoff flags ehsize phentsize phnum shentsize shnum shstrndx
+?[2]E[2]E[4]Exxxxwwwwww (elf_ident)ident (elf_type)type (elf_machine)machine (elf_obj_version)version entry phoff shoff flags ehsize phentsize phnum shentsize shnum shstrndx
 52
 
-pf.elf_header {1}?[2]E[2]E[4]Exxxxwwwwww (elf_ident)ident (elf_type)type (elf_machine)machine (elf_obj_version)version entry phoff shoff flags ehsize phentsize phnum shentsize shnum shstrndx
+{1}?[2]E[2]E[4]Exxxxwwwwww (elf_ident)ident (elf_type)type (elf_machine)machine (elf_obj_version)version entry phoff shoff flags ehsize phentsize phnum shentsize shnum shstrndx
 52
 
-pf.elf_header {2}?[2]E[2]E[4]Exxxxwwwwww (elf_ident)ident (elf_type)type (elf_machine)machine (elf_obj_version)version entry phoff shoff flags ehsize phentsize phnum shentsize shnum shstrndx
+{2}?[2]E[2]E[4]Exxxxwwwwww (elf_ident)ident (elf_type)type (elf_machine)machine (elf_obj_version)version entry phoff shoff flags ehsize phentsize phnum shentsize shnum shstrndx
 104
 RUN
