@@ -188,14 +188,12 @@ eee
 fff        
 RUN
 
-NAME=$alias and `|cmd`
+NAME=$alias and `cmd` with multiple-line output
 FILE=../bins/elf/before-after-main
 CMDS=<<EXPECT
 ?e `om*`
 ?e -----
-?e `|om*`
-?e -----
-$initial_map=`|om*`
+$initial_map=`om*`
 om
 ?e -----
 om-*
@@ -204,8 +202,6 @@ om
 $initial_map
 om  # TODO: map order is reversed
 EXPECT=<<RUN
-om 3 0x08048000 0x00000a68 0x00000000 r-x fmap.LOAD0 om 3 0x08049ed4 0x0000014c 0x00000ed4 r-- fmap.LOAD1 om 4 0x0804a020 0x00000004 0x00000000 rw- mmap.LOAD1
------
 om 3 0x08048000 0x00000a68 0x00000000 r-x fmap.LOAD0
 om 3 0x08049ed4 0x0000014c 0x00000ed4 r-- fmap.LOAD1
 om 4 0x0804a020 0x00000004 0x00000000 rw- mmap.LOAD1
