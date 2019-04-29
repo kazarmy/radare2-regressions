@@ -66,7 +66,7 @@ ONE_STREAM=true
 CMDS=<<EXPECT
 wz pd 1\n?e ----
 wz 1\n2\n3\n4 @ 0x100
-`ps 4` @@= `ps 2 @ 0x100` 2 3 4
+`ps 4` @@= `pr 2 @ 0x100` 2 `pr 2 @ 0x104` 4
 ?e
 "$cmd=pd 1;?e ----"
 $cmd @@= 1 2 3 4
@@ -74,6 +74,7 @@ $cmd @@= 1 2 3 4
 `prz`@@=`prz @ 0x100`
 EXPECT=<<RUN
             0x00000001      642031         and byte fs:[rcx], dh
+
             0x00000002      2031           and byte [rcx], dh
             0x00000003      310a           xor dword [rdx], ecx
             0x00000004      0a3f           or bh, byte [rdi]
