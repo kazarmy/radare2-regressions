@@ -74,7 +74,6 @@ $cmd @@= 1 2 3 4
 `prz`@@=`prz @ 0x100`
 EXPECT=<<RUN
             0x00000001      642031         and byte fs:[rcx], dh
-
             0x00000002      2031           and byte [rcx], dh
             0x00000003      310a           xor dword [rdx], ecx
             0x00000004      0a3f           or bh, byte [rdi]
@@ -90,7 +89,6 @@ EXPECT=<<RUN
 
             0x00000001      642031         and byte fs:[rcx], dh
 ----
-
             0x00000002      2031           and byte [rcx], dh
 ----
             0x00000003      310a           xor dword [rdx], ecx
