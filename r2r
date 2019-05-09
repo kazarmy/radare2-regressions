@@ -31,7 +31,8 @@ control_c() {
 
 trap control_c 2
 
-R2R="node node_modules/.bin/r2r"
+#R2R="node node_modules/.bin/r2r"  # TODO: Select this on env var
+R2R="`cd new; npm bin`/r2r"
 
 usage() {
 	echo "Usage: r2r (-options) [keyword]"
