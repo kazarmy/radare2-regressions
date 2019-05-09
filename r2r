@@ -31,6 +31,8 @@ control_c() {
 
 trap control_c 2
 
+R2R="node node_modules/node-r2r/bin/r2r.js"
+
 usage() {
 	echo "Usage: r2r (-options) [keyword]"
 	echo "  -a [type] [test] [name] ([commands])  add test"
@@ -77,7 +79,7 @@ case "$KW" in
 			#(cd new/db/${TYPE} ; grep|cat)
 		#	echo "Usage: -a [type] [test] [name] ([commands])"
 		else
-			(cd new && bin/r2r.js -e "${TYPE}" "${TEST}" "${NAME}" )
+			(cd new && ${R2R} -e "${TYPE}" "${TEST}" "${NAME}" )
 		fi
 	fi
 	exit 0
@@ -164,19 +166,19 @@ ${LINE}"
 	exit 1
 	;;
 -r)
-	(shift ; cd new ; node bin/r2r.js -v $@)
+	(shift ; cd new ; ${R2R} -v $@)
 	;;
 -R)
-	(shift ; cd new ; node bin/r2r.js -i $@)
+	(shift ; cd new ; ${R2R} -i $@)
 	;;
 --debase64)
-	(shift ; cd new ; node bin/r2r.js --debase64 $@)
+	(shift ; cd new ; ${R2R} --debase64 $@)
 	;;
 --format)
-	(shift ; cd new ; node bin/r2r.js --format $@)
+	(shift ; cd new ; ${R2R} --format $@)
 	;;
 -df)
-	(shift ; cd new ; node bin/r2r.js --debase64 --format $@)
+	(shift ; cd new ; ${R2R} --debase64 --format $@)
 	;;
 -v)
 	echo "1.7.0"
