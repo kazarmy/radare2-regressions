@@ -31,14 +31,7 @@ control_c() {
 
 trap control_c 2
 
-if [ -z "${NPM-x}" ]; then
-	R2R="node node_modules/.bin/r2r"
-else
-	if [ -z "${NPM+x}" ]; then
-		NPM="npm"
-	fi
-	R2R="`cd new && ${NPM} bin`/r2r"
-fi
+[ -z "${R2R}" ] && R2R="`cd new && npm bin`/r2r"
 
 usage() {
 	echo "Usage: r2r (-options) [keyword]"
