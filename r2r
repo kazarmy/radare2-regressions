@@ -31,7 +31,8 @@ control_c() {
 
 trap control_c 2
 
-[ -z "${R2R}" ] && R2R="`cd new && npm bin`/r2r"
+# Use R2R="node node_modules/.bin/r2r" to bypass npm
+[ -z "${R2R}" ] && R2R="`cd new && npm up >&2 && npm bin`/r2r"
 
 usage() {
 	echo "Usage: r2r (-options) [keyword]"
