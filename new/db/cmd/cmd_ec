@@ -70,3 +70,21 @@ ec gui.border rgb:000000
 ec wordhl rgb:ff0000
 ec linehl rgb:201000
 RUN
+
+NAME=ansicon ecs
+FILE=-
+CMDS=<<EXPECT
+e scr.color=1
+e scr.ansicon=true
+ecs
+EXPECT=<<RUN
+[30m[40m__[0m black
+[31m[41m__[0m red
+[37m[47m__[0m white
+[32m[42m__[0m green
+[35m[45m__[0m magenta
+[33m[43m__[0m yellow
+[36m[46m__[0m cyan
+[34m[44m__[0m blue
+[0m[0m__[0m none
+RUN
