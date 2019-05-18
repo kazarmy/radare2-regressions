@@ -86,5 +86,6 @@ EXPECT=<<RUN
 [33m[43m__[0m yellow
 [36m[46m__[0m cyan
 [34m[44m__[0m blue
+[1;30m[48;5;8m__[0m gray
 [0m[0m__[0m none
 RUN
