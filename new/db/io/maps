@@ -172,7 +172,7 @@ om-*
 ?e ----
 om
 ?e ----
-.$initial_map
+$initial_map |.
 om               # Output must be the same as initial om
 EXPECT=<<RUN
  3 fd: 3 +0x00000000 0x08048000 - 0x08048a67 r-x fmap.LOAD0
