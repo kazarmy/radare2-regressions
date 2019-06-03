@@ -87,5 +87,87 @@ EXPECT=<<RUN
 [36m[46m__[0m cyan
 [34m[44m__[0m blue
 [90m[100m__[0m gray
+[90m[100m__[0m bblack
+[91m[101m__[0m bred
+[97m[107m__[0m bwhite
+[92m[102m__[0m bgreen
+[95m[105m__[0m bmagenta
+[93m[103m__[0m byellow
+[96m[106m__[0m bcyan
+[94m[104m__[0m bblue
 [0m[0m__[0m none
+RUN
+
+NAME=ecd
+FILE=-
+CMDS=<<EXPECT
+e scr.color=1
+ecd
+ec
+EXPECT=<<RUN
+ [31m##[0m  comment
+ [37m##[0m  usrcmt
+ [33m##[0m  args
+ [31m##[0m  fname
+ [36m##[0m  floc
+ [36m##[0m  fline
+ [36m##[0m  flag
+ [36m##[0m  label
+ [32m##[0m  help
+ [36m##[0m  flow
+ [34m##[0m  flow2
+ [33m##[0m  prompt
+ [32m##[0m  offset
+ [37m##[0m  input
+ [1;31m##[0m  invalid
+ [37m##[0m  other
+ [32m##[0m  b0x00
+ [36m##[0m  b0x7f
+ [31m##[0m  b0xff
+ [33m##[0m  math
+ [36m##[0m  bin
+ [33m##[0m  btext
+ [35m##[0m  push
+ [1;35m##[0m  pop
+ [44m##[0m  crypto
+ [32m##[0m  jmp
+ [32m##[0m  cjmp
+ [1;32m##[0m  call
+ [34m##[0m  nop
+ [31m##[0m  ret
+ [1;31m##[0m  trap
+ [32m##[0m  ucall
+ [32m##[0m  ujmp
+ [35m##[0m  swi
+ [36m##[0m  cmp
+ [36m##[0m  reg
+ [36m##[0m  creg
+ [33m##[0m  num
+ [37m##[0m  mov
+ [37m##[0m  func_var
+ [34m##[0m  func_var_type
+ [36m##[0m  func_var_addr
+ [40m##[0m  widget_bg
+ [41m##[0m  widget_sel
+ [32m##[0m  ai.read
+ [34m##[0m  ai.write
+ [31m##[0m  ai.exec
+ [35m##[0m  ai.seq
+ [33m##[0m  ai.ascii
+ [0m##[0m  graph.box
+ [34m##[0m  graph.box2
+ [35m##[0m  graph.box3
+ [90m##[0m  graph.box4
+ [32m##[0m  graph.true
+ [31m##[0m  graph.false
+ [34m##[0m  graph.trufae
+ [34m##[0m  graph.current
+ [33m##[0m  graph.traced
+ [33m##[0m  gui.cflow
+ [33m##[0m  gui.dataoffset
+ [30m##[0m  gui.background
+ [37m##[0m  gui.alt_background
+ [30m##[0m  gui.border
+ [41m##[0m  wordhl
+ [44m##[0m  linehl
 RUN
