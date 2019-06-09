@@ -98,11 +98,14 @@ EXPECT=<<RUN
 [0m[0m__[0m none
 RUN
 
-NAME=ecd
+NAME=ecd and eco bright
 FILE=-
 CMDS=<<EXPECT
 e scr.color=1
 ecd
+ec
+?e
+eco bright
 ec
 EXPECT=<<RUN
  [31m##[0m  comment
@@ -170,4 +173,70 @@ EXPECT=<<RUN
  [30m##[0m  gui.border
  [41m##[0m  wordhl
  [44m##[0m  linehl
+
+ [91m##[0m  comment
+ [97m##[0m  usrcmt
+ [93m##[0m  args
+ [91m##[0m  fname
+ [96m##[0m  floc
+ [96m##[0m  fline
+ [96m##[0m  flag
+ [96m##[0m  label
+ [92m##[0m  help
+ [96m##[0m  flow
+ [94m##[0m  flow2
+ [93m##[0m  prompt
+ [92m##[0m  offset
+ [97m##[0m  input
+ [91m##[0m  invalid
+ [97m##[0m  other
+ [92m##[0m  b0x00
+ [96m##[0m  b0x7f
+ [91m##[0m  b0xff
+ [93m##[0m  math
+ [96m##[0m  bin
+ [93m##[0m  btext
+ [95m##[0m  push
+ [95m##[0m  pop
+ [104m##[0m  crypto
+ [92m##[0m  jmp
+ [92m##[0m  cjmp
+ [92m##[0m  call
+ [94m##[0m  nop
+ [91m##[0m  ret
+ [91m##[0m  trap
+ [92m##[0m  ucall
+ [92m##[0m  ujmp
+ [95m##[0m  swi
+ [96m##[0m  cmp
+ [96m##[0m  reg
+ [96m##[0m  creg
+ [93m##[0m  num
+ [97m##[0m  mov
+ [97m##[0m  func_var
+ [94m##[0m  func_var_type
+ [96m##[0m  func_var_addr
+ [40m##[0m  widget_bg
+ [101m##[0m  widget_sel
+ [92m##[0m  ai.read
+ [94m##[0m  ai.write
+ [91m##[0m  ai.exec
+ [95m##[0m  ai.seq
+ [93m##[0m  ai.ascii
+ [30m##[0m  graph.box
+ [94m##[0m  graph.box2
+ [95m##[0m  graph.box3
+ [90m##[0m  graph.box4
+ [92m##[0m  graph.true
+ [91m##[0m  graph.false
+ [94m##[0m  graph.trufae
+ [94m##[0m  graph.current
+ [93m##[0m  graph.traced
+ [93m##[0m  gui.cflow
+ [93m##[0m  gui.dataoffset
+ [30m##[0m  gui.background
+ [97m##[0m  gui.alt_background
+ [30m##[0m  gui.border
+ [101m##[0m  wordhl
+ [104m##[0m  linehl
 RUN
