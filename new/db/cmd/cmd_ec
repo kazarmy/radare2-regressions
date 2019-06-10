@@ -188,7 +188,7 @@ EXPECT=<<RUN
  [93m##[0m  prompt
  [92m##[0m  offset
  [97m##[0m  input
- [91m##[0m  invalid
+ [1;91m##[0m  invalid
  [97m##[0m  other
  [92m##[0m  b0x00
  [96m##[0m  b0x7f
@@ -197,14 +197,14 @@ EXPECT=<<RUN
  [96m##[0m  bin
  [93m##[0m  btext
  [95m##[0m  push
- [95m##[0m  pop
+ [1;95m##[0m  pop
  [104m##[0m  crypto
  [92m##[0m  jmp
  [92m##[0m  cjmp
- [92m##[0m  call
+ [1;92m##[0m  call
  [94m##[0m  nop
  [91m##[0m  ret
- [91m##[0m  trap
+ [1;91m##[0m  trap
  [92m##[0m  ucall
  [92m##[0m  ujmp
  [95m##[0m  swi
