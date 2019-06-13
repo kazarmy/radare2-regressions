@@ -238,5 +238,5 @@ EXPECT=<<RUN
  [97m##[0m  gui.alt_background
  [30m##[0m  gui.border
  [101m##[0m  wordhl
- [104m##[0m  linehl
+ [44m##[0m  linehl
 RUN
