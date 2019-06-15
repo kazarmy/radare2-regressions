@@ -228,8 +228,8 @@ RUN
 NAME=pd pseudo test for issue #7268
 FILE=malloc://8
 EXPECT=<<EOF
-            [7m[32m0x00000000[0m      [33m48[37m89[37me5[0m         [37mrbp = rsp[0m[0m
-[0m            [7m[32m0x00000000[0m      [33m48[37m89[37me5[0m         [37mrbp = rsp[0m
+            [32m[7m0x00000000[0m      [33m48[37m89[37me5[0m         [37mrbp = rsp[0m[0m
+[0m            [32m[7m0x00000000[0m      [33m48[37m89[37me5[0m         [37mrbp = rsp[0m
 EOF
 CMDS=<<EOF
 e asm.arch=x86
@@ -248,7 +248,7 @@ RUN
 NAME=pd bits hint
 FILE=-
 EXPECT=<<EOF
-            [7m[32m0x00000000[0m      [37ma9[33m7e[32m00[0m         [35mlda[36m #[33m0x007e[0m[0m[0m
+            [32m[7m0x00000000[0m      [37ma9[33m7e[32m00[0m         [35mlda[36m #[33m0x007e[0m[0m[0m
 EOF
 ARGS=-a snes
 CMDS=<<EOF
