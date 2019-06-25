@@ -12,7 +12,7 @@ ec flow2 rgb:0037da
 ec prompt rgb:c19c00
 ec offset rgb:13a10e
 ec input rgb:cccccc
-ec invalid rgb:e74856
+ec invalid rgb:e74856 . bold
 ec other rgb:cccccc
 ec b0x00 rgb:13a10e
 ec b0x7f rgb:3a96dd
@@ -21,14 +21,14 @@ ec math rgb:c19c00
 ec bin rgb:3a96dd
 ec btext rgb:c19c00
 ec push rgb:881798
-ec pop rgb:b4009e
+ec pop rgb:b4009e . bold
 ec crypto rgb:0037da
 ec jmp rgb:13a10e
 ec cjmp rgb:13a10e
-ec call rgb:16c60c
+ec call rgb:16c60c . bold
 ec nop rgb:0037da
 ec ret rgb:c50f1f
-ec trap rgb:e74856
+ec trap rgb:e74856 . bold
 ec ucall rgb:13a10e
 ec ujmp rgb:13a10e
 ec swi rgb:881798

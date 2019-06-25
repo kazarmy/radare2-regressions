@@ -240,3 +240,21 @@ EXPECT=<<RUN
  [101m##[0m  wordhl
  [44m##[0m  linehl
 RUN
+
+NAME=ec* and attributes
+FILE=-
+CMDS=<<EXPECT
+eco bright
+ec*~pop
+eco white2
+ec*~bin
+ec*~cjmp
+ec*~comment
+ec*~fname
+EXPECT=<<RUN
+ec pop rgb:ff00ff . bold
+ec bin rgb:4f1900 . bold
+ec cjmp rgb:376b4c . bold underline
+ec comment rgb:001296 . italic
+ec fname rgb:8d0004 . bold italic
+RUN
