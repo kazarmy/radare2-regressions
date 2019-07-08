@@ -3408,7 +3408,7 @@ RUN
 NAME=iz utf16le
 FILE=../bins/elf/strenc
 EXPECT=<<EOF
-005 0x0000224a 0x0040224a  56 116 (.rodata) utf16le utf16le> \\u00a2\\u20ac\\U00010348 in green:\e[32m ¢€𐍈 \e[0m\n blocks=Basic Latin,Latin-1 Supplement,Currency Symbols,Gothic
+005 0x00002248 0x00402248  57 118 (.rodata) utf16le \nutf16le> \\u00a2\\u20ac\\U00010348 in green:\e[32m ¢€𐍈 \e[0m\n blocks=Basic Latin,Latin-1 Supplement,Currency Symbols,Gothic
 007 0x000022c8 0x004022c8  33  68 (.rodata) utf16le is a wall with no embedded zeros\n
 EOF
 CMDS=<<EOF
@@ -3553,7 +3553,7 @@ NAME=iz/izz bin.str.purge
 FILE=../bins/elf/analysis/ls2
 EXPECT=<<EOF
 --1--
-1060 0x00012420 0x00412420   5   6 (.text) ascii AWAVA
+1063 0x00012420 0x00412420   5   6 (.text) ascii AWAVA
 --2--
 --3--
 000 0x000131d8 0x004131d8  11  12 (.rodata) ascii dev_ino_pop
