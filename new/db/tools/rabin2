@@ -101,14 +101,14 @@ NAME=rabin2 -zz pe
 FILE=../bins/pe/ioli/w32/crackme0x00.exe
 CMDS=!rabin2 -zz ${R2_FILE} | grep "Password:"
 EXPECT=<<RUN
-086 0x00002619 0x00404019  10  11 (.rdata) ascii Password: 
+065 0x00002619 0x00404019  10  11 (.rdata) ascii Password: 
 RUN
 
 NAME=rabin2 -zzz pe
 FILE=../bins/pe/ioli/w32/crackme0x00.exe
 CMDS=!rabin2 -zzz ${R2_FILE} | grep "Password:"
 EXPECT=<<RUN
-086 0x00002619 0x00404019  10  11 (.rdata) ascii Password: 
+065 0x00002619 0x00404019  10  11 (.rdata) ascii Password: 
 RUN
 
 NAME=rabin2 -zzq pe
