@@ -3420,12 +3420,11 @@ EOF
 RUN
 
 NAME=iz/izz utf32le
-BROKEN=1
 FILE=../bins/elf/strenc
 EXPECT=<<EOF
-016 0x0000258c 0x0040258c  55 224 (.rodata) utf32le utf32le> \\u00a2\\u20ac\\U00010348 in cyan:\e[36m ¢€𐍈 \e[0m\n blocks=Basic Latin,Latin-1 Supplement,Currency Symbols,Gothic
-017 0x0000266c 0x0040266c  48 196 (.rodata) utf32le Mountain range with embedded quad zeros: 𐌀A𐌀A𐌀A\n blocks=Basic Latin,Old Italic
-135 0x00002528 0x00402528  24 100 (.rodata) utf32le \tLinux_wide\\esc: \e[0m¡\r\n blocks=Basic Latin,Latin-1 Supplement
+017 0x0000258c 0x0040258c  55 224 (.rodata) utf32le utf32le> \\u00a2\\u20ac\\U00010348 in cyan:\e[36m ¢€𐍈 \e[0m\n blocks=Basic Latin,Latin-1 Supplement,Currency Symbols,Gothic
+018 0x0000266c 0x0040266c  48 196 (.rodata) utf32le Mountain range with embedded quad zeros: 𐌀A𐌀A𐌀A\n blocks=Basic Latin,Old Italic
+136 0x00002528 0x00402528  24 100 (.rodata) utf32le \tLinux_wide\\esc: \e[0m¡\r\n blocks=Basic Latin,Latin-1 Supplement
 EOF
 CMDS=<<EOF
 e str.escbslash=true
@@ -3436,11 +3435,10 @@ EOF
 RUN
 
 NAME=str.escbslash and iz
-BROKEN=1
 FILE=../bins/elf/strenc
 EXPECT=<<EOF
-015 0x00002528 0x00402528  24 100 (.rodata) utf32le \tLinux_wide\\esc: \e[0m¡\r\n blocks=Basic Latin,Latin-1 Supplement
-015 0x00002528 0x00402528  24 100 (.rodata) utf32le \tLinux_wide\esc: \e[0m¡\r\n blocks=Basic Latin,Latin-1 Supplement
+016 0x00002528 0x00402528  24 100 (.rodata) utf32le \tLinux_wide\\esc: \e[0m¡\r\n blocks=Basic Latin,Latin-1 Supplement
+016 0x00002528 0x00402528  24 100 (.rodata) utf32le \tLinux_wide\esc: \e[0m¡\r\n blocks=Basic Latin,Latin-1 Supplement
 EOF
 CMDS=<<EOF
 e str.escbslash=true
@@ -3451,7 +3449,6 @@ EOF
 RUN
 
 NAME=iz utf32le partial
-BROKEN=1
 FILE=../bins/elf/strenc-guess-utf32le
 EXPECT=<<EOF
 001 0x0000060c 0x0040060c   6  28 (.rodata) utf32le ABCDEF
@@ -3536,9 +3533,8 @@ EOF
 RUN
 
 NAME=izj unicode blocks
-BROKEN=1
 FILE=../bins/elf/strenc
-EXPECT='[{"vaddr":4202996,"paddr":8692,"ordinal":2,"size":11,"length":10,"section":".rodata","type":"ascii","string":"ZW5fVVMudXRmOA=="},{"vaddr":4203007,"paddr":8703,"ordinal":3,"size":61,"length":54,"section":".rodata","type":"utf8","string":"dXRmOD4gXFx1MDBhMlxcdTIwYWNcXFUwMDAxMDM0OCBpbiB5ZWxsb3c6XGVbMzNtIMKi4oKs8JCNiCBcZVswbVxu","blocks":["Basic Latin","Latin-1 Supplement","Currency Symbols","Gothic"]},{"vaddr":4203208,"paddr":8904,"ordinal":7,"size":68,"length":33,"section":".rodata","type":"utf16le","string":"aXMgYSB3YWxsIHdpdGggbm8gZW1iZWRkZWQgemVyb3Ncbg=="}]'
+EXPECT='[{"vaddr":4202996,"paddr":8692,"ordinal":2,"size":11,"length":10,"section":".rodata","type":"ascii","string":"ZW5fVVMudXRmOA=="},{"vaddr":4203007,"paddr":8703,"ordinal":3,"size":61,"length":54,"section":".rodata","type":"utf8","string":"dXRmOD4gXFx1MDBhMlxcdTIwYWNcXFUwMDAxMDM0OCBpbiB5ZWxsb3c6XGVbMzNtIMKi4oKs8JCNiCBcZVswbVxu","blocks":["Basic Latin","Latin-1 Supplement","Currency Symbols","Gothic"]},{"vaddr":4203208,"paddr":8904,"ordinal":8,"size":68,"length":33,"section":".rodata","type":"utf16le","string":"aXMgYSB3YWxsIHdpdGggbm8gZW1iZWRkZWQgemVyb3Ncbg=="}]'
 CMDS=<<EOF
 e bin.str.purge=all,!4202996,!4203007,!4203208
 izj
@@ -3546,7 +3542,6 @@ EOF
 RUN
 
 NAME=izzj unicode blocks
-BROKEN=1
 FILE=../bins/elf/strenc-guess-utf32le
 EXPECT='[{"vaddr":4195920,"paddr":1616,"ordinal":13,"size":44,"length":10,"section":".rodata","type":"utf32le","string":"YWJjZGVm8JCNiCAgZw==","blocks":["Basic Latin","Gothic"]}]'
 CMDS=<<EOF
@@ -3559,7 +3554,7 @@ NAME=iz/izz bin.str.purge
 FILE=../bins/elf/analysis/ls2
 EXPECT=<<EOF
 --1--
-1047 0x00012420 0x00412420   5   6 (.text) ascii AWAVA
+1062 0x00012420 0x00412420   5   6 (.text) ascii AWAVA
 --2--
 --3--
 000 0x000131d8 0x004131d8  11  12 (.rodata) ascii dev_ino_pop
@@ -4199,8 +4194,8 @@ NAME=ascii substring detection (#14499)
 FILE=../bins/pe/Reborn_Stub-strings.exe
 CMDS=izz~pomf
 EXPECT=<<RUN
-6069 0x00087f8a 0x00489d8a  26  53 (.text) utf16le http://pomf.cat/upload.php
-6074 0x000880dd 0x00489edd  19  39 (.text) utf16le https://a.pomf.cat/
-6237 0x00089bed 0x0048b9ed  26  53 (.text) utf16le http://pomf.cat/upload.php
-6238 0x00089c22 0x0048ba22  19  40 (.text) utf16le https://a.pomf.cat/
+7168 0x00087f8a 0x00489d8a  26  53 (.text) utf16le http://pomf.cat/upload.php
+7173 0x000880dd 0x00489edd  19  39 (.text) utf16le https://a.pomf.cat/
+7336 0x00089bed 0x0048b9ed  26  53 (.text) utf16le http://pomf.cat/upload.php
+7337 0x00089c22 0x0048ba22  19  40 (.text) utf16le https://a.pomf.cat/
 RUN

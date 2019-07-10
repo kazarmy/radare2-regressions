@@ -501,15 +501,15 @@ RUN
 NAME=Cs8
 FILE=../bins/elf/strenc
 EXPECT=<<EOF
-Cs 46 @ 0x004021ff # utf8> \\u00a2\\u20ac\\U00010348 in yellow:\e[33m 
-"utf8> \\u00a2\\u20ac\\U00010348 in yellow:\e[33m "
-ascii[46] "utf8> \\u00a2\\u20ac\\U00010348 in yellow:\e[33m "
-            ;-- "utf8> \\u00a2\\u20ac\\U00010348 in yellow:\e[33m ":
-            0x004021ff     .string "utf8> \\u00a2\\u20ac\\U00010348 in yellow:\e[33m " ; len=46
+Cs 61 @ 0x004021ff # utf8> \\u00a2\\u20ac\\U00010348 in yellow:\e[33m \xc2\xa2\xe2\x82\xac\xf0\x90\x8d\x88 \e[0m\n
+"utf8> \\u00a2\\u20ac\\U00010348 in yellow:\e[33m \xc2\xa2\xe2\x82\xac\xf0\x90\x8d\x88 \e[0m\n"
+latin1[61] "utf8> \\u00a2\\u20ac\\U00010348 in yellow:\e[33m \xc2\xa2\xe2\x82\xac\xf0\x90\x8d\x88 \e[0m\n"
+            ;-- "utf8> \\u00a2\\u20ac\\U00010348 in yellow:\e[33m ¢€𐍈 \e[0m\n":
+            0x004021ff     .string "utf8> \\u00a2\\u20ac\\U00010348 in yellow:\e[33m \xc2\xa2\xe2\x82\xac\xf0\x90\x8d\x88 \e[0m\n" ; len=61
 Cs8 61 @ 0x004021ff # utf8> \\u00a2\\u20ac\\U00010348 in yellow:\x1b[33m \u00a2\u20ac\U00010348 \x1b[0m\n
 "utf8> \\u00a2\\u20ac\\U00010348 in yellow:\x1b[33m \u00a2\u20ac\U00010348 \x1b[0m\n"
 utf8[61] "utf8> \\u00a2\\u20ac\\U00010348 in yellow:\x1b[33m \u00a2\u20ac\U00010348 \x1b[0m\n"
-            ;-- "utf8> \\u00a2\\u20ac\\U00010348 in yellow:\e[33m ":
+            ;-- "utf8> \\u00a2\\u20ac\\U00010348 in yellow:\e[33m ¢€𐍈 \e[0m\n":
             0x004021ff     .string "utf8> \\u00a2\\u20ac\\U00010348 in yellow:\x1b[33m \u00a2\u20ac\U00010348 \x1b[0m\n" ; len=61
 EOF
 CMDS=<<EOF
@@ -529,7 +529,7 @@ RUN
 
 NAME=Cs8 and Csj
 FILE=../bins/elf/strenc
-EXPECT='[{"offset":4203007, "type":"Cs", "name":"dXRmOD4gXFx1MDBhMlxcdTIwYWNcXFUwMDAxMDM0OCBpbiB5ZWxsb3c6XGVbMzNtIA==", "enc":"iz", "ascii":true}]
+EXPECT='[{"offset":4203007, "type":"Cs", "name":"dXRmOD4gXFx1MDBhMlxcdTIwYWNcXFUwMDAxMDM0OCBpbiB5ZWxsb3c6XGVbMzNtIMKi4oKs8JCNiCBcZVswbVxu", "enc":"iz", "ascii":false}]
 [{"offset":4203007, "type":"Cs", "name":"dXRmOD4gXHUwMGEyXHUyMGFjXFUwMDAxMDM0OCBpbiB5ZWxsb3c6G1szM20gwqLigqzwkI2IIBtbMG0K", "enc":"utf8", "ascii":false}]
 '
 ARGS=-e bin.str.purge=all,!0x004021ff
