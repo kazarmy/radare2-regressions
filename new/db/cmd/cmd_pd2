@@ -513,3 +513,25 @@ EXPECT=<<RUN
   }
 ]
 RUN
+
+NAME=c++ disasm call demangling
+FILE=../bins/elf/abcde-qt32
+CMDS=<<EXPECT
+e asm.demangle=true
+e asm.bytes=false
+e asm.cmt.right=true
+pd 1 @ 0x08049249
+pd 1 @ 0x08049278
+?e
+e asm.cmt.right=false
+pd 1 @ 0x08049249
+pd 1 @ 0x08049278
+EXPECT=<<RUN
+            0x08049249      call method.QFlags_Qt::WindowType_.QFlags_intQFlags_Qt::WindowType_::Private:: ; QFlags<Qt::WindowType>::QFlags(intQFlags<Qt::WindowType>::Private::*)
+            0x08049278      call sym.QLabel::QLabel_QStringconst__QWidget__QFlags_Qt::WindowType ; QLabel::QLabel(QStringconst&,QWidget*,QFlags<Qt::WindowType>)
+
+            ; QFlags<Qt::WindowType>::QFlags(intQFlags<Qt::WindowType>::Private::*)
+            0x08049249      call method.QFlags_Qt::WindowType_.QFlags_intQFlags_Qt::WindowType_::Private::
+            ; QLabel::QLabel(QStringconst&,QWidget*,QFlags<Qt::WindowType>)
+            0x08049278      call sym.QLabel::QLabel_QStringconst__QWidget__QFlags_Qt::WindowType
+RUN
