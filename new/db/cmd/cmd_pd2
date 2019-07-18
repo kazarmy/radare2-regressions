@@ -539,3 +539,19 @@ EXPECT=<<RUN
             ; QLabel::QLabel(QStringconst&,QWidget*,QFlags<Qt::WindowType>)
             0x08049278      call sym.QLabel::QLabel_QStringconst__QWidget__QFlags_Qt::WindowType
 RUN
+
+NAME=flag-func_sig order
+FILE=../bins/elf/abcde-qt32
+CMDS=<<EXPECT
+e asm.demangle=true
+e asm.bytes=false
+e asm.filter=false
+e asm.jmpsub=false
+aa
+e asm.cmt.right=true
+pd 1 @ 0x080493b4
+pd 1 @ 0x080493ca
+EXPECT=<<RUN
+|           0x080493b4      call 0x80490b0                             ; sym.imp.strlen ; size_t strlen(const char *s)
+|           0x080493ca      call 0x80490e0                             ; QString::fromAscii_helper(charconst*,int) ; sym.QString::fromAscii_helper_charconst__int
+RUN
