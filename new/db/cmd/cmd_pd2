@@ -553,5 +553,6 @@ pd 1 @ 0x080493b4
 pd 1 @ 0x080493ca
 EXPECT=<<RUN
 |           0x080493b4      call 0x80490b0                             ; sym.imp.strlen ; size_t strlen(const char *s)
-|           0x080493ca      call 0x80490e0                             ; QString::fromAscii_helper(charconst*,int) ; sym.QString::fromAscii_helper_charconst__int
+|           0x080493ca      call 0x80490e0                             ; sym.QString::fromAscii_helper_charconst__int
+|                                                                      ; QString::fromAscii_helper(charconst*,int)
 RUN
