@@ -95,36 +95,36 @@ FILE=../bins/elf/libmemalloc-dump-mem
 EXPECT=<<EOF
 [Symbols]
 Num Paddr      Vaddr      Bind     Type Size Name
-003 0x00002dd0 0x00003dd0   WEAK    OBJ   36 vtableforgralloc::IMemAlloc
-006 0x00001210 0x00001210 GLOBAL   FUNC   68 gralloc::IonAlloc::unmap_buffer(void*,unsignedint,int)
+003 0x00002dd0 0x00003dd0   WEAK    OBJ   36 vtable for gralloc::IMemAlloc
+006 0x00001210 0x00001210 GLOBAL   FUNC   68 gralloc::IonAlloc::unmap_buffer(void*, unsigned int, int)
 011 0x00001254 0x00001254 GLOBAL   FUNC   96 gralloc::IonAlloc::open_device()
-013 0x000012b4 0x000012b4 GLOBAL   FUNC  240 gralloc::IonAlloc::clean_buffer(void*,unsignedint,int,int,int)
-015 0x000013a4 0x000013a4 GLOBAL   FUNC   84 gralloc::IonAlloc::map_buffer(void**,unsignedint,int,int)
-017 0x000013f8 0x000013f8 GLOBAL   FUNC   68 gralloc::IonAlloc::free_buffer(void*,unsignedint,int,int)
+013 0x000012b4 0x000012b4 GLOBAL   FUNC  240 gralloc::IonAlloc::clean_buffer(void*, unsigned int, int, int, int)
+015 0x000013a4 0x000013a4 GLOBAL   FUNC   84 gralloc::IonAlloc::map_buffer(void**, unsigned int, int, int)
+017 0x000013f8 0x000013f8 GLOBAL   FUNC   68 gralloc::IonAlloc::free_buffer(void*, unsigned int, int, int)
 021 0x0000143c 0x0000143c GLOBAL   FUNC  304 gralloc::IonAlloc::alloc_buffer(gralloc::alloc_data&)
 022 0x0000156c 0x0000156c GLOBAL   FUNC   22 gralloc::IonAlloc::close_device()
-024 0x00002df8 0x00003df8 GLOBAL    OBJ   36 vtableforgralloc::IonAlloc
-026 0x00002e20 0x00003e20   WEAK    OBJ   24 vtableforgralloc::IAllocController
+024 0x00002df8 0x00003df8 GLOBAL    OBJ   36 vtable for gralloc::IonAlloc
+026 0x00002e20 0x00003e20   WEAK    OBJ   24 vtable for gralloc::IAllocController
 027 0x00001614 0x00001614 GLOBAL   FUNC   48 gralloc::IonController::getAllocator(int)
-028 0x00001644 0x00001644 GLOBAL   FUNC  452 gralloc::IonController::allocate(gralloc::alloc_data&,int)
+028 0x00001644 0x00001644 GLOBAL   FUNC  452 gralloc::IonController::allocate(gralloc::alloc_data&, int)
 036 0x00001808 0x00001808 GLOBAL   FUNC   40 AdrenoMemInfo::AdrenoMemInfo()
 039 0x00001808 0x00001808 GLOBAL   FUNC   40 AdrenoMemInfo::AdrenoMemInfo()
 040 0x00001830 0x00001830 GLOBAL   FUNC   16 AdrenoMemInfo::~AdrenoMemInfo()
 042 0x00001830 0x00001830 GLOBAL   FUNC   16 AdrenoMemInfo::~AdrenoMemInfo()
-043 0x00001840 0x00001840 GLOBAL   FUNC  288 AdrenoMemInfo::getStride(int,int)
+043 0x00001840 0x00001840 GLOBAL   FUNC  288 AdrenoMemInfo::getStride(int, int)
 045 0x00001960 0x00001960 GLOBAL   FUNC   68 gralloc::IonController::IonController()
 047 0x00001960 0x00001960 GLOBAL   FUNC   68 gralloc::IonController::IonController()
 048 0x000019a4 0x000019a4 GLOBAL   FUNC   40 gralloc::IAllocController::getInstance()
 049 0x000019cc 0x000019cc GLOBAL   FUNC   60 free_buffer(private_handle_t*)
 050 0x00001a08 0x00001a08   WEAK   FUNC   56 android::Singleton<AdrenoMemInfo>::getInstance()
-051 0x00001a40 0x00001a40 GLOBAL   FUNC  636 getBufferSizeAndDimensions(int,int,int,int&,int&)
-052 0x00001cbc 0x00001cbc GLOBAL   FUNC  244 alloc_buffer(private_handle_t**,int,int,int,int)
+051 0x00001a40 0x00001a40 GLOBAL   FUNC  636 getBufferSizeAndDimensions(int, int, int, int&, int&)
+052 0x00001cbc 0x00001cbc GLOBAL   FUNC  244 alloc_buffer(private_handle_t**, int, int, int, int)
 054 0x00001db0 0x00001db0   WEAK   FUNC   44 android::Singleton<AdrenoMemInfo>::hasInstance()
 055 0x00001ddc 0x00001ddc   WEAK   FUNC    2 android::Singleton<AdrenoMemInfo>::~Singleton()
 056 0x00001ddc 0x00001ddc   WEAK   FUNC    2 android::Singleton<AdrenoMemInfo>::~Singleton()
 057 0x00001ddc 0x00001ddc   WEAK   FUNC    2 android::Singleton<AdrenoMemInfo>::Singleton()
 058 0x00001ddc 0x00001ddc   WEAK   FUNC    2 android::Singleton<AdrenoMemInfo>::Singleton()
-060 0x00002e38 0x00003e38 GLOBAL    OBJ   24 vtableforgralloc::IonController
+060 0x00002e38 0x00003e38 GLOBAL    OBJ   24 vtable for gralloc::IonController
 061 ---------- 0x0000400c GLOBAL    OBJ    4 gralloc::IAllocController::sController
 062 ---------- 0x00004004 GLOBAL    OBJ    4 android::Singleton<AdrenoMemInfo>::sInstance
 063 ---------- 0x00004008 GLOBAL    OBJ    4 android::Singleton<AdrenoMemInfo>::sLock

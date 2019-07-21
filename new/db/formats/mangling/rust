@@ -1,7 +1,7 @@
 NAME=cxx compatibility
 FILE=-
 EXPECT=<<EOF
-std::__cxx11::basic_string<char,std::char_traits<char>,std::allocator<char>>::~basic_string()
+std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string()
 EOF
 CMDS=<<EOF
 "!rabin2 -D rust _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEED1Ev"

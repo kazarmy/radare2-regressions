@@ -3,25 +3,25 @@ FILE=../bins/mach0/hellocxx-osx-i386
 EXPECT=<<EOF
 0x00002054 0 _NXArgc
 0x00002058 0 _NXArgv
-0x00001d9a 0 unsignedlongconst&std::min<unsignedlong>(unsignedlongconst&,unsignedlongconst&)
+0x00001d9a 0 unsigned long const& std::min<unsigned long>(unsigned long const&, unsigned long const&)
 0x00002060 0 ___progname
 0x00001000 0 __mh_execute_header
 0x0000205c 0 _environ
 0x00001d52 0 _main
 0x00001c10 0 start
-0x00001ba0 0 __static_initialization_and_destruction_0(int,int)
-0x00001bf2 0 globalconstructorskeyedtomain
-0x00001c4e 0 std::__verify_grouping(charconst*,unsignedlong,std::stringconst&)
+0x00001ba0 0 __static_initialization_and_destruction_0(int, int)
+0x00001bf2 0 global constructors keyed to main
+0x00001c4e 0 std::__verify_grouping(char const*, unsigned long, std::string const&)
 0x00001dc1 0 ___tcf_0
 0x00001e24 0  stub helpers
 0x00002000 0 _pvars
 0x00002064 0 std::__ioinit
-0x00001dee 0 std::string::size()const
-0x00001df4 0 std::string::operator[](unsignedlong)const
-0x00001dfa 0 std::ostream::operator<<(std::ostream&(*)(std::ostream&))
+0x00001dee 0 std::string::size() const
+0x00001df4 0 std::string::operator[](unsigned long) const
+0x00001dfa 0 std::ostream::operator<<(std::ostream& (*)(std::ostream&))
 0x00001e00 0 std::ios_base::Init::Init()
 0x00001e06 0 std::ios_base::Init::~Init()
-0x00001e12 0 std::basic_ostream<char,std::char_traits<char>>&std::operator<<<std::char_traits<char>>(std::basic_ostream<char,std::char_traits<char>>&,charconst*)
+0x00001e12 0 std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)
 0x00001e18 0 imp.__cxa_atexit
 0x00001e1e 0 imp.exit
 EOF
@@ -83,7 +83,7 @@ RUN
 NAME=C++ demangle relocs
 FILE=../bins/elf/libstdc++.so.6
 EXPECT=<<CMDS
-            0x00091004      488b159d880f.  mov rdx, qword [reloc.vtableforstd::bad_alloc_168] ; [0x1898a8:8]=0
+            0x00091004      488b159d880f.  mov rdx, qword [reloc.vtable_for_std::bad_alloc_168] ; [0x1898a8:8]=0
 CMDS=<<RUN
 pd 1 @0x00091004
 RUN
@@ -101,7 +101,8 @@ RUN
 
 NAME=demangle in irj
 FILE=../bins/elf/demangle-test-cpp
-EXPECT={"name":"_ZSt20__throw_length_errorPKc","demname":"std::__throw_length_error(charconst*)","type":"SET_64","vaddr":16424,"paddr":12328,"is_ifunc":false}
+EXPECT='{"name":"_ZSt20__throw_length_errorPKc","demname":"std::__throw_length_error(char const*)","type":"SET_64","vaddr":16424,"paddr":12328,"is_ifunc":false}
+'
 CMDS=irj~{9}
 RUN
 
