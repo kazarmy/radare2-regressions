@@ -10,12 +10,12 @@ EXPECT=<<EOF
   0x00402c5e      lea rax, [rbp - 0xa0]
   0x00402c65      mov esi, obj.Password
   0x00402c6a      mov rdi, rax
-  0x00402c6d      call sym MD5_Update(MD5_CTX*,voidconst*,unsignedlong)
+  0x00402c6d      call sym MD5_Update(MD5_CTX*, void const*, unsigned long)
   0x00402c72      lea rdx, [rbp - 0xa0]
   0x00402c79      lea rax, [rbp - 0xb0]
   0x00402c80      mov rsi, rdx
   0x00402c83      mov rdi, rax
-  0x00402c86      call sym MD5_Final(unsignedchar*,MD5_CTX*)
+  0x00402c86      call sym MD5_Final(unsigned char*, MD5_CTX*)
   0x00402c8b      mov eax, dword [rbp - 0xb4]
   0x00402c91      cdqe
   0x00402c93      shl rax, 4

@@ -534,22 +534,22 @@ e asm.demangle=false
 .(pd_calls)
 EXPECT=<<RUN
             0x0804921a      call sym.__x86.get_pc_thunk.si
-            0x08049249      call method QFlags<Qt::WindowType>::QFlags(intQFlags<Qt::WindowType>::Private::*) ; method.QFlags_Qt::WindowType_.QFlags_intQFlags_Qt::WindowType_::Private::
-            0x08049278      call sym QLabel::QLabel(QStringconst&,QWidget*,QFlags<Qt::WindowType>) ; sym.QLabel::QLabel_QStringconst__QWidget__QFlags_Qt::WindowType
+            0x08049249      call method QFlags<Qt::WindowType>::QFlags(int QFlags<Qt::WindowType>::Private::*) ; method.QFlags_Qt::WindowType_.QFlags_int_QFlags_Qt::WindowType_::Private::
+            0x08049278      call sym QLabel::QLabel(QString const&, QWidget*, QFlags<Qt::WindowType>) ; sym.QLabel::QLabel_QString_const___QWidget___QFlags_Qt::WindowType
 
             0x0804921a      call sym.__x86.get_pc_thunk.si
-            ; method.QFlags_Qt::WindowType_.QFlags_intQFlags_Qt::WindowType_::Private::
-            0x08049249      call method QFlags<Qt::WindowType>::QFlags(intQFlags<Qt::WindowType>::Private::*)
-            ; sym.QLabel::QLabel_QStringconst__QWidget__QFlags_Qt::WindowType
-            0x08049278      call sym QLabel::QLabel(QStringconst&,QWidget*,QFlags<Qt::WindowType>)
+            ; method.QFlags_Qt::WindowType_.QFlags_int_QFlags_Qt::WindowType_::Private::
+            0x08049249      call method QFlags<Qt::WindowType>::QFlags(int QFlags<Qt::WindowType>::Private::*)
+            ; sym.QLabel::QLabel_QString_const___QWidget___QFlags_Qt::WindowType
+            0x08049278      call sym QLabel::QLabel(QString const&, QWidget*, QFlags<Qt::WindowType>)
 
 |           0x0804921a      call sym.__x86.get_pc_thunk.si
-|           0x08049249      call method QFlags<Qt::WindowType>::QFlags(intQFlags<Qt::WindowType>::Private::*) ; method.QFlags_Qt::WindowType_.QFlags_intQFlags_Qt::WindowType_::Private::
-|           0x08049278      call sym QLabel::QLabel(QStringconst&,QWidget*,QFlags<Qt::WindowType>) ; sym.QLabel::QLabel_QStringconst__QWidget__QFlags_Qt::WindowType
+|           0x08049249      call method QFlags<Qt::WindowType>::QFlags(int QFlags<Qt::WindowType>::Private::*) ; method.QFlags_Qt::WindowType_.QFlags_int_QFlags_Qt::WindowType_::Private::
+|           0x08049278      call sym QLabel::QLabel(QString const&, QWidget*, QFlags<Qt::WindowType>) ; sym.QLabel::QLabel_QString_const___QWidget___QFlags_Qt::WindowType
 
 |           0x0804921a      call sym.__x86.get_pc_thunk.si
-|           0x08049249      call method.QFlags_Qt::WindowType_.QFlags_intQFlags_Qt::WindowType_::Private::
-|           0x08049278      call sym.QLabel::QLabel_QStringconst__QWidget__QFlags_Qt::WindowType
+|           0x08049249      call method.QFlags_Qt::WindowType_.QFlags_int_QFlags_Qt::WindowType_::Private::
+|           0x08049278      call sym.QLabel::QLabel_QString_const___QWidget___QFlags_Qt::WindowType
 RUN
 
 NAME=flag-func_sig order
@@ -569,13 +569,13 @@ pd 1 @ 0x080493b4
 pd 1 @ 0x080493ca
 EXPECT=<<RUN
 |           0x080493b4      call 0x80490b0                             ; sym.imp.strlen ; size_t strlen(const char *s)
-|           0x080493ca      call 0x80490e0                             ; sym.QString::fromAscii_helper_charconst__int
-|                                                                      ; QString::fromAscii_helper(charconst*,int)
+|           0x080493ca      call 0x80490e0                             ; sym.QString::fromAscii_helper_char_const___int
+|                                                                      ; QString::fromAscii_helper(char const*, int)
 
 |           ; sym.imp.strlen
 |           ; size_t strlen(const char *s)
 |           0x080493b4      call 0x80490b0
-|           ; sym.QString::fromAscii_helper_charconst__int
-|           ; QString::fromAscii_helper(charconst*,int)
+|           ; sym.QString::fromAscii_helper_char_const___int
+|           ; QString::fromAscii_helper(char const*, int)
 |           0x080493ca      call 0x80490e0
 RUN
