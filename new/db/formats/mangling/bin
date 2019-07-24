@@ -151,3 +151,63 @@ EXPECT=<<RUN
 |           0x08049249      call method.QFlags_Qt::WindowType_.QFlags_int_QFlags_Qt::WindowType_::Private::
 |           0x08049278      call sym.QLabel::QLabel_QString_const___QWidget___QFlags_Qt::WindowType
 RUN
+
+NAME=c++ xref demangling (in fcn)
+FILE=../bins/elf/abcde-qt32
+CMDS=<<EXPECT
+e asm.var=false
+e asm.bytes=false
+aa
+e asm.demangle=true
+pd 1 @ sym.__x86.get_pc_thunk.bx
+?e
+e asm.demangle=false
+pd 1 @ sym.__x86.get_pc_thunk.bx
+EXPECT=<<RUN
+/ (fcn) sym.__x86.get_pc_thunk.bx 4
+|   sym.__x86.get_pc_thunk.bx ();
+|           ; CALL XREF from sym._init (0x8049008)
+|           ; CALL XREF from method.QtPrivate::RefCount.deref (0x8049349)
+|           ; CALL XREF from method.QString.QString_char_const (0x804939d)
+|           ; CALL XREF from method.QString._QString (0x80493e5)
+|           ; CALL XREF from sym._fini (0x80495d4)
+|           0x08049140      mov ebx, dword [esp]
+
+/ (fcn) sym.__x86.get_pc_thunk.bx 4
+|   sym.__x86.get_pc_thunk.bx ();
+|           ; CALL XREF from sym._init (0x8049008)
+|           ; CALL XREF from method.QtPrivate::RefCount.deref (0x8049349)
+|           ; CALL XREF from method.QString.QString_char_const (0x804939d)
+|           ; CALL XREF from method.QString._QString (0x80493e5)
+|           ; CALL XREF from sym._fini (0x80495d4)
+|           0x08049140      mov ebx, dword [esp]
+RUN
+
+NAME=c++ xref demangling (not in fcn)
+FILE=../bins/elf/redpill
+CMDS=<<EXPECT
+e asm.var=false
+e asm.bytes=false
+aaa
+e asm.demangle=true
+pd 1 @ sym.imp._Unwind_Resume
+?e
+e asm.demangle=false
+pd 1 @ sym.imp._Unwind_Resume
+EXPECT=<<RUN
+/ (fcn) sym.imp._Unwind_Resume 6
+|   sym.imp._Unwind_Resume ();
+|           ; CALL XREF from main (+0x222)
+|           ; CALL XREF from fcn.00001717 (+0xbb)
+|           ; CALL XREF from sym.std::__cxx11::basic_string_char__std::char_traits_char___std::allocator_char___::basic_string_char___void__char___char___std::allocator_char__const (+0x66)
+|           ; CALL XREF from sym.void_std::__cxx11::basic_string_char__std::char_traits_char___std::allocator_char___::_M_construct_char___char___char___std::forward_iterator_tag (+0x116)
+\           0x00000f10      jmp dword [ebx + 0x70]                     ; 'p'
+
+/ (fcn) sym.imp._Unwind_Resume 6
+|   sym.imp._Unwind_Resume ();
+|           ; CALL XREF from main (+0x222)
+|           ; CALL XREF from fcn.00001717 (+0xbb)
+|           ; CALL XREF from sym.std::__cxx11::basic_string_char__std::char_traits_char___std::allocator_char___::basic_string_char___void__char___char___std::allocator_char__const (+0x66)
+|           ; CALL XREF from sym.void_std::__cxx11::basic_string_char__std::char_traits_char___std::allocator_char___::_M_construct_char___char___char___std::forward_iterator_tag (+0x116)
+\           0x00000f10      jmp dword [ebx + 0x70]                     ; 'p'
+RUN
