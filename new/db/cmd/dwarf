@@ -9,6 +9,6 @@ EXPECT=<<RUN
 / (fcn) main 44
 |   int main (int argc, char **argv, char **envp);
 |           ; var int32_t var_4h @ rbp-0x4
-|           ; DATA XREF from entry0 (0x40045d)
+|           ; DATA XREF from entry0 @ 0x40045d
 |           0x0040052d      55             push rbp                    ; /tmp/r2-regressions/.//dwarftest.c:4
 RUN

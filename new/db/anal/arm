@@ -652,7 +652,7 @@ EXPECT=<<EOF
 / (fcn) sym.call 44
 |           ; var int32_t var_8h @ fp-0x8
 |           ; arg int32_t arg1 @ r0
-|           ; CALL XREF from main (0x10468)
+|           ; CALL XREF from main @ 0x10468
 |           0x00010420      00482de9       push {fp, lr}
 |           0x00010424      04b08de2       add fp, sp, 4
 |           0x00010428      08d04de2       sub sp, sp, 8
@@ -707,7 +707,7 @@ EXPECT=<<EOF
             0x00010328      .dword 0x000104e0 ; sym.__libc_csu_fini
             0x0001032c      .dword 0x00010450 ; main ; sym.main
             ;-- aav.0x00010330:
-            ; UNKNOWN XREF from section..plt (+0x10)
+            ; UNKNOWN XREF from section..plt @ +0x10
             0x00010330      .dword 0x0001047c ; sym.__libc_csu_init
 EOF
 CMDS=<<EOF
