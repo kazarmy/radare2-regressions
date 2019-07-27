@@ -163,6 +163,12 @@ pd 1 @ sym.__x86.get_pc_thunk.bx
 ?e
 e asm.demangle=false
 pd 1 @ sym.__x86.get_pc_thunk.bx
+?e
+e asm.demangle=true
+pd 1 @ 0x08049390
+?e
+e asm.demangle=false
+pd 1 @ 0x08049390
 EXPECT=<<RUN
 / (fcn) sym.__x86.get_pc_thunk.bx 4
 |   sym.__x86.get_pc_thunk.bx ();
@@ -181,6 +187,12 @@ EXPECT=<<RUN
 |           ; CALL XREF from method.QString._QString @ 0x80493e5
 |           ; CALL XREF from sym._fini @ 0x80495d4
 |           0x08049140      mov ebx, dword [esp]
+
+|           ; CODE XREFS from QtPrivate::RefCount::deref() @ 0x8049371, 0x804937e ; method.QtPrivate::RefCount.deref
+|           0x08049390      mov ebx, dword [var_4h]
+
+|           ; CODE XREFS from method.QtPrivate::RefCount.deref @ 0x8049371, 0x804937e
+|           0x08049390      mov ebx, dword [var_4h]
 RUN
 
 NAME=c++ xref demangling (xref not from fcn)
