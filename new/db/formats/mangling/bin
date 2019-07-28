@@ -184,18 +184,21 @@ EXPECT=<<RUN
 |           0x08049140      mov ebx, dword [esp]
 
 [0x08049140]>  # sym.__x86.get_pc_thunk.bx ();
- ------------------------------------------------------------------------------------------------.
-|  0x8049140                                                                                     |
-| (fcn) sym.__x86.get_pc_thunk.bx 4                                                              |
-|   sym.__x86.get_pc_thunk.bx ();                                                                |
-| ; CALL XREF from sym._init @ 0x8049008                                                         |
-| ; CALL XREF from QtPrivate::RefCount::deref() @ 0x8049349 ; method.QtPrivate::RefCount.deref   |
-| ; CALL XREF from QString::QString(char const*) @ 0x804939d ; method.QString.QString_char_const |
-| ; CALL XREF from QString::~QString() @ 0x80493e5 ; method.QString._QString                     |
-| ; CALL XREF from sym._fini @ 0x80495d4                                                         |
-| mov ebx, dword [esp]                                                                           |
-| ret                                                                                            |
-`------------------------------------------------------------------------------------------------'
+ ------------------------------------------------------------.
+|  0x8049140                                                 |
+| (fcn) sym.__x86.get_pc_thunk.bx 4                          |
+|   sym.__x86.get_pc_thunk.bx ();                            |
+| ; CALL XREF from sym._init @ 0x8049008                     |
+| ; CALL XREF from QtPrivate::RefCount::deref() @ 0x8049349  |
+|   ; method.QtPrivate::RefCount.deref                       |
+| ; CALL XREF from QString::QString(char const*) @ 0x804939d |
+|   ; method.QString.QString_char_const                      |
+| ; CALL XREF from QString::~QString() @ 0x80493e5           |
+|   ; method.QString._QString                                |
+| ; CALL XREF from sym._fini @ 0x80495d4                     |
+| mov ebx, dword [esp]                                       |
+| ret                                                        |
+`------------------------------------------------------------'
 
 / (fcn) sym.__x86.get_pc_thunk.bx 4
 |   sym.__x86.get_pc_thunk.bx ();
