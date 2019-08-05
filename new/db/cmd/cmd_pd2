@@ -541,3 +541,29 @@ EXPECT=<<RUN
 |           ; QString::fromAscii_helper(char const*, int)
 |           0x080493ca      call 0x80490e0
 RUN
+
+NAME=newlined-comment-refline fix (#14627)
+FILE=../bins/elf/ls
+CMDS=<<EXPECT
+e asm.bytes=false
+e asm.filter=false
+s 0x000041e0
+pd 15
+EXPECT=<<RUN
+        ,=< 0x000041e0      je 0x421a
+        |   0x000041e2      mov ecx, 4
+        |   0x000041e7      lea rdx, [0x0001b980]
+        |   0x000041ee      lea rsi, [0x00021a40]
+        |   0x000041f5      mov rdi, rax
+        |   0x000041f8      call 0xc660
+        |   0x000041fe      test eax, eax
+       ,==< 0x00004200      js 0x4ae5
+       ||   0x00004206      cdqe
+       ||   0x00004208      lea rdx, [0x0001b980]
+       ||   0x0000420f      xor edi, edi
+       ||   0x00004211      mov esi, dword [rdx + rax*4]
+       ||   0x00004214      call 0x13c50
+       |`-> 0x0000421a      mov qword [0x000232b0], 0x50               ; 'P'
+       ||                                                              ; [0x232b0:8]=0
+       |    0x00004225      lea rdi, [0x00018a22]                      ; str.COLUMNS ; "COLUMNS"
+RUN
