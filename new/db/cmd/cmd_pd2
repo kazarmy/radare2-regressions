@@ -564,6 +564,6 @@ EXPECT=<<RUN
        ||   0x00004211      mov esi, dword [rdx + rax*4]
        ||   0x00004214      call 0x13c50
        |`-> 0x0000421a      mov qword [0x000232b0], 0x50               ; 'P'
-       ||                                                              ; [0x232b0:8]=0
+       |                                                               ; [0x232b0:8]=0
        |    0x00004225      lea rdi, [0x00018a22]                      ; str.COLUMNS ; "COLUMNS"
 RUN
