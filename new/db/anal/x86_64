@@ -666,7 +666,7 @@ EXPECT=<<EOF
 |    || |   0x00003cf4      call fcn.00012740
 |    || |   ; CODE XREFS from main @ 0x3ce1, 0x4602, 0x4c38
 |    `----> 0x00003cf9      lea rdi, [rip + 0x14fb4]                   ; str.QUOTING_STYLE
-|    || |                                                              ; 0x18cb4 ; "QUOTING_STYLE" ; const char *name
+|     | |                                                              ; 0x18cb4 ; "QUOTING_STYLE" ; const char *name
 EOF
 CMDS=<<EOF
 e asm.relsub=false
