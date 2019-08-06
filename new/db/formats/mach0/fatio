@@ -37,7 +37,7 @@ NAME=fatmach0 io symbol test
 FILE=../bins/mach0/fatmach0-3true
 ARGS=-a x86 -b64
 EXPECT=<<EOF
-jmp qword [0x10000100a]
+jmp qword reloc.exit
 EOF
 CMDS=<<EOF
 pi 1 @ sym.imp.exit

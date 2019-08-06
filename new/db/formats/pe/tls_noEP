@@ -32,7 +32,7 @@ push 0x401024
 call dword [sym.imp.msvcrt.dll_printf]
 add esp, 4
 nop
-mov dword [0x401184], 0x401070
+mov dword entry0, 0x401070
 EOF
 CMDS=<<EOF
 pi 5

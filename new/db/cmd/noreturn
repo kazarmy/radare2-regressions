@@ -114,7 +114,7 @@ RUN
 NAME=noreturn address
 FILE=-
 EXPECT=<<EOF
-call 0x10
+call fcn.00000010
 EOF
 CMDS=<<EOF
 e asm.arch=x86
