@@ -577,17 +577,17 @@ pi 15
 EXPECT=<<RUN
 je 0x421a
 mov ecx, 4
-lea rdx, [0x0001b979]
-lea rsi, [0x00021a39]
+lea rdx, [0x0001b980]
+lea rsi, str.literal
 mov rdi, rax
 call 0xc660
 test eax, eax
 js 0x4ae5
 cdqe
-lea rdx, [0x0001b979]
+lea rdx, [0x0001b980]
 xor edi, edi
 mov esi, dword [rdx + rax*4]
 call 0x13c50
-mov qword [0x000232a5], 0x50
-lea rdi, [0x00018a1b]
+mov qword [0x000232b0], 0x50
+lea rdi, str.COLUMNS
 RUN
