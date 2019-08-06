@@ -567,3 +567,27 @@ EXPECT=<<RUN
        |                                                               ; [0x232b0:8]=0
        |    0x00004225      lea rdi, [0x00018a22]                      ; str.COLUMNS ; "COLUMNS"
 RUN
+
+NAME=pi no-color rip-relative addr fix
+FILE=../bins/elf/ls
+CMDS=<<EXPECT
+e scr.color=0
+s 0x000041e0
+pi 15
+EXPECT=<<RUN
+je 0x421a
+mov ecx, 4
+lea rdx, [0x0001b979]
+lea rsi, [0x00021a39]
+mov rdi, rax
+call 0xc660
+test eax, eax
+js 0x4ae5
+cdqe
+lea rdx, [0x0001b979]
+xor edi, edi
+mov esi, dword [rdx + rax*4]
+call 0x13c50
+mov qword [0x000232a5], 0x50
+lea rdi, [0x00018a1b]
+RUN
