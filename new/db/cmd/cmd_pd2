@@ -542,18 +542,23 @@ EXPECT=<<RUN
 |           0x080493ca      call 0x80490e0
 RUN
 
-NAME=newlined-comment-refline fix (#14627)
+NAME=newlined-comment-refline fix (#14627), wayward rip-relative flag fix
 FILE=../bins/elf/ls
 CMDS=<<EXPECT
 e asm.bytes=false
-e asm.filter=false
+e asm.filter=true
+e asm.relsub=true
 s 0x000041e0
 pd 15
+?e
+e asm.relsub=false
+pd 1 @ 0x000041ee
+pd 1 @ 0x00004225
 EXPECT=<<RUN
         ,=< 0x000041e0      je 0x421a
         |   0x000041e2      mov ecx, 4
         |   0x000041e7      lea rdx, [0x0001b980]
-        |   0x000041ee      lea rsi, [0x00021a40]
+        |   0x000041ee      lea rsi, str.literal                       ; 0x21a40
         |   0x000041f5      mov rdi, rax
         |   0x000041f8      call 0xc660
         |   0x000041fe      test eax, eax
@@ -565,7 +570,11 @@ EXPECT=<<RUN
        ||   0x00004214      call 0x13c50
        |`-> 0x0000421a      mov qword [0x000232b0], 0x50               ; 'P'
        |                                                               ; [0x232b0:8]=0
-       |    0x00004225      lea rdi, [0x00018a22]                      ; str.COLUMNS ; "COLUMNS"
+       |    0x00004225      lea rdi, str.COLUMNS                       ; 0x18a22 ; "COLUMNS"
+
+            0x000041ee      lea rsi, str.literal                       ; 0x21a40
+            0x00004225      lea rdi, [rip + 0x147f6]                   ; str.COLUMNS
+                                                                       ; 0x18a22 ; "COLUMNS"
 RUN
 
 NAME=pi no-color rip-relative addr fix
