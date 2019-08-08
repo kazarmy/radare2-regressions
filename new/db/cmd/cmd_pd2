@@ -558,7 +558,7 @@ EXPECT=<<RUN
         ,=< 0x000041e0      je 0x421a
         |   0x000041e2      mov ecx, 4
         |   0x000041e7      lea rdx, [0x0001b980]
-        |   0x000041ee      lea rsi, str.literal                       ; 0x21a40
+        |   0x000041ee      lea rsi, [0x00021a40]
         |   0x000041f5      mov rdi, rax
         |   0x000041f8      call 0xc660
         |   0x000041fe      test eax, eax
@@ -572,7 +572,7 @@ EXPECT=<<RUN
        |                                                               ; [0x232b0:8]=0
        |    0x00004225      lea rdi, str.COLUMNS                       ; 0x18a22 ; "COLUMNS"
 
-            0x000041ee      lea rsi, str.literal                       ; 0x21a40
+            0x000041ee      lea rsi, [rip + 0x1d84b]                   ; 0x21a40
             0x00004225      lea rdi, [rip + 0x147f6]                   ; str.COLUMNS
                                                                        ; 0x18a22 ; "COLUMNS"
 RUN
@@ -587,7 +587,7 @@ EXPECT=<<RUN
 je 0x421a
 mov ecx, 4
 lea rdx, [0x0001b980]
-lea rsi, str.literal
+lea rsi, [0x00021a40]
 mov rdi, rax
 call 0xc660
 test eax, eax
