@@ -599,7 +599,7 @@ EXPECT=<<EOF
 |       |   0x000113c8      call sym.imp.strrchr                       ; char *strrchr(const char *s, int c)
 |       |   0x000113cd      test rax, rax
 |      ,==< 0x000113d0      je 0x11424
-|      ||   0x000113d2      lea rdx, [rax + 1]                         ; r10 ; "ELF\x02\x01\x01"
+|      ||   0x000113d2      lea rdx, [rax + 1]
 |      ||   0x000113d6      mov rcx, rdx
 |      ||   0x000113d9      sub rcx, rbx
 |      ||   0x000113dc      cmp rcx, 6
