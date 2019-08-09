@@ -639,7 +639,7 @@ EXPECT=<<EOF
 
             0x00000000      8b4004         mov eax, dword [eax + foo.b] ; [0x4:4]=0x508d0451
             0x00000003      895104         mov dword [ecx + foo.b], edx
-            0x00000006      8d5008         lea edx, [eax + foo.c]      ; 0x8
+            0x00000006      8d5008         lea edx, [eax + foo.c]
             0x00000009      83780800       cmp dword [eax + foo.c], 0  ; [0x8:4]=0x8788308
 EOF
 RUN
