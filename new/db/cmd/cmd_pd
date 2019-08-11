@@ -775,9 +775,9 @@ RUN
 NAME=no rep flag in cmt with gen sym flag (mov)
 FILE=../bins/pe/ConsoleApplication1.exe
 EXPECT=<<EOF
-            0x004010fa      8b3500204000   mov esi, dword sym.imp.KERNEL32.dll_GetLastError ; [0x402000:4]=0x29f4 reloc.KERNEL32.dll_GetLastError
+            0x004010fa      8b3500204000   mov esi, dword [sym.imp.KERNEL32.dll_GetLastError] ; [0x402000:4]=0x29f4 reloc.KERNEL32.dll_GetLastError
             ; [0x402000:4]=0x29f4 reloc.KERNEL32.dll_GetLastError
-            0x004010fa      8b3500204000   mov esi, dword sym.imp.KERNEL32.dll_GetLastError
+            0x004010fa      8b3500204000   mov esi, dword [sym.imp.KERNEL32.dll_GetLastError]
 EOF
 CMDS=<<EOF
 e asm.cmt.right=true
@@ -807,7 +807,7 @@ RUN
 NAME=pd asm.filter color
 FILE=../bins/elf/analysis/ls-alxchk
 EXPECT=<<EOF
-            [32m0x0001145f[0m      [37mlea[36m rdi[0m,[36m[36m [0m[36mstr.A_NULL_argv_0__was_passed_through_an_exec_system_call.[0m[36m[0m[0m
+            [32m0x0001145f[0m      [37mlea[36m rdi[0m,[36m[36m [0m[36m[36mstr.A_NULL_argv_0__was_passed_through_an_exec_system_call.[36m[0m[0m
             [32m0x0001145f[0m      [37mlea[36m rdi[0m,[36m[36m [0m[[36m[36m0x0001b5d8[0m][36m[0m[0m
 EOF
 CMDS=<<EOF
