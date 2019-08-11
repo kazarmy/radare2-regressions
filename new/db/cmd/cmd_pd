@@ -807,7 +807,7 @@ RUN
 NAME=pd asm.filter color
 FILE=../bins/elf/analysis/ls-alxchk
 EXPECT=<<EOF
-            [32m0x0001145f[0m      [37mlea[36m rdi[0m,[36m[36m [0m[36m[36mstr.A_NULL_argv_0__was_passed_through_an_exec_system_call.[36m[0m[0m
+            [32m0x0001145f[0m      [37mlea[36m rdi[0m,[36m[36m [0m[36mstr.A_NULL_argv_0__was_passed_through_an_exec_system_call.[36m[0m[0m
             [32m0x0001145f[0m      [37mlea[36m rdi[0m,[36m[36m [0m[[36m[36m0x0001b5d8[0m][36m[0m[0m
 EOF
 CMDS=<<EOF
