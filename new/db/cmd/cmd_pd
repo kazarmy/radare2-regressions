@@ -775,9 +775,9 @@ RUN
 NAME=no rep flag in cmt with gen sym flag (mov)
 FILE=../bins/pe/ConsoleApplication1.exe
 EXPECT=<<EOF
-            0x004010fa      8b3500204000   mov esi, dword sym.imp.KERNEL32.dll_GetLastError ; [0x402000:4]=0x29f4 reloc.KERNEL32.dll_GetLastError
+            0x004010fa      8b3500204000   mov esi, dword [sym.imp.KERNEL32.dll_GetLastError] ; [0x402000:4]=0x29f4 reloc.KERNEL32.dll_GetLastError
             ; [0x402000:4]=0x29f4 reloc.KERNEL32.dll_GetLastError
-            0x004010fa      8b3500204000   mov esi, dword sym.imp.KERNEL32.dll_GetLastError
+            0x004010fa      8b3500204000   mov esi, dword [sym.imp.KERNEL32.dll_GetLastError]
 EOF
 CMDS=<<EOF
 e asm.cmt.right=true
