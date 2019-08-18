@@ -1200,7 +1200,7 @@ fastcall
 |           0x0804842d      01d0           add eax, edx
 |           0x0804842f      8945f4         mov dword [var_ch], eax
 |           0x08048432      8b45e0         mov eax, dword [var_20h]
-|           0x08048435      2b450c         sub eax, dword [arg_ch]     ; [0xc:4]=-1 ; 12
+|           0x08048435      2b450c         sub eax, dword [arg_ch]
 |           0x08048438      8945f0         mov dword [var_10h], eax
 |           0x0804843b      ff7508         push dword [arg_8h]
 |           0x0804843e      ff75f0         push dword [var_10h]
@@ -1237,12 +1237,12 @@ cdecl
 |           0x08048456      55             push ebp
 |           0x08048457      89e5           mov ebp, esp
 |           0x08048459      83ec18         sub esp, 0x18
-|           0x0804845c      8b5508         mov edx, dword [arg_8h]     ; [0x8:4]=-1 ; 8
-|           0x0804845f      8b450c         mov eax, dword [arg_ch]     ; [0xc:4]=-1 ; 12
+|           0x0804845c      8b5508         mov edx, dword [arg_8h]
+|           0x0804845f      8b450c         mov eax, dword [arg_ch]
 |           0x08048462      01d0           add eax, edx
 |           0x08048464      8945f4         mov dword [var_ch], eax
-|           0x08048467      8b450c         mov eax, dword [arg_ch]     ; [0xc:4]=-1 ; 12
-|           0x0804846a      2b4514         sub eax, dword [arg_14h]    ; [0x14:4]=-1 ; 20
+|           0x08048467      8b450c         mov eax, dword [arg_ch]
+|           0x0804846a      2b4514         sub eax, dword [arg_14h]
 |           0x0804846d      8945f0         mov dword [var_10h], eax
 |           0x08048470      ff7510         push dword [arg_10h]
 |           0x08048473      ff75f0         push dword [var_10h]

@@ -595,11 +595,11 @@ pd 2 @ 0x560e95
 fm 0x560e97 @ sym.dummy
 pd 3 @ 0x560e95
 EXPECT=<<RUN
-            0x00560e7a  ~   0085965e5052   add byte [ebp + 0x52505e96], al ; [0x52505e96:1]=255
+            0x00560e7a  ~   0085965e5052   add byte [ebp + 0x52505e96], al
 |           ;-- sym.dummy:
 |           0x00560e7d      5e             pop esi
 
-            0x00560e7a  ~   0085965e5052   add byte [ebp + 0x52505e96], al ; [0x52505e96:1]=255
+            0x00560e7a  ~   0085965e5052   add byte [ebp + 0x52505e96], al
             ;-- sym.dummy:
             0x00560e7c      96             xchg eax, esi
 |           0x00560e7d      5e             pop esi
