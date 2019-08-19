@@ -418,7 +418,7 @@ FILE=../bins/elf/analysis/zigs
 EXPECT=<<EOF
 zigs:main:
   bytes: 554889e54883ec10897dfc488975f0bf13064000e8c2ffffffb800000000c9c3
-  mask: ffffffffffffffffff0000ff000000ff00000000ff00000000ffffffffffffff
+  mask: ffffffffffffffffffffffffffffffff00000000ff00000000ffffffffffffff
   graph: cc=1 nbbs=1 edges=0 ebbs=1 bbsum=32
   addr: 0x0040055b
   realname: main
@@ -440,7 +440,7 @@ FILE=../bins/elf/analysis/zigs
 EXPECT=<<EOF
 zigs:main:
   bytes: 554889e54883ec10897dfc488975f0bf13064000e8c2ffffffb800000000c9c3
-  mask: ffffffffffffffffff0000ff000000ff00000000ff00000000ffffffffffffff
+  mask: ffffffffffffffffffffffffffffffff00000000ff00000000ffffffffffffff
   graph: cc=1 nbbs=1 edges=0 ebbs=1 bbsum=32
   addr: 0x0040055b
   realname: main
@@ -462,7 +462,7 @@ FILE=../bins/elf/analysis/zigs
 EXPECT=<<EOF
 main:
   bytes: 554889e54883ec10897dfc488975f0bf13064000e8c2ffffffb800000000c9c3
-  mask: ffffffffffffffffff0000ff000000ff00000000ff00000000ffffffffffffff
+  mask: ffffffffffffffffffffffffffffffff00000000ff00000000ffffffffffffff
   graph: cc=1 nbbs=1 edges=0 ebbs=1 bbsum=32
   addr: 0x0040055b
   refs: sym.print
@@ -482,7 +482,7 @@ FILE=../bins/elf/analysis/zigs
 EXPECT=<<EOF
 foobar:
   bytes: 554889e54883ec10897dfc488975f0bf13064000e8c2ffffffb800000000c9c3
-  mask: ffffffffffffffffff0000ff000000ff00000000ff00000000ffffffffffffff
+  mask: ffffffffffffffffffffffffffffffff00000000ff00000000ffffffffffffff
   graph: cc=1 nbbs=1 edges=0 ebbs=1 bbsum=32
   addr: 0x0040055b
   realname: main
@@ -504,7 +504,7 @@ FILE=../bins/elf/analysis/zigs
 EXPECT=<<EOF
 foobar:
   bytes: 554889e54883ec10897dfc488975f0bf13064000e8c2ffffffb800000000c9c3
-  mask: ffffffffffffffffff0000ff000000ff00000000ff00000000ffffffffffffff
+  mask: ffffffffffffffffffffffffffffffff00000000ff00000000ffffffffffffff
   graph: cc=1 nbbs=1 edges=0 ebbs=1 bbsum=32
   addr: 0x0040055b
   realname: main
