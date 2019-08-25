@@ -19,7 +19,7 @@ EXPECT=<<EOF
   0x100001080      testl %r14d, %r14d
   0x100001083      jg 0x10000108a
   0x100001085      callq sym.func.100004401
-  0x10000108a      leaq 0x100004b10, %rsi
+  0x10000108a      leaq section.4.__TEXT.__cstring, %rsi
   0x100001091      xorl %edi, %edi
   0x100001093      callq sym.imp.setlocale
   0x100001098      movl $1, %r13d
@@ -56,7 +56,7 @@ EXPECT=<<EOF
 | 0x100001080      testl %r14d, %r14d
 | 0x100001083      jg 0x10000108a
 | 0x100001085      callq sym.func.100004401
-| 0x10000108a      leaq 0x100004b10, %rsi
+| 0x10000108a      leaq section.4.__TEXT.__cstring, %rsi
 | 0x100001091      xorl %edi, %edi
 | 0x100001093      callq sym.imp.setlocale
 | 0x100001098      movl $1, %r13d
