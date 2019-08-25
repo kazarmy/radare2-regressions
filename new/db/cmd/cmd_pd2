@@ -687,6 +687,19 @@ EXPECT=<<RUN
             [31m                                                           ; [[31m0x18a22[31m:8]=0x534e4d554c4f43[31m ; "COLUMNS"[0m
 RUN
 
+NAME=lea section flag bracket fix
+FILE=../bins/elf/analysis/ls-alxchk
+CMDS=<<EXPECT
+s 0x5e6e
+e scr.color=0
+pd 1
+e scr.color=1
+pd 1
+EXPECT=<<RUN
+            0x00005e6e      488d3d339b01.  lea rdi, [section..fini_array] ; 0x1f9a8
+            [32m0x00005e6e[0m      [33m48[37m8d[33m3d[33m33[37m9b[37m01[37m.[0m  [37mlea[36m rdi[0m,[36m[36m [0m[[36m[36msection..fini_array][36m[0m[0m[31m ; 0x1f9a8[0m
+RUN
+
 NAME=pi no-color rip-relative addr fix
 FILE=../bins/elf/ls
 CMDS=<<EXPECT
