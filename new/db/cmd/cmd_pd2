@@ -326,12 +326,11 @@ s sym.deregister_tm_clones+41
 pd 2
 EXPECT=<<RUN
             0x080483cf      nop
-|           |
 / (fcn) sym.deregister_tm_clones 40
 |           0x080483d0      mov eax, obj.completed.6891
 
             0x080483f9      lea edi, [edi]
-\           |
+            |
 \           0x08048400      ret
 RUN
 
