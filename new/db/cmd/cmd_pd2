@@ -309,7 +309,36 @@ EXPECT=<<RUN
             0x00000000      488b4608       mov rax, qword [rsi + ms.member1]
 RUN
 
-NAME=asm.bb.line no-anal glitch fix (#12516)
+NAME=asm.bb.line fcnline glitches fix
+FILE=../bins/elf/before-after-main
+CMDS=<<EXPECT
+e asm.bb.line=true
+e asm.bytes=false
+e asm.comments=false
+e asm.fcnsig=false
+e asm.var=false
+s sym.deregister_tm_clones
+aF
+s sym.deregister_tm_clones-1
+pd 2
+?e
+s sym.deregister_tm_clones+41
+pd 2
+EXPECT=<<RUN
+            0x080483cf      nop
+|           |
+/ (fcn) sym.deregister_tm_clones 40
+|           0x080483d0      mov eax, obj.completed.6891
+
+            0x080483f9      lea edi, [edi]
+\           |
+\           0x08048400      ret
+RUN
+
+# asm.bb.line with no analysis is not supported, since backward jump targets
+# can't be determined completely without analysis of the whole function
+# (assuming no jumps from outside the function into the middle)
+NAME=asm.bb.line no-anal
 FILE=../bins/elf/lab2
 CMDS=<<EXPECT
 e asm.bb.line=true
@@ -320,8 +349,6 @@ wx 907f04 @ 0x08048597
 wx 75f3909090 @ 0x080485bc
 s 0x08048598
 pd 11
-?e
-pdJ 11~{}
 EXPECT=<<RUN
         ,=< 0x08048598      jg 0x804859e
         |   0x0804859a      cmp al, byte [esp + 0x27]
@@ -334,60 +361,9 @@ EXPECT=<<RUN
       | :   0x080485b8      mov ebx, dword [esp + 0x20]
       | `=< 0x080485bc      jne 0x80485b1
       |     0x080485be      nop
-
-[
-  {
-    "offset": 134514072,
-    "arrow": 134514078,
-    "text": "        ,=< 0x08048598      jg 0x804859e"
-  },
-  {
-    "offset": 134514074,
-    "text": "        |   0x0804859a      cmp al, byte [esp + 0x27]"
-  },
-  {
-    "offset": 134514078,
-    "arrow": 134514099,
-    "text": "       ,`-> 0x0804859e      je 0x80485b3"
-  },
-  {
-    "offset": 134514080,
-    "text": "       |    0x080485a0      mov dword [esp], str.Wrong"
-  },
-  {
-    "offset": 134514087,
-    "text": "       |    0x080485a7      call sym.imp.puts"
-  },
-  {
-    "offset": 134514092,
-    "text": "       |    0x080485ac      mov eax, 1"
-  },
-  {
-    "offset": 134514097,
-    "arrow": 134514169,
-    "text": "      ,=.-> 0x080485b1      jmp 0x80485f9"
-  },
-  {
-    "offset": 134514099,
-    "text": "      |`--> 0x080485b3      add dword [esp + 0x20], 1"
-  },
-  {
-    "offset": 134514104,
-    "text": "      | :   0x080485b8      mov ebx, dword [esp + 0x20]"
-  },
-  {
-    "offset": 134514108,
-    "arrow": 134514097,
-    "text": "      | `=< 0x080485bc      jne 0x80485b1"
-  },
-  {
-    "offset": 134514110,
-    "text": "      |     0x080485be      nop"
-  }
-]
 RUN
 
-NAME=asm.bb.line anal
+NAME=asm.bb.line glitch fix (#12516)
 FILE=../bins/elf/ls
 CMDS=<<EXPECT
 e asm.bb.line=true
