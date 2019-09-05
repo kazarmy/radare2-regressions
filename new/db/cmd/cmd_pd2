@@ -674,3 +674,14 @@ call 0x13c50
 mov qword [0x000232b0], 0x50
 lea rdi, str.COLUMNS
 RUN
+
+NAME=esil call no-fcn-name cmt alignment
+FILE=../bins/elf/analysis/arm-ls
+CMDS=<<EXPECT
+e asm.bytes=false
+e emu.pre=true
+e emu.str=true
+pd 1 @ 0x00011ee4
+EXPECT=<<RUN
+            0x00011ee4      bl 0x2258c                                 ; 0x2258c(0x19ac0, 0x25c0c, 0x0, 0x372cc)
+RUN
