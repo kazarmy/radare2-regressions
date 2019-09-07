@@ -309,7 +309,7 @@ EXPECT=<<RUN
             0x00000000      488b4608       mov rax, qword [rsi + ms.member1]
 RUN
 
-NAME=asm.bb.line fcnline glitches fix
+NAME=asm.bb.line fcnline glitches fix, bblines btw bb & non-bb
 FILE=../bins/elf/before-after-main
 CMDS=<<EXPECT
 e asm.bb.line=true
@@ -320,18 +320,31 @@ e asm.var=false
 s sym.deregister_tm_clones
 aF
 s sym.deregister_tm_clones-1
-pd 2
+pd 3
 ?e
-s sym.deregister_tm_clones+41
-pd 2
+s sym.deregister_tm_clones+38
+pd 4
+?e
+s entry.fini0
+aF
+s entry.fini0+32
+pd 3
 EXPECT=<<RUN
             0x080483cf      nop
 / (fcn) sym.deregister_tm_clones 40
 |           0x080483d0      mov eax, obj.completed.6891
+|           0x080483d5      cmp eax, obj.completed.6891
 
+|           0x080483f6      ret
+            0x080483f7      mov esi, esi
             0x080483f9      lea edi, [edi]
             |
 \           0x08048400      ret
+
+|           0x08048470      ret
+            0x08048471      lea esi, [esi]
+            |
+\           0x08048478      ret
 RUN
 
 # asm.bb.line with no analysis is not supported, since backward jump targets
