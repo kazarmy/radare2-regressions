@@ -336,12 +336,14 @@ EXPECT=<<RUN
 |           0x080483d5      cmp eax, obj.completed.6891
 
 |           0x080483f6      ret
+            |
             0x080483f7      mov esi, esi
             0x080483f9      lea edi, [edi]
             |
 \           0x08048400      ret
 
 |           0x08048470      ret
+            |
             0x08048471      lea esi, [esi]
             |
 \           0x08048478      ret
