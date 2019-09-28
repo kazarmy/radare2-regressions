@@ -1,3 +1,17 @@
+NAME=hang-on-aa/-aac fix (#15004)
+FILE=../bins/pe/15004.file
+CMDS=<<EXPECT
+aa
+e asm.var=false
+pdb
+EXPECT=<<RUN
+/ (loc) entry0 1983
+|   entry0 ();
+|           0x006453a1      e8d8170000     call fcn.00646b7e
+|           0x006453a6      8d642444       lea esp, [var_44h]
+|       ,=< 0x006453aa      0f85a6300000   jne 0x648456                ; int.0064843c+0x1a
+RUN
+
 NAME=aap
 FILE=../bins/pe/NoREpls.exe
 CMDS=<<EOF
