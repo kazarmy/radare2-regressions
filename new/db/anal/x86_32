@@ -300,32 +300,6 @@ pd 4 @ 0x00560e67
 EOF
 RUN
 
-NAME=af anal.endsize
-FILE=../bins/elf/echo-bin
-EXPECT=<<EOF
-name: main
-EOF
-CMDS=<<EOF
-e anal.endsize=0
-aaa
-s 0x1144
-afi~name
-EOF
-RUN
-
-NAME=af anal.endsize
-FILE=../bins/elf/echo-bin
-EXPECT=<<EOF
-name: main
-EOF
-CMDS=<<EOF
-e anal.endsize=1
-aaa
-s 0x1144
-afi~name
-EOF
-RUN
-
 NAME=af 8 bbs 4 ret and some jumps
 FILE=malloc://512
 EXPECT=<<EOF
