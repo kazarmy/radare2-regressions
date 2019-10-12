@@ -656,7 +656,7 @@ RUN
 NAME=mac-ls switch count
 FILE=../bins/mach0/mac-ls
 EXPECT=<<EOF
-2
+3
 EOF
 CMDS=<<EOF
 aaa
@@ -680,7 +680,7 @@ RUN
 NAME=mac-ls switch count2
 FILE=../bins/mach0/mac-ls
 EXPECT=<<EOF
-83
+90
 EOF
 CMDS=<<EOF
 aaa
