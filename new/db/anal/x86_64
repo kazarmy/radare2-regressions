@@ -432,8 +432,11 @@ aF
 pd 3 @ 0x3ec1
 EXPECT=<<RUN
 |           0x00003ec1      add rax, rbx
-|           0x00003ec4      jmp rax
-            0x00003ec6      mov byte [0x00021260], 1                   ; [0x21260:1]=0
+|           ;-- switch.0x00003ec4:
+|           0x00003ec4      jmp rax                                    ; switch table (275 cases) at 0x172d8
+|           ;-- case 241 (0x3ec4):
+|           ; CODE XREF from main @ 0x3ec4
+|           0x00003ec6      mov byte [0x00021260], 1                   ; [0x21260:1]=0
 RUN
 
 NAME=aac pe trampoline fcn name 64bit
