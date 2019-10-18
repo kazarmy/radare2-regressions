@@ -1,10 +1,10 @@
 NAME= fnj shows demangled symbols
 FILE=../bins/elf/demangle-test-cpp
 EXPECT=<<CMDS
-{"name":"loc.__init_array_start","size":0,"offset":15800}
-{"name":"__init_array_start","size":0,"offset":15800}
+{"name":"reloc.operator_delete_void","size":8,"offset":16432}
+{"name":"reloc.operator delete(void*)","size":8,"offset":16432}
 CMDS=<<RUN
 aaa
-fj~{244}
-fnj~{244}
+fj~{268}
+fnj~{268}
 RUN
