@@ -1253,6 +1253,20 @@ pd 1 @ 0x1523
 EOF
 RUN
 
+NAME=aae after aF
+FILE=../bins/elf/redpill
+CMDS=<<EXPECT
+e asm.bytes=false
+s main
+aF
+aae
+pd 1 @ 0x1557
+pd 1 @ 0x1523
+EXPECT=<<RUN
+|           0x00001557      lea eax, str.fwhibbit                      ; 0x1df4 ; "  fwhibbit{"
+|           0x00001523      lea eax, str.Red_Pill                      ; 0x1de8 ; "\n  Red Pill"
+RUN
+
 NAME=cmova eax, ecx
 FILE=-
 ARGS=-a x86 -b 32
