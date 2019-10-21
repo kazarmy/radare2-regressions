@@ -642,13 +642,10 @@ RUN
 
 NAME=sym is not fcn
 FILE=../bins/mach0/mach0-i386
-EXPECT=<<EOF
-0x00001f50
-0x00001f00
-EOF
+EXPECT=''
 CMDS=<<EOF
 aa > /dev/null
-afl~foo,bar[0]
+afl~sym.__mh_execute_header[0]
 EOF
 RUN
 
