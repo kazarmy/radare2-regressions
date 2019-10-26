@@ -5,7 +5,6 @@
 # TODO: bisect with -b
 
 R2RDIR="@R2RDIR@"
-TESTRUNNER="run_tests.sh"
 
 if [ "${R2RDIR}" != "@""R2RDIR@" ]; then
 	cd "${R2RDIR}"
@@ -43,8 +42,6 @@ usage() {
 	echo "  -c    clean temporary files (travis/tmp, ...)"
 	echo "  -s    search only. do not run any test"
 	echo "  -S    shell into the regressions repo"
-	echo "  -p    run test files in parallel"
-	echo "  -P    run every single test in parallel"
 	echo "  -r    run tests from new/db"
 	echo "  -R    run tests from new/db in verbose mode"
 	echo "  -i    run tests from new/db interactively"
@@ -233,19 +230,6 @@ ${LINE}"
 	usage
 	exit 0
 	;;
--P)
-	export HYPERPARALLEL=1
-	TESTRUNNER="run_tests_parallel.sh"
-	shift
-	KW=$1
-	KX="$2"
-	;;
--p)
-	TESTRUNNER="run_tests_parallel.sh"
-	shift
-	KW=$1
-	KX="$2"
-	;;
 -s)
 	if [ -n "$KX" ]; then
 		find t* | grep "$KX"
@@ -259,39 +243,7 @@ esac
 
 export VERBOSE=1
 
-if [ -n "$KW" ]; then
-	if [ -n "$KX" ]; then
-		TESTS=`find t* | grep -- "$KW" | grep -- "$KX" | grep -v '/\.'`
-	else
-		TESTS=`find t* | grep -- "$KW" | grep -v '/\.'`
-	fi
-	echo
-	echo "$TESTS"
-	echo
-	DIRS=""
-	FAIL=0
-	for a in ${TESTS} ; do
-		SKIP=0
-		if [ -d "$a" ]; then
-			DIRS="${DIRS} $a"
-		else
-			for b in ${DIRS} ; do
-				if [ -n "`echo $a | grep ^$b`" ]; then
-					echo "Skip $a"
-					SKIP=1
-					break
-				fi
-			done
-		fi
-		if [ "${SKIP}" = 0 ]; then
-			./${TESTRUNNER} "$a"
-			if [ $? != 0 ]; then
-				FAIL=1
-			fi
-		fi
-	done
-	exit $FAIL
-else
+if [ -z "$KW" ]; then
 	usage
 	exit 1
 fi
