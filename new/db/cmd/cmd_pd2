@@ -713,3 +713,20 @@ pd 1 @ 0x00011ee4
 EXPECT=<<RUN
             0x00011ee4      bl 0x2258c                                 ; 0x2258c(0x19ac0, 0x25c0c, 0x0, 0x372cc)
 RUN
+
+NAME=bin.str.enc no-guess with initial null
+FILE=../bins/elf/utfbe
+CMDS=<<EXPECT
+# e asm.symbol=true
+e asm.bytes=false
+e asm.offset=false
+e asm.cmt.off=false
+s main+86
+e bin.str.enc=guess
+pd 1
+e bin.str.enc=utf16le
+pd 1
+EXPECT=<<RUN
+                 mov esi, obj.utf16be
+                 mov esi, obj.utf16be
+RUN
