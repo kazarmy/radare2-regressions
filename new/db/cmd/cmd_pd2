@@ -749,8 +749,8 @@ aar
 .(pdstr utf32le_bom)
 # .(pdstr utf32be_bom)
 EXPECT=<<RUN
-                 mov esi, obj.utf8_bom
+                 mov esi, obj.utf8_bom                                 ; "\ufeffUTF8_BOM"
                  mov esi, obj.utf16le_bom                              ; u"\ufeffUTF16LE_BOM"
-                 mov esi, obj.utf16be_bom
-                 mov esi, obj.utf32le_bom                              ; "\xff\xfe"
+                 mov esi, obj.utf16be_bom                              ; ub"\ufeffUTF16BE_BOM"
+                 mov esi, obj.utf32le_bom                              ; U"\ufeffUTF32LE_BOM"
 RUN
