@@ -1024,6 +1024,34 @@ pd 1 @ 0x00400463
 EOF
 RUN
 
+NAME=bin.str.enc alias and error handling
+ONE_STREAM=true
+FILE=../bins/elf/strenc
+CMDS=<<EXPECT
+e asm.filter=false
+e asm.noisy=false
+e asm.bytes=false
+e asm.cmt.off=false
+e str.escbslash=true
+(test_str.enc enc, e bin.str.enc=$0, e bin.str.enc)
+.(test_str.enc guess)
+.(test_str.enc utf-8)
+.(test_str.enc utf-16le)
+pd 1 @ 0x004016c0
+.(test_str.enc utf32-le)
+pd 1 @ 0x004016ed
+.(test_str.enc cat_sat_on_keyboard)
+EXPECT=<<RUN
+guess
+utf8
+utf16le
+            0x004016c0      mov edi, 0x40230c                          ; u"\u2520\u2542\u2500\u2500\u2542\u2528 is a fence with embedded zeros\n"
+utf32le
+            0x004016ed      mov edi, 0x40258c                          ; U"utf32le> \\u00a2\\u20ac\\U00010348 in cyan:\x1b[36m \xa2\u20ac\U00010348 \x1b[0m\n"
+Unknown encoding: cat_sat_on_keyboard
+utf32le
+RUN
+
 NAME=hide flag iff unchanged and string shown
 FILE=../bins/pe/testapp-msvc64.exe
 EXPECT=<<EOF
