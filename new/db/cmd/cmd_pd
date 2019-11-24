@@ -1041,6 +1041,10 @@ pd 1 @ 0x004016c0
 .(test_str.enc utf32-le)
 pd 1 @ 0x004016ed
 .(test_str.enc cat_sat_on_keyboard)
+?e
+.(test_str.enc UTF32BE)
+.(test_str.enc UTF16-LE)
+.(test_str.enc CAT_SAT_ON_KEYBOARD)
 EXPECT=<<RUN
 guess
 utf8
@@ -1050,6 +1054,11 @@ utf32le
             0x004016ed      mov edi, 0x40258c                          ; U"utf32le> \\u00a2\\u20ac\\U00010348 in cyan:\x1b[36m \xa2\u20ac\U00010348 \x1b[0m\n"
 Unknown encoding: cat_sat_on_keyboard
 utf32le
+
+utf32be
+utf16le
+Unknown encoding: CAT_SAT_ON_KEYBOARD
+utf16le
 RUN
 
 NAME=hide flag iff unchanged and string shown
