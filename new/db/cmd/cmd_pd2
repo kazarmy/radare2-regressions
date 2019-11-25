@@ -736,12 +736,12 @@ EXPECT=<<RUN
                  mov esi, obj.utf32be                                  ; Ub"UTF32BE"
 RUN
 
-NAME=bin.str.enc guess bom
+NAME=bin.str.enc guess bom, asm.cmt.off=0/1
 FILE=../bins/elf/utfbe&bom
 CMDS=<<EXPECT
-e asm.bytes=false
-e asm.offset=false
-e asm.cmt.off=false
+e asm.bytes=0
+e asm.offset=0
+e asm.cmt.off=0
 e bin.str.enc=guess
 aar
 (pdstr flag, s `axt obj.$0~[1]`, pd 1)
@@ -750,10 +750,15 @@ aar
 .(pdstr utf16be_bom)
 .(pdstr utf32le_bom)
 .(pdstr utf32be_bom)
+?e
+e asm.cmt.off=1
+.(pdstr utf32be_bom)
 EXPECT=<<RUN
                  mov esi, obj.utf8_bom                                 ; "\ufeffUTF8_BOM"
                  mov esi, obj.utf16le_bom                              ; u"\ufeffUTF16LE_BOM"
                  mov esi, obj.utf16be_bom                              ; ub"\ufeffUTF16BE_BOM"
                  mov esi, obj.utf32le_bom                              ; U"\ufeffUTF32LE_BOM"
                  mov esi, obj.utf32be_bom                              ; Ub"\ufeffUTF32BE_BOM"
+
+                 mov esi, obj.utf32be_bom                              ; 0x4041e0 ; Ub"\ufeffUTF32BE_BOM"
 RUN
